@@ -78,6 +78,14 @@ figure {
     margin: 0 auto;
 }
 
+/* Ensure images don't overflow their containers */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
 /* headings use Noto Serif font */
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Noto Serif', serif;
@@ -514,7 +522,7 @@ a.email::after {
     margin-bottom: 0;
 }
 
-.sankey-caption {
+.caption {
     font-size: 1.2rem;
     text-align: left;
     margin-top: 0;
