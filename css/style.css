@@ -78,12 +78,33 @@ figure {
     margin: 0 auto;
 }
 
+/* Add top margin to all figures except the header figure */
+figure:not(#header) {
+    margin-top: 2.8rem;
+}
+
 /* Ensure images don't overflow their containers */
 img {
     max-width: 100%;
     height: auto;
     display: block;
     margin: 0 auto;
+}
+
+/* Clickable images - show cursor and hover effect */
+figure a {
+    display: block;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+figure a:hover {
+    opacity: 0.85;
+}
+
+figure a:focus {
+    outline: 2px solid white;
+    outline-offset: 2px;
 }
 
 /* headings use Noto Serif font */
@@ -525,7 +546,7 @@ a.email::after {
 .caption {
     font-size: 1.2rem;
     text-align: left;
-    margin-top: 0;
+    margin-top: .75rem;
     margin-bottom: 2rem;
     margin-left: auto;
     margin-right: auto;
