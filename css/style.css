@@ -264,6 +264,13 @@ td {
         max-width: 75%;
     }
 
+    /* Project developers list: center based on longest item */
+    #project-developers + ul {
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
 }
 
 /* navigation styling */
