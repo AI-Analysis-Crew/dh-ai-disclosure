@@ -50,6 +50,7 @@ html {
     -webkit-text-size-adjust: 100%;
     background: #1a2332;
     min-height: 100vh;
+    scroll-padding-top: 5rem;
 }
 
 /* main container for body of html pages */
@@ -231,10 +232,6 @@ td {
     margin-bottom: 0;
 }
 
-#menu::after {
-    display: none;
-}
-
 #menu + ol {
     width: fit-content;
     margin-left: auto;
@@ -243,18 +240,10 @@ td {
     margin-bottom: 0.5rem;
 }
 
-#menu + ol li {
-    padding: .1rem 0;
-}
-
-#menu + ol li:first-child {
-    padding-top: .1rem;
-}
-
 /* Results brief specific styling */
 
 .contents-box:has(#results-brief) {
-    padding-bottom: 1.75rem;
+    margin-top: 2.8rem;
 }
 
 #results-brief {
@@ -265,31 +254,6 @@ td {
     margin-bottom: 0.5rem;
 }
 
-#results-brief + ol li {
-    padding: .25rem 0;
-}
-
-#results-brief + ol li:first-child {
-    padding-top: .25rem;
-}
-
-#results-brief + ol li > ol {
-    margin-top: -0.1rem;
-    margin-bottom: .25rem;
-}
-
-#results-brief + ol li > ol li {
-    padding: .125rem 0;
-}
-
-#results-brief + ol li > ol li:first-child {
-    padding-top: 0;
-}
-
-#results-brief + ol li > ol li:last-child {
-    padding-bottom: 0;
-}
-
 /* Desktop: contents box at half width */
 @media (min-width: 768px) {
     .contents-box {
@@ -297,12 +261,9 @@ td {
     }
 
     .contents-box:has(#results-brief) {
-        max-width: 85%;
+        max-width: 75%;
     }
 
-    #results table {
-        width: 80%;
-    }
 }
 
 /* navigation styling */
@@ -411,7 +372,7 @@ ul, ol {
 /* Add spacing for nested lists */
 li > ul,
 li > ol {
-    margin-top: .5rem;
+    margin-top: .25rem;
 }
 
 /* Style nested unordered lists with hollow circles */
@@ -420,7 +381,7 @@ li > ul {
 }
 
 li {
-    padding: .5rem 0;
+    padding: .25rem 0;
 }
 
 /* Remove top padding only for lists directly following headings */
@@ -433,6 +394,18 @@ h3 + ol > li:first-child,
 h4 + ul > li:first-child,
 h4 + ol > li:first-child {
     padding-top: 0;
+}
+
+/* Remove top padding from list item that follows a list item containing a nested list */
+li:has(> ul) + li,
+li:has(> ol) + li {
+    padding-top: 0;
+}
+
+/* Remove bottom padding from last item in nested lists */
+li > ul > li:last-child,
+li > ol > li:last-child {
+    padding-bottom: 0;
 }
 
 /* center utility class */
