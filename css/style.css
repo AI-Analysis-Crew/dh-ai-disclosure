@@ -166,6 +166,30 @@ section[aria-labelledby="survey-box"] h3 {
     margin-top: 0;
 }
 
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem auto;
+    max-width: 850px;
+}
+
+th, td {
+    padding: .5rem 1rem;
+    text-align: left;
+    border: 1px solid #5A93AC;
+}
+
+th {
+    background: rgba(90, 147, 172, 0.15);
+    color: #E8F4F8;
+    font-weight: 600;
+}
+
+td {
+    background: rgba(90, 147, 172, 0.05);
+}
+
 /* Contents box styling */
 .contents-box {
     border: 2px solid #5A93AC;
