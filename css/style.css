@@ -113,8 +113,9 @@ h2::after {
 
 h3 {
     font-size: 1.8rem;
+    font-style: italic;
     color: #D4E8F0;
-    margin-top: 3rem;
+    margin-top: 2rem;
     margin-bottom: 1.5rem;
     position: relative;
 }
@@ -168,6 +169,7 @@ section[aria-labelledby="survey-box"] h3 {
 
 /* Table styling */
 table {
+    font-size: 1.3rem;
     width: 100%;
     border-collapse: collapse;
     margin: 2rem auto;
@@ -198,7 +200,7 @@ td {
     max-width: 850px;
     margin-left: auto;
     margin-right: auto;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
 }
 
 .contents-box h3 {
@@ -217,10 +219,89 @@ td {
     padding-left: 1.5rem;
 }
 
+/* Menu-specific styling: reduce spacing between items and center list */
+.contents-box:has(#menu) {
+    padding-top: 1.5rem;
+    padding-bottom: 2rem;
+}
+
+#menu {
+    font-style: normal;
+    text-transform: uppercase;
+    margin-bottom: 0;
+}
+
+#menu::after {
+    display: none;
+}
+
+#menu + ol {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0.25rem;
+    margin-bottom: 0.5rem;
+}
+
+#menu + ol li {
+    padding: .1rem 0;
+}
+
+#menu + ol li:first-child {
+    padding-top: .1rem;
+}
+
+/* Results brief specific styling */
+
+.contents-box:has(#results-brief) {
+    padding-bottom: 1.75rem;
+}
+
+#results-brief {
+    font-style: normal;
+}
+
+#results-brief + ol {
+    margin-bottom: 0.5rem;
+}
+
+#results-brief + ol li {
+    padding: .25rem 0;
+}
+
+#results-brief + ol li:first-child {
+    padding-top: .25rem;
+}
+
+#results-brief + ol li > ol {
+    margin-top: -0.1rem;
+    margin-bottom: .25rem;
+}
+
+#results-brief + ol li > ol li {
+    padding: .125rem 0;
+}
+
+#results-brief + ol li > ol li:first-child {
+    padding-top: 0;
+}
+
+#results-brief + ol li > ol li:last-child {
+    padding-bottom: 0;
+}
+
 /* Desktop: contents box at half width */
 @media (min-width: 768px) {
     .contents-box {
         max-width: 425px;
+    }
+
+    .contents-box:has(#results-brief) {
+        max-width: 85%;
+    }
+
+    #results table {
+        width: 80%;
     }
 }
 
@@ -317,6 +398,41 @@ p {
     margin-bottom: 1.25rem;
     line-height: 1.8;
     color: #D4E8F0;
+}
+
+/* list styling */
+ul, ol {
+    padding-left: 1.5rem;
+    padding-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* Add spacing for nested lists */
+li > ul,
+li > ol {
+    margin-top: .5rem;
+}
+
+/* Style nested unordered lists with hollow circles */
+li > ul {
+    list-style-type: circle;
+}
+
+li {
+    padding: .5rem 0;
+}
+
+/* Remove top padding only for lists directly following headings */
+h1 + ul > li:first-child,
+h1 + ol > li:first-child,
+h2 + ul > li:first-child,
+h2 + ol > li:first-child,
+h3 + ul > li:first-child,
+h3 + ol > li:first-child,
+h4 + ul > li:first-child,
+h4 + ol > li:first-child {
+    padding-top: 0;
 }
 
 /* center utility class */
@@ -448,7 +564,7 @@ a.email::after {
 /* Mobile devices (up to 767px) */
 @media (max-width: 767px) {
     section {
-        padding: 0 0.5rem;
+        padding: 0;
     }
 }
 
@@ -468,7 +584,7 @@ a.email::after {
     }
 
     section {
-        padding: 0 0.5rem;
+        padding: 0;
     }
 
     nav {
