@@ -23,11 +23,6 @@
     box-sizing: border-box;
 }
 
-/* removes the default focus on individual items */
-*:focus {
-    outline: none;
-}
-
 /* color applied when user highlights text on a page */ 
 /* adapted from HTML5 Boilerplate v8.0.0 | MIT License | https://html5boilerplate.com/ */
 ::selection {
@@ -35,6 +30,10 @@
     background: #A8D5E2;
     text-shadow: none;
 }
+
+/* ========================================
+   LAYOUT & SPACING
+   ======================================== */
 
 /* styles for entire site */
 :root {
@@ -107,6 +106,20 @@ figure a:focus {
     outline-offset: 2px;
 }
 
+/* Figure caption styling */
+.caption {
+    font-size: 1.2rem;
+    text-align: left;
+    margin-top: 0.75rem;
+    margin-bottom: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ========================================
+   TYPOGRAPHY
+   ======================================== */
+
 /* headings use Noto Serif font */
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Noto Serif', serif;
@@ -120,7 +133,7 @@ h1 {
     border-bottom: 3px solid #5A93AC;
     padding-bottom: 1rem;
     margin-bottom: 3rem;
-    margin-top: 0;
+    margin-top: 4.5rem; /* spacing for fixed nav */
     width: 100%;
 }
 
@@ -196,6 +209,10 @@ section[aria-labelledby="survey"] h2,
 section[aria-labelledby="survey-box"] h3 {
     margin-top: 0;
 }
+
+/* ========================================
+   COMPONENTS
+   ======================================== */
 
 /* Table styling */
 table {
@@ -283,25 +300,6 @@ td {
     margin-bottom: 0.5rem;
 }
 
-/* Desktop: contents box at half width */
-@media (min-width: 768px) {
-    .contents-box {
-        max-width: 425px;
-    }
-
-    .contents-box:has(#results-brief) {
-        max-width: 75%;
-    }
-
-    /* Project developers list: center based on longest item */
-    #project-developers + ul {
-        width: fit-content;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-}
-
 /* navigation styling */
 [data-include="nav"] {
     position: fixed;
@@ -321,24 +319,12 @@ td {
     border-bottom-color: white;
 }
 
-/* Reduce nav padding on smaller screens below 768px */
-@media (max-width: 767px) {
-    [data-include="nav"] {
-        padding: 0.75rem 1rem;
-    }
-}
-
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     margin-bottom: 0;
-}
-
-/* Add spacing for fixed nav */
-h1 {
-    margin-top: 4.5rem !important;
 }
 
 nav .page-title {
@@ -449,6 +435,10 @@ li > ol > li:last-child {
     text-align: center;
 }
 
+/* ========================================
+   INTERACTIVE ELEMENTS & LINKS
+   ======================================== */
+
 /* link styling */
 a {
     color: #5A93AC;
@@ -475,7 +465,7 @@ a:active {
 
 /* page title link styling */
 .page-title a {
-    text-decoration: none;
+    /* text-decoration: none; */
     color: inherit;
     font-weight: 600;
 }
@@ -530,10 +520,10 @@ a.email::after {
 }
 
 /* ========================================
-   SANKEY DIAGRAM RESPONSIVE BEHAVIOR
+   SPECIALIZED COMPONENTS
    ======================================== */
 
-/* Default: Show interactive diagram, hide static image */
+/* Sankey Diagram - Show interactive diagram by default, hide static image */
 #sankey-chart {
     display: block;
 }
@@ -543,39 +533,9 @@ a.email::after {
     margin-bottom: 0;
 }
 
-.caption {
-    font-size: 1.2rem;
-    text-align: left;
-    margin-top: .75rem;
-    margin-bottom: 2rem;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* Below 992px: Hide interactive, show static image */
-@media (max-width: 991px) {
-    #sankey-chart {
-        display: none;
-    }
-
-    #sankey-static {
-        display: block;
-        width: 100%;
-        height: auto;
-        margin: 2rem auto 0;
-    }
-}
-
 /* ========================================
    RESPONSIVE BREAKPOINTS
    ======================================== */
-
-/* Mobile devices (up to 767px) */
-@media (max-width: 767px) {
-    section {
-        padding: 0;
-    }
-}
 
 /* Extra small devices (phones, up to 400px) */
 @media (max-width: 400px) {
@@ -631,10 +591,50 @@ a.email::after {
     }
 }
 
+/* Mobile devices (max-width: 767px) */
+@media (max-width: 767px) {
+    [data-include="nav"] {
+        padding: 0.75rem 1rem;
+    }
+
+    section {
+        padding: 0;
+    }
+}
+
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
     body {
         padding: 1.5rem 2.5rem;
+    }
+
+    .contents-box {
+        max-width: 425px;
+    }
+
+    .contents-box:has(#results-brief) {
+        max-width: 75%;
+    }
+
+    /* Project developers list: center based on longest item */
+    #project-developers + ul {
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* Sankey diagram responsive behavior (below 992px) */
+@media (max-width: 991px) {
+    #sankey-chart {
+        display: none;
+    }
+
+    #sankey-static {
+        display: block;
+        width: 100%;
+        height: auto;
+        margin: 2rem auto 0;
     }
 }
 
