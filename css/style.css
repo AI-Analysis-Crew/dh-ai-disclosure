@@ -21,6 +21,8 @@
 /* applies border-box to entire site */
 *, *::before, *::after {
     box-sizing: border-box;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
 }
 
 /* color applied when user highlights text on a page */ 
@@ -45,8 +47,6 @@
 
 /* main container for html pages */
 html {
-    -ms-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
     background: #1a2332;
     min-height: 100vh;
     scroll-padding-top: 5rem;
@@ -61,6 +61,41 @@ body {
     overflow-x: hidden;
     text-align: center;
     font-size: 1.4rem;
+}
+
+/* Small devices (phones, 480px and up) */
+@media (min-width: 480px) {
+    body {
+        padding: 1.5rem 1.5rem;
+    }
+}
+
+/* Small to medium devices (large phones/small tablets, 600px and up) */
+@media (min-width: 600px) {
+    body {
+        padding: 1.5rem 2rem;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    body {
+        padding: 1.5rem 2.5rem;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    body {
+        padding: 1.5rem 3rem;
+    }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    body {
+        padding: 1.5rem 4rem;
+    }
 }
 
 /* align header and main content to left */
@@ -137,12 +172,26 @@ h1 {
     width: 100%;
 }
 
+/* Extra small devices (phones, up to 400px) */
+@media (max-width: 400px) {
+    h1 {
+        font-size: 2rem;
+    }
+}
+
 h2 {
     font-size: 2.15rem;
     color: #D4E8F0;
     margin-top: 3rem;
     margin-bottom: 2rem;
     position: relative;
+}
+
+/* Extra small devices (phones, up to 400px) */
+@media (max-width: 400px) {
+    h2 {
+        font-size: 1.5rem;
+    }
 }
 
 h2::after {
@@ -163,6 +212,13 @@ h3 {
     position: relative;
 }
 
+/* Extra small devices (phones, up to 400px) */
+@media (max-width: 400px) {
+    h3 {
+        font-size: 1.35rem;
+    }
+}
+
 h3::after {
     content: '';
     display: block;
@@ -181,6 +237,13 @@ h4 {
     text-align: left;
 }
 
+/* Extra small devices (phones, up to 400px) */
+@media (max-width: 400px) {
+    h4 {
+        font-size: 1.05rem;
+    }
+}
+
 /* horizontal rule styling */
 hr {
     border: none;
@@ -195,6 +258,20 @@ section {
     margin-left: auto;
     margin-right: auto;
     padding: 0 1rem;
+}
+
+/* Extra small devices (phones, up to 400px) */
+@media (max-width: 400px) {
+    section {
+        padding: 0;
+    }
+}
+
+/* Mobile devices (max-width: 767px) */
+@media (max-width: 767px) {
+    section {
+        padding: 0;
+    }
 }
 
 section[aria-labelledby="survey"],
@@ -248,6 +325,24 @@ td {
     margin-left: auto;
     margin-right: auto;
     font-size: 1.3rem;
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .contents-box {
+        max-width: 425px;
+    }
+
+    .contents-box:has(#results-brief) {
+        max-width: 75%;
+    }
+
+    /* Project developers list: center based on longest item */
+    #project-developers + ul {
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 .contents-box h3 {
@@ -352,6 +447,41 @@ nav ul li a {
     transition: all 0.3s ease;
 }
 
+/* Extra small devices (phones, up to 400px) */
+@media (max-width: 400px) {
+    nav {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    nav .page-title {
+        text-align: center;
+    }
+
+    nav ul {
+        gap: 1rem;
+        justify-content: center;
+    }
+}
+
+/* Small phones (401px to 600px) - reduce gap to prevent wrapping */
+@media (min-width: 401px) and (max-width: 600px) {
+    nav ul {
+        gap: 1rem;
+    }
+
+    nav ul li a {
+        font-size: 1.1rem;
+    }
+}
+
+/* Mobile devices (max-width: 767px) */
+@media (max-width: 767px) {
+    [data-include="nav"] {
+        padding: 0.75rem 1rem;
+    }
+}
+
 /* footer styling */
 footer ul {
     list-style: none;
@@ -374,6 +504,15 @@ footer ul li:not(:last-child)::after {
     content: ' | ';
     margin-left: 0.25rem;
     margin-right: 0.25rem;
+}
+
+/* Extra small devices (phones, up to 400px) */
+@media (max-width: 400px) {
+    footer ul {
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+    }
 }
 
 /* paragraph spacing */
@@ -533,96 +672,6 @@ a.email::after {
     margin-bottom: 0;
 }
 
-/* ========================================
-   RESPONSIVE BREAKPOINTS
-   ======================================== */
-
-/* Extra small devices (phones, up to 400px) */
-@media (max-width: 400px) {
-    h1 {
-        font-size: 2rem;
-    }
-
-    h2 {
-        font-size: 1.5rem;
-    }
-
-    body {
-        padding: 1.5rem 1rem;
-    }
-
-    section {
-        padding: 0;
-    }
-
-    nav {
-        flex-direction: column;
-        gap: 1rem;
-    }
-
-    nav .page-title {
-        text-align: center;
-    }
-
-    nav ul {
-        gap: 1rem;
-        justify-content: center;
-    }
-
-    footer ul {
-        flex-wrap: wrap;
-        gap: 1rem;
-        justify-content: center;
-    }
-}
-
-/* Small devices (phones, 480px and up) */
-@media (min-width: 480px) {
-    body {
-        padding: 1.5rem 1.5rem;
-    }
-}
-
-/* Small to medium devices (large phones/small tablets, 600px and up) */
-@media (min-width: 600px) {
-    body {
-        padding: 1.5rem 2rem;
-    }
-}
-
-/* Mobile devices (max-width: 767px) */
-@media (max-width: 767px) {
-    [data-include="nav"] {
-        padding: 0.75rem 1rem;
-    }
-
-    section {
-        padding: 0;
-    }
-}
-
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-    body {
-        padding: 1.5rem 2.5rem;
-    }
-
-    .contents-box {
-        max-width: 425px;
-    }
-
-    .contents-box:has(#results-brief) {
-        max-width: 75%;
-    }
-
-    /* Project developers list: center based on longest item */
-    #project-developers + ul {
-        width: fit-content;
-        margin-left: auto;
-        margin-right: auto;
-    }
-}
-
 /* Sankey diagram responsive behavior (below 992px) */
 @media (max-width: 991px) {
     #sankey-chart {
@@ -634,19 +683,5 @@ a.email::after {
         width: 100%;
         height: auto;
         margin: 2rem auto 0;
-    }
-}
-
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-    body {
-        padding: 1.5rem 3rem;
-    }
-}
-
-/* Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-    body {
-        padding: 1.5rem 4rem;
     }
 }
