@@ -8,7 +8,7 @@
    - index.html (line ~26 and ~32): css/style.css?vers=00X
    - survey.html (line ~21 and ~27): css/style.css?vers=00X
 
-   Current version: 003
+   Current version: 005
 
    This forces browsers to reload the updated stylesheet and
    prevents users from seeing cached/outdated styles.
@@ -432,10 +432,12 @@ td {
 
 nav {
     display: flex;
+    flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     margin-bottom: 0;
+    gap: 0.5rem;
 }
 
 nav .page-title {
@@ -443,6 +445,11 @@ nav .page-title {
     color: #E8F4F8;
     font-weight: 700;
     font-size: 1.2rem;
+    flex-shrink: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 nav ul {
@@ -450,18 +457,25 @@ nav ul {
     padding: 0;
     margin: 0;
     display: flex;
-    gap: 2rem;
+    flex-wrap: nowrap;
+    gap: 1rem;
     align-items: center;
+    flex-shrink: 1;
+    min-width: 0;
 }
 
 nav ul li {
     text-align: center;
+    flex-shrink: 1;
+    min-width: 0;
+    white-space: nowrap;
 }
 
 nav ul li a {
     font-weight: 500;
     font-size: 1.2rem;
     transition: all 0.3s ease;
+    white-space: nowrap;
 }
 
 /* Extra small devices (phones, up to 400px) */
@@ -476,30 +490,19 @@ nav ul li a {
     }
 
     nav ul {
-        gap: 1rem;
-        justify-content: center;
-    }
-}
-
-/* Small phones (401px to 600px) - reduce gap to prevent wrapping */
-@media (min-width: 401px) and (max-width: 600px) {
-    nav .page-title {
-        font-size: 1rem;
-    }
-
-    nav ul {
         gap: 0.75rem;
-    }
-
-    nav ul li a {
-        font-size: 1rem;
+        justify-content: center;
     }
 }
 
 /* Mobile devices (max-width: 767px) */
 @media (max-width: 767px) {
     [data-include="nav"] {
-        padding: 0.75rem 1rem;
+        padding: 0.75rem 0.75rem;
+    }
+
+    nav ul {
+        gap: 0.5rem;
     }
 }
 
