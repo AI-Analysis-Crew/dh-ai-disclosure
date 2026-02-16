@@ -8,7 +8,7 @@
    - index.html (line ~26 and ~32): css/style.css?vers=00X
    - survey.html (line ~21 and ~27): css/style.css?vers=00X
 
-   Current version: 009
+   Current version: 011
 
    This forces browsers to reload the updated stylesheet and
    prevents users from seeing cached/outdated styles.
@@ -160,6 +160,7 @@ figure a:focus {
 /* Figure caption styling */
 .caption {
     font-size: 1.2rem;
+    line-height: 1.5;
     text-align: left;
     margin-top: 0.75rem;
     margin-bottom: 2rem;
@@ -184,7 +185,7 @@ h1 {
     border-bottom: 3px solid #5A93AC;
     padding-bottom: 1rem;
     margin-bottom: 3rem;
-    margin-top: 4.5rem; /* spacing for fixed nav */
+    margin-top: 3.5rem; /* spacing for fixed nav */
     width: 100%;
 }
 
