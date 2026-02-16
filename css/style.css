@@ -1,4 +1,20 @@
 /* ========================================
+   CACHE MANAGEMENT REMINDER
+   ======================================== */
+/*
+   IMPORTANT: When this CSS file is updated, you MUST increment
+   the version number in the following HTML files:
+
+   - index.html (line ~26 and ~32): css/style.css?vers=00X
+   - survey.html (line ~21 and ~27): css/style.css?vers=00X
+
+   Current version: 002
+
+   This forces browsers to reload the updated stylesheet and
+   prevents users from seeing cached/outdated styles.
+*/
+
+/* ========================================
    COLOR PALETTE
    Balanced Dark Mode - AAA Accessible
    ======================================== */
