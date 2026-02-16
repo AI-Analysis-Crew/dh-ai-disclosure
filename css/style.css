@@ -8,7 +8,7 @@
    - index.html (line ~26 and ~32): css/style.css?vers=00X
    - survey.html (line ~21 and ~27): css/style.css?vers=00X
 
-   Current version: 008
+   Current version: 009
 
    This forces browsers to reload the updated stylesheet and
    prevents users from seeing cached/outdated styles.
@@ -481,7 +481,7 @@ nav ul li a {
     }
 
     nav .page-title {
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
 
     nav ul {
@@ -489,7 +489,7 @@ nav ul li a {
     }
 
     nav ul li a {
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
 }
 
