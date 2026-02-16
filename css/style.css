@@ -8,7 +8,7 @@
    - index.html (line ~26 and ~32): css/style.css?vers=00X
    - survey.html (line ~21 and ~27): css/style.css?vers=00X
 
-   Current version: 011
+   Current version: 012
 
    This forces browsers to reload the updated stylesheet and
    prevents users from seeing cached/outdated styles.
@@ -65,7 +65,7 @@
 html {
     background: #1a2332;
     min-height: 100vh;
-    scroll-padding-top: 5rem;
+    scroll-padding-top: 6.5rem;
 }
 
 /* main container for body of html pages */
