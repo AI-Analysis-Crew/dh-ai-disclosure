@@ -300,7 +300,7 @@ section[aria-labelledby="survey-box"] {
 }
 
 section[aria-labelledby="survey"] h2,
-section[aria-labelledby="survey-box"] h3 {
+section[aria-labelledby="survey-box"] h2 {
     margin-top: 0;
 }
 
