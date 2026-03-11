@@ -315,11 +315,20 @@
 			// Includes HTML snippets; vanilla JavaScript implementation
 			document.addEventListener('DOMContentLoaded', function() {
 				var includes = document.querySelectorAll('[data-include]');
+				var basePath = './';
 				includes.forEach(function(element) {
-					var file = './common/' + element.getAttribute('data-include') + '.html?vers=001';
+					var file = basePath + 'common/' + element.getAttribute('data-include') + '.html?vers=001';
 					fetch(file)
 						.then(response => response.text())
-						.then(data => element.innerHTML = data)
+						.then(function(data) {
+							element.innerHTML = data;
+							element.querySelectorAll('a[href]').forEach(function(a) {
+								var href = a.getAttribute('href');
+								if (href && !href.startsWith('http') && !href.startsWith('#') && !href.startsWith('mailto:')) {
+									a.setAttribute('href', basePath + href);
+								}
+							});
+						})
 						.catch(error => console.error('Error loading include:', error));
 				});
 
