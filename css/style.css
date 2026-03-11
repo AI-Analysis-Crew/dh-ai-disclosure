@@ -5,8 +5,8 @@
    IMPORTANT: When this CSS file is updated, you MUST increment
    the version number in the following HTML files:
 
-   - index.html (line ~26 and ~32): css/style.css?vers=00X
-   - survey.html (line ~21 and ~27): css/style.css?vers=00X
+   - /index.html (line ~26 and ~32): /css/style.css?vers=00X
+   - /survey.html (line ~21 and ~27): /css/style.css?vers=00X
 
    Current version: 012
 
