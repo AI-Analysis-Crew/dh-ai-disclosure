@@ -23,13 +23,13 @@
 		<!--<link rel="/apple-touch-icon" sizes="180x180" href=""/>-->
 		<!--<link rel="/manifest" href="/site.webmanifest"/>-->
 		<!-- Preload critical resources -->
-		<link rel="preload" href="./css/style.css?vers=015" as="style"/>
+		<link rel="preload" href="./css/style.css?vers=023" as="style"/>
 		<link rel="preconnect" href="https://fonts.googleapis.com"/>
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 		<link rel="preconnect" href="https://cdnjs.cloudflare.com"/>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=Source+Sans+Pro:wght@400;600;700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,;:!?()'&quot;-"/>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		<link rel="stylesheet" type="text/css" href="./css/style.css?vers=015"/>
+		<link rel="stylesheet" type="text/css" href="./css/style.css?vers=023"/>
 		<!-- Plotly.js CDN for Sankey diagram -->
 		<script src="https://cdn.plot.ly/plotly-2.27.0.min.js" charset="utf-8"></script>
 	</head>
@@ -317,7 +317,7 @@
 				var includes = document.querySelectorAll('[data-include]');
 				var basePath = './';
 				includes.forEach(function(element) {
-					var file = basePath + 'common/' + element.getAttribute('data-include') + '.html?vers=001';
+					var file = basePath + 'common/' + element.getAttribute('data-include') + '.html?vers=003';
 					fetch(file)
 						.then(response => response.text())
 						.then(function(data) {
@@ -328,6 +328,35 @@
 									a.setAttribute('href', basePath + href);
 								}
 							});
+								// Initialize hamburger menu after nav loads
+								if (element.getAttribute('data-include') === 'nav') {
+									var btn = element.querySelector('.hamburger');
+									var menu = element.querySelector('.nav-menu');
+									var overlay = document.createElement('div');
+									overlay.className = 'nav-overlay';
+									var closeBtn = document.createElement('button');
+									closeBtn.className = 'nav-menu-close';
+									closeBtn.setAttribute('aria-label', 'Close menu');
+									closeBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+									menu.insertBefore(closeBtn, menu.firstChild);
+									document.body.appendChild(overlay);
+									document.body.appendChild(menu);
+									if (btn && menu) {
+										function toggleMenu() {
+											var open = menu.classList.toggle('open');
+											overlay.classList.toggle('open', open);
+											btn.setAttribute('aria-expanded', open);
+										}
+										btn.addEventListener('click', toggleMenu);
+										overlay.addEventListener('click', toggleMenu);
+										closeBtn.addEventListener('click', toggleMenu);
+										menu.querySelectorAll('a').forEach(function(a) {
+											a.addEventListener('click', function() {
+												if (menu.classList.contains('open')) toggleMenu();
+											});
+										});
+									}
+								}
 						})
 						.catch(error => console.error('Error loading include:', error));
 				});
