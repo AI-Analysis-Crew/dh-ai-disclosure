@@ -8,7 +8,7 @@
    - /index.html (line ~26 and ~32): /css/style.css?vers=00X
    - /survey.html (line ~21 and ~27): /css/style.css?vers=00X
 
-   Current version: 023
+   Current version: 024
 
    This forces browsers to reload the updated stylesheet and
    prevents users from seeing cached/outdated styles.
@@ -892,4 +892,88 @@ a.email::after {
     border-radius: 50%;
     margin-right: 0.5rem;
     flex-shrink: 0;
+}
+
+/* ========================================
+   Q6 DISTRIBUTION CHART
+   ======================================== */
+
+.q6-filter-row {
+    margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+    .q6-filter-container {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    .q6-filter-row {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .q6-filter-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .q6-filter-row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+    .q6-filter-row label {
+        position: absolute;
+        right: calc(100% + 1rem);
+        white-space: nowrap;
+    }
+}
+
+.q6-filter-row label {
+    font-weight: 600;
+    color: #A8D5E2;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.q6-filter-row select {
+    padding: 0.6rem 1rem;
+    font-size: 1.1rem;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+    color: #333;
+    cursor: pointer;
+    font-family: 'Source Sans Pro', sans-serif;
+    transition: border-color 0.2s;
+    min-width: 250px;
+}
+
+.q6-filter-row select:hover {
+    border-color: #4CAF50;
+}
+
+.q6-filter-row select:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+
+.q6-chart-container {
+    overflow: hidden;
+}
+
+#q6-chart {
+    width: 1200px;
+    max-width: 100%;
+    height: 600px;
+    margin: 2rem auto;
 }
