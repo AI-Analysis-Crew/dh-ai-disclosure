@@ -8,7 +8,7 @@
    - /index.html (line ~26 and ~32): /css/style.css?vers=00X
    - /survey.html (line ~21 and ~27): /css/style.css?vers=00X
 
-   Current version: 015
+   Current version: 023
 
    This forces browsers to reload the updated stylesheet and
    prevents users from seeing cached/outdated styles.
@@ -449,7 +449,8 @@ nav .page-title {
     flex: 0 1 auto;
 }
 
-nav ul {
+nav ul,
+.nav-menu {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -460,44 +461,120 @@ nav ul {
     flex: 0 0 auto;
 }
 
-nav ul li {
+nav ul li,
+.nav-menu li {
     text-align: center;
 }
 
-nav ul li a {
+nav ul li a,
+.nav-menu li a {
     font-weight: 500;
     font-size: 1.2rem;
     transition: all 0.3s ease;
     display: block;
 }
 
-/* Mobile devices - horizontal nav optimization (up to 600px) */
-@media (max-width: 600px) {
-    [data-include="nav"] {
-        padding: 0.75rem 0.5rem;
-    }
-
-    nav {
-        gap: 0.5rem;
-    }
-
-    nav .page-title {
-        font-size: 1.2rem;
-    }
-
-    nav ul {
-        gap: 0.5rem;
-    }
-
-    nav ul li a {
-        font-size: 1.2rem;
-    }
+/* Hamburger button - hidden on desktop */
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    color: #E8F4F8;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    line-height: 1;
+    z-index: 200;
 }
 
-/* Mobile devices (max-width: 767px) */
+.hamburger:focus {
+    outline: 2px solid white;
+    outline-offset: 2px;
+}
+
+/* Close button and overlay - hidden on desktop */
+.nav-menu-close {
+    display: none;
+}
+
+.nav-overlay {
+    display: none;
+}
+
+/* Mobile nav (below 768px) */
 @media (max-width: 767px) {
     [data-include="nav"] {
         padding: 0.75rem 1rem;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    body > .nav-menu {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: -260px;
+        width: 260px;
+        height: 100vh;
+        background: #2a3444;
+        padding: 4rem 1.5rem 2rem;
+        margin: 0;
+        gap: 0;
+        transition: right 0.3s ease;
+        z-index: 150;
+        box-shadow: -2px 0 8px rgba(0, 0, 0, 0.3);
+    }
+
+    body > .nav-menu.open {
+        right: 0;
+    }
+
+    body > .nav-menu li {
+        text-align: left;
+        padding: 0;
+    }
+
+    body > .nav-menu li a {
+        font-size: 1.3rem;
+        padding: 0.75rem 0;
+        display: block;
+    }
+
+    .nav-menu-close {
+        display: block;
+        position: absolute;
+        top: 0.75rem;
+        right: 0.75rem;
+        background: none;
+        border: none;
+        color: #E8F4F8;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0.25rem 0.5rem;
+        line-height: 1;
+    }
+
+    .nav-menu-close:focus {
+        outline: 2px solid white;
+        outline-offset: 2px;
+    }
+
+    .nav-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(200, 200, 210, 0.92);
+        z-index: 140;
+    }
+
+    .nav-overlay.open {
+        display: block;
     }
 }
 
@@ -630,6 +707,7 @@ a:active {
 
 /* hover effects for navigation and footer links */
 nav ul li a:hover,
+.nav-menu li a:hover,
 footer ul li a:hover {
     color: #A8D5E2;
 }
