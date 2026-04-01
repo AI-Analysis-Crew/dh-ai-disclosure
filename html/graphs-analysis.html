@@ -18,13 +18,13 @@
 		<meta name="twitter:title" content="Graphs/Analysis - Disclosing Generative AI Use in Digital Humanities Research"/>
 		<meta name="twitter:description" content="Graphs and analysis based on a generative AI use in digital humanities research disclosure and transparency survey."/>
 		<!-- Preload critical resources -->
-		<link rel="preload" href="../css/style.css?vers=026" as="style"/>
+		<link rel="preload" href="../css/style.css?vers=027" as="style"/>
 		<link rel="preconnect" href="https://fonts.googleapis.com"/>
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
 		<link rel="preconnect" href="https://cdnjs.cloudflare.com"/>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=Source+Sans+Pro:wght@400;600;700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,;:!?()'&quot;-"/>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		<link rel="stylesheet" type="text/css" href="../css/style.css?vers=026"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css?vers=027"/>
 		<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 	</head>
 
@@ -79,9 +79,28 @@
 
 					<div class="q6-chart-container">
 						<div class="q6-chart-scaler">
-							<div id="q6-chart"></div>
+							<div id="q6-chart" role="img" aria-label="Bar chart showing how respondents assess the necessity of disclosing generative AI use. 67 said very necessary, 21 somewhat necessary, 10 neutral, 5 not very necessary, 3 not necessary at all, 1 prefer not to answer."></div>
 						</div>
 					</div>
+
+					<table class="sr-only" aria-label="Q6 response data: Do scholars think AI use should be disclosed? All respondents.">
+						<caption>Survey responses on the necessity of disclosing generative AI use (all respondents, n=107)</caption>
+						<thead>
+							<tr>
+								<th scope="col">Response</th>
+								<th scope="col">Count</th>
+								<th scope="col">Percentage</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr><td>Very necessary</td><td>67</td><td>62.6%</td></tr>
+							<tr><td>Somewhat necessary</td><td>21</td><td>19.6%</td></tr>
+							<tr><td>Neutral</td><td>10</td><td>9.3%</td></tr>
+							<tr><td>Not very necessary</td><td>5</td><td>4.7%</td></tr>
+							<tr><td>Not necessary at all</td><td>3</td><td>2.8%</td></tr>
+							<tr><td>Prefer not to answer</td><td>1</td><td>0.9%</td></tr>
+						</tbody>
+					</table>
 
 				<section aria-labelledby="read-1">
 					<h3 id="read-1">How to Read This Graph</h3>
@@ -105,7 +124,7 @@
 
 					<div class="q8-chart-container">
 						<div class="q8-chart-scaler">
-							<div id="q8-chart"></div>
+							<div id="q8-chart" role="img" aria-label="Network graph showing which entities respondents believe should be responsible for ensuring AI disclosure. Larger circles indicate more selections. Lines between circles show how often entities were selected together."></div>
 						</div>
 
 						<div class="q8-legend">
@@ -113,6 +132,51 @@
 							<ul class="q8-legend-items" id="q8-legend-items"></ul>
 						</div>
 					</div>
+
+					<table class="sr-only" aria-label="Q8 response data: Who should be responsible for ensuring AI disclosure?">
+						<caption>Entities selected as responsible for AI disclosure and their co-selection frequencies (n=107)</caption>
+						<thead>
+							<tr>
+								<th scope="col">Entity</th>
+								<th scope="col">Selections</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr><td>Journal publishers and editorial boards</td><td>92</td></tr>
+							<tr><td>Academic institutions</td><td>91</td></tr>
+							<tr><td>Professional organizations</td><td>73</td></tr>
+							<tr><td>Funding bodies</td><td>72</td></tr>
+							<tr><td>Ethical review boards</td><td>63</td></tr>
+							<tr><td>Government agencies</td><td>54</td></tr>
+							<tr><td>Industry organizations</td><td>38</td></tr>
+							<tr><td>Independent oversight bodies</td><td>38</td></tr>
+							<tr><td>International organizations</td><td>37</td></tr>
+							<tr><td>Other</td><td>7</td></tr>
+							<tr><td>Prefer not to answer</td><td>5</td></tr>
+						</tbody>
+					</table>
+
+					<table class="sr-only" aria-label="Q8 co-selection data: How often entities were selected together">
+						<caption>Top co-selections between entities (strongest connections in the network)</caption>
+						<thead>
+							<tr>
+								<th scope="col">Entity pair</th>
+								<th scope="col">Co-selections</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr><td>Academic institutions &harr; Journal publishers and editorial boards</td><td>84</td></tr>
+							<tr><td>Professional organizations &harr; Journal publishers and editorial boards</td><td>70</td></tr>
+							<tr><td>Funding bodies &harr; Journal publishers and editorial boards</td><td>70</td></tr>
+							<tr><td>Academic institutions &harr; Professional organizations</td><td>73</td></tr>
+							<tr><td>Academic institutions &harr; Funding bodies</td><td>70</td></tr>
+							<tr><td>Academic institutions &harr; Ethical review boards</td><td>60</td></tr>
+							<tr><td>Professional organizations &harr; Funding bodies</td><td>58</td></tr>
+							<tr><td>Professional organizations &harr; Ethical review boards</td><td>56</td></tr>
+							<tr><td>Government agencies &harr; Journal publishers and editorial boards</td><td>53</td></tr>
+							<tr><td>Funding bodies &harr; Ethical review boards</td><td>54</td></tr>
+						</tbody>
+					</table>
 
 				<section aria-labelledby="read-2">
 					<h3 id="read-2">How to Read This Graph</h3>
