@@ -18,13 +18,13 @@
 		<meta name="twitter:title" content="Graphs/Analysis - Disclosing Generative AI Use in Digital Humanities Research"/>
 		<meta name="twitter:description" content="Graphs and analysis based on a generative AI use in digital humanities research disclosure and transparency survey."/>
 		<!-- Preload critical resources -->
-		<link rel="preload" href="../css/style.css?vers=024" as="style"/>
+		<link rel="preload" href="../css/style.css?vers=026" as="style"/>
 		<link rel="preconnect" href="https://fonts.googleapis.com"/>
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
 		<link rel="preconnect" href="https://cdnjs.cloudflare.com"/>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=Source+Sans+Pro:wght@400;600;700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,;:!?()'&quot;-"/>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		<link rel="stylesheet" type="text/css" href="../css/style.css?vers=024"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css?vers=026"/>
 		<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 	</head>
 
@@ -78,7 +78,9 @@
 					</div>
 
 					<div class="q6-chart-container">
-						<div id="q6-chart"></div>
+						<div class="q6-chart-scaler">
+							<div id="q6-chart"></div>
+						</div>
 					</div>
 
 				<section aria-labelledby="read-1">
@@ -509,11 +511,11 @@
 						y: xValues,
 						type: 'bar',
 						orientation: 'h',
-						width: 0.3,
+						width: 0.4,
 						marker: {
-							color: '#CFD186',
+							color: '#7EC9EE',
 							line: {
-								color: '#A8B060',
+								color: '#5AAFE0',
 								width: 1.5
 							}
 						},
@@ -529,17 +531,38 @@
 					const layout = {
 						xaxis: {
 							title: 'Number of Respondents',
-							rangemode: 'tozero'
+							rangemode: 'tozero',
+							range: [0, Math.max(...yValues) * 1.15],
+							showline: true,
+							linecolor: 'black',
+							linewidth: 1
 						},
 						yaxis: {
 							title: '',
-							automargin: true
+							automargin: true,
+							ticksuffix: '   ',
+							showline: false
 						},
-						plot_bgcolor: '#fafafa',
-						paper_bgcolor: 'white',
-						margin: { t: 20, b: 60, l: 250, r: 100 },
+						shapes: [{
+							type: 'line',
+							xref: 'paper',
+							yref: 'paper',
+							x0: 0,
+							y0: 0,
+							x1: 0,
+							y1: 1,
+							line: { color: 'black', width: 1 }
+						}],
+						plot_bgcolor: 'rgba(0,0,0,0)',
+						paper_bgcolor: 'rgba(0,0,0,0)',
+						margin: { t: 40, b: 100, l: 160, r: 60 },
 						hovermode: 'closest',
-						font: { family: 'Source Sans Pro, sans-serif', size: 13 }
+						hoverlabel: {
+							bgcolor: 'white',
+							font: { family: 'Source Sans Pro, sans-serif', size: 14, color: 'black' },
+							bordercolor: '#5AAFE0'
+						},
+						font: { family: 'Source Sans Pro, sans-serif', size: 14 }
 					};
 
 					const config = {
@@ -547,8 +570,68 @@
 						displayModeBar: false
 					};
 
+					var hasHover = window.matchMedia('(any-hover: hover)').matches;
+					if (!hasHover) {
+						layout.hovermode = false;
+					}
+
 					Plotly.newPlot('q6-chart', [trace], layout, config);
+
+					var q6ChartDiv = document.getElementById('q6-chart');
+					var defaultColor = '#7EC9EE';
+					var hoverColor = '#5AAFE0';
+
+					if (hasHover) {
+						q6ChartDiv.on('plotly_hover', function(eventData) {
+							var point = eventData.points[0];
+							var colors = yValues.map(function() { return defaultColor; });
+							colors[point.pointIndex] = hoverColor;
+							Plotly.restyle('q6-chart', { 'marker.color': [colors] }, [0]);
+						});
+						q6ChartDiv.on('plotly_unhover', function() {
+							Plotly.restyle('q6-chart', { 'marker.color': [yValues.map(function() { return defaultColor; })] }, [0]);
+						});
+					} else {
+						var q6InfoPanel = document.createElement('div');
+						q6InfoPanel.className = 'q6-touch-info';
+						q6ChartDiv.parentNode.insertBefore(q6InfoPanel, q6ChartDiv.nextSibling);
+						var q6ActiveBar = -1;
+
+						q6ChartDiv.on('plotly_click', function(eventData) {
+							var point = eventData.points[0];
+							var idx = point.pointIndex;
+							var colors = yValues.map(function() { return defaultColor; });
+
+							if (q6ActiveBar === idx) {
+								q6ActiveBar = -1;
+								q6InfoPanel.style.display = 'none';
+							} else {
+								q6ActiveBar = idx;
+								colors[idx] = hoverColor;
+								var pct = totalResponses > 0 ? (yValues[idx] / totalResponses * 100).toFixed(1) : 0;
+								q6InfoPanel.innerHTML = '<strong>' + xValues[idx] + '</strong><br>Count: ' + yValues[idx] + '<br>Percentage: ' + pct + '%';
+								q6InfoPanel.style.display = 'block';
+							}
+							Plotly.restyle('q6-chart', { 'marker.color': [colors] }, [0]);
+						});
+					}
+
+					scaleQ6Chart();
 				};
+
+				function scaleQ6Chart() {
+					var scaler = document.querySelector('.q6-chart-scaler');
+					var chartDiv = document.getElementById('q6-chart');
+					if (window.innerWidth < 768) {
+						var scale = scaler.clientWidth / 768;
+						chartDiv.style.transform = 'scale(' + scale + ')';
+						scaler.style.height = (chartDiv.offsetHeight * scale) + 'px';
+					} else {
+						chartDiv.style.transform = '';
+						scaler.style.height = '';
+					}
+				}
+				window.addEventListener('resize', scaleQ6Chart);
 
 				if (document.readyState === 'loading') {
 					document.addEventListener('DOMContentLoaded', updateQ6FilterOptions);
@@ -584,21 +667,23 @@
 									closeBtn.className = 'nav-menu-close';
 									closeBtn.setAttribute('aria-label', 'Close menu');
 									closeBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
-									menu.insertBefore(closeBtn, menu.firstChild);
+									var mobileMenu = menu.cloneNode(true);
+									mobileMenu.classList.add('nav-menu-mobile');
+									mobileMenu.insertBefore(closeBtn, mobileMenu.firstChild);
 									document.body.appendChild(overlay);
-									document.body.appendChild(menu);
-									if (btn && menu) {
+									document.body.appendChild(mobileMenu);
+									if (btn && mobileMenu) {
 										function toggleMenu() {
-											var open = menu.classList.toggle('open');
+											var open = mobileMenu.classList.toggle('open');
 											overlay.classList.toggle('open', open);
 											btn.setAttribute('aria-expanded', open);
 										}
 										btn.addEventListener('click', toggleMenu);
 										overlay.addEventListener('click', toggleMenu);
 										closeBtn.addEventListener('click', toggleMenu);
-										menu.querySelectorAll('a').forEach(function(a) {
+										mobileMenu.querySelectorAll('a').forEach(function(a) {
 											a.addEventListener('click', function() {
-												if (menu.classList.contains('open')) toggleMenu();
+												if (mobileMenu.classList.contains('open')) toggleMenu();
 											});
 										});
 									}
