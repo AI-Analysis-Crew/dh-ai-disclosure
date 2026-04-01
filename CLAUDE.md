@@ -18,7 +18,7 @@ Three branches promoted in order: `dev` → `stage` → `main`. All work happens
 
 **Styles:** Single stylesheet `css/style.css`. Uses a dark-mode color palette (Deep Slate background, cyan/blue text) designed for AAA accessibility (7:1+ contrast ratios). When updating CSS, increment the `?vers=` cache-busting parameter in all HTML files that reference it (currently `index.html`, `html/survey.html`, `html/graphs-analysis.html`).
 
-**Visualizations:** Interactive charts in `graphs/` are standalone HTML files (Plotly.js). The Sankey diagram on the homepage uses `js/sankey_data.js` rendered via Plotly CDN, with a static PNG fallback (`png/sankey-diagram.png`) for mobile.
+**Visualizations:** Interactive charts in `graphs/` are standalone HTML files (Plotly.js). The Sankey diagram on the homepage uses `js/sankey_data.js` rendered via Plotly CDN, with CSS transform scaling for narrow viewports (no static PNG fallback).
 
 **Images:** Source images in `jpg/`, responsive variants in `jpg/responsive/`. Generated via ImageMagick (`scripts/generate-responsive-images.sh`).
 
@@ -29,4 +29,4 @@ Three branches promoted in order: `dev` → `stage` → `main`. All work happens
 - `common/nav.html` and `common/footer.html` versioning: bump `?vers=` in the fetch URL when these change
 - External libraries loaded via CDN with SRI hashes (Font Awesome, Google Fonts, Plotly.js)
 - Fonts: Noto Serif (headings), Source Sans Pro (body)
-- **Touch-aware hover for Plotly graphs:** All interactive Plotly charts on `html/graphs-analysis.html` must detect device capability via `window.matchMedia('(any-hover: hover)')`. On hover-capable devices, use standard Plotly hover events (`plotly_hover`/`plotly_unhover`). On touch-only devices, set `layout.hovermode = false` and use `plotly_click` with tap-to-toggle behavior, displaying info in a visible panel (class `q8-touch-info` or similar) instead of tooltips. See the Q8 network graph script for the reference implementation.
+- **Touch-aware hover for Plotly graphs:** All interactive Plotly charts (homepage and `html/graphs-analysis.html`) must detect device capability via `window.matchMedia('(any-hover: hover)')`. On hover-capable devices, use standard Plotly hover events (`plotly_hover`/`plotly_unhover`). On touch-only devices, set `layout.hovermode = false` and use `plotly_click` with tap-to-toggle behavior, displaying info in a visible panel (class `sankey-touch-info`, `q8-touch-info`, or similar) instead of tooltips. See the Q8 network graph script for the reference implementation.

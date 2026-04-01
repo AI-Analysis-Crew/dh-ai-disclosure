@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(ls -lh /media/rosie/62771373-28ee-4534-8a16-8c392fafd80e/GitHub/dh-ai-disclosure/png/sankey*)"
+      "Bash(ls -lh /media/rosie/62771373-28ee-4534-8a16-8c392fafd80e/GitHub/dh-ai-disclosure/png/sankey*)",
+      "Bash(find /media/rosie/62771373-28ee-4534-8a16-8c392fafd80e/GitHub/dh-ai-disclosure/graphs -name *.html -type f)"
     ]
   }
 }
