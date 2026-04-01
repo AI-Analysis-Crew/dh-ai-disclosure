@@ -1169,3 +1169,18 @@ h1#introduction {
     line-height: 1.5;
     text-align: center;
 }
+
+/* Site Accessibility section */
+[aria-labelledby="page-overview"] ul {
+    list-style: none;
+    padding-left: 1.5rem;
+}
+
+[aria-labelledby="page-overview"] ul > li::before {
+    content: "– ";
+    margin-left: -1.25rem;
+}
+
+[aria-labelledby="page-overview"] code {
+    font-size: 0.75em;
+}
