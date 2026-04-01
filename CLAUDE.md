@@ -12,7 +12,7 @@ Three branches promoted in order: `dev` → `stage` → `main`. All work happens
 
 ## Architecture
 
-**Pages:** `index.html` (root), `html/survey.html`, `html/graphs-analysis.html`
+**Pages:** `index.html` (root), `html/survey.html`, `html/graphs-analysis.html`, `html/accessibility.html`
 
 **Shared components:** `common/nav.html` and `common/footer.html` are loaded at runtime via `fetch()` into `<div data-include="nav">` / `<div data-include="footer">` elements. Each page has its own inline `<script>` that handles this inclusion and rewrites relative paths. The `basePath` variable differs per page (`'./'` for root, `'../'` for pages in `html/`).
 
