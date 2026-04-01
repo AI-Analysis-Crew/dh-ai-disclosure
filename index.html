@@ -23,13 +23,13 @@
 		<!--<link rel="/apple-touch-icon" sizes="180x180" href=""/>-->
 		<!--<link rel="/manifest" href="/site.webmanifest"/>-->
 		<!-- Preload critical resources -->
-		<link rel="preload" href="./css/style.css?vers=029" as="style"/>
+		<link rel="preload" href="./css/style.css?vers=030" as="style"/>
 		<link rel="preconnect" href="https://fonts.googleapis.com"/>
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 		<link rel="preconnect" href="https://cdnjs.cloudflare.com"/>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=Source+Sans+Pro:wght@400;600;700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,;:!?()'&quot;-"/>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		<link rel="stylesheet" type="text/css" href="./css/style.css?vers=029"/>
+		<link rel="stylesheet" type="text/css" href="./css/style.css?vers=030"/>
 		<!-- Plotly.js CDN for Sankey diagram -->
 		<script src="https://cdn.plot.ly/plotly-2.27.0.min.js" charset="utf-8"></script>
 	</head>
@@ -78,10 +78,11 @@
 		<h1 id="introduction">Disclosing Generative AI Use in Digital Humanities Research</h1>
 
 		<figure id="header">
-			<!-- Interactive Sankey diagram (hidden on mobile) -->
-			<div id="sankey-chart" aria-label="Interactive Sankey diagram showing survey responses about generative AI disclosure in digital humanities: Question 6 asks about necessity of disclosure, Question 16 asks about degree of disclosure, Question 10 asks about frequency of disclosure, and Question 11 asks whether disclosure was required or voluntary. Most respondents believe disclosure is necessary but have never actually disclosed their AI use." style="width: 100%; height: 600px; margin: 2rem auto 0;"></div>
-			<!-- Static image fallback for mobile (hidden on desktop) -->
-			<img id="sankey-static" src="./png/sankey-diagram.png" alt="Sankey diagram showing survey responses about GenAI disclosure: necessity, degree, frequency, and whether disclosure was required or voluntary" />
+			<div class="sankey-chart-container-home">
+				<div class="sankey-chart-scaler-home">
+					<div id="sankey-chart" aria-label="Interactive Sankey diagram showing survey responses about generative AI disclosure in digital humanities: Question 6 asks about necessity of disclosure, Question 16 asks about degree of disclosure, Question 10 asks about frequency of disclosure, and Question 11 asks whether disclosure was required or voluntary. Most respondents believe disclosure is necessary but have never actually disclosed their AI use." style="width: 100%; height: 600px; margin: 0 auto;"></div>
+				</div>
+			</div>
 			<figcaption class="caption"><strong>Figure 1.</strong> This Sankey diagram documents one of the key findings of our project, that digital humanists in theory support the disclosure of generative AI use, but in practice tend not to disclose such use or do so only in limited ways.</figcaption>
 		</figure>
 
@@ -387,25 +388,141 @@
 		<!-- Sankey diagram data and rendering -->
 		<script src="./js/sankey_data.js?vers=001"></script>
 		<script>
-			// Render the Sankey diagram when the page loads
-			document.addEventListener('DOMContentLoaded', function() {
-				if (typeof Plotly !== 'undefined' && typeof renderSankeyDiagram === 'function') {
-					renderSankeyDiagram('sankey-chart');
+			// Homepage Sankey diagram — enhanced version
+			(function() {
+				function createSankeyHome() {
+					var chartDiv = document.getElementById('sankey-chart');
+					if (!chartDiv || typeof Plotly === 'undefined' || typeof sankeyData === 'undefined') {
+						console.error('Plotly or sankey data not loaded');
+						return;
+					}
 
-					// Re-render on window resize with debouncing
-					var resizeTimeout;
-					window.addEventListener('resize', function() {
-						clearTimeout(resizeTimeout);
-						resizeTimeout = setTimeout(function() {
-							if (document.getElementById('sankey-chart').style.display !== 'none') {
-								renderSankeyDiagram('sankey-chart');
+					// Deep-clone layout and data to override without mutating shared objects
+					var layout = JSON.parse(JSON.stringify(sankeyLayout));
+					var data = JSON.parse(JSON.stringify(sankeyData));
+
+					// Node padding (match graphs-analysis)
+					data[0].node.pad = 40;
+
+					// Node colors from Q8 palette, distributed for maximum contrast between neighbors
+					data[0].node.color = [
+						'#7EC9EE', '#DB667A', '#2A904D', '#C552B1', '#AFA11C', '#757575',  // Q6
+						'#8B084A', '#3D6090', '#E2D072', '#9e9e9e',                          // Q16
+						'#4FB4A3', '#DB667A', '#3D6090', '#AFA11C', '#C552B1', '#757575',    // Q10
+						'#E2D072', '#4FB4A3', '#7EC9EE', '#8B084A', '#9e9e9e', '#2A904D'     // Q11
+					];
+
+					// Darken node label text for contrast
+					data[0].textfont = { color: 'black', family: 'Source Sans Pro, sans-serif', size: 14 };
+
+					// Mute link colors for text legibility (black text over #f5f5f5 bg meets WCAG AA)
+					data[0].link.color = data[0].link.source.map(function() { return 'rgba(180, 180, 180, 0.35)'; });
+
+					// Hover customization
+					data[0].name = '';
+					data[0].node.hovertemplate = '%{label}<extra></extra>';
+					data[0].node.hoverlabel = { bgcolor: 'white', font: { family: 'Source Sans Pro, sans-serif', size: 14, color: 'black' } };
+					data[0].link.hovertemplate = '%{source.label} \u2192 %{target.label}<br>%{value}<extra></extra>';
+					data[0].link.hoverlabel = { bgcolor: 'white', font: { family: 'Source Sans Pro, sans-serif', size: 14, color: 'black' } };
+
+					// Annotation font sizes — homepage uses larger sizes
+					var width = chartDiv.offsetWidth || window.innerWidth;
+					var fontSize = width < 768 ? 11 : width < 992 ? 12 : 14;
+					if (layout.annotations) {
+						layout.annotations.forEach(function(ann) {
+							ann.font.size = fontSize;
+						});
+					}
+
+					// Opaque hover popups (layout-level)
+					layout.hoverlabel = {
+						bgcolor: 'white',
+						bordercolor: '#333',
+						font: { family: 'Source Sans Pro, sans-serif', size: 14, color: 'black' }
+					};
+
+					// Config: hide mode bar
+					var config = {
+						responsive: true,
+						displayModeBar: false
+					};
+
+					// Touch-aware hover
+					var hasHover = window.matchMedia('(any-hover: hover)').matches;
+					if (!hasHover) {
+						layout.hovermode = false;
+					}
+
+					Plotly.newPlot('sankey-chart', data, layout, config);
+
+					// Touch: tap-to-toggle info panel
+					if (!hasHover) {
+						var sankeyInfoPanel = document.createElement('div');
+						sankeyInfoPanel.className = 'sankey-touch-info';
+						chartDiv.parentNode.insertBefore(sankeyInfoPanel, chartDiv.nextSibling);
+						var sankeyActivePoint = null;
+
+						chartDiv.on('plotly_click', function(eventData) {
+							var point = eventData.points[0];
+							if (!point) return;
+
+							var info = '';
+							var key = '';
+
+							if (point.hasOwnProperty('pointNumber') && point.hasOwnProperty('label')) {
+								// Node tap
+								var label = (point.label || '').replace(/<br>/g, ' ');
+								var value = point.value || '';
+								info = '<strong>' + label + '</strong>';
+								if (value) info += '<br>Total flow: ' + value;
+								key = 'node-' + point.pointNumber;
+							} else if (point.hasOwnProperty('source') && point.hasOwnProperty('target')) {
+								// Link tap
+								var src = (point.source.label || '').replace(/<br>/g, ' ');
+								var tgt = (point.target.label || '').replace(/<br>/g, ' ');
+								var val = point.value || '';
+								info = '<strong>' + src + '</strong> &rarr; <strong>' + tgt + '</strong>';
+								if (val) info += '<br>Count: ' + val;
+								key = 'link-' + point.pointNumber;
 							}
-						}, 250);
-					});
-				} else {
-					console.error('Plotly or sankey data not loaded');
+
+							if (info) {
+								if (sankeyActivePoint === key) {
+									sankeyActivePoint = null;
+									sankeyInfoPanel.style.display = 'none';
+								} else {
+									sankeyActivePoint = key;
+									sankeyInfoPanel.innerHTML = info;
+									sankeyInfoPanel.style.display = 'block';
+								}
+							}
+						});
+					}
+
+					// CSS-based responsive scaling below 768px
+					function scaleSankeyHome() {
+						var scaler = document.querySelector('.sankey-chart-scaler-home');
+						if (!scaler) return;
+						if (window.innerWidth < 768) {
+							var scale = scaler.clientWidth / 768;
+							chartDiv.style.transform = 'scale(' + scale + ')';
+							chartDiv.style.transformOrigin = 'top left';
+							scaler.style.height = (chartDiv.offsetHeight * scale) + 'px';
+						} else {
+							chartDiv.style.transform = '';
+							scaler.style.height = '';
+						}
+					}
+					scaleSankeyHome();
+					window.addEventListener('resize', scaleSankeyHome);
 				}
-			});
+
+				if (document.readyState === 'loading') {
+					document.addEventListener('DOMContentLoaded', createSankeyHome);
+				} else {
+					createSankeyHome();
+				}
+			})();
 		</script>
 	</body>
 </html>
