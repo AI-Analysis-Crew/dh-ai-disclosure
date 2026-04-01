@@ -780,27 +780,39 @@ a.email::after {
    SPECIALIZED COMPONENTS
    ======================================== */
 
-/* Sankey Diagram - Show interactive diagram by default, hide static image */
+/* Sankey Diagram (homepage) — always interactive, CSS-scaled on narrow viewports */
 #sankey-chart {
     display: block;
 }
 
-#sankey-static {
-    display: none;
-    margin-bottom: 0;
+#sankey-chart .hoverlayer .hovertext path {
+    fill: white !important;
+    stroke: #333 !important;
+    fill-opacity: 1 !important;
 }
 
-/* Sankey diagram responsive behavior (below 992px) */
-@media (max-width: 991px) {
-    #sankey-chart {
-        display: none;
-    }
+#sankey-chart .hoverlayer .hovertext text {
+    fill: black !important;
+}
 
-    #sankey-static {
-        display: block;
-        width: 100%;
-        height: auto;
-        margin: 2rem auto 0;
+/* Tighten gap between h1 and Sankey on homepage */
+h1#introduction {
+    margin-bottom: 1.5rem;
+}
+
+.sankey-chart-container-home {
+    width: 100%;
+}
+
+.sankey-chart-scaler-home {
+    overflow: hidden;
+}
+
+@media (max-width: 767px) {
+    #sankey-chart {
+        width: 768px !important;
+        max-width: none !important;
+        transform-origin: top left;
     }
 }
 
