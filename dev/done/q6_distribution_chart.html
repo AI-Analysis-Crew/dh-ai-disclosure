@@ -1,0 +1,216 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Q6 Distribution Analysis - Combined View</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        .filter-container {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .filter-row {
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+            color: #333;
+            display: inline-block;
+            min-width: 150px;
+            text-align: right;
+        }
+        select {
+            padding: 8px 15px;
+            font-size: 14px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            background-color: white;
+            cursor: pointer;
+            min-width: 300px;
+        }
+        select:hover {
+            border-color: #4CAF50;
+        }
+        select:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+        #chart {
+            width: 100%;
+            height: 600px;
+        }
+        .info {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f5e9;
+            border-left: 4px solid #4CAF50;
+            border-radius: 5px;
+        }
+        .info p {
+            margin: 5px 0;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Q6 Distribution Analysis</h1>
+        <p class="subtitle">Interactive visualization of "Do you think it is necessary to disclose generative AI use in scholarship?" responses</p>
+        
+        <div class="filter-container">
+            <div class="filter-row">
+                <label for="question-filter">Select Question:</label>
+                <select id="question-filter" onchange="updateFilterOptions()">
+                    <option value="Q2">Q2: Years of Experience</option>
+                    <option value="Q4">Q4: Seniority</option>
+                    <option value="Q5">Q5: Discipline</option>
+                    <option value="Q24">Q24: GenAI Literacy</option>
+                </select>
+            </div>
+            <div class="filter-row">
+                <label for="value-filter">Filter by:</label>
+                <select id="value-filter" onchange="updateChart()">
+                    <option value="all">All Respondents</option>
+                </select>
+            </div>
+        </div>
+        
+        <div id="chart"></div>
+        
+        <div class="info">
+            <p><strong>Note:</strong> <span id="filter-note">Select a question and filter to see the distribution.</span></p>
+            <p><strong>Sample size:</strong> <span id="sample-size">Loading...</span></p>
+        </div>
+    </div>
+
+    <script>
+        // Data
+        const allData = {"Q2": {"all": {"1": 67, "2": 21, "3": 10, "4": 5, "5": 3, "6": 1}, "1": {"1": 1, "2": 4, "3": 0, "4": 0, "5": 0, "6": 0}, "2": {"1": 12, "2": 7, "3": 6, "4": 0, "5": 1, "6": 0}, "3": {"1": 9, "2": 3, "3": 2, "4": 2, "5": 1, "6": 0}, "4": {"1": 16, "2": 2, "3": 2, "4": 1, "5": 0, "6": 1}, "5": {"1": 28, "2": 5, "3": 0, "4": 2, "5": 1, "6": 0}, "6": {"1": 1, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}, "Q4": {"all": {"1": 67, "2": 21, "3": 10, "4": 5, "5": 3, "6": 1}, "1": {"1": 1, "2": 1, "3": 1, "4": 0, "5": 0, "6": 0}, "2": {"1": 1, "2": 2, "3": 1, "4": 0, "5": 0, "6": 0}, "3": {"1": 12, "2": 4, "3": 3, "4": 1, "5": 1, "6": 0}, "4": {"1": 4, "2": 2, "3": 1, "4": 0, "5": 0, "6": 1}, "5": {"1": 5, "2": 1, "3": 1, "4": 0, "5": 0, "6": 0}, "6": {"1": 7, "2": 0, "3": 1, "4": 1, "5": 0, "6": 0}, "7": {"1": 11, "2": 2, "3": 0, "4": 1, "5": 0, "6": 0}, "8": {"1": 9, "2": 2, "3": 1, "4": 2, "5": 1, "6": 0}, "9": {"1": 16, "2": 7, "3": 1, "4": 0, "5": 1, "6": 0}, "10": {"1": 1, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}, "Q5": {"all": {"1": 67, "2": 21, "3": 10, "4": 5, "5": 3, "6": 1}, "1": {"1": 4, "2": 0, "3": 0, "4": 1, "5": 0, "6": 0}, "2": {"1": 2, "2": 1, "3": 0, "4": 1, "5": 0, "6": 0}, "3": {"1": 3, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "4": {"1": 3, "2": 1, "3": 1, "4": 0, "5": 1, "6": 0}, "5": {"1": 4, "2": 0, "3": 2, "4": 0, "5": 0, "6": 1}, "6": {"1": 1, "2": 2, "3": 1, "4": 1, "5": 1, "6": 0}, "7": {"1": 17, "2": 8, "3": 4, "4": 1, "5": 2, "6": 0}, "8": {"1": 13, "2": 11, "3": 2, "4": 2, "5": 1, "6": 0}, "9": {"1": 4, "2": 1, "3": 1, "4": 1, "5": 1, "6": 0}, "10": {"1": 35, "2": 11, "3": 4, "4": 3, "5": 2, "6": 0}, "11": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 1, "6": 0}, "12": {"1": 2, "2": 0, "3": 1, "4": 0, "5": 0, "6": 0}, "13": {"1": 4, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "14": {"1": 1, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "15": {"1": 5, "2": 1, "3": 0, "4": 0, "5": 0, "6": 0}, "16": {"1": 1, "2": 1, "3": 0, "4": 0, "5": 1, "6": 0}, "17": {"1": 1, "2": 1, "3": 1, "4": 0, "5": 1, "6": 0}, "18": {"1": 17, "2": 2, "3": 0, "4": 1, "5": 0, "6": 0}, "19": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}, "Q24": {"all": {"1": 67, "2": 21, "3": 10, "4": 5, "5": 3, "6": 1}, "1": {"1": 2, "2": 0, "3": 0, "4": 1, "5": 0, "6": 0}, "2": {"1": 9, "2": 0, "3": 4, "4": 2, "5": 1, "6": 0}, "3": {"1": 24, "2": 12, "3": 4, "4": 1, "5": 0, "6": 0}, "4": {"1": 16, "2": 6, "3": 2, "4": 1, "5": 1, "6": 0}, "5": {"1": 15, "2": 3, "3": 0, "4": 0, "5": 1, "6": 0}, "6": {"1": 1, "2": 0, "3": 0, "4": 0, "5": 0, "6": 1}}};
+        const q6Labels = {"1": "Very necessary", "2": "Somewhat necessary", "3": "Neutral", "4": "Not very necessary", "5": "Not necessary at all", "6": "Prefer not to answer"};
+        const questionMetadata = {"Q2": {"title": "Years of Experience", "labels": {"1": "Less than 1 year", "2": "1-3 years", "3": "4-6 years", "4": "7-10 years", "5": "More than 10 years", "6": "Prefer not to answer"}, "is_multi_choice": false}, "Q4": {"title": "Seniority", "labels": {"1": "Undergraduate Student", "2": "Master Student", "3": "PhD Student", "4": "Postdoctoral Researcher", "5": "Research Scientist", "6": "Assistant Professor", "7": "Associate Professor", "8": "Professor", "9": "Other (please specify)", "10": "Prefer not to answer"}, "is_multi_choice": false}, "Q5": {"title": "Discipline", "labels": {"1": "Anthropology", "2": "Art History and Theory", "3": "Classical Studies", "4": "Computational Linguistics", "5": "Computer Science", "6": "Geography and GIS", "7": "History", "8": "Information Science", "9": "Linguistics", "10": "Literary and Cultural Studies", "11": "Mathematics", "12": "Musicology", "13": "Philosophy", "14": "Political Science", "15": "Religious Studies", "16": "Sociology", "17": "Statistics", "18": "Other (please specify)", "19": "Prefer not to answer"}, "is_multi_choice": true}, "Q24": {"title": "GenAI Literacy", "labels": {"1": "Expert", "2": "Advanced", "3": "Proficient", "4": "Competent", "5": "Novice", "6": "Prefer not to answer"}, "is_multi_choice": false}};
+        
+        function updateFilterOptions() {
+            const selectedQuestion = document.getElementById('question-filter').value;
+            const valueFilter = document.getElementById('value-filter');
+            const labels = questionMetadata[selectedQuestion].labels;
+            const isMultiChoice = questionMetadata[selectedQuestion].is_multi_choice;
+            
+            // Clear existing options
+            valueFilter.innerHTML = '<option value="all">All Respondents</option>';
+            
+            // Add options for selected question
+            for (const [key, value] of Object.entries(labels)) {
+                const option = document.createElement('option');
+                option.value = key;
+                option.textContent = value;
+                valueFilter.appendChild(option);
+            }
+            
+            // Update note text
+            const noteSpan = document.getElementById('filter-note');
+            if (isMultiChoice) {
+                noteSpan.textContent = 'This is a multiple-choice question. When filtering by a specific option, the chart shows Q6 responses from all respondents who selected that option (among potentially others).';
+            } else {
+                noteSpan.textContent = 'When filtering by a specific option, the chart shows Q6 responses from all respondents with that characteristic.';
+            }
+            
+            // Update chart
+            updateChart();
+        }
+        
+        function updateChart() {
+            const selectedQuestion = document.getElementById('question-filter').value;
+            const selectedValue = document.getElementById('value-filter').value;
+            const distribution = allData[selectedQuestion][selectedValue];
+            
+            // Prepare chart data (reverse for better display from top to bottom)
+            const xValues = Object.keys(distribution).map(key => q6Labels[key]).reverse();
+            const yValues = Object.values(distribution).reverse();
+            const totalResponses = yValues.reduce((a, b) => a + b, 0);
+            
+            // Update sample size display
+            document.getElementById('sample-size').textContent = totalResponses + ' respondents';
+            
+            // Create horizontal bar chart
+            const trace = {
+                x: yValues,
+                y: xValues,
+                type: 'bar',
+                orientation: 'h',
+                width: 0.3,
+                marker: {
+                    color: '#CFD186',
+                    line: {
+                        color: '#A8B060',
+                        width: 1.5
+                    }
+                },
+                text: yValues.map(v => v.toString()),
+                textposition: 'outside',
+                hovertemplate: '<b>%{y}</b><br>' +
+                              'Count: %{x}<br>' +
+                              'Percentage: %{customdata:.1f}%<br>' +
+                              '<extra></extra>',
+                customdata: yValues.map(v => totalResponses > 0 ? (v / totalResponses * 100) : 0)
+            };
+            
+            const layout = {
+                title: {
+                    text: 'Distribution of Responses to Q6',
+                    font: { size: 18 }
+                },
+                xaxis: {
+                    title: 'Number of Respondents',
+                    rangemode: 'tozero'
+                },
+                yaxis: {
+                    title: '',
+                    automargin: true
+                },
+                plot_bgcolor: '#fafafa',
+                paper_bgcolor: 'white',
+                margin: { t: 80, b: 80, l: 250, r: 150 },
+                hovermode: 'closest'
+            };
+            
+            const config = {
+                responsive: true,
+                displayModeBar: true,
+                displaylogo: false,
+                modeBarButtonsToRemove: ['pan2d', 'lasso2d', 'select2d']
+            };
+            
+            Plotly.newPlot('chart', [trace], layout, config);
+        }
+        
+        // Initial load
+        updateFilterOptions();
+    </script>
+</body>
+</html>

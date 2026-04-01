@@ -1,0 +1,341 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q8 Network Analysis</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        #chart {
+            width: 100%;
+            height: 800px;
+        }
+        
+        .info {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f5e9;
+            border-left: 4px solid #4CAF50;
+            border-radius: 5px;
+        }
+        
+        .info p {
+            margin: 5px 0;
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .legend {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+        }
+        
+        .legend h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        @media screen and (max-width: 768px) {
+            #chart {
+                height: 600px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Q8 Network Analysis</h1>
+        <p class="subtitle">Communities Responsible for Ensuring GenAI Disclosure - Co-selection Network</p>
+        
+        <div id="chart"></div>
+        
+        <div class="legend">
+            <h3>Communities</h3>
+            <div id="legend-items"></div>
+        </div>
+        
+        <div class="info">
+            <p><strong>How to read this network:</strong></p>
+            <p>• <strong>Node size:</strong> Represents the number of respondents who selected that community</p>
+            <p>• <strong>Edge thickness:</strong> Represents the number of respondents who selected both communities</p>
+            <p>• <strong>Hover over nodes:</strong> See the community name and selection count</p>
+            <p>• <strong>Hover over edges:</strong> See the co-selection count between two communities</p>
+        </div>
+        
+        <div class="info">
+            <p><strong>Total respondents:</strong> 107</p>
+            <p><strong>Question:</strong> Which communities should be responsible for ensuring disclosure? (Multiple selections allowed)</p>
+        </div>
+    </div>
+
+    <script>
+        // Data
+        const nodeCounts = {"1": 54, "2": 91, "3": 73, "4": 72, "5": 92, "6": 38, "7": 63, "8": 38, "9": 37, "10": 7, "11": 5};
+        const edges = {"1-2": 54, "1-3": 48, "1-4": 48, "1-5": 53, "1-6": 32, "1-7": 44, "1-8": 33, "1-9": 33, "1-10": 4, "2-3": 73, "2-4": 70, "2-5": 84, "2-6": 36, "2-7": 60, "2-8": 36, "2-9": 37, "2-10": 5, "3-4": 58, "3-5": 70, "3-6": 36, "3-7": 56, "3-8": 35, "3-9": 35, "3-10": 4, "4-5": 70, "4-6": 33, "4-7": 54, "4-8": 34, "4-9": 34, "4-10": 4, "5-6": 35, "5-7": 59, "5-8": 37, "5-9": 36, "5-10": 5, "6-7": 33, "6-8": 30, "6-9": 29, "6-10": 3, "7-8": 34, "7-9": 34, "7-10": 3, "8-9": 28, "8-10": 2, "9-10": 3};
+        const nodePositions = {"1": [1.0, 0.0], "2": [0.8412535328311812, 0.5406408174555976], "3": [0.41541501300188644, 0.9096319953545183], "4": [-0.142314838273285, 0.9898214418809328], "5": [-0.6548607339452851, 0.7557495743542583], "6": [-0.9594929736144974, 0.28173255684142967], "7": [-0.9594929736144975, -0.2817325568414294], "8": [-0.6548607339452852, -0.7557495743542582], "9": [-0.14231483827328523, -0.9898214418809327], "10": [0.41541501300188605, -0.9096319953545186], "11": [0.8412535328311812, -0.5406408174555976]};
+        const q8Labels = {"1": "Government agencies", "2": "Academic institutions (e.g., universities, research institutes)", "3": "Professional organizations (e.g., ADHO, IEEE, ACM)", "4": "Funding bodies (e.g., NSF, NEH)", "5": "Journal publishers and editorial boards", "6": "Industry organizations", "7": "Ethical review boards (e.g., IRBs)", "8": "Independent oversight bodies", "9": "International organizations (e.g., UNESCO, OECD)", "10": "Other (please specify)", "11": "Prefer not to answer"};
+        const q8LabelsShort = {"1": "Government\nagencies", "2": "Academic\ninstitutions", "3": "Professional\norganizations", "4": "Funding\nbodies", "5": "Journal publishers\nand editorial boards", "6": "Industry\norganizations", "7": "Ethical review\nboards", "8": "Independent\noversight bodies", "9": "International\norganizations", "10": "Other", "11": "Prefer not\nto answer"};
+        const activeNodes = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];
+        
+        // Store edge traces for highlighting
+        let edgeLineTraces = [];
+        let edgeHoverTraces = [];
+        
+        function createNetwork() {
+            // Create edge traces
+            const edgeTraces = [];
+            edgeLineTraces = [];
+            edgeHoverTraces = [];
+            
+            let edgeIndex = 0;
+            for (const [edgeKey, weight] of Object.entries(edges)) {
+                const [node1, node2] = edgeKey.split('-');
+                const pos1 = nodePositions[node1];
+                const pos2 = nodePositions[node2];
+                
+                // Edge line (normal state)
+                const edgeLine = {
+                    type: 'scatter',
+                    mode: 'lines',
+                    x: [pos1[0], pos2[0]],
+                    y: [pos1[1], pos2[1]],
+                    line: {
+                        width: Math.sqrt(weight) * 2,
+                        color: 'rgba(100, 100, 100, 0.3)'
+                    },
+                    hoverinfo: 'none',
+                    showlegend: false,
+                    name: `edge-line-${edgeIndex}`
+                };
+                
+                // Create multiple hover points along the edge for better hover detection
+                const numPoints = 20;
+                const hoverX = [];
+                const hoverY = [];
+                
+                for (let i = 0; i <= numPoints; i++) {
+                    const t = i / numPoints;
+                    hoverX.push(pos1[0] * (1 - t) + pos2[0] * t);
+                    hoverY.push(pos1[1] * (1 - t) + pos2[1] * t);
+                }
+                
+                const edgeHover = {
+                    type: 'scatter',
+                    mode: 'markers',
+                    x: hoverX,
+                    y: hoverY,
+                    marker: {
+                        size: Math.sqrt(weight) * 3 + 8,
+                        color: 'rgba(100, 100, 100, 0.001)',
+                        line: { width: 0 }
+                    },
+                    hovertemplate: `<b>${q8Labels[node1]}</b><br>↔<br><b>${q8Labels[node2]}</b><br>Co-selections: ${weight}<extra></extra>`,
+                    showlegend: false,
+                    name: `edge-hover-${edgeIndex}`,
+                    customdata: Array(numPoints + 1).fill([edgeIndex, weight, node1, node2])
+                };
+                
+                edgeLineTraces.push(edgeLine);
+                edgeHoverTraces.push(edgeHover);
+                edgeTraces.push(edgeLine);
+                edgeTraces.push(edgeHover);
+                edgeIndex++;
+            }
+            
+            // Create node trace
+            const nodeX = [];
+            const nodeY = [];
+            const nodeSize = [];
+            const nodeText = [];
+            const nodeHover = [];
+            const nodeColor = [];
+            
+            // Color palette
+            // Options 1-9, then 10 (Other), 11 (Prefer not to answer)
+            const colors = [
+                '#3D6090', '#7EC9EE', '#4FB4A3', '#2A904D', '#AFA11C',
+                '#E2D072', '#DB667A', '#8B084A', '#C552B1', '#757575', '#9e9e9e'
+            ];
+            
+            for (let i = 0; i < activeNodes.length; i++) {
+                const opt = activeNodes[i];
+                const pos = nodePositions[opt];
+                const count = nodeCounts[opt];
+                
+                nodeX.push(pos[0]);
+                nodeY.push(pos[1]);
+                nodeSize.push(Math.sqrt(count) * 15 + 10);
+                nodeText.push(q8LabelsShort[opt]);
+                nodeHover.push(`${q8Labels[opt]}<br>Selections: ${count}`);
+                nodeColor.push(colors[parseInt(opt) - 1]);
+            }
+            
+            const nodeTrace = {
+                type: 'scatter',
+                mode: 'markers+text',
+                x: nodeX,
+                y: nodeY,
+                text: nodeText,
+                textposition: 'middle center',
+                textfont: {
+                    size: 12,
+                    color: 'black',
+                    family: 'Arial, sans-serif'
+                },
+                marker: {
+                    size: nodeSize,
+                    color: nodeColor,
+                    opacity: 0.7,
+                    line: {
+                        color: 'white',
+                        width: 2
+                    }
+                },
+                hovertemplate: '%{customdata}<extra></extra>',
+                customdata: nodeHover,
+                showlegend: false
+            };
+            
+            // Create layout
+            const layout = {
+                title: {
+                    text: 'Q8: Communities Responsible for Ensuring Disclosure - Co-selection Network',
+                    font: { size: 18 }
+                },
+                xaxis: {
+                    showgrid: false,
+                    zeroline: false,
+                    showticklabels: false,
+                    range: [-1.5, 1.5]
+                },
+                yaxis: {
+                    showgrid: false,
+                    zeroline: false,
+                    showticklabels: false,
+                    range: [-1.5, 1.5]
+                },
+                plot_bgcolor: 'white',
+                paper_bgcolor: 'white',
+                margin: { t: 80, b: 40, l: 40, r: 40 },
+                hovermode: 'closest'
+            };
+            
+            const config = {
+                responsive: true,
+                displayModeBar: true,
+                displaylogo: false,
+                modeBarButtonsToRemove: ['pan2d', 'lasso2d', 'select2d', 'zoom2d', 'zoomIn2d', 'zoomOut2d', 'autoScale2d']
+            };
+            
+            // Combine all traces
+            const data = [...edgeTraces, nodeTrace];
+            
+            Plotly.newPlot('chart', data, layout, config);
+            
+            // Add hover event listeners for edge highlighting
+            const chartDiv = document.getElementById('chart');
+            
+            chartDiv.on('plotly_hover', function(eventData) {
+                const point = eventData.points[0];
+                
+                // Check if hovering over an edge hover marker
+                if (point.data.name && point.data.name.startsWith('edge-hover-')) {
+                    const edgeIndex = point.customdata[0];
+                    const weight = point.customdata[1];
+                    
+                    // Update the corresponding edge line to be highlighted
+                    const update = {
+                        'line.color': 'rgba(120, 120, 120, 0.8)',
+                        'line.width': Math.sqrt(weight) * 3
+                    };
+                    
+                    Plotly.restyle('chart', update, edgeIndex * 2);
+                }
+            });
+            
+            chartDiv.on('plotly_unhover', function(eventData) {
+                const point = eventData.points[0];
+                
+                // Check if unhovering from an edge hover marker
+                if (point.data.name && point.data.name.startsWith('edge-hover-')) {
+                    const edgeIndex = point.customdata[0];
+                    const weight = point.customdata[1];
+                    
+                    // Reset the edge line to normal state
+                    const update = {
+                        'line.color': 'rgba(100, 100, 100, 0.3)',
+                        'line.width': Math.sqrt(weight) * 2
+                    };
+                    
+                    Plotly.restyle('chart', update, edgeIndex * 2);
+                }
+            });
+            
+            // Create legend
+            const legendContainer = document.getElementById('legend-items');
+            activeNodes.forEach((opt, i) => {
+                const item = document.createElement('div');
+                item.className = 'legend-item';
+                item.innerHTML = `
+                    <div class="legend-color" style="background-color: ${colors[parseInt(opt) - 1]}"></div>
+                    <span>${q8Labels[opt]}</span>
+                `;
+                legendContainer.appendChild(item);
+            });
+        }
+        
+        // Initialize
+        createNetwork();
+    </script>
+</body>
+</html>

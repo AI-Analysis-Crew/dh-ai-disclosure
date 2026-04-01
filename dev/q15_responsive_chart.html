@@ -1,0 +1,402 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q15 Distribution Analysis - Responsive View</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 10px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .subtitle {
+            color: #666;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 0.875rem;
+            padding: 0 10px;
+        }
+        
+        .filter-container {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .filter-row {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+            font-size: 0.9rem;
+        }
+        
+        select {
+            padding: 10px;
+            font-size: 14px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            background-color: white;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        select:hover {
+            border-color: #4CAF50;
+        }
+        
+        select:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+        
+        #chart {
+            width: 100%;
+            height: 600px;
+        }
+        
+        .info {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f5e9;
+            border-left: 4px solid #4CAF50;
+            border-radius: 5px;
+        }
+        
+        .info p {
+            margin: 5px 0;
+            color: #333;
+            font-size: 0.875rem;
+        }
+        
+        .device-indicator {
+            text-align: center;
+            padding: 10px;
+            margin-bottom: 15px;
+            background-color: #e3f2fd;
+            border-radius: 5px;
+            font-weight: bold;
+            color: #1976d2;
+        }
+        
+        /* Desktop styles (992px and above) */
+        @media screen and (min-width: 992px) {
+            body {
+                padding: 20px;
+            }
+            
+            .container {
+                padding: 30px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .filter-container {
+                margin-bottom: 30px;
+            }
+            
+            .filter-row {
+                flex-direction: row;
+                align-items: center;
+                max-width: 600px;
+            }
+            
+            label {
+                min-width: 150px;
+                text-align: right;
+                margin-right: 10px;
+                margin-bottom: 0;
+            }
+            
+            select {
+                width: auto;
+                min-width: 300px;
+            }
+            
+            #chart {
+                height: 700px;
+            }
+            
+            .info p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="device-indicator" id="device-indicator">Loading...</div>
+        
+        <h1>Q15 Distribution Analysis</h1>
+        <p class="subtitle">Interactive visualization of "Which of the following generative AI-assisted activities do you think are the most important to disclose?" responses</p>
+        
+        <div class="filter-container">
+            <div class="filter-row">
+                <label for="question-filter">Select Question:</label>
+                <select id="question-filter" onchange="updateFilterOptions()">
+                    <option value="Q2">Q2: Years of Experience</option>
+                    <option value="Q4">Q4: Seniority</option>
+                    <option value="Q5">Q5: Discipline</option>
+                    <option value="Q24">Q24: GenAI Literacy</option>
+                </select>
+            </div>
+            <div class="filter-row">
+                <label for="value-filter">Filter by:</label>
+                <select id="value-filter" onchange="updateChart()">
+                    <option value="all">All Respondents</option>
+                </select>
+            </div>
+        </div>
+        
+        <div id="chart"></div>
+        
+        <div class="info">
+            <p><strong>Note:</strong> Q15 is a multiple-choice question. Respondents could select multiple activities. The chart shows the count of respondents who selected each activity.</p>
+            <p><strong>Filter Note:</strong> <span id="filter-note">When filtering by a specific option, the chart shows activity selections from all respondents with that characteristic.</span></p>
+            <p><strong>Sample size:</strong> <span id="sample-size">Loading...</span></p>
+        </div>
+    </div>
+
+    <script>
+        // Data
+        const allData = {"Q2": {"all": {"1": 21, "2": 5, "3": 24, "4": 25, "5": 0, "6": 44, "7": 21, "8": 9, "9": 62, "10": 32, "11": 11, "12": 4, "13": 35, "14": 6, "15": 1}, "1": {"1": 1, "2": 0, "3": 1, "4": 0, "5": 0, "6": 2, "7": 2, "8": 1, "9": 4, "10": 2, "11": 0, "12": 0, "13": 1, "14": 0, "15": 0}, "2": {"1": 8, "2": 1, "3": 5, "4": 9, "5": 0, "6": 11, "7": 3, "8": 3, "9": 16, "10": 6, "11": 4, "12": 1, "13": 8, "14": 0, "15": 0}, "3": {"1": 1, "2": 1, "3": 2, "4": 3, "5": 0, "6": 7, "7": 4, "8": 3, "9": 7, "10": 8, "11": 1, "12": 1, "13": 7, "14": 2, "15": 0}, "4": {"1": 4, "2": 2, "3": 5, "4": 5, "5": 0, "6": 11, "7": 4, "8": 1, "9": 14, "10": 5, "11": 1, "12": 1, "13": 7, "14": 1, "15": 1}, "5": {"1": 7, "2": 1, "3": 10, "4": 8, "5": 0, "6": 12, "7": 8, "8": 1, "9": 21, "10": 10, "11": 5, "12": 1, "13": 12, "14": 3, "15": 0}, "6": {"1": 0, "2": 0, "3": 1, "4": 0, "5": 0, "6": 1, "7": 0, "8": 0, "9": 0, "10": 1, "11": 0, "12": 0, "13": 0, "14": 0, "15": 0}}, "Q4": {"all": {"1": 21, "2": 5, "3": 24, "4": 25, "5": 0, "6": 44, "7": 21, "8": 9, "9": 62, "10": 32, "11": 11, "12": 4, "13": 35, "14": 6, "15": 1}, "1": {"1": 2, "2": 0, "3": 0, "4": 3, "5": 0, "6": 1, "7": 0, "8": 1, "9": 1, "10": 0, "11": 1, "12": 0, "13": 0, "14": 0, "15": 0}, "2": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 3, "7": 1, "8": 1, "9": 3, "10": 2, "11": 0, "12": 0, "13": 1, "14": 0, "15": 0}, "3": {"1": 5, "2": 1, "3": 7, "4": 5, "5": 0, "6": 10, "7": 3, "8": 3, "9": 14, "10": 3, "11": 3, "12": 1, "13": 6, "14": 0, "15": 0}, "4": {"1": 4, "2": 0, "3": 0, "4": 2, "5": 0, "6": 1, "7": 1, "8": 1, "9": 5, "10": 3, "11": 1, "12": 0, "13": 3, "14": 0, "15": 1}, "5": {"1": 1, "2": 0, "3": 4, "4": 1, "5": 0, "6": 4, "7": 2, "8": 1, "9": 2, "10": 2, "11": 1, "12": 0, "13": 3, "14": 0, "15": 0}, "6": {"1": 0, "2": 1, "3": 2, "4": 1, "5": 0, "6": 3, "7": 2, "8": 0, "9": 3, "10": 5, "11": 0, "12": 0, "13": 4, "14": 2, "15": 0}, "7": {"1": 3, "2": 0, "3": 2, "4": 1, "5": 0, "6": 3, "7": 2, "8": 0, "9": 10, "10": 7, "11": 2, "12": 1, "13": 6, "14": 1, "15": 0}, "8": {"1": 3, "2": 1, "3": 2, "4": 3, "5": 0, "6": 4, "7": 5, "8": 2, "9": 7, "10": 5, "11": 1, "12": 1, "13": 5, "14": 1, "15": 0}, "9": {"1": 3, "2": 2, "3": 6, "4": 9, "5": 0, "6": 14, "7": 5, "8": 0, "9": 17, "10": 4, "11": 2, "12": 1, "13": 7, "14": 2, "15": 0}, "10": {"1": 0, "2": 0, "3": 1, "4": 0, "5": 0, "6": 1, "7": 0, "8": 0, "9": 0, "10": 1, "11": 0, "12": 0, "13": 0, "14": 0, "15": 0}}, "Q5": {"all": {"1": 21, "2": 5, "3": 24, "4": 25, "5": 0, "6": 44, "7": 21, "8": 9, "9": 62, "10": 32, "11": 11, "12": 4, "13": 35, "14": 6, "15": 1}, "1": {"1": 0, "2": 0, "3": 2, "4": 1, "5": 0, "6": 2, "7": 1, "8": 0, "9": 4, "10": 1, "11": 1, "12": 1, "13": 2, "14": 0, "15": 0}, "2": {"1": 0, "2": 0, "3": 1, "4": 1, "5": 0, "6": 2, "7": 1, "8": 0, "9": 1, "10": 2, "11": 1, "12": 0, "13": 2, "14": 0, "15": 0}, "3": {"1": 0, "2": 0, "3": 1, "4": 0, "5": 0, "6": 2, "7": 0, "8": 0, "9": 2, "10": 2, "11": 0, "12": 0, "13": 2, "14": 0, "15": 0}, "4": {"1": 2, "2": 0, "3": 2, "4": 1, "5": 0, "6": 3, "7": 2, "8": 1, "9": 3, "10": 0, "11": 1, "12": 0, "13": 2, "14": 0, "15": 0}, "5": {"1": 4, "2": 0, "3": 2, "4": 1, "5": 0, "6": 1, "7": 2, "8": 0, "9": 2, "10": 2, "11": 1, "12": 0, "13": 1, "14": 0, "15": 1}, "6": {"1": 0, "2": 0, "3": 2, "4": 2, "5": 0, "6": 1, "7": 2, "8": 1, "9": 3, "10": 3, "11": 1, "12": 0, "13": 2, "14": 0, "15": 0}, "7": {"1": 6, "2": 3, "3": 12, "4": 7, "5": 0, "6": 18, "7": 7, "8": 5, "9": 18, "10": 7, "11": 1, "12": 1, "13": 8, "14": 1, "15": 0}, "8": {"1": 8, "2": 1, "3": 7, "4": 4, "5": 0, "6": 12, "7": 8, "8": 3, "9": 13, "10": 11, "11": 3, "12": 1, "13": 9, "14": 1, "15": 0}, "9": {"1": 4, "2": 0, "3": 2, "4": 3, "5": 0, "6": 2, "7": 4, "8": 1, "9": 4, "10": 1, "11": 2, "12": 0, "13": 0, "14": 0, "15": 0}, "10": {"1": 8, "2": 2, "3": 8, "4": 15, "5": 0, "6": 21, "7": 12, "8": 4, "9": 35, "10": 18, "11": 7, "12": 3, "13": 19, "14": 3, "15": 0}, "11": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 1, "7": 1, "8": 0, "9": 0, "10": 0, "11": 0, "12": 0, "13": 0, "14": 0, "15": 0}, "12": {"1": 1, "2": 0, "3": 3, "4": 0, "5": 0, "6": 0, "7": 1, "8": 0, "9": 2, "10": 0, "11": 0, "12": 0, "13": 2, "14": 0, "15": 0}, "13": {"1": 1, "2": 0, "3": 1, "4": 0, "5": 0, "6": 3, "7": 1, "8": 1, "9": 2, "10": 0, "11": 0, "12": 0, "13": 1, "14": 0, "15": 0}, "14": {"1": 1, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0, "7": 0, "8": 0, "9": 1, "10": 1, "11": 0, "12": 0, "13": 0, "14": 0, "15": 0}, "15": {"1": 2, "2": 0, "3": 3, "4": 0, "5": 0, "6": 3, "7": 1, "8": 0, "9": 4, "10": 2, "11": 0, "12": 0, "13": 2, "14": 0, "15": 0}, "16": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 2, "7": 2, "8": 1, "9": 1, "10": 1, "11": 0, "12": 0, "13": 0, "14": 0, "15": 0}, "17": {"1": 2, "2": 0, "3": 2, "4": 0, "5": 0, "6": 1, "7": 2, "8": 1, "9": 2, "10": 1, "11": 0, "12": 0, "13": 0, "14": 0, "15": 0}, "18": {"1": 3, "2": 1, "3": 4, "4": 5, "5": 0, "6": 9, "7": 3, "8": 1, "9": 11, "10": 4, "11": 2, "12": 2, "13": 6, "14": 3, "15": 0}, "19": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0, "7": 0, "8": 0, "9": 0, "10": 0, "11": 0, "12": 0, "13": 0, "14": 0, "15": 0}}, "Q24": {"all": {"1": 21, "2": 5, "3": 24, "4": 25, "5": 0, "6": 44, "7": 21, "8": 9, "9": 62, "10": 32, "11": 11, "12": 4, "13": 35, "14": 6, "15": 1}, "1": {"1": 0, "2": 0, "3": 1, "4": 0, "5": 0, "6": 2, "7": 2, "8": 0, "9": 1, "10": 0, "11": 1, "12": 0, "13": 1, "14": 0, "15": 0}, "2": {"1": 2, "2": 0, "3": 3, "4": 1, "5": 0, "6": 8, "7": 3, "8": 1, "9": 11, "10": 7, "11": 0, "12": 0, "13": 8, "14": 1, "15": 0}, "3": {"1": 7, "2": 3, "3": 9, "4": 12, "5": 0, "6": 18, "7": 8, "8": 4, "9": 25, "10": 9, "11": 7, "12": 1, "13": 12, "14": 4, "15": 0}, "4": {"1": 8, "2": 2, "3": 5, "4": 6, "5": 0, "6": 11, "7": 4, "8": 2, "9": 14, "10": 6, "11": 3, "12": 1, "13": 8, "14": 1, "15": 0}, "5": {"1": 4, "2": 0, "3": 6, "4": 6, "5": 0, "6": 5, "7": 4, "8": 2, "9": 10, "10": 9, "11": 0, "12": 2, "13": 5, "14": 0, "15": 0}, "6": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0, "7": 0, "8": 0, "9": 1, "10": 1, "11": 0, "12": 0, "13": 1, "14": 0, "15": 1}}};
+        const q15Labels = {"1": "Brainstorming, including creating hypotheses or arguments", "2": "Project design and planning", "3": "Literature search and review", "4": "Summarizing, explaining, and simplifying content", "5": "Topic or skill coaching", "6": "Data collection, transcription, translation, and analysis", "7": "Data organization, representation, and visualization", "8": "Coding and Programming", "9": "Writing and rewriting", "10": "Create graphics, pictures, videos or audios", "11": "Critiquing and offering alternate perspectives", "12": "Dissemination (e.g., website building, conference presentation, social media marketing)", "13": "Peer review", "14": "Other (please specify)", "15": "Prefer not to answer"};
+        const q15LabelsMobile = {"1": "Brainstorming, including<br>creating hypotheses or arguments", "2": "Project design<br>and planning", "3": "Literature search<br>and review", "4": "Summarizing, explaining,<br>and simplifying content", "5": "Topic or skill<br>coaching", "6": "Data collection, transcription,<br>translation, and analysis", "7": "Data organization,<br>representation, and visualization", "8": "Coding and<br>Programming", "9": "Writing and<br>rewriting", "10": "Create graphics, pictures,<br>videos or audios", "11": "Critiquing and offering<br>alternate perspectives", "12": "Dissemination (e.g., website<br>building, conference presentation,<br>social media marketing)", "13": "Peer review", "14": "Other<br>(please specify)", "15": "Prefer not<br>to answer"};
+        const questionMetadata = {"Q2": {"title": "Years of Experience", "labels": {"1": "Less than 1 year", "2": "1-3 years", "3": "4-6 years", "4": "7-10 years", "5": "More than 10 years", "6": "Prefer not to answer"}, "is_multi_choice": false}, "Q4": {"title": "Seniority", "labels": {"1": "Undergraduate Student", "2": "Master Student", "3": "PhD Student", "4": "Postdoctoral Researcher", "5": "Research Scientist", "6": "Assistant Professor", "7": "Associate Professor", "8": "Professor", "9": "Other (please specify)", "10": "Prefer not to answer"}, "is_multi_choice": false}, "Q5": {"title": "Discipline", "labels": {"1": "Anthropology", "2": "Art History and Theory", "3": "Classical Studies", "4": "Computational Linguistics", "5": "Computer Science", "6": "Geography and GIS", "7": "History", "8": "Information Science", "9": "Linguistics", "10": "Literary and Cultural Studies", "11": "Mathematics", "12": "Musicology", "13": "Philosophy", "14": "Political Science", "15": "Religious Studies", "16": "Sociology", "17": "Statistics", "18": "Other (please specify)", "19": "Prefer not to answer"}, "is_multi_choice": true}, "Q24": {"title": "GenAI Literacy", "labels": {"1": "Expert", "2": "Advanced", "3": "Proficient", "4": "Competent", "5": "Novice", "6": "Prefer not to answer"}, "is_multi_choice": false}};
+        
+        // Detect device type
+        function isMobile() {
+            return window.innerWidth < 992;
+        }
+        
+        function updateDeviceIndicator() {
+            const indicator = document.getElementById('device-indicator');
+            if (isMobile()) {
+                indicator.textContent = '📱 Mobile View (Horizontal Bar Chart)';
+            } else {
+                indicator.textContent = '🖥️ Desktop View (Vertical Bar Chart)';
+            }
+        }
+        
+        function updateFilterOptions() {
+            const selectedQuestion = document.getElementById('question-filter').value;
+            const valueFilter = document.getElementById('value-filter');
+            const labels = questionMetadata[selectedQuestion].labels;
+            const isMultiChoice = questionMetadata[selectedQuestion].is_multi_choice;
+            
+            // Clear existing options
+            valueFilter.innerHTML = '<option value="all">All Respondents</option>';
+            
+            // Add options for selected question
+            for (const [key, value] of Object.entries(labels)) {
+                const option = document.createElement('option');
+                option.value = key;
+                option.textContent = value;
+                valueFilter.appendChild(option);
+            }
+            
+            // Update note text
+            const noteSpan = document.getElementById('filter-note');
+            if (isMultiChoice) {
+                noteSpan.textContent = 'This filter is a multiple-choice question. When filtering by a specific option, the chart shows Q15 activity selections from all respondents who selected that option (among potentially others).';
+            } else {
+                noteSpan.textContent = 'When filtering by a specific option, the chart shows Q15 activity selections from all respondents with that characteristic.';
+            }
+            
+            // Update chart
+            updateChart();
+        }
+        
+        function updateChart() {
+            const selectedQuestion = document.getElementById('question-filter').value;
+            const selectedValue = document.getElementById('value-filter').value;
+            const distribution = allData[selectedQuestion][selectedValue];
+            
+            const mobile = isMobile();
+            
+            // Prepare chart data with custom order (1-15)
+            const desiredOrder = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15'];
+            
+            // Use appropriate labels based on device type
+            const labelSet = mobile ? q15LabelsMobile : q15Labels;
+            
+            // For mobile: reverse order so Brainstorming is at top
+            // For desktop: normal order
+            const labels = mobile ? 
+                desiredOrder.map(key => labelSet[key]).reverse() :
+                desiredOrder.map(key => labelSet[key]);
+            const values = mobile ?
+                desiredOrder.map(key => distribution[key] || 0).reverse() :
+                desiredOrder.map(key => distribution[key] || 0);
+            
+            const totalSelections = values.reduce((a, b) => a + b, 0);
+            
+            // Update sample size display
+            const maxCount = Math.max(...values);
+            document.getElementById('sample-size').textContent = maxCount > 0 ? 
+                'Activities selected by filtered respondents (Note: Each respondent could select multiple activities)' : 
+                '0 respondents';
+            
+            // Create trace based on device type
+            const trace = mobile ? {
+                // Mobile: horizontal bar chart (Number on x-axis, Q15 on y-axis)
+                x: values,
+                y: labels,
+                type: 'bar',
+                orientation: 'h',
+                marker: {
+                    color: '#EBE698',
+                    line: {
+                        color: '#D4D080',
+                        width: 1.5
+                    }
+                },
+                text: values.map(v => v.toString()),
+                textposition: 'auto',
+                textfont: {
+                    size: 9
+                },
+                hovertemplate: '<b>%{y}</b><br>' +
+                              'Count: %{x} respondents<br>' +
+                              '<extra></extra>'
+            } : {
+                // Desktop: vertical bar chart (Q15 on x-axis, Number on y-axis)
+                x: labels,
+                y: values,
+                type: 'bar',
+                marker: {
+                    color: '#EBE698',
+                    line: {
+                        color: '#D4D080',
+                        width: 1.5
+                    }
+                },
+                text: values.map(v => v.toString()),
+                textposition: 'auto',
+                textfont: {
+                    size: 10
+                },
+                hovertemplate: '<b>%{x}</b><br>' +
+                              'Count: %{y} respondents<br>' +
+                              '<extra></extra>'
+            };
+            
+            // Create layout based on device type
+            const layout = mobile ? {
+                // Mobile layout
+                title: {
+                    text: 'Q15 Distribution',
+                    font: { size: 16 }
+                },
+                xaxis: {
+                    title: 'Number of Respondents',
+                    rangemode: 'tozero',
+                    titlefont: { size: 12 }
+                },
+                yaxis: {
+                    title: '',
+                    automargin: true,
+                    tickfont: { size: 8 }
+                },
+                plot_bgcolor: '#fafafa',
+                paper_bgcolor: 'white',
+                margin: { t: 50, b: 50, l: 200, r: 40 },
+                hovermode: 'closest',
+                uniformtext: {
+                    minsize: 7,
+                    mode: 'hide'
+                },
+                bargap: 0.3
+            } : {
+                // Desktop layout
+                title: {
+                    text: 'Distribution of Responses to Q15',
+                    font: { size: 18 }
+                },
+                xaxis: {
+                    title: 'Q15: Which of the following generative AI-assisted activities do you think are the most important to disclose?',
+                    tickangle: -45,
+                    automargin: true,
+                    tickfont: { size: 10 }
+                },
+                yaxis: {
+                    title: 'Number of Respondents',
+                    rangemode: 'tozero'
+                },
+                plot_bgcolor: '#fafafa',
+                paper_bgcolor: 'white',
+                margin: { t: 80, b: 250, l: 80, r: 40 },
+                hovermode: 'closest',
+                uniformtext: {
+                    minsize: 8,
+                    mode: 'hide'
+                },
+                bargap: 0.3
+            };
+            
+            const config = {
+                responsive: true,
+                displayModeBar: true,
+                displaylogo: false,
+                modeBarButtonsToRemove: ['pan2d', 'lasso2d', 'select2d']
+            };
+            
+            Plotly.newPlot('chart', [trace], layout, config);
+        }
+        
+        // Handle window resize
+        let resizeTimer;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                updateDeviceIndicator();
+                updateChart();
+            }, 250);
+        });
+        
+        // Initial load
+        updateDeviceIndicator();
+        updateFilterOptions();
+    </script>
+</body>
+</html>

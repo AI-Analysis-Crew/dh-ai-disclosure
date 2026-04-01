@@ -1,0 +1,363 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q15 & Q21 Cross-Selection Heatmap</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .filter-section {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+        
+        .filter-group {
+            margin-bottom: 20px;
+        }
+        
+        .filter-group h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .checkbox-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 10px;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .checkbox-item input {
+            margin-right: 8px;
+            cursor: pointer;
+        }
+        
+        .checkbox-item label {
+            cursor: pointer;
+            font-size: 14px;
+            color: #333;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .select-all {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .select-all:hover {
+            background-color: #45a049;
+        }
+        
+        .clear-all {
+            background-color: #f44336;
+            color: white;
+        }
+        
+        .clear-all:hover {
+            background-color: #da190b;
+        }
+        
+        #chart {
+            width: 100%;
+            height: 800px;
+            margin-top: 20px;
+        }
+        
+        .info {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #e8f5e9;
+            border-left: 4px solid #4CAF50;
+            border-radius: 5px;
+        }
+        
+        .info p {
+            margin: 5px 0;
+            color: #333;
+            font-size: 14px;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .checkbox-container {
+                grid-template-columns: 1fr;
+            }
+            
+            #chart {
+                height: 600px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Q15 & Q21 Cross-Selection Heatmap</h1>
+        <p class="subtitle">Interactive visualization showing the overlap between Q15 (Important to disclose) and Q21 (Activities used GenAI for)</p>
+        
+        <div class="info">
+            <p><strong>Note:</strong> Both Q15 and Q21 are multiple-choice questions. The heatmap shows the number of respondents who selected both corresponding options.</p>
+            <p><strong>Total respondents:</strong> <span id="total-respondents">71</span></p>
+            <p><strong>How to use:</strong> Check/uncheck options below to highlight specific activities. Selected intersections appear in color, unselected areas appear in gray.</p>
+        </div>
+        
+        <div id="chart"></div>
+        
+        <div class="filter-section">
+            <div class="filter-group">
+                <h3>Q15: Which of the following generative AI-assisted activities do you think are the most important to disclose? (perception)</h3>
+                <div class="checkbox-container" id="q15-checkboxes"></div>
+                <div class="button-group">
+                    <button class="select-all" onclick="selectAll('q15')">Select All</button>
+                    <button class="clear-all" onclick="clearAll('q15')">Clear All</button>
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <h3>Q21: Which of the following activities have you ever used generative AI to assist with? (practice)</h3>
+                <div class="checkbox-container" id="q21-checkboxes"></div>
+                <div class="button-group">
+                    <button class="select-all" onclick="selectAll('q21')">Select All</button>
+                    <button class="clear-all" onclick="clearAll('q21')">Clear All</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data
+        const data = {"matrix_count": [[8.0, 2.0, 3.0, 4.0, 1.0, 0.0, 3.0, 4.0, 4.0, 2.0, 3.0, 2.0, 0.0, 0.0, 0.0], [3.0, 1.0, 2.0, 2.0, 0.0, 0.0, 1.0, 3.0, 2.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0], [8.0, 3.0, 6.0, 6.0, 2.0, 5.0, 5.0, 7.0, 5.0, 4.0, 4.0, 4.0, 2.0, 2.0, 0.0], [8.0, 5.0, 4.0, 9.0, 2.0, 2.0, 5.0, 6.0, 4.0, 4.0, 2.0, 1.0, 1.0, 3.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [11.0, 12.0, 11.0, 12.0, 3.0, 11.0, 9.0, 18.0, 14.0, 12.0, 6.0, 4.0, 2.0, 3.0, 0.0], [7.0, 4.0, 7.0, 7.0, 3.0, 5.0, 7.0, 11.0, 10.0, 6.0, 5.0, 3.0, 2.0, 3.0, 0.0], [5.0, 2.0, 1.0, 3.0, 0.0, 1.0, 0.0, 3.0, 3.0, 1.0, 1.0, 0.0, 0.0, 2.0, 0.0], [18.0, 8.0, 14.0, 20.0, 4.0, 10.0, 11.0, 19.0, 15.0, 7.0, 7.0, 5.0, 2.0, 3.0, 0.0], [15.0, 9.0, 10.0, 11.0, 3.0, 8.0, 8.0, 7.0, 9.0, 8.0, 4.0, 5.0, 1.0, 2.0, 0.0], [1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0, 2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [2.0, 2.0, 2.0, 2.0, 1.0, 2.0, 3.0, 1.0, 1.0, 2.0, 1.0, 2.0, 0.0, 1.0, 0.0], [9.0, 2.0, 7.0, 8.0, 3.0, 5.0, 3.0, 9.0, 4.0, 3.0, 3.0, 1.0, 1.0, 1.0, 0.0], [2.0, 1.0, 1.0, 2.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0]], "matrix_percent": [[11.267605633802818, 2.8169014084507045, 4.225352112676056, 5.633802816901409, 1.4084507042253522, 0.0, 4.225352112676056, 5.633802816901409, 5.633802816901409, 2.8169014084507045, 4.225352112676056, 2.8169014084507045, 0.0, 0.0, 0.0], [4.225352112676056, 1.4084507042253522, 2.8169014084507045, 2.8169014084507045, 0.0, 0.0, 1.4084507042253522, 4.225352112676056, 2.8169014084507045, 1.4084507042253522, 0.0, 0.0, 0.0, 0.0, 0.0], [11.267605633802818, 4.225352112676056, 8.450704225352112, 8.450704225352112, 2.8169014084507045, 7.042253521126761, 7.042253521126761, 9.859154929577464, 7.042253521126761, 5.633802816901409, 5.633802816901409, 5.633802816901409, 2.8169014084507045, 2.8169014084507045, 0.0], [11.267605633802818, 7.042253521126761, 5.633802816901409, 12.676056338028168, 2.8169014084507045, 2.8169014084507045, 7.042253521126761, 8.450704225352112, 5.633802816901409, 5.633802816901409, 2.8169014084507045, 1.4084507042253522, 1.4084507042253522, 4.225352112676056, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [15.492957746478872, 16.901408450704224, 15.492957746478872, 16.901408450704224, 4.225352112676056, 15.492957746478872, 12.676056338028168, 25.352112676056336, 19.718309859154928, 16.901408450704224, 8.450704225352112, 5.633802816901409, 2.8169014084507045, 4.225352112676056, 0.0], [9.859154929577464, 5.633802816901409, 9.859154929577464, 9.859154929577464, 4.225352112676056, 7.042253521126761, 9.859154929577464, 15.492957746478872, 14.084507042253522, 8.450704225352112, 7.042253521126761, 4.225352112676056, 2.8169014084507045, 4.225352112676056, 0.0], [7.042253521126761, 2.8169014084507045, 1.4084507042253522, 4.225352112676056, 0.0, 1.4084507042253522, 0.0, 4.225352112676056, 4.225352112676056, 1.4084507042253522, 1.4084507042253522, 0.0, 0.0, 2.8169014084507045, 0.0], [25.352112676056336, 11.267605633802818, 19.718309859154928, 28.169014084507044, 5.633802816901409, 14.084507042253522, 15.492957746478872, 26.76056338028169, 21.12676056338028, 9.859154929577464, 9.859154929577464, 7.042253521126761, 2.8169014084507045, 4.225352112676056, 0.0], [21.12676056338028, 12.676056338028168, 14.084507042253522, 15.492957746478872, 4.225352112676056, 11.267605633802818, 11.267605633802818, 9.859154929577464, 12.676056338028168, 11.267605633802818, 5.633802816901409, 7.042253521126761, 1.4084507042253522, 2.8169014084507045, 0.0], [1.4084507042253522, 1.4084507042253522, 1.4084507042253522, 1.4084507042253522, 1.4084507042253522, 0.0, 1.4084507042253522, 2.8169014084507045, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [2.8169014084507045, 2.8169014084507045, 2.8169014084507045, 2.8169014084507045, 1.4084507042253522, 2.8169014084507045, 4.225352112676056, 1.4084507042253522, 1.4084507042253522, 2.8169014084507045, 1.4084507042253522, 2.8169014084507045, 0.0, 1.4084507042253522, 0.0], [12.676056338028168, 2.8169014084507045, 9.859154929577464, 11.267605633802818, 4.225352112676056, 7.042253521126761, 4.225352112676056, 12.676056338028168, 5.633802816901409, 4.225352112676056, 4.225352112676056, 1.4084507042253522, 1.4084507042253522, 1.4084507042253522, 0.0], [2.8169014084507045, 1.4084507042253522, 1.4084507042253522, 2.8169014084507045, 0.0, 0.0, 0.0, 1.4084507042253522, 0.0, 1.4084507042253522, 0.0, 0.0, 0.0, 1.4084507042253522, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.4084507042253522]], "total_respondents": 71, "all_options": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"]};
+        const activityLabels = {"1": "Brainstorming, including creating hypotheses or arguments", "2": "Project design and planning", "3": "Literature search and review", "4": "Summarizing, explaining, and simplifying content", "5": "Topic or skill coaching", "6": "Data collection, transcription, translation, and analysis", "7": "Data organization, representation, and visualization", "8": "Coding and Programming", "9": "Writing and rewriting", "10": "Create graphics, pictures, videos or audios", "11": "Critiquing and offering alternate perspectives", "12": "Dissemination (e.g., website building, conference presentation, social media marketing)", "13": "Peer review", "14": "Other (please specify)", "15": "Prefer not to answer"};
+        const activityLabelsShort = {"1": "Brainstorming", "2": "Project design", "3": "Literature search", "4": "Summarizing", "5": "Topic coaching", "6": "Data collection", "7": "Data organization", "8": "Coding", "9": "Writing", "10": "Create graphics", "11": "Critiquing", "12": "Dissemination", "13": "Peer review", "14": "Other", "15": "Prefer not to answer"};
+        
+        // Initialize selected options (all selected by default)
+        let selectedQ15 = data.all_options.slice();
+        let selectedQ21 = data.all_options.slice();
+        
+        // Create checkboxes
+        function createCheckboxes() {
+            const q15Container = document.getElementById('q15-checkboxes');
+            const q21Container = document.getElementById('q21-checkboxes');
+            
+            data.all_options.forEach(opt => {
+                // Q15 checkbox
+                const q15Item = document.createElement('div');
+                q15Item.className = 'checkbox-item';
+                q15Item.innerHTML = `
+                    <input type="checkbox" id="q15-${opt}" value="${opt}" checked onchange="updateSelection('q15')">
+                    <label for="q15-${opt}">${opt}. ${activityLabels[opt]}</label>
+                `;
+                q15Container.appendChild(q15Item);
+                
+                // Q21 checkbox
+                const q21Item = document.createElement('div');
+                q21Item.className = 'checkbox-item';
+                q21Item.innerHTML = `
+                    <input type="checkbox" id="q21-${opt}" value="${opt}" checked onchange="updateSelection('q21')">
+                    <label for="q21-${opt}">${opt}. ${activityLabels[opt]}</label>
+                `;
+                q21Container.appendChild(q21Item);
+            });
+        }
+        
+        // Update selection
+        function updateSelection(question) {
+            const checkboxes = document.querySelectorAll(`#${question}-checkboxes input[type="checkbox"]`);
+            const selected = Array.from(checkboxes)
+                .filter(cb => cb.checked)
+                .map(cb => cb.value);
+            
+            if (question === 'q15') {
+                selectedQ15 = selected;
+            } else {
+                selectedQ21 = selected;
+            }
+            
+            updateChart();
+        }
+        
+        // Select all
+        function selectAll(question) {
+            const checkboxes = document.querySelectorAll(`#${question}-checkboxes input[type="checkbox"]`);
+            checkboxes.forEach(cb => cb.checked = true);
+            updateSelection(question);
+        }
+        
+        // Clear all
+        function clearAll(question) {
+            const checkboxes = document.querySelectorAll(`#${question}-checkboxes input[type="checkbox"]`);
+            checkboxes.forEach(cb => cb.checked = false);
+            updateSelection(question);
+        }
+        
+        // Update chart
+        function updateChart() {
+            // Always show all options (15x15 matrix)
+            const allLabels = data.all_options;
+            
+            // Extract full matrix with color/gray distinction
+            const zCount = [];
+            const zColor = [];
+            const hoverText = [];
+            
+            for (let i = 0; i < allLabels.length; i++) {
+                const rowCount = [];
+                const rowColor = [];
+                const rowHover = [];
+                
+                for (let j = 0; j < allLabels.length; j++) {
+                    const count = data.matrix_count[i][j];
+                    const percent = data.matrix_percent[i][j];
+                    
+                    // Check if this cell should be highlighted
+                    const isSelected = selectedQ15.includes(allLabels[i]) && selectedQ21.includes(allLabels[j]);
+                    
+                    rowCount.push(count);
+                    rowColor.push(isSelected ? count : -1);  // Use -1 for gray cells
+                    rowHover.push(
+                        `Q15: ${activityLabelsShort[allLabels[i]]}<br>` +
+                        `Q21: ${activityLabelsShort[allLabels[j]]}<br>` +
+                        `Count: ${count}<br>` +
+                        `Percentage: ${percent.toFixed(1)}%<br>` +
+                        `Status: ${isSelected ? 'Selected' : 'Not selected'}`
+                    );
+                }
+                
+                zCount.push(rowCount);
+                zColor.push(rowColor);
+                hoverText.push(rowHover);
+            }
+            
+            // Prepare labels (all options)
+            const xLabels = allLabels.map(opt => `${opt}. ${activityLabelsShort[opt]}`);
+            const yLabels = allLabels.map(opt => `${opt}. ${activityLabelsShort[opt]}`);
+            
+            // Create custom colorscale: gray for -1, Viridis for 0+
+            const maxCount = Math.max(...zCount.flat());
+            const colorscale = [
+                [0, '#d3d3d3'],           // Gray for unselected (-1 normalized to 0)
+                [0.001, '#440154'],       // Start of Viridis for count=0
+                [0.25, '#31688e'],
+                [0.5, '#35b779'],
+                [0.75, '#fde724'],
+                [1, '#fde724']
+            ];
+            
+            // Normalize data for colorscale: -1 maps to 0, other values map to [0.001, 1]
+            const zNormalized = zColor.map(row => 
+                row.map(val => val === -1 ? 0 : 0.001 + (val / maxCount) * 0.999)
+            );
+            
+            // Create heatmap
+            const trace = {
+                z: zNormalized,
+                x: xLabels,
+                y: yLabels,
+                type: 'heatmap',
+                colorscale: colorscale,
+                hovertemplate: '%{customdata}<extra></extra>',
+                customdata: hoverText,
+                colorbar: {
+                    title: 'Count',
+                    titleside: 'right',
+                    tickvals: [0, 0.25, 0.5, 0.75, 1],
+                    ticktext: ['N/A', Math.round(maxCount * 0.25), Math.round(maxCount * 0.5), Math.round(maxCount * 0.75), maxCount]
+                },
+                zmin: 0,
+                zmax: 1,
+                showscale: true,
+                xgap: 1,
+                ygap: 1
+            };
+            
+            const layout = {
+                title: {
+                    text: 'Q15 vs Q21: Cross-Selection Analysis',
+                    font: { size: 18 }
+                },
+                xaxis: {
+                    title: 'Q21: Activities Used GenAI For (practice)',
+                    tickangle: -45,
+                    automargin: true,
+                    side: 'bottom'
+                },
+                yaxis: {
+                    title: 'Q15: Activities Important to Disclose (perception)',
+                    automargin: true
+                },
+                plot_bgcolor: 'white',
+                paper_bgcolor: 'white',
+                margin: { t: 100, b: 200, l: 250, r: 100 }
+            };
+            
+            const config = {
+                responsive: true,
+                displayModeBar: true,
+                displaylogo: false,
+                modeBarButtonsToRemove: ['pan2d', 'lasso2d', 'select2d']
+            };
+            
+            Plotly.newPlot('chart', [trace], layout, config);
+        }
+        
+        // Initialize
+        createCheckboxes();
+        updateChart();
+    </script>
+</body>
+</html>
