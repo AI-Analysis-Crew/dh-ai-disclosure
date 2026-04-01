@@ -780,6 +780,14 @@
 					// Reduce node padding back now that labels wrap properly
 					data[0].node.pad = 40;
 
+					// Node colors from Q8 palette, distributed for maximum contrast between neighbors
+					data[0].node.color = [
+						'#7EC9EE', '#DB667A', '#2A904D', '#C552B1', '#AFA11C', '#757575',  // Q6
+						'#8B084A', '#3D6090', '#E2D072', '#9e9e9e',                          // Q16
+						'#4FB4A3', '#DB667A', '#3D6090', '#AFA11C', '#C552B1', '#757575',    // Q10
+						'#E2D072', '#4FB4A3', '#7EC9EE', '#8B084A', '#9e9e9e', '#2A904D'     // Q11
+					];
+
 					// Clean <br> from labels for hover tooltips
 					var cleanLabels = data[0].node.label.map(function(lbl) {
 						return lbl.replace(/<br>/g, ' ');
