@@ -720,6 +720,19 @@ footer ul li a:hover {
     color: #A8D5E2;
 }
 
+/* screen-reader-only utility */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 /* custom focus styles for accessibility */
 *:focus {
     outline: 2px solid white;
