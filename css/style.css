@@ -8,7 +8,7 @@
    - /index.html (line ~26 and ~32): /css/style.css?vers=00X
    - /survey.html (line ~21 and ~27): /css/style.css?vers=00X
 
-   Current version: 025
+   Current version: 029
 
    This forces browsers to reload the updated stylesheet and
    prevents users from seeing cached/outdated styles.
@@ -804,6 +804,11 @@ a.email::after {
     }
 }
 
+/* Gradual fade for hover tooltips on all Plotly charts */
+.hoverlayer .hovertext {
+    transition: opacity 0.3s ease;
+}
+
 /* ========================================
    Q8 NETWORK GRAPH
    ======================================== */
@@ -1069,6 +1074,78 @@ a.email::after {
 }
 
 .q6-touch-info {
+    display: none;
+    margin: 0.75rem auto;
+    padding: 0.75rem 1rem;
+    max-width: 600px;
+    background: rgba(90, 147, 172, 0.12);
+    border: 1px solid rgba(90, 147, 172, 0.3);
+    border-radius: 8px;
+    font-size: 1rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* ============================================================
+   SANKEY DIAGRAM (graphs-analysis)
+   ============================================================ */
+
+.sankey-chart-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 2rem auto;
+    text-align: center;
+}
+
+@media (min-width: 1000px) {
+    .sankey-chart-container {
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+.sankey-chart-scaler {
+    overflow: hidden;
+}
+
+#sankey-chart-ga {
+    width: 1000px;
+    max-width: 100%;
+    height: 600px;
+    margin: 0 auto;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#sankey-chart-ga .hoverlayer .hovertext path {
+    fill: white !important;
+    stroke: #333 !important;
+    fill-opacity: 1 !important;
+}
+
+#sankey-chart-ga .hoverlayer .hovertext text {
+    fill: black !important;
+}
+
+@media (max-width: 991px) {
+    #sankey-chart-ga {
+        height: 550px;
+    }
+}
+
+@media (max-width: 767px) {
+    #sankey-chart-ga {
+        width: 768px;
+        max-width: none;
+        height: 550px;
+        transform-origin: top left;
+    }
+}
+
+.sankey-touch-info {
     display: none;
     margin: 0.75rem auto;
     padding: 0.75rem 1rem;
