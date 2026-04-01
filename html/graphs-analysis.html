@@ -18,14 +18,14 @@
 		<meta name="twitter:title" content="Graphs/Analysis - Disclosing Generative AI Use in Digital Humanities Research"/>
 		<meta name="twitter:description" content="Graphs and analysis based on a generative AI use in digital humanities research disclosure and transparency survey."/>
 		<!-- Preload critical resources -->
-		<link rel="preload" href="../css/style.css?vers=028" as="style"/>
+		<link rel="preload" href="../css/style.css?vers=029" as="style"/>
 		<link rel="preconnect" href="https://fonts.googleapis.com"/>
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
 		<link rel="preconnect" href="https://cdnjs.cloudflare.com"/>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=Source+Sans+Pro:wght@400;600;700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,;:!?()'&quot;-"/>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		<link rel="stylesheet" type="text/css" href="../css/style.css?vers=028"/>
-		<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="../css/style.css?vers=029"/>
+		<script src="https://cdn.plot.ly/plotly-2.27.0.min.js" charset="utf-8"></script>
 	</head>
 
 	<body>
@@ -52,7 +52,7 @@
 					<li><a href="#context">Does Context Matter for AI Disclosure?</a></li>
 					<li><a href="#activities">Which AI-Assisted Activities Do Scholars Believe Should Be Disclosed?</a></li>
 					<li><a href="#practice">Where Do Disclosure Expectations Align with Practice?</a></li>
-					<li><a href="#principles]">Do Disclosure Principles Align with Disclosure Practices?</a></li>
+					<li><a href="#principles">Do Disclosure Principles Align with Disclosure Practices?</a></li>
 				</ol>
 			</section>
 
@@ -280,7 +280,67 @@
 			<section aria-labelledby="principles">
 				<h2 id="principles">Do Disclosure Principles Align with Disclosure Practices?</h2>
 
-					<p class="center">Coming soon!</p>
+					<div class="sankey-chart-container">
+						<div class="sankey-chart-scaler">
+							<div id="sankey-chart-ga" role="img" aria-label="Interactive Sankey diagram showing survey responses about generative AI disclosure in digital humanities: Q6 asks about necessity of disclosure, Q16 asks about degree of disclosure, Q10 asks about frequency of disclosure, and Q11 asks whether disclosure was required or voluntary. Most respondents believe disclosure is necessary but have never actually disclosed their AI use."></div>
+						</div>
+					</div>
+
+					<table class="sr-only" aria-label="Sankey diagram data: Flow of responses across Q6, Q16, Q10, and Q11">
+						<caption>Survey response flows: necessity of disclosure (Q6) to degree (Q16) to frequency (Q10) to volition (Q11), n=107</caption>
+						<thead>
+							<tr>
+								<th scope="col">Source Node</th>
+								<th scope="col">Target Node</th>
+								<th scope="col">Count</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr><td>Q6 - Very necessary (67)</td><td>Q16 - Minimal disclosure (8)</td><td>1</td></tr>
+							<tr><td>Q6 - Very necessary (67)</td><td>Q16 - Brief disclosure (59)</td><td>33</td></tr>
+							<tr><td>Q6 - Very necessary (67)</td><td>Q16 - Detailed disclosure (37)</td><td>33</td></tr>
+							<tr><td>Q6 - Somewhat necessary (21)</td><td>Q16 - Minimal disclosure (8)</td><td>2</td></tr>
+							<tr><td>Q6 - Somewhat necessary (21)</td><td>Q16 - Brief disclosure (59)</td><td>18</td></tr>
+							<tr><td>Q6 - Somewhat necessary (21)</td><td>Q16 - Detailed disclosure (37)</td><td>1</td></tr>
+							<tr><td>Q6 - Neutral (10)</td><td>Q16 - Minimal disclosure (8)</td><td>4</td></tr>
+							<tr><td>Q6 - Neutral (10)</td><td>Q16 - Brief disclosure (59)</td><td>4</td></tr>
+							<tr><td>Q6 - Neutral (10)</td><td>Q16 - Detailed disclosure (37)</td><td>1</td></tr>
+							<tr><td>Q6 - Neutral (10)</td><td>Q16 - Prefer not to answer (3)</td><td>1</td></tr>
+							<tr><td>Q6 - Not very necessary (5)</td><td>Q16 - Minimal disclosure (8)</td><td>1</td></tr>
+							<tr><td>Q6 - Not very necessary (5)</td><td>Q16 - Brief disclosure (59)</td><td>3</td></tr>
+							<tr><td>Q6 - Not very necessary (5)</td><td>Q16 - Prefer not to answer (3)</td><td>1</td></tr>
+							<tr><td>Q6 - Not necessary at all (3)</td><td>Q16 - Brief disclosure (59)</td><td>1</td></tr>
+							<tr><td>Q6 - Not necessary at all (3)</td><td>Q16 - Detailed disclosure (37)</td><td>2</td></tr>
+							<tr><td>Q6 - Prefer not to answer (1)</td><td>Q16 - Prefer not to answer (3)</td><td>1</td></tr>
+							<tr><td>Q16 - Minimal disclosure (8)</td><td>Q10 - Never (73)</td><td>5</td></tr>
+							<tr><td>Q16 - Minimal disclosure (8)</td><td>Q10 - 1-2 times (22)</td><td>1</td></tr>
+							<tr><td>Q16 - Minimal disclosure (8)</td><td>Q10 - More than 10 times (2)</td><td>1</td></tr>
+							<tr><td>Q16 - Minimal disclosure (8)</td><td>Q10 - Prefer not to answer (2)</td><td>1</td></tr>
+							<tr><td>Q16 - Brief disclosure (59)</td><td>Q10 - Never (73)</td><td>36</td></tr>
+							<tr><td>Q16 - Brief disclosure (59)</td><td>Q10 - 1-2 times (22)</td><td>17</td></tr>
+							<tr><td>Q16 - Brief disclosure (59)</td><td>Q10 - 3-5 times (6)</td><td>3</td></tr>
+							<tr><td>Q16 - Brief disclosure (59)</td><td>Q10 - 6-10 times (2)</td><td>1</td></tr>
+							<tr><td>Q16 - Brief disclosure (59)</td><td>Q10 - More than 10 times (2)</td><td>1</td></tr>
+							<tr><td>Q16 - Brief disclosure (59)</td><td>Q10 - Prefer not to answer (2)</td><td>1</td></tr>
+							<tr><td>Q16 - Detailed disclosure (37)</td><td>Q10 - Never (73)</td><td>31</td></tr>
+							<tr><td>Q16 - Detailed disclosure (37)</td><td>Q10 - 1-2 times (22)</td><td>4</td></tr>
+							<tr><td>Q16 - Detailed disclosure (37)</td><td>Q10 - 3-5 times (6)</td><td>1</td></tr>
+							<tr><td>Q16 - Detailed disclosure (37)</td><td>Q10 - 6-10 times (2)</td><td>1</td></tr>
+							<tr><td>Q16 - Prefer not to answer (3)</td><td>Q10 - Never (73)</td><td>1</td></tr>
+							<tr><td>Q16 - Prefer not to answer (3)</td><td>Q10 - 3-5 times (6)</td><td>2</td></tr>
+							<tr><td>Q10 - Never (73)</td><td>Q11 - Never disclosed (73)</td><td>73</td></tr>
+							<tr><td>Q10 - 1-2 times (22)</td><td>Q11 - It was required (9)</td><td>7</td></tr>
+							<tr><td>Q10 - 1-2 times (22)</td><td>Q11 - Both required and voluntary (2)</td><td>1</td></tr>
+							<tr><td>Q10 - 1-2 times (22)</td><td>Q11 - I disclosed it voluntarily (21)</td><td>14</td></tr>
+							<tr><td>Q10 - 3-5 times (6)</td><td>Q11 - It was required (9)</td><td>2</td></tr>
+							<tr><td>Q10 - 3-5 times (6)</td><td>Q11 - I disclosed it voluntarily (21)</td><td>4</td></tr>
+							<tr><td>Q10 - 6-10 times (2)</td><td>Q11 - I disclosed it voluntarily (21)</td><td>2</td></tr>
+							<tr><td>Q10 - More than 10 times (2)</td><td>Q11 - Both required and voluntary (2)</td><td>1</td></tr>
+							<tr><td>Q10 - More than 10 times (2)</td><td>Q11 - Other (1)</td><td>1</td></tr>
+							<tr><td>Q10 - Prefer not to answer (2)</td><td>Q11 - I disclosed it voluntarily (21)</td><td>1</td></tr>
+							<tr><td>Q10 - Prefer not to answer (2)</td><td>Q11 - Prefer not to answer (1)</td><td>1</td></tr>
+						</tbody>
+					</table>
 
 				<section aria-labelledby="read-6">
 					<h3 id="read-6">How to Read This Graph</h3>
@@ -701,6 +761,131 @@
 					document.addEventListener('DOMContentLoaded', updateQ6FilterOptions);
 				} else {
 					updateQ6FilterOptions();
+				}
+			})();
+		</script>
+
+		<script src="../js/sankey_data.js?vers=001"></script>
+		<script>
+			// Sankey Diagram (graphs-analysis)
+			(function() {
+				function createSankeyGA() {
+					var chartDiv = document.getElementById('sankey-chart-ga');
+					if (!chartDiv || typeof Plotly === 'undefined' || typeof sankeyData === 'undefined') return;
+
+					// Deep-clone layout and data to override without mutating shared objects
+					var layout = JSON.parse(JSON.stringify(sankeyLayout));
+					var data = JSON.parse(JSON.stringify(sankeyData));
+
+					// Reduce node padding back now that labels wrap properly
+					data[0].node.pad = 40;
+
+					// Clean <br> from labels for hover tooltips
+					var cleanLabels = data[0].node.label.map(function(lbl) {
+						return lbl.replace(/<br>/g, ' ');
+					});
+
+					// Remove extra number from hover popups
+					data[0].name = '';
+					data[0].node.hovertemplate = '%{label}<extra></extra>';
+					data[0].node.hoverlabel = { bgcolor: 'white', font: { family: 'Source Sans Pro, sans-serif', size: 14, color: 'black' } };
+					data[0].link.hovertemplate = '%{source.label} → %{target.label}<br>%{value}<extra></extra>';
+					data[0].link.hoverlabel = { bgcolor: 'white', font: { family: 'Source Sans Pro, sans-serif', size: 14, color: 'black' } };
+
+					// Adjust annotation font size — slightly smaller than homepage
+					var width = chartDiv.offsetWidth || window.innerWidth;
+					var fontSize = width < 768 ? 11 : width < 992 ? 12 : 13;
+					if (layout.annotations) {
+						layout.annotations.forEach(function(ann) {
+							ann.font.size = fontSize;
+						});
+					}
+
+					// Opaque hover popups
+					layout.hoverlabel = {
+						bgcolor: 'white',
+						bordercolor: '#333',
+						font: { family: 'Source Sans Pro, sans-serif', size: 14, color: 'black' }
+					};
+
+					// Match other graphs-analysis charts: hide mode bar
+					var config = {
+						responsive: true,
+						displayModeBar: false
+					};
+
+					// Touch-aware hover
+					var hasHover = window.matchMedia('(any-hover: hover)').matches;
+					if (!hasHover) {
+						layout.hovermode = false;
+					}
+
+					Plotly.newPlot('sankey-chart-ga', data, layout, config);
+
+					if (!hasHover) {
+						// Touch: show info panel on tap
+						var sankeyInfoPanel = document.createElement('div');
+						sankeyInfoPanel.className = 'sankey-touch-info';
+						chartDiv.parentNode.insertBefore(sankeyInfoPanel, chartDiv.nextSibling);
+						var sankeyActivePoint = null;
+
+						chartDiv.on('plotly_click', function(eventData) {
+							var point = eventData.points[0];
+							if (!point) return;
+
+							var info = '';
+							var key = '';
+
+							if (point.hasOwnProperty('pointNumber') && point.hasOwnProperty('label')) {
+								// Node tap
+								var label = (point.label || '').replace(/<br>/g, ' ');
+								var value = point.value || '';
+								info = '<strong>' + label + '</strong>';
+								if (value) info += '<br>Total flow: ' + value;
+								key = 'node-' + point.pointNumber;
+							} else if (point.hasOwnProperty('source') && point.hasOwnProperty('target')) {
+								// Link tap
+								var src = (point.source.label || '').replace(/<br>/g, ' ');
+								var tgt = (point.target.label || '').replace(/<br>/g, ' ');
+								var val = point.value || '';
+								info = '<strong>' + src + '</strong> &rarr; <strong>' + tgt + '</strong>';
+								if (val) info += '<br>Count: ' + val;
+								key = 'link-' + point.pointNumber;
+							}
+
+							if (info) {
+								if (sankeyActivePoint === key) {
+									sankeyActivePoint = null;
+									sankeyInfoPanel.style.display = 'none';
+								} else {
+									sankeyActivePoint = key;
+									sankeyInfoPanel.innerHTML = info;
+									sankeyInfoPanel.style.display = 'block';
+								}
+							}
+						});
+					}
+
+					// Scale chart to fit viewport below 768px
+					function scaleSankeyChart() {
+						var scaler = document.querySelector('.sankey-chart-scaler');
+						if (window.innerWidth < 768) {
+							var scale = scaler.clientWidth / 768;
+							chartDiv.style.transform = 'scale(' + scale + ')';
+							scaler.style.height = (chartDiv.offsetHeight * scale) + 'px';
+						} else {
+							chartDiv.style.transform = '';
+							scaler.style.height = '';
+						}
+					}
+					scaleSankeyChart();
+					window.addEventListener('resize', scaleSankeyChart);
+				}
+
+				if (document.readyState === 'loading') {
+					document.addEventListener('DOMContentLoaded', createSankeyGA);
+				} else {
+					createSankeyGA();
 				}
 			})();
 		</script>
