@@ -18,13 +18,13 @@
 		<meta name="twitter:title" content="Graphs/Analysis - Disclosing Generative AI Use in Digital Humanities Research"/>
 		<meta name="twitter:description" content="Graphs and analysis based on a generative AI use in digital humanities research disclosure and transparency survey."/>
 		<!-- Preload critical resources -->
-		<link rel="preload" href="../css/style.css?vers=031" as="style"/>
+		<link rel="preload" href="../css/style.css?vers=040" as="style"/>
 		<link rel="preconnect" href="https://fonts.googleapis.com"/>
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
 		<link rel="preconnect" href="https://cdnjs.cloudflare.com"/>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=Source+Sans+Pro:wght@400;600;700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,;:!?()'&quot;-"/>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		<link rel="stylesheet" type="text/css" href="../css/style.css?vers=031"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css?vers=040"/>
 		<script src="https://cdn.plot.ly/plotly-2.27.0.min.js" charset="utf-8"></script>
 	</head>
 
@@ -202,7 +202,49 @@
 			<section aria-labelledby="context">
 				<h3 id="context">Does Context Matter for AI Disclosure?</h3>
 
-					<p class="center">Coming soon!</p>
+					<div class="q13-filter-container">
+						<div class="q13-filter-row">
+							<label for="q13-question-filter">Select Question:</label>
+							<select id="q13-question-filter" onchange="updateQ13FilterOptions()">
+								<option value="Q2">Q2: Years of Experience</option>
+								<option value="Q4">Q4: Seniority</option>
+								<option value="Q5">Q5: Discipline</option>
+								<option value="Q24">Q24: GenAI Literacy</option>
+							</select>
+						</div>
+						<div class="q13-filter-row">
+							<label for="q13-value-filter">Filter by:</label>
+							<select id="q13-value-filter" onchange="updateQ13Charts()">
+								<option value="all">All Respondents</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="q13-chart-container">
+						<div class="q13-chart-scaler">
+							<ul class="q13-legend" id="q13-legend"></ul>
+							<div id="q13-chart" role="img" aria-label="Pie chart showing whether respondents believe the type of scholarly product matters for generative AI disclosure. 35 said always matters, 27 usually matters, 17 sometimes matters, 0 rarely matters, 0 never matters, 2 prefer not to answer."></div>
+						</div>
+					</div>
+
+					<table class="sr-only" aria-label="Q13 response data: Does the type of scholarly product matter for GenAI disclosure? All respondents.">
+						<caption>Survey responses on whether scholarly product type matters for GenAI disclosure (all respondents, n=81)</caption>
+						<thead>
+							<tr>
+								<th scope="col">Response</th>
+								<th scope="col">Count</th>
+								<th scope="col">Percentage</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr><td>Always matters</td><td>35</td><td>43.2%</td></tr>
+							<tr><td>Usually matters</td><td>27</td><td>33.3%</td></tr>
+							<tr><td>Sometimes matters</td><td>17</td><td>21.0%</td></tr>
+							<tr><td>Rarely matters</td><td>0</td><td>0.0%</td></tr>
+							<tr><td>Never matters</td><td>0</td><td>0.0%</td></tr>
+							<tr><td>Prefer not to answer</td><td>2</td><td>2.5%</td></tr>
+						</tbody>
+					</table>
 
 				<section aria-labelledby="read-3">
 					<h4 id="read-3">How to Read This Graph</h4>
@@ -454,7 +496,7 @@
 							y: pos[1],
 							text: q8LabelsShort[opt],
 							showarrow: false,
-							font: { size: 14, color: 'black', family: 'Source Sans Pro, sans-serif' },
+							font: { size: 16, color: 'black', family: 'Source Sans Pro, sans-serif' },
 							bgcolor: 'white',
 							bordercolor: 'black',
 							borderwidth: 1,
@@ -464,14 +506,14 @@
 
 					var layout = {
 						title: '',
-						font: { family: 'Source Sans Pro, sans-serif', size: 14 },
+						font: { family: 'Source Sans Pro, sans-serif', size: 16 },
 						xaxis: { showgrid: false, zeroline: false, showticklabels: false, range: [-1.5, 1.5] },
 						yaxis: { showgrid: false, zeroline: false, showticklabels: false, range: [-1.5, 1.5] },
 						plot_bgcolor: 'rgba(0,0,0,0)',
 						paper_bgcolor: 'rgba(0,0,0,0)',
 						margin: { t: 20, b: 20, l: 20, r: 20 },
 						hovermode: 'closest',
-						hoverlabel: { font: { family: 'Source Sans Pro, sans-serif', size: 14 } },
+						hoverlabel: { font: { family: 'Source Sans Pro, sans-serif', size: 16 } },
 						annotations: annotations
 					};
 
@@ -656,7 +698,7 @@
 
 					const layout = {
 						xaxis: {
-							title: 'Number of Respondents',
+							title: { text: 'Number of Respondents', font: { size: 15 } },
 							rangemode: 'tozero',
 							range: [0, Math.max(...yValues) * 1.15],
 							showline: true,
@@ -685,10 +727,10 @@
 						hovermode: 'closest',
 						hoverlabel: {
 							bgcolor: 'white',
-							font: { family: 'Source Sans Pro, sans-serif', size: 14, color: 'black' },
+							font: { family: 'Source Sans Pro, sans-serif', size: 16, color: 'black' },
 							bordercolor: '#5AAFE0'
 						},
-						font: { family: 'Source Sans Pro, sans-serif', size: 14 }
+						font: { family: 'Source Sans Pro, sans-serif', size: 16 }
 					};
 
 					const config = {
@@ -763,6 +805,368 @@
 					document.addEventListener('DOMContentLoaded', updateQ6FilterOptions);
 				} else {
 					updateQ6FilterOptions();
+				}
+			})();
+		</script>
+
+		<script>
+			// Q13 Pie Chart (Context section)
+			(function() {
+				const allData = {"Q2": {"all": {"q13_dist": {"1": 35, "2": 27, "3": 17, "4": 0, "5": 0, "6": 2}, "q14_by_q13": {"1": {"1": 31, "2": 21, "3": 9, "4": 0, "5": 0, "6": 0}, "2": {"1": 34, "2": 25, "3": 13, "4": 0, "5": 0, "6": 0}, "3": {"1": 31, "2": 20, "3": 9, "4": 0, "5": 0, "6": 0}, "4": {"1": 30, "2": 19, "3": 8, "4": 0, "5": 0, "6": 0}, "5": {"1": 32, "2": 25, "3": 12, "4": 0, "5": 0, "6": 1}, "6": {"1": 30, "2": 16, "3": 7, "4": 0, "5": 0, "6": 0}, "7": {"1": 4, "2": 1, "3": 1, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 1}}}, "1": {"q13_dist": {"1": 0, "2": 0, "3": 3, "4": 0, "5": 0, "6": 0}, "q14_by_q13": {"1": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "2": {"1": 0, "2": 0, "3": 2, "4": 0, "5": 0, "6": 0}, "3": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "4": {"1": 0, "2": 0, "3": 2, "4": 0, "5": 0, "6": 0}, "5": {"1": 0, "2": 0, "3": 3, "4": 0, "5": 0, "6": 0}, "6": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "7": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}, "2": {"q13_dist": {"1": 7, "2": 8, "3": 6, "4": 0, "5": 0, "6": 0}, "q14_by_q13": {"1": {"1": 5, "2": 6, "3": 6, "4": 0, "5": 0, "6": 0}, "2": {"1": 7, "2": 7, "3": 6, "4": 0, "5": 0, "6": 0}, "3": {"1": 6, "2": 6, "3": 5, "4": 0, "5": 0, "6": 0}, "4": {"1": 5, "2": 5, "3": 4, "4": 0, "5": 0, "6": 0}, "5": {"1": 6, "2": 7, "3": 3, "4": 0, "5": 0, "6": 0}, "6": {"1": 5, "2": 3, "3": 4, "4": 0, "5": 0, "6": 0}, "7": {"1": 1, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}, "3": {"q13_dist": {"1": 4, "2": 3, "3": 5, "4": 0, "5": 0, "6": 0}, "q14_by_q13": {"1": {"1": 4, "2": 2, "3": 2, "4": 0, "5": 0, "6": 0}, "2": {"1": 4, "2": 3, "3": 4, "4": 0, "5": 0, "6": 0}, "3": {"1": 4, "2": 2, "3": 3, "4": 0, "5": 0, "6": 0}, "4": {"1": 4, "2": 2, "3": 2, "4": 0, "5": 0, "6": 0}, "5": {"1": 4, "2": 3, "3": 5, "4": 0, "5": 0, "6": 0}, "6": {"1": 4, "2": 2, "3": 2, "4": 0, "5": 0, "6": 0}, "7": {"1": 0, "2": 0, "3": 1, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}, "4": {"q13_dist": {"1": 8, "2": 7, "3": 2, "4": 0, "5": 0, "6": 1}, "q14_by_q13": {"1": {"1": 8, "2": 5, "3": 0, "4": 0, "5": 0, "6": 0}, "2": {"1": 8, "2": 6, "3": 1, "4": 0, "5": 0, "6": 0}, "3": {"1": 7, "2": 5, "3": 0, "4": 0, "5": 0, "6": 0}, "4": {"1": 7, "2": 4, "3": 0, "4": 0, "5": 0, "6": 0}, "5": {"1": 8, "2": 7, "3": 1, "4": 0, "5": 0, "6": 0}, "6": {"1": 7, "2": 4, "3": 0, "4": 0, "5": 0, "6": 0}, "7": {"1": 1, "2": 1, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 1}}}, "5": {"q13_dist": {"1": 16, "2": 9, "3": 1, "4": 0, "5": 0, "6": 1}, "q14_by_q13": {"1": {"1": 14, "2": 8, "3": 1, "4": 0, "5": 0, "6": 0}, "2": {"1": 15, "2": 9, "3": 0, "4": 0, "5": 0, "6": 0}, "3": {"1": 14, "2": 7, "3": 1, "4": 0, "5": 0, "6": 0}, "4": {"1": 14, "2": 8, "3": 0, "4": 0, "5": 0, "6": 0}, "5": {"1": 14, "2": 8, "3": 0, "4": 0, "5": 0, "6": 1}, "6": {"1": 14, "2": 7, "3": 1, "4": 0, "5": 0, "6": 0}, "7": {"1": 2, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}, "6": {"q13_dist": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "q14_by_q13": {"1": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "2": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "3": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "4": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "5": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "6": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "7": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}}, "Q4": {"all": {"q13_dist": {"1": 35, "2": 27, "3": 17, "4": 0, "5": 0, "6": 2}, "q14_by_q13": {"1": {"1": 31, "2": 21, "3": 9, "4": 0, "5": 0, "6": 0}, "2": {"1": 34, "2": 25, "3": 13, "4": 0, "5": 0, "6": 0}, "3": {"1": 31, "2": 20, "3": 9, "4": 0, "5": 0, "6": 0}, "4": {"1": 30, "2": 19, "3": 8, "4": 0, "5": 0, "6": 0}, "5": {"1": 32, "2": 25, "3": 12, "4": 0, "5": 0, "6": 1}, "6": {"1": 30, "2": 16, "3": 7, "4": 0, "5": 0, "6": 0}, "7": {"1": 4, "2": 1, "3": 1, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 1}}}, "1": {"q13_dist": {"1": 0, "2": 1, "3": 1, "4": 0, "5": 0, "6": 0}, "q14_by_q13": {"1": {"1": 0, "2": 0, "3": 1, "4": 0, "5": 0, "6": 0}, "2": {"1": 0, "2": 0, "3": 1, "4": 0, "5": 0, "6": 0}, "3": {"1": 0, "2": 1, "3": 1, "4": 0, "5": 0, "6": 0}, "4": {"1": 0, "2": 1, "3": 1, "4": 0, "5": 0, "6": 0}, "5": {"1": 0, "2": 1, "3": 0, "4": 0, "5": 0, "6": 0}, "6": {"1": 0, "2": 0, "3": 1, "4": 0, "5": 0, "6": 0}, "7": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}, "2": {"q13_dist": {"1": 0, "2": 1, "3": 3, "4": 0, "5": 0, "6": 0}, "q14_by_q13": {"1": {"1": 0, "2": 0, "3": 1, "4": 0, "5": 0, "6": 0}, "2": {"1": 0, "2": 1, "3": 1, "4": 0, "5": 0, "6": 0}, "3": {"1": 0, "2": 0, "3": 2, "4": 0, "5": 0, "6": 0}, "4": {"1": 0, "2": 1, "3": 1, "4": 0, "5": 0, "6": 0}, "5": {"1": 0, "2": 1, "3": 3, "4": 0, "5": 0, "6": 0}, "6": {"1": 0, "2": 0, "3": 1, "4": 0, "5": 0, "6": 0}, "7": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}, "3": {"q13_dist": {"1": 9, "2": 4, "3": 6, "4": 0, "5": 0, "6": 0}, "q14_by_q13": {"1": {"1": 8, "2": 4, "3": 3, "4": 0, "5": 0, "6": 0}, "2": {"1": 9, "2": 4, "3": 5, "4": 0, "5": 0, "6": 0}, "3": {"1": 8, "2": 4, "3": 2, "4": 0, "5": 0, "6": 0}, "4": {"1": 7, "2": 3, "3": 2, "4": 0, "5": 0, "6": 0}, "5": {"1": 8, "2": 4, "3": 5, "4": 0, "5": 0, "6": 0}, "6": {"1": 8, "2": 3, "3": 2, "4": 0, "5": 0, "6": 0}, "7": {"1": 1, "2": 1, "3": 1, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}, "4": {"q13_dist": {"1": 0, "2": 3, "3": 1, "4": 0, "5": 0, "6": 1}, "q14_by_q13": {"1": {"1": 0, "2": 3, "3": 0, "4": 0, "5": 0, "6": 0}, "2": {"1": 0, "2": 3, "3": 1, "4": 0, "5": 0, "6": 0}, "3": {"1": 0, "2": 2, "3": 0, "4": 0, "5": 0, "6": 0}, "4": {"1": 0, "2": 1, "3": 0, "4": 0, "5": 0, "6": 0}, "5": {"1": 0, "2": 3, "3": 0, "4": 0, "5": 0, "6": 0}, "6": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "7": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 1}}}, "5": {"q13_dist": {"1": 2, "2": 4, "3": 0, "4": 0, "5": 0, "6": 0}, "q14_by_q13": {"1": {"1": 2, "2": 3, "3": 0, "4": 0, "5": 0, "6": 0}, "2": {"1": 2, "2": 4, "3": 0, "4": 0, "5": 0, "6": 0}, "3": {"1": 2, "2": 3, "3": 0, "4": 0, "5": 0, "6": 0}, "4": {"1": 2, "2": 4, "3": 0, "4": 0, "5": 0, "6": 0}, "5": {"1": 2, "2": 4, "3": 0, "4": 0, "5": 0, "6": 0}, "6": {"1": 2, "2": 4, "3": 0, "4": 0, "5": 0, "6": 0}, "7": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}, "6": {"q13_dist": {"1": 4, "2": 2, "3": 0, "4": 0, "5": 0, "6": 0}, "q14_by_q13": {"1": {"1": 4, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "2": {"1": 4, "2": 2, "3": 0, "4": 0, "5": 0, "6": 0}, "3": {"1": 4, "2": 1, "3": 0, "4": 0, "5": 0, "6": 0}, "4": {"1": 4, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "5": {"1": 4, "2": 2, "3": 0, "4": 0, "5": 0, "6": 0}, "6": {"1": 4, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "7": {"1": 1, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}, "7": {"q13_dist": {"1": 6, "2": 4, "3": 2, "4": 0, "5": 0, "6": 0}, "q14_by_q13": {"1": {"1": 3, "2": 3, "3": 0, "4": 0, "5": 0, "6": 0}, "2": {"1": 5, "2": 4, "3": 2, "4": 0, "5": 0, "6": 0}, "3": {"1": 4, "2": 3, "3": 0, "4": 0, "5": 0, "6": 0}, "4": {"1": 4, "2": 4, "3": 1, "4": 0, "5": 0, "6": 0}, "5": {"1": 5, "2": 4, "3": 2, "4": 0, "5": 0, "6": 0}, "6": {"1": 3, "2": 3, "3": 0, "4": 0, "5": 0, "6": 0}, "7": {"1": 1, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}, "8": {"q13_dist": {"1": 5, "2": 3, "3": 2, "4": 0, "5": 0, "6": 1}, "q14_by_q13": {"1": {"1": 5, "2": 3, "3": 2, "4": 0, "5": 0, "6": 0}, "2": {"1": 5, "2": 3, "3": 1, "4": 0, "5": 0, "6": 0}, "3": {"1": 5, "2": 2, "3": 2, "4": 0, "5": 0, "6": 0}, "4": {"1": 5, "2": 2, "3": 1, "4": 0, "5": 0, "6": 0}, "5": {"1": 4, "2": 2, "3": 1, "4": 0, "5": 0, "6": 1}, "6": {"1": 5, "2": 2, "3": 2, "4": 0, "5": 0, "6": 0}, "7": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}, "9": {"q13_dist": {"1": 9, "2": 5, "3": 2, "4": 0, "5": 0, "6": 0}, "q14_by_q13": {"1": {"1": 9, "2": 5, "3": 2, "4": 0, "5": 0, "6": 0}, "2": {"1": 9, "2": 4, "3": 2, "4": 0, "5": 0, "6": 0}, "3": {"1": 8, "2": 4, "3": 2, "4": 0, "5": 0, "6": 0}, "4": {"1": 8, "2": 3, "3": 2, "4": 0, "5": 0, "6": 0}, "5": {"1": 9, "2": 4, "3": 1, "4": 0, "5": 0, "6": 0}, "6": {"1": 8, "2": 4, "3": 1, "4": 0, "5": 0, "6": 0}, "7": {"1": 1, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}, "10": {"q13_dist": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "q14_by_q13": {"1": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "2": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "3": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "4": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "5": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "6": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "7": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}}, "Q5": {"all": {"q13_dist": {"1": 35, "2": 27, "3": 17, "4": 0, "5": 0, "6": 2}, "q14_by_q13": {"1": {"1": 31, "2": 21, "3": 9, "4": 0, "5": 0, "6": 0}, "2": {"1": 34, "2": 25, "3": 13, "4": 0, "5": 0, "6": 0}, "3": {"1": 31, "2": 20, "3": 9, "4": 0, "5": 0, "6": 0}, "4": {"1": 30, "2": 19, "3": 8, "4": 0, "5": 0, "6": 0}, "5": {"1": 32, "2": 25, "3": 12, "4": 0, "5": 0, "6": 1}, "6": {"1": 30, "2": 16, "3": 7, "4": 0, "5": 0, "6": 0}, "7": {"1": 4, "2": 1, "3": 1, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 1}}}, "1": {"q13_dist": {"1": 2, "2": 2, "3": 0, "4": 0, "5": 0, "6": 0}, "q14_by_q13": {"1": {"1": 2, "2": 2, "3": 0, "4": 0, "5": 0, "6": 0}, "2": {"1": 2, "2": 2, "3": 0, "4": 0, "5": 0, "6": 0}, "3": {"1": 2, "2": 2, "3": 0, "4": 0, "5": 0, "6": 0}, "4": {"1": 2, "2": 2, "3": 0, "4": 0, "5": 0, "6": 0}, "5": {"1": 2, "2": 2, "3": 0, "4": 0, "5": 0, "6": 0}, "6": {"1": 2, "2": 1, "3": 0, "4": 0, "5": 0, "6": 0}, "7": {"1": 0, "2": 1, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}, "2": {"q13_dist": {"1": 1, "2": 2, "3": 0, "4": 0, "5": 0, "6": 1}, "q14_by_q13": {"1": {"1": 1, "2": 2, "3": 0, "4": 0, "5": 0, "6": 0}, "2": {"1": 1, "2": 2, "3": 0, "4": 0, "5": 0, "6": 0}, "3": {"1": 1, "2": 2, "3": 0, "4": 0, "5": 0, "6": 0}, "4": {"1": 1, "2": 2, "3": 0, "4": 0, "5": 0, "6": 0}, "5": {"1": 1, "2": 1, "3": 0, "4": 0, "5": 0, "6": 1}, "6": {"1": 1, "2": 2, "3": 0, "4": 0, "5": 0, "6": 0}, "7": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}, "3": {"q13_dist": {"1": 2, "2": 1, "3": 0, "4": 0, "5": 0, "6": 0}, "q14_by_q13": {"1": {"1": 2, "2": 1, "3": 0, "4": 0, "5": 0, "6": 0}, "2": {"1": 2, "2": 1, "3": 0, "4": 0, "5": 0, "6": 0}, "3": {"1": 2, "2": 1, "3": 0, "4": 0, "5": 0, "6": 0}, "4": {"1": 2, "2": 1, "3": 0, "4": 0, "5": 0, "6": 0}, "5": {"1": 2, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "6": {"1": 2, "2": 1, "3": 0, "4": 0, "5": 0, "6": 0}, "7": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}, "4": {"q13_dist": {"1": 1, "2": 3, "3": 1, "4": 0, "5": 0, "6": 0}, "q14_by_q13": {"1": {"1": 1, "2": 3, "3": 1, "4": 0, "5": 0, "6": 0}, "2": {"1": 1, "2": 3, "3": 1, "4": 0, "5": 0, "6": 0}, "3": {"1": 1, "2": 1, "3": 1, "4": 0, "5": 0, "6": 0}, "4": {"1": 1, "2": 2, "3": 1, "4": 0, "5": 0, "6": 0}, "5": {"1": 1, "2": 2, "3": 0, "4": 0, "5": 0, "6": 0}, "6": {"1": 1, "2": 3, "3": 1, "4": 0, "5": 0, "6": 0}, "7": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}, "5": {"q13_dist": {"1": 1, "2": 2, "3": 3, "4": 0, "5": 0, "6": 1}, "q14_by_q13": {"1": {"1": 1, "2": 2, "3": 2, "4": 0, "5": 0, "6": 0}, "2": {"1": 1, "2": 2, "3": 3, "4": 0, "5": 0, "6": 0}, "3": {"1": 1, "2": 1, "3": 1, "4": 0, "5": 0, "6": 0}, "4": {"1": 1, "2": 2, "3": 1, "4": 0, "5": 0, "6": 0}, "5": {"1": 1, "2": 2, "3": 1, "4": 0, "5": 0, "6": 0}, "6": {"1": 1, "2": 2, "3": 1, "4": 0, "5": 0, "6": 0}, "7": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 1}}}, "6": {"q13_dist": {"1": 0, "2": 1, "3": 1, "4": 0, "5": 0, "6": 0}, "q14_by_q13": {"1": {"1": 0, "2": 1, "3": 1, "4": 0, "5": 0, "6": 0}, "2": {"1": 0, "2": 1, "3": 0, "4": 0, "5": 0, "6": 0}, "3": {"1": 0, "2": 1, "3": 1, "4": 0, "5": 0, "6": 0}, "4": {"1": 0, "2": 1, "3": 0, "4": 0, "5": 0, "6": 0}, "5": {"1": 0, "2": 1, "3": 0, "4": 0, "5": 0, "6": 0}, "6": {"1": 0, "2": 1, "3": 1, "4": 0, "5": 0, "6": 0}, "7": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}, "7": {"q13_dist": {"1": 10, "2": 12, "3": 3, "4": 0, "5": 0, "6": 0}, "q14_by_q13": {"1": {"1": 10, "2": 8, "3": 2, "4": 0, "5": 0, "6": 0}, "2": {"1": 10, "2": 10, "3": 3, "4": 0, "5": 0, "6": 0}, "3": {"1": 9, "2": 9, "3": 2, "4": 0, "5": 0, "6": 0}, "4": {"1": 8, "2": 8, "3": 3, "4": 0, "5": 0, "6": 0}, "5": {"1": 9, "2": 11, "3": 2, "4": 0, "5": 0, "6": 0}, "6": {"1": 9, "2": 7, "3": 1, "4": 0, "5": 0, "6": 0}, "7": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}, "8": {"q13_dist": {"1": 7, "2": 6, "3": 6, "4": 0, "5": 0, "6": 0}, "q14_by_q13": {"1": {"1": 5, "2": 4, "3": 3, "4": 0, "5": 0, "6": 0}, "2": {"1": 6, "2": 6, "3": 5, "4": 0, "5": 0, "6": 0}, "3": {"1": 5, "2": 4, "3": 2, "4": 0, "5": 0, "6": 0}, "4": {"1": 5, "2": 4, "3": 3, "4": 0, "5": 0, "6": 0}, "5": {"1": 4, "2": 5, "3": 6, "4": 0, "5": 0, "6": 0}, "6": {"1": 5, "2": 4, "3": 2, "4": 0, "5": 0, "6": 0}, "7": {"1": 2, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}, "9": {"q13_dist": {"1": 2, "2": 1, "3": 3, "4": 0, "5": 0, "6": 0}, "q14_by_q13": {"1": {"1": 2, "2": 1, "3": 1, "4": 0, "5": 0, "6": 0}, "2": {"1": 2, "2": 1, "3": 2, "4": 0, "5": 0, "6": 0}, "3": {"1": 2, "2": 0, "3": 1, "4": 0, "5": 0, "6": 0}, "4": {"1": 2, "2": 0, "3": 2, "4": 0, "5": 0, "6": 0}, "5": {"1": 2, "2": 0, "3": 2, "4": 0, "5": 0, "6": 0}, "6": {"1": 2, "2": 1, "3": 1, "4": 0, "5": 0, "6": 0}, "7": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}, "10": {"q13_dist": {"1": 15, "2": 15, "3": 8, "4": 0, "5": 0, "6": 1}, "q14_by_q13": {"1": {"1": 14, "2": 11, "3": 3, "4": 0, "5": 0, "6": 0}, "2": {"1": 15, "2": 14, "3": 6, "4": 0, "5": 0, "6": 0}, "3": {"1": 14, "2": 12, "3": 4, "4": 0, "5": 0, "6": 0}, "4": {"1": 14, "2": 11, "3": 3, "4": 0, "5": 0, "6": 0}, "5": {"1": 15, "2": 15, "3": 6, "4": 0, "5": 0, "6": 1}, "6": {"1": 13, "2": 10, "3": 3, "4": 0, "5": 0, "6": 0}, "7": {"1": 1, "2": 0, "3": 1, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}, "11": {"q13_dist": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "q14_by_q13": {"1": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "2": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "3": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "4": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "5": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "6": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "7": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}, "12": {"q13_dist": {"1": 1, "2": 1, "3": 1, "4": 0, "5": 0, "6": 0}, "q14_by_q13": {"1": {"1": 1, "2": 1, "3": 1, "4": 0, "5": 0, "6": 0}, "2": {"1": 1, "2": 1, "3": 1, "4": 0, "5": 0, "6": 0}, "3": {"1": 1, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "4": {"1": 1, "2": 1, "3": 0, "4": 0, "5": 0, "6": 0}, "5": {"1": 1, "2": 1, "3": 1, "4": 0, "5": 0, "6": 0}, "6": {"1": 1, "2": 1, "3": 0, "4": 0, "5": 0, "6": 0}, "7": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}, "13": {"q13_dist": {"1": 2, "2": 1, "3": 1, "4": 0, "5": 0, "6": 0}, "q14_by_q13": {"1": {"1": 2, "2": 1, "3": 1, "4": 0, "5": 0, "6": 0}, "2": {"1": 2, "2": 1, "3": 1, "4": 0, "5": 0, "6": 0}, "3": {"1": 2, "2": 1, "3": 1, "4": 0, "5": 0, "6": 0}, "4": {"1": 2, "2": 1, "3": 1, "4": 0, "5": 0, "6": 0}, "5": {"1": 2, "2": 1, "3": 1, "4": 0, "5": 0, "6": 0}, "6": {"1": 2, "2": 1, "3": 1, "4": 0, "5": 0, "6": 0}, "7": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}, "14": {"q13_dist": {"1": 0, "2": 0, "3": 1, "4": 0, "5": 0, "6": 0}, "q14_by_q13": {"1": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "2": {"1": 0, "2": 0, "3": 1, "4": 0, "5": 0, "6": 0}, "3": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "4": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "5": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "6": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "7": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}, "15": {"q13_dist": {"1": 3, "2": 2, "3": 0, "4": 0, "5": 0, "6": 0}, "q14_by_q13": {"1": {"1": 3, "2": 2, "3": 0, "4": 0, "5": 0, "6": 0}, "2": {"1": 3, "2": 2, "3": 0, "4": 0, "5": 0, "6": 0}, "3": {"1": 3, "2": 2, "3": 0, "4": 0, "5": 0, "6": 0}, "4": {"1": 3, "2": 2, "3": 0, "4": 0, "5": 0, "6": 0}, "5": {"1": 3, "2": 1, "3": 0, "4": 0, "5": 0, "6": 0}, "6": {"1": 3, "2": 1, "3": 0, "4": 0, "5": 0, "6": 0}, "7": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}, "16": {"q13_dist": {"1": 0, "2": 0, "3": 2, "4": 0, "5": 0, "6": 0}, "q14_by_q13": {"1": {"1": 0, "2": 0, "3": 1, "4": 0, "5": 0, "6": 0}, "2": {"1": 0, "2": 0, "3": 1, "4": 0, "5": 0, "6": 0}, "3": {"1": 0, "2": 0, "3": 1, "4": 0, "5": 0, "6": 0}, "4": {"1": 0, "2": 0, "3": 1, "4": 0, "5": 0, "6": 0}, "5": {"1": 0, "2": 0, "3": 2, "4": 0, "5": 0, "6": 0}, "6": {"1": 0, "2": 0, "3": 1, "4": 0, "5": 0, "6": 0}, "7": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}, "17": {"q13_dist": {"1": 0, "2": 0, "3": 2, "4": 0, "5": 0, "6": 0}, "q14_by_q13": {"1": {"1": 0, "2": 0, "3": 1, "4": 0, "5": 0, "6": 0}, "2": {"1": 0, "2": 0, "3": 2, "4": 0, "5": 0, "6": 0}, "3": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "4": {"1": 0, "2": 0, "3": 1, "4": 0, "5": 0, "6": 0}, "5": {"1": 0, "2": 0, "3": 2, "4": 0, "5": 0, "6": 0}, "6": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "7": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}, "18": {"q13_dist": {"1": 9, "2": 6, "3": 2, "4": 0, "5": 0, "6": 0}, "q14_by_q13": {"1": {"1": 6, "2": 5, "3": 1, "4": 0, "5": 0, "6": 0}, "2": {"1": 8, "2": 5, "3": 1, "4": 0, "5": 0, "6": 0}, "3": {"1": 8, "2": 3, "3": 1, "4": 0, "5": 0, "6": 0}, "4": {"1": 7, "2": 3, "3": 1, "4": 0, "5": 0, "6": 0}, "5": {"1": 8, "2": 6, "3": 2, "4": 0, "5": 0, "6": 0}, "6": {"1": 7, "2": 2, "3": 1, "4": 0, "5": 0, "6": 0}, "7": {"1": 2, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}, "19": {"q13_dist": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "q14_by_q13": {"1": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "2": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "3": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "4": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "5": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "6": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "7": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}}, "Q24": {"all": {"q13_dist": {"1": 35, "2": 27, "3": 17, "4": 0, "5": 0, "6": 2}, "q14_by_q13": {"1": {"1": 31, "2": 21, "3": 9, "4": 0, "5": 0, "6": 0}, "2": {"1": 34, "2": 25, "3": 13, "4": 0, "5": 0, "6": 0}, "3": {"1": 31, "2": 20, "3": 9, "4": 0, "5": 0, "6": 0}, "4": {"1": 30, "2": 19, "3": 8, "4": 0, "5": 0, "6": 0}, "5": {"1": 32, "2": 25, "3": 12, "4": 0, "5": 0, "6": 1}, "6": {"1": 30, "2": 16, "3": 7, "4": 0, "5": 0, "6": 0}, "7": {"1": 4, "2": 1, "3": 1, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 1}}}, "1": {"q13_dist": {"1": 1, "2": 1, "3": 0, "4": 0, "5": 0, "6": 0}, "q14_by_q13": {"1": {"1": 1, "2": 1, "3": 0, "4": 0, "5": 0, "6": 0}, "2": {"1": 1, "2": 1, "3": 0, "4": 0, "5": 0, "6": 0}, "3": {"1": 1, "2": 1, "3": 0, "4": 0, "5": 0, "6": 0}, "4": {"1": 1, "2": 1, "3": 0, "4": 0, "5": 0, "6": 0}, "5": {"1": 1, "2": 1, "3": 0, "4": 0, "5": 0, "6": 0}, "6": {"1": 1, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "7": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}, "2": {"q13_dist": {"1": 5, "2": 4, "3": 3, "4": 0, "5": 0, "6": 0}, "q14_by_q13": {"1": {"1": 4, "2": 3, "3": 1, "4": 0, "5": 0, "6": 0}, "2": {"1": 4, "2": 4, "3": 2, "4": 0, "5": 0, "6": 0}, "3": {"1": 4, "2": 2, "3": 2, "4": 0, "5": 0, "6": 0}, "4": {"1": 4, "2": 2, "3": 0, "4": 0, "5": 0, "6": 0}, "5": {"1": 4, "2": 3, "3": 2, "4": 0, "5": 0, "6": 0}, "6": {"1": 4, "2": 3, "3": 1, "4": 0, "5": 0, "6": 0}, "7": {"1": 1, "2": 1, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}, "3": {"q13_dist": {"1": 10, "2": 10, "3": 8, "4": 0, "5": 0, "6": 0}, "q14_by_q13": {"1": {"1": 9, "2": 6, "3": 5, "4": 0, "5": 0, "6": 0}, "2": {"1": 10, "2": 10, "3": 6, "4": 0, "5": 0, "6": 0}, "3": {"1": 10, "2": 8, "3": 4, "4": 0, "5": 0, "6": 0}, "4": {"1": 9, "2": 7, "3": 3, "4": 0, "5": 0, "6": 0}, "5": {"1": 10, "2": 10, "3": 5, "4": 0, "5": 0, "6": 0}, "6": {"1": 9, "2": 7, "3": 3, "4": 0, "5": 0, "6": 0}, "7": {"1": 0, "2": 0, "3": 1, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}, "4": {"q13_dist": {"1": 10, "2": 5, "3": 4, "4": 0, "5": 0, "6": 1}, "q14_by_q13": {"1": {"1": 9, "2": 5, "3": 2, "4": 0, "5": 0, "6": 0}, "2": {"1": 10, "2": 4, "3": 3, "4": 0, "5": 0, "6": 0}, "3": {"1": 9, "2": 3, "3": 2, "4": 0, "5": 0, "6": 0}, "4": {"1": 9, "2": 4, "3": 3, "4": 0, "5": 0, "6": 0}, "5": {"1": 9, "2": 4, "3": 3, "4": 0, "5": 0, "6": 1}, "6": {"1": 9, "2": 4, "3": 2, "4": 0, "5": 0, "6": 0}, "7": {"1": 2, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}, "5": {"q13_dist": {"1": 8, "2": 7, "3": 2, "4": 0, "5": 0, "6": 0}, "q14_by_q13": {"1": {"1": 7, "2": 6, "3": 1, "4": 0, "5": 0, "6": 0}, "2": {"1": 8, "2": 6, "3": 2, "4": 0, "5": 0, "6": 0}, "3": {"1": 6, "2": 6, "3": 1, "4": 0, "5": 0, "6": 0}, "4": {"1": 6, "2": 5, "3": 2, "4": 0, "5": 0, "6": 0}, "5": {"1": 7, "2": 7, "3": 2, "4": 0, "5": 0, "6": 0}, "6": {"1": 6, "2": 2, "3": 1, "4": 0, "5": 0, "6": 0}, "7": {"1": 1, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}}}, "6": {"q13_dist": {"1": 1, "2": 0, "3": 0, "4": 0, "5": 0, "6": 1}, "q14_by_q13": {"1": {"1": 1, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "2": {"1": 1, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "3": {"1": 1, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "4": {"1": 1, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "5": {"1": 1, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "6": {"1": 1, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "7": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}, "8": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 1}}}}};
+				const q13Labels = {"1": "Always matters", "2": "Usually matters", "3": "Sometimes matters", "4": "Rarely matters", "5": "Never matters", "6": "Prefer not to answer"};
+				const q14Labels = {"1": "Conference<br>presentations", "2": "Publications", "3": "Project<br>documentation", "4": "Websites or other critical<br>digital humanities projects", "5": "Creative works<br>(e.g., videos, digital art)", "6": "Grant<br>applications", "7": "Other", "8": "Prefer not<br>to answer"};
+				const q13Colors = {"1": "#3D6090", "2": "#7EC9EE", "3": "#4FB4A3", "4": "#2A904D", "5": "#AFA11C", "6": "#757575"};
+				const questionMetadata = {"Q2": {"title": "Years of Experience", "labels": {"1": "Less than 1 year", "2": "1-3 years", "3": "4-6 years", "4": "7-10 years", "5": "More than 10 years", "6": "Prefer not to answer"}, "is_multi_choice": false}, "Q4": {"title": "Seniority", "labels": {"1": "Undergraduate Student", "2": "Master Student", "3": "PhD Student", "4": "Postdoctoral Researcher", "5": "Research Scientist", "6": "Assistant Professor", "7": "Associate Professor", "8": "Professor", "9": "Other (please specify)", "10": "Prefer not to answer"}, "is_multi_choice": false}, "Q5": {"title": "Discipline", "labels": {"1": "Anthropology", "2": "Art History and Theory", "3": "Classical Studies", "4": "Computational Linguistics", "5": "Computer Science", "6": "Geography and GIS", "7": "History", "8": "Information Science", "9": "Linguistics", "10": "Literary and Cultural Studies", "11": "Mathematics", "12": "Musicology", "13": "Philosophy", "14": "Political Science", "15": "Religious Studies", "16": "Sociology", "17": "Statistics", "18": "Other (please specify)", "19": "Prefer not to answer"}, "is_multi_choice": true}, "Q24": {"title": "GenAI Literacy", "labels": {"1": "Expert", "2": "Advanced", "3": "Proficient", "4": "Competent", "5": "Novice", "6": "Prefer not to answer"}, "is_multi_choice": false}};
+
+				window.updateQ13FilterOptions = function() {
+					const selectedQuestion = document.getElementById('q13-question-filter').value;
+					const valueFilter = document.getElementById('q13-value-filter');
+					const labels = questionMetadata[selectedQuestion].labels;
+
+					valueFilter.innerHTML = '<option value="all">All Respondents</option>';
+
+					for (const [key, value] of Object.entries(labels)) {
+						const option = document.createElement('option');
+						option.value = key;
+						option.textContent = value;
+						valueFilter.appendChild(option);
+					}
+
+					updateQ13Charts();
+				};
+
+				window.updateQ13Charts = function() {
+					const selectedQuestion = document.getElementById('q13-question-filter').value;
+					const selectedValue = document.getElementById('q13-value-filter').value;
+					const data = allData[selectedQuestion][selectedValue];
+
+					// Q13 pie chart — filter out zero-value slices
+					const q13Dist = data.q13_dist;
+					var filteredKeys = Object.keys(q13Dist).filter(function(k) { return q13Dist[k] > 0; });
+					const pieLabels = filteredKeys.map(function(k) { return q13Labels[k]; });
+					const pieValues = filteredKeys.map(function(k) { return q13Dist[k]; });
+					const pieColors = filteredKeys.map(function(k) { return q13Colors[k]; });
+					const totalResponses = pieValues.reduce(function(a, b) { return a + b; }, 0);
+
+					// Handle empty data: show outline circle with "Option not selected"
+					if (totalResponses === 0) {
+						var chartEl = document.getElementById('q13-chart');
+						Plotly.purge(chartEl);
+						// Remove any outside labels/lines from previous render
+						document.querySelectorAll('.q13-outside-label').forEach(function(el) { el.remove(); });
+						document.querySelectorAll('.q13-outside-line').forEach(function(el) { el.remove(); });
+						var cw = chartEl.offsetWidth || 1000;
+						var ch = chartEl.offsetHeight || 540;
+						var cx = cw * 0.61;
+						var cy = ch / 2;
+						var radius = Math.min(cw * 0.35, ch * 0.42);
+						chartEl.innerHTML = '<svg width="' + cw + '" height="' + ch + '">' +
+							'<circle cx="' + cx + '" cy="' + cy + '" r="' + radius + '" fill="none" stroke="black" stroke-width="2"/>' +
+							'<rect x="' + (cx - 95) + '" y="' + (cy - 15) + '" width="190" height="30" rx="3" fill="white" stroke="black" stroke-width="1"/>' +
+							'<text x="' + cx + '" y="' + cy + '" text-anchor="middle" dominant-baseline="central" ' +
+							'font-family="Source Sans Pro, sans-serif" font-size="16" fill="#1a1a1a">Option not selected</text>' +
+							'</svg>';
+						return;
+					}
+
+					var hasHover = window.matchMedia('(any-hover: hover)').matches;
+
+					// Hide inside labels for small slices — will add external annotations after render
+					var smallSliceThreshold = 0.15;
+					var textPositions = pieValues.map(function(v) {
+						return (v / totalResponses) < smallSliceThreshold ? 'none' : 'inside';
+					});
+
+					const pieTrace = {
+						type: 'pie',
+						labels: pieLabels,
+						values: pieValues,
+						domain: { x: [0.22, 1] },
+						marker: {
+							colors: pieColors,
+							line: { color: 'white', width: 2 }
+						},
+						textinfo: 'label+percent',
+						textposition: textPositions,
+						insidetextfont: {
+							family: 'Source Sans Pro, sans-serif',
+							size: 16,
+							color: '#1a1a1a'
+						},
+						insidetextorientation: 'horizontal',
+						hoverinfo: 'none'
+					};
+
+					const pieLayout = {
+						showlegend: false,
+						margin: { t: 40, b: 40, l: 40, r: 40 },
+						plot_bgcolor: 'rgba(0,0,0,0)',
+						paper_bgcolor: 'rgba(0,0,0,0)',
+						font: { family: 'Source Sans Pro, sans-serif', size: 16 },
+						hovermode: 'closest'
+					};
+
+					const config = {
+						responsive: true,
+						displayModeBar: false
+					};
+
+					if (!hasHover) {
+						pieLayout.hovermode = false;
+					}
+
+					// Build custom HTML legend (always shows all categories)
+					var legendEl = document.getElementById('q13-legend');
+					legendEl.innerHTML = '';
+					var allKeys = Object.keys(q13Dist);
+					for (var i = 0; i < allKeys.length; i++) {
+						var li = document.createElement('li');
+						li.innerHTML = '<span class="q13-legend-color" style="background-color: ' + q13Colors[allKeys[i]] + '"></span>' + q13Labels[allKeys[i]];
+						legendEl.appendChild(li);
+					}
+
+					// Helper: add white background boxes behind inside pie slice labels
+					function addQ13LabelBoxes() {
+						var chartEl = document.getElementById('q13-chart');
+						var oldRects = chartEl.querySelectorAll('.q13-label-bg');
+						oldRects.forEach(function(r) { r.remove(); });
+						var svgEl = chartEl.querySelector('.main-svg');
+						if (!svgEl) return;
+						var allTextEls = svgEl.querySelectorAll('.pielayer text');
+						allTextEls.forEach(function(textEl) {
+							var content = textEl.textContent.trim();
+							if (!content) return;
+							var bbox = textEl.getBBox();
+							if (bbox.width === 0 || bbox.height === 0) return;
+							var parentG = textEl.parentNode;
+							var rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+							rect.setAttribute('class', 'q13-label-bg');
+							rect.setAttribute('x', bbox.x - 6);
+							rect.setAttribute('y', bbox.y - 4);
+							rect.setAttribute('width', bbox.width + 12);
+							rect.setAttribute('height', bbox.height + 8);
+							rect.setAttribute('rx', 3);
+							rect.setAttribute('fill', 'white');
+							rect.setAttribute('stroke', 'black');
+							rect.setAttribute('stroke-width', '1');
+							var textTransform = textEl.getAttribute('transform');
+							if (textTransform) {
+								rect.setAttribute('transform', textTransform);
+							}
+							parentG.insertBefore(rect, textEl);
+						});
+					}
+
+					// Helper: create HTML labels for small slices positioned outside the pie
+					function addQ13SmallSliceLabels() {
+						// Remove old labels
+						var oldLabels = document.querySelectorAll('.q13-outside-label');
+						oldLabels.forEach(function(el) { el.remove(); });
+						var oldLines = document.querySelectorAll('.q13-outside-line');
+						oldLines.forEach(function(el) { el.remove(); });
+
+						var chartEl = document.getElementById('q13-chart');
+						var svgEl = chartEl.querySelector('.main-svg');
+						if (!svgEl) return;
+						var chartRect = chartEl.getBoundingClientRect();
+
+						// Get slice paths
+						var slicePaths = svgEl.querySelectorAll('.pielayer path[data-index]');
+						if (slicePaths.length === 0) {
+							// Fallback: get all paths in the slice group
+							var traceGroup = svgEl.querySelector('.pielayer .trace');
+							if (traceGroup) {
+								slicePaths = traceGroup.querySelectorAll('.surface path');
+								if (slicePaths.length === 0) {
+									slicePaths = traceGroup.querySelectorAll('path');
+								}
+							}
+						}
+						if (!slicePaths || slicePaths.length === 0) return;
+
+						// Find pie center by averaging all slice path bounding boxes
+						var allCx = 0, allCy = 0, pathCount = 0;
+						slicePaths.forEach(function(p) {
+							var r = p.getBoundingClientRect();
+							if (r.width > 0) {
+								allCx += r.left + r.width / 2;
+								allCy += r.top + r.height / 2;
+								pathCount++;
+							}
+						});
+						if (pathCount === 0) return;
+						var pieCenterScreenX = allCx / pathCount;
+						var pieCenterScreenY = allCy / pathCount;
+
+						// Plotly sorts by value descending by default
+						var sortedIndices = pieValues.map(function(v, i) { return i; });
+						sortedIndices.sort(function(a, b) { return pieValues[b] - pieValues[a]; });
+
+						slicePaths.forEach(function(path, pathIdx) {
+							if (pathIdx >= sortedIndices.length) return;
+							var dataIdx = sortedIndices[pathIdx];
+							var sliceFraction = pieValues[dataIdx] / totalResponses;
+							if (sliceFraction >= smallSliceThreshold || sliceFraction === 0) return;
+
+							// Get this slice's screen position
+							var pathRect = path.getBoundingClientRect();
+							var sliceCx = pathRect.left + pathRect.width / 2;
+							var sliceCy = pathRect.top + pathRect.height / 2;
+
+							// Direction from pie center to slice center
+							var dx = sliceCx - pieCenterScreenX;
+							var dy = sliceCy - pieCenterScreenY;
+							var dist = Math.sqrt(dx * dx + dy * dy);
+							if (dist === 0) return;
+
+							// Position label further out in the same direction
+							var labelDist = 140;
+							var labelScreenX = sliceCx + (dx / dist) * labelDist;
+							var labelScreenY = sliceCy + (dy / dist) * labelDist;
+
+							// Convert to position relative to chart container
+							var labelX = labelScreenX - chartRect.left;
+							var labelY = labelScreenY - chartRect.top;
+							var sliceRelX = sliceCx - chartRect.left;
+							var sliceRelY = sliceCy - chartRect.top;
+
+							var pct = (sliceFraction * 100).toFixed(1);
+
+							// Create SVG line from slice to label
+							var lineEl = document.createElement('div');
+							lineEl.className = 'q13-outside-line';
+							lineEl.style.cssText = 'position:absolute;pointer-events:none;z-index:5;';
+							var lineSvg = '<svg style="position:absolute;top:0;left:0;width:100%;height:100%;overflow:visible;pointer-events:none;">' +
+								'<line x1="' + sliceRelX + '" y1="' + sliceRelY + '" x2="' + labelX + '" y2="' + labelY + '" stroke="black" stroke-width="1.5"/>' +
+								'<circle cx="' + sliceRelX + '" cy="' + sliceRelY + '" r="3" fill="black"/>' +
+								'</svg>';
+							lineEl.innerHTML = lineSvg;
+							chartEl.parentNode.style.position = 'relative';
+							chartEl.parentNode.appendChild(lineEl);
+
+							// Create label div
+							var label = document.createElement('div');
+							label.className = 'q13-outside-label';
+							label.innerHTML = pieLabels[dataIdx] + '<br>' + pct + '%';
+							label.style.cssText = 'position:absolute;z-index:6;background:white;color:#1a1a1a;' +
+								'border:1px solid black;border-radius:3px;padding:4px 8px;font-family:Source Sans Pro,sans-serif;' +
+								'font-size:16px;line-height:1.3;white-space:nowrap;pointer-events:none;' +
+								'left:' + labelX + 'px;top:' + labelY + 'px;transform:translate(-50%,-50%);';
+							chartEl.parentNode.appendChild(label);
+						});
+					}
+
+					Plotly.newPlot('q13-chart', [pieTrace], pieLayout, config).then(function() {
+						requestAnimationFrame(function() {
+							requestAnimationFrame(function() {
+								addQ13LabelBoxes();
+								addQ13SmallSliceLabels();
+							});
+						});
+					});
+
+					var q13ChartDiv = document.getElementById('q13-chart');
+
+					// Create custom HTML tooltip for Q13 (Plotly pie hover is unreliable)
+					var q13Tooltip = document.getElementById('q13-hover-tooltip');
+					if (!q13Tooltip) {
+						q13Tooltip = document.createElement('div');
+						q13Tooltip.id = 'q13-hover-tooltip';
+						q13Tooltip.className = 'q13-hover-tooltip';
+						document.body.appendChild(q13Tooltip);
+					}
+
+					// Track mouse position for tooltip placement
+					var q13MouseX = 0, q13MouseY = 0;
+					q13ChartDiv.addEventListener('mousemove', function(e) {
+						q13MouseX = e.clientX;
+						q13MouseY = e.clientY;
+						if (q13Tooltip.style.display === 'block') {
+							q13Tooltip.style.left = (q13MouseX + 15) + 'px';
+							q13Tooltip.style.top = (q13MouseY - 10) + 'px';
+						}
+					});
+
+					if (hasHover) {
+						q13ChartDiv.on('plotly_hover', function(eventData) {
+							var point = eventData.points[0];
+							var colors = pieColors.slice();
+							for (var i = 0; i < colors.length; i++) {
+								if (i !== point.pointNumber) {
+									colors[i] = colors[i].replace('ff', '88');
+								}
+							}
+							Plotly.restyle('q13-chart', { 'marker.colors': [colors] }, [0]).then(function() {
+								requestAnimationFrame(addQ13LabelBoxes);
+							});
+							// Show custom tooltip at mouse position
+							var pct = totalResponses > 0 ? (pieValues[point.pointNumber] / totalResponses * 100).toFixed(1) : 0;
+							q13Tooltip.innerHTML = '<strong>' + pieLabels[point.pointNumber] + '</strong><br>Count: ' + pieValues[point.pointNumber] + '<br>Percent: ' + pct + '%';
+							q13Tooltip.style.display = 'block';
+							q13Tooltip.style.left = (q13MouseX + 15) + 'px';
+							q13Tooltip.style.top = (q13MouseY - 10) + 'px';
+						});
+						q13ChartDiv.on('plotly_unhover', function() {
+							Plotly.restyle('q13-chart', { 'marker.colors': [pieColors] }, [0]).then(function() {
+								requestAnimationFrame(addQ13LabelBoxes);
+							});
+							q13Tooltip.style.display = 'none';
+						});
+					} else {
+						var q13InfoPanel = document.createElement('div');
+						q13InfoPanel.className = 'q13-touch-info';
+						q13ChartDiv.parentNode.insertBefore(q13InfoPanel, q13ChartDiv.nextSibling);
+						var q13ActiveSlice = -1;
+
+						q13ChartDiv.on('plotly_click', function(eventData) {
+							var point = eventData.points[0];
+							var idx = point.pointNumber;
+
+							if (q13ActiveSlice === idx) {
+								q13ActiveSlice = -1;
+								q13InfoPanel.style.display = 'none';
+								Plotly.restyle('q13-chart', { 'marker.colors': [pieColors] }, [0]).then(function() {
+									requestAnimationFrame(addQ13LabelBoxes);
+								});
+							} else {
+								q13ActiveSlice = idx;
+								var colors = pieColors.slice();
+								for (var i = 0; i < colors.length; i++) {
+									if (i !== idx) {
+										colors[i] = colors[i].replace('ff', '88');
+									}
+								}
+								Plotly.restyle('q13-chart', { 'marker.colors': [colors] }, [0]).then(function() {
+									requestAnimationFrame(addQ13LabelBoxes);
+								});
+								var pct = totalResponses > 0 ? (pieValues[idx] / totalResponses * 100).toFixed(1) : 0;
+								q13InfoPanel.innerHTML = '<strong>' + pieLabels[idx] + '</strong><br>Count: ' + pieValues[idx] + '<br>Percent: ' + pct + '%';
+								q13InfoPanel.style.display = 'block';
+							}
+						});
+					}
+
+					scaleQ13Chart();
+				};
+
+				function scaleQ13Chart() {
+					var container = document.querySelector('.q13-chart-container');
+					var scaler = document.querySelector('.q13-chart-scaler');
+					if (container.clientWidth < 1000) {
+						var scale = container.clientWidth / 1000;
+						scaler.style.transform = 'scale(' + scale + ')';
+						container.style.height = (scaler.offsetHeight * scale) + 'px';
+					} else {
+						scaler.style.transform = '';
+						container.style.height = '';
+					}
+				}
+				window.addEventListener('resize', scaleQ13Chart);
+
+				if (document.readyState === 'loading') {
+					document.addEventListener('DOMContentLoaded', updateQ13FilterOptions);
+				} else {
+					updateQ13FilterOptions();
 				}
 			})();
 		</script>
