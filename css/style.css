@@ -1301,6 +1301,52 @@ h1#introduction {
     text-align: center;
 }
 
+.q14-chart-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 2rem auto;
+    text-align: center;
+    overflow: hidden;
+}
+
+@media (min-width: 1000px) {
+    .q14-chart-container {
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+.q14-chart-scaler {
+    width: 1000px;
+    overflow: visible;
+    position: relative;
+    transform-origin: top left;
+}
+
+#q14-chart {
+    width: 1000px;
+    height: 600px;
+    margin: 0 auto;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.q14-touch-info {
+    display: none;
+    margin: 0.75rem auto;
+    padding: 0.75rem 1rem;
+    max-width: 600px;
+    background: rgba(90, 147, 172, 0.12);
+    border: 1px solid rgba(90, 147, 172, 0.3);
+    border-radius: 8px;
+    font-size: 1rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
 /* ============================================================
    SANKEY DIAGRAM (graphs-analysis)
    ============================================================ */

@@ -18,13 +18,13 @@
 		<meta name="twitter:title" content="Graphs/Analysis - Disclosing Generative AI Use in Digital Humanities Research"/>
 		<meta name="twitter:description" content="Graphs and analysis based on a generative AI use in digital humanities research disclosure and transparency survey."/>
 		<!-- Preload critical resources -->
-		<link rel="preload" href="../css/style.css?vers=040" as="style"/>
+		<link rel="preload" href="../css/style.css?vers=041" as="style"/>
 		<link rel="preconnect" href="https://fonts.googleapis.com"/>
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
 		<link rel="preconnect" href="https://cdnjs.cloudflare.com"/>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=Source+Sans+Pro:wght@400;600;700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,;:!?()'&quot;-"/>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		<link rel="stylesheet" type="text/css" href="../css/style.css?vers=040"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css?vers=041"/>
 		<script src="https://cdn.plot.ly/plotly-2.27.0.min.js" charset="utf-8"></script>
 	</head>
 
@@ -243,6 +243,30 @@
 							<tr><td>Rarely matters</td><td>0</td><td>0.0%</td></tr>
 							<tr><td>Never matters</td><td>0</td><td>0.0%</td></tr>
 							<tr><td>Prefer not to answer</td><td>2</td><td>2.5%</td></tr>
+						</tbody>
+					</table>
+
+					<div class="q14-chart-container">
+						<div class="q14-chart-scaler">
+							<div id="q14-chart" role="img" aria-label="Horizontal stacked bar chart showing which scholarly products respondents believe require generative AI disclosure, broken down by whether the type of product matters. 8 product types are shown: Conference presentations, Publications, Project documentation, Websites or other critical digital humanities projects, Creative works, Grant applications, Other, and Prefer not to answer."></div>
+						</div>
+					</div>
+
+					<table class="sr-only" aria-label="Q14 response data: Which scholarly products require GenAI disclosure, cross-tabulated by Q13 responses. All respondents.">
+						<caption>Which scholarly products require GenAI disclosure, broken down by Q13 response (all respondents)</caption>
+						<thead>
+							<tr>
+								<th scope="col">Scholarly Product</th>
+								<th scope="col">Always matters</th>
+								<th scope="col">Usually matters</th>
+								<th scope="col">Sometimes matters</th>
+								<th scope="col">Rarely matters</th>
+								<th scope="col">Never matters</th>
+								<th scope="col">Prefer not to answer</th>
+								<th scope="col">Total</th>
+							</tr>
+						</thead>
+						<tbody id="q14-sr-tbody">
 						</tbody>
 					</table>
 
@@ -866,6 +890,17 @@
 							'<text x="' + cx + '" y="' + cy + '" text-anchor="middle" dominant-baseline="central" ' +
 							'font-family="Source Sans Pro, sans-serif" font-size="16" fill="#1a1a1a">Option not selected</text>' +
 							'</svg>';
+						// Also clear Q14 chart
+						var q14El = document.getElementById('q14-chart');
+						Plotly.purge(q14El);
+						var cw14 = q14El.offsetWidth || 1000;
+						var ch14 = q14El.offsetHeight || 600;
+						q14El.innerHTML = '<svg width="' + cw14 + '" height="' + ch14 + '">' +
+							'<rect x="' + (cw14/2 - 95) + '" y="' + (ch14/2 - 15) + '" width="190" height="30" rx="3" fill="white" stroke="black" stroke-width="1"/>' +
+							'<text x="' + (cw14/2) + '" y="' + (ch14/2) + '" text-anchor="middle" dominant-baseline="central" ' +
+							'font-family="Source Sans Pro, sans-serif" font-size="16" fill="#1a1a1a">Option not selected</text>' +
+							'</svg>';
+						scaleQ14Chart();
 						return;
 					}
 
@@ -1148,6 +1183,155 @@
 						});
 					}
 
+					// ── Q14 stacked bar chart ──
+					var q14ByQ13 = data.q14_by_q13;
+					var desiredOrder = ['1','2','3','4','5','6','7','8'];
+					var yLabels = desiredOrder.map(function(k) { return q14Labels[k]; }).reverse();
+					var q13Keys = Object.keys(q13Labels);
+
+					// Calculate totals for each Q14 option (reversed to match yLabels)
+					var q14Totals = desiredOrder.map(function(q14Opt) {
+						var total = 0;
+						for (var i = 0; i < q13Keys.length; i++) {
+							total += (q14ByQ13[q14Opt][q13Keys[i]] || 0);
+						}
+						return total;
+					}).reverse();
+
+					// Create one trace per Q13 category (6 traces)
+					var barTraces = [];
+					for (var t = 0; t < q13Keys.length; t++) {
+						var q13Opt = q13Keys[t];
+						var xValues = desiredOrder.map(function(q14Opt) {
+							return q14ByQ13[q14Opt][q13Opt] || 0;
+						}).reverse();
+
+						barTraces.push({
+							type: 'bar',
+							name: q13Labels[q13Opt],
+							x: xValues,
+							y: yLabels,
+							orientation: 'h',
+							width: 0.5,
+							marker: { color: q13Colors[q13Opt] },
+							hovertemplate: '<b>%{y}</b><br>' +
+								q13Labels[q13Opt] + ': %{x}<extra></extra>'
+						});
+					}
+
+					// Annotations: total count at end of each bar
+					var q14Annotations = yLabels.map(function(label, idx) {
+						return {
+							x: q14Totals[idx],
+							y: label,
+							text: q14Totals[idx].toString(),
+							xanchor: 'left',
+							xshift: 5,
+							showarrow: false,
+							font: { size: 16, color: 'black', family: 'Source Sans Pro, sans-serif' }
+						};
+					});
+
+					var q14MaxTotal = Math.max.apply(null, q14Totals);
+
+					var q14Layout = {
+						barmode: 'stack',
+						xaxis: {
+							title: { text: 'Number of Respondents', font: { color: 'black', family: 'Source Sans Pro, sans-serif', size: 15 } },
+							rangemode: 'tozero',
+							range: [0, q14MaxTotal * 1.15],
+							tickfont: { size: 16, color: 'black', family: 'Source Sans Pro, sans-serif' },
+							showline: true,
+							linecolor: 'black',
+							linewidth: 1,
+							domain: [0.35, 0.92]
+						},
+						yaxis: {
+							automargin: true,
+							ticksuffix: '      ',
+							tickfont: { size: 16, color: 'black', family: 'Source Sans Pro, sans-serif' },
+							showline: false
+						},
+						shapes: [{
+							type: 'line',
+							xref: 'paper',
+							yref: 'paper',
+							x0: 0.35,
+							y0: 0,
+							x1: 0.35,
+							y1: 1,
+							line: { color: 'black', width: 1 }
+						}],
+						legend: {
+							orientation: 'h',
+							x: 0,
+							xanchor: 'left',
+							y: -0.18,
+							font: { size: 14, color: 'black', family: 'Source Sans Pro, sans-serif' },
+							traceorder: 'normal'
+						},
+						annotations: q14Annotations,
+						plot_bgcolor: 'rgba(0,0,0,0)',
+						paper_bgcolor: 'rgba(0,0,0,0)',
+						font: { family: 'Source Sans Pro, sans-serif', size: 16, color: 'black' },
+						margin: { t: 40, b: 120, l: 160, r: 60 },
+						hovermode: 'closest'
+					};
+
+					if (!hasHover) {
+						q14Layout.hovermode = false;
+					}
+
+					Plotly.newPlot('q14-chart', barTraces, q14Layout, config);
+
+					// Touch interaction for Q14
+					var q14ChartDiv = document.getElementById('q14-chart');
+
+					if (!hasHover) {
+						var q14InfoPanel = document.querySelector('.q14-touch-info');
+						if (!q14InfoPanel) {
+							q14InfoPanel = document.createElement('div');
+							q14InfoPanel.className = 'q14-touch-info';
+							q14ChartDiv.parentNode.insertBefore(q14InfoPanel, q14ChartDiv.nextSibling);
+						}
+						var q14ActiveBar = -1;
+
+						q14ChartDiv.on('plotly_click', function(eventData) {
+							var point = eventData.points[0];
+							var idx = point.pointNumber;
+							var traceIdx = point.curveNumber;
+
+							if (q14ActiveBar === idx) {
+								q14ActiveBar = -1;
+								q14InfoPanel.style.display = 'none';
+							} else {
+								q14ActiveBar = idx;
+								q14InfoPanel.innerHTML = '<strong>' + point.y + '</strong><br>' +
+									q13Labels[q13Keys[traceIdx]] + ': ' + point.x;
+								q14InfoPanel.style.display = 'block';
+							}
+						});
+					}
+
+					// Update Q14 sr-only table
+					var q14Tbody = document.getElementById('q14-sr-tbody');
+					if (q14Tbody) {
+						q14Tbody.innerHTML = '';
+						for (var d = 0; d < desiredOrder.length; d++) {
+							var q14Opt = desiredOrder[d];
+							var row = '<tr><td>' + q14Labels[q14Opt].replace(/<br>/g, ' ') + '</td>';
+							var rowTotal = 0;
+							for (var c = 0; c < q13Keys.length; c++) {
+								var cnt = q14ByQ13[q14Opt][q13Keys[c]] || 0;
+								row += '<td>' + cnt + '</td>';
+								rowTotal += cnt;
+							}
+							row += '<td>' + rowTotal + '</td></tr>';
+							q14Tbody.innerHTML += row;
+						}
+					}
+
+					scaleQ14Chart();
 					scaleQ13Chart();
 				};
 
@@ -1163,7 +1347,22 @@
 						container.style.height = '';
 					}
 				}
-				window.addEventListener('resize', scaleQ13Chart);
+
+				function scaleQ14Chart() {
+					var container = document.querySelector('.q14-chart-container');
+					var scaler = document.querySelector('.q14-chart-scaler');
+					if (!container || !scaler) return;
+					if (container.clientWidth < 1000) {
+						var scale = container.clientWidth / 1000;
+						scaler.style.transform = 'scale(' + scale + ')';
+						container.style.height = (scaler.offsetHeight * scale) + 'px';
+					} else {
+						scaler.style.transform = '';
+						container.style.height = '';
+					}
+				}
+
+				window.addEventListener('resize', function() { scaleQ13Chart(); scaleQ14Chart(); });
 
 				if (document.readyState === 'loading') {
 					document.addEventListener('DOMContentLoaded', updateQ13FilterOptions);
