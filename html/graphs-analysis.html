@@ -968,7 +968,9 @@
 						var chartEl = document.getElementById('q13-chart');
 						var svgEl = chartEl.querySelector('.main-svg');
 						if (!svgEl) return;
-						var chartRect = chartEl.getBoundingClientRect();
+						var scalerEl = chartEl.parentNode;
+						var scalerRect = scalerEl.getBoundingClientRect();
+						var scale = scalerRect.width / scalerEl.offsetWidth || 1;
 
 						// Get slice paths
 						var slicePaths = svgEl.querySelectorAll('.pielayer path[data-index]');
@@ -1019,16 +1021,16 @@
 							var dist = Math.sqrt(dx * dx + dy * dy);
 							if (dist === 0) return;
 
-							// Position label further out in the same direction
-							var labelDist = 140;
+							// Position label further out in the same direction (in viewport pixels)
+							var labelDist = 140 * scale;
 							var labelScreenX = sliceCx + (dx / dist) * labelDist;
 							var labelScreenY = sliceCy + (dy / dist) * labelDist;
 
-							// Convert to position relative to chart container
-							var labelX = labelScreenX - chartRect.left;
-							var labelY = labelScreenY - chartRect.top;
-							var sliceRelX = sliceCx - chartRect.left;
-							var sliceRelY = sliceCy - chartRect.top;
+							// Convert to position relative to scaler (accounting for CSS transform scale)
+							var labelX = (labelScreenX - scalerRect.left) / scale;
+							var labelY = (labelScreenY - scalerRect.top) / scale;
+							var sliceRelX = (sliceCx - scalerRect.left) / scale;
+							var sliceRelY = (sliceCy - scalerRect.top) / scale;
 
 							var pct = (sliceFraction * 100).toFixed(1);
 
