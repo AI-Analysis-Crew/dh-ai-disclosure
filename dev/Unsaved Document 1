@@ -1,0 +1,3 @@
+add padding at bottom (not done). move labels at left away from bar chart (not done); you'll also need to narrow the bar chart slightly to do this. legend at bottom still on two lines rather than one; not occupying full width available. also font sizes in chart could be increased to match chart 1 and q13
+
+legend at bottom needs to be centered; it is left justified now. you still did not add padding at bottom, between legend and edge of graph. you have narrowed the chart too much while the labels at left are still too close/adjacent to it. see screenshot
