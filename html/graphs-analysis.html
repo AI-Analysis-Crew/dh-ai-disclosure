@@ -1464,19 +1464,19 @@
 					entries.reverse();
 
 					const xValues = entries.map(entry => entry.value);
-					// Add non-breaking spaces right after the text to create padding from the y-axis
-					const yValues = entries.map(entry => entry.label + '\u00A0\u00A0\u00A0\u00A0');
+					// Adds 4 non-breaking spaces to the end of EVERY line (splitting at <br>) to match Q14's right-alignment hack
+					const yValues = entries.map(entry => entry.label.split('<br>').join('\u00A0\u00A0\u00A0\u00A0<br>') + '\u00A0\u00A0\u00A0\u00A0');
 
 					const trace = {
 						x: xValues,
 						y: yValues,
 						type: 'bar',
 						orientation: 'h',
-						width: 0.6,
+						width: 0.4, // Shrunk from 0.6 to 0.4 to match Q6's spacing
 						marker: {
-							color: '#4FB4A3', // Pulled from the Q8 palette
+							color: '#2A904D', // True green from Q8 (Funding bodies)
 							line: {
-								color: '#36897B', // Darker shade for the line border
+								color: '#1B6334', // Darker green for the stroke
 								width: 1.5
 							}
 						},
@@ -1513,14 +1513,12 @@
 						}],
 						plot_bgcolor: 'rgba(0,0,0,0)',
 						paper_bgcolor: 'rgba(0,0,0,0)',
-						// Reduced left margin down to 210, widening the plotting area horizontally
-						margin: { t: 40, b: 80, l: 210, r: 60 },
-						bargap: 0.3, // Added bar gap to shrink bar thickness and space them out
+						margin: { t: 40, b: 100, l: 220, r: 60 }, // Bottom margin increased to 100 to match Q6
 						hovermode: 'closest',
 						hoverlabel: {
 							bgcolor: 'white',
 							font: { family: 'Source Sans Pro, sans-serif', size: 16, color: 'black' },
-							bordercolor: '#36897B'
+							bordercolor: '#1B6334' // Matches the darker green line
 						},
 						font: { family: 'Source Sans Pro, sans-serif', size: 16, color: 'black' }
 					};
@@ -1538,8 +1536,8 @@
 					Plotly.newPlot('q15-chart', [trace], layout, config);
 
 					var q15ChartDiv = document.getElementById('q15-chart');
-					var defaultColor = '#4FB4A3';
-					var hoverColor = '#36897B';
+					var defaultColor = '#2A904D';
+					var hoverColor = '#1B6334';
 
 					if (hasHover) {
 						q15ChartDiv.on('plotly_hover', function(eventData) {
@@ -1571,6 +1569,7 @@
 							} else {
 								q15ActiveBar = idx;
 								colors[idx] = hoverColor;
+								// Strips out the <br> and the non-breaking spaces for a clean tooltip
 								q15InfoPanel.innerHTML = '<strong>' + yValues[idx].replace(/<br>/g, ' ').replace(/\u00A0/g, '') + '</strong><br>Count: ' + xValues[idx] + ' respondents';
 								q15InfoPanel.style.display = 'block';
 							}
