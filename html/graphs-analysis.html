@@ -18,13 +18,13 @@
 		<meta name="twitter:title" content="Graphs/Analysis - Disclosing Generative AI Use in Digital Humanities Research"/>
 		<meta name="twitter:description" content="Graphs and analysis based on a generative AI use in digital humanities research disclosure and transparency survey."/>
 		<!-- Preload critical resources -->
-		<link rel="preload" href="../style.css?vers=043" as="style"/>
+		<link rel="preload" href="../css/style.css?vers=043" as="style"/>
 		<link rel="preconnect" href="https://fonts.googleapis.com"/>
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
 		<link rel="preconnect" href="https://cdnjs.cloudflare.com"/>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=Source+Sans+Pro:wght@400;600;700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,;:!?()'&quot;-"/>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		<link rel="stylesheet" type="text/css" href="../style.css?vers=043"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css?vers=043"/>
 		<script src="https://cdn.plot.ly/plotly-2.27.0.min.js" charset="utf-8"></script>
 	</head>
 
@@ -294,7 +294,56 @@
 			<section aria-labelledby="activities">
 				<h3 id="activities">Which AI-Assisted Activities Do Scholars Believe Should Be Disclosed?</h3>
 
-					<p class="center">Coming soon!</p>
+					<div class="q15-filter-container">
+						<div class="q15-filter-row">
+							<label for="q15-question-filter">Select Question:</label>
+							<select id="q15-question-filter" onchange="updateQ15FilterOptions()">
+								<option value="Q2">Q2: Years of Experience</option>
+								<option value="Q4">Q4: Seniority</option>
+								<option value="Q5">Q5: Discipline</option>
+								<option value="Q24">Q24: GenAI Literacy</option>
+							</select>
+						</div>
+						<div class="q15-filter-row">
+							<label for="q15-value-filter">Filter by:</label>
+							<select id="q15-value-filter" onchange="updateQ15Chart()">
+								<option value="all">All Respondents</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="q15-chart-container">
+						<div class="q15-chart-scaler">
+							<div id="q15-chart" role="img" aria-label="Horizontal bar chart showing which generative AI-assisted research activities respondents believe are most important to disclose."></div>
+						</div>
+					</div>
+
+					<table class="sr-only" aria-label="Q15 response data: Which AI-assisted activities should be disclosed? All respondents.">
+						<caption>Survey responses on activities to disclose (all respondents)</caption>
+						<thead>
+							<tr>
+								<th scope="col">Activity</th>
+								<th scope="col">Count</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr><td>Writing and rewriting</td><td>62</td></tr>
+							<tr><td>Data collection, transcription, translation, and analysis</td><td>44</td></tr>
+							<tr><td>Peer review</td><td>35</td></tr>
+							<tr><td>Create graphics, pictures, videos or audios</td><td>32</td></tr>
+							<tr><td>Summarizing, explaining, and simplifying content</td><td>25</td></tr>
+							<tr><td>Literature search and review</td><td>24</td></tr>
+							<tr><td>Brainstorming, including creating hypotheses or arguments</td><td>21</td></tr>
+							<tr><td>Data organization, representation, and visualization</td><td>21</td></tr>
+							<tr><td>Critiquing and offering alternate perspectives</td><td>11</td></tr>
+							<tr><td>Coding and Programming</td><td>9</td></tr>
+							<tr><td>Other (please specify)</td><td>6</td></tr>
+							<tr><td>Project design and planning</td><td>5</td></tr>
+							<tr><td>Dissemination (e.g., website building, conference presentation, social media marketing)</td><td>4</td></tr>
+							<tr><td>Prefer not to answer</td><td>1</td></tr>
+							<tr><td>Topic or skill coaching</td><td>0</td></tr>
+						</tbody>
+					</table>
 
 				<section aria-labelledby="read-4">
 					<h4 id="read-4">How to Read This Graph</h4>
@@ -1371,6 +1420,185 @@
 					document.addEventListener('DOMContentLoaded', updateQ13FilterOptions);
 				} else {
 					updateQ13FilterOptions();
+				}
+			})();
+		</script>
+
+		<script>
+			// Q15 Distribution Chart (Activities)
+			(function() {
+				const allData = {"Q2": {"all": {"1": 21, "2": 5, "3": 24, "4": 25, "5": 0, "6": 44, "7": 21, "8": 9, "9": 62, "10": 32, "11": 11, "12": 4, "13": 35, "14": 6, "15": 1}, "1": {"1": 1, "2": 0, "3": 1, "4": 0, "5": 0, "6": 2, "7": 2, "8": 1, "9": 4, "10": 2, "11": 0, "12": 0, "13": 1, "14": 0, "15": 0}, "2": {"1": 8, "2": 1, "3": 5, "4": 9, "5": 0, "6": 11, "7": 3, "8": 3, "9": 16, "10": 6, "11": 4, "12": 1, "13": 8, "14": 0, "15": 0}, "3": {"1": 1, "2": 1, "3": 2, "4": 3, "5": 0, "6": 7, "7": 4, "8": 3, "9": 7, "10": 8, "11": 1, "12": 1, "13": 7, "14": 2, "15": 0}, "4": {"1": 4, "2": 2, "3": 5, "4": 5, "5": 0, "6": 11, "7": 4, "8": 1, "9": 14, "10": 5, "11": 1, "12": 1, "13": 7, "14": 1, "15": 1}, "5": {"1": 7, "2": 1, "3": 10, "4": 8, "5": 0, "6": 12, "7": 8, "8": 1, "9": 21, "10": 10, "11": 5, "12": 1, "13": 12, "14": 3, "15": 0}, "6": {"1": 0, "2": 0, "3": 1, "4": 0, "5": 0, "6": 1, "7": 0, "8": 0, "9": 0, "10": 1, "11": 0, "12": 0, "13": 0, "14": 0, "15": 0}}, "Q4": {"all": {"1": 21, "2": 5, "3": 24, "4": 25, "5": 0, "6": 44, "7": 21, "8": 9, "9": 62, "10": 32, "11": 11, "12": 4, "13": 35, "14": 6, "15": 1}, "1": {"1": 2, "2": 0, "3": 0, "4": 3, "5": 0, "6": 1, "7": 0, "8": 1, "9": 1, "10": 0, "11": 1, "12": 0, "13": 0, "14": 0, "15": 0}, "2": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 3, "7": 1, "8": 1, "9": 3, "10": 2, "11": 0, "12": 0, "13": 1, "14": 0, "15": 0}, "3": {"1": 5, "2": 1, "3": 7, "4": 5, "5": 0, "6": 10, "7": 3, "8": 3, "9": 14, "10": 3, "11": 3, "12": 1, "13": 6, "14": 0, "15": 0}, "4": {"1": 4, "2": 0, "3": 0, "4": 2, "5": 0, "6": 1, "7": 1, "8": 1, "9": 5, "10": 3, "11": 1, "12": 0, "13": 3, "14": 0, "15": 1}, "5": {"1": 1, "2": 0, "3": 4, "4": 1, "5": 0, "6": 4, "7": 2, "8": 1, "9": 2, "10": 2, "11": 1, "12": 0, "13": 3, "14": 0, "15": 0}, "6": {"1": 0, "2": 1, "3": 2, "4": 1, "5": 0, "6": 3, "7": 2, "8": 0, "9": 3, "10": 5, "11": 0, "12": 0, "13": 4, "14": 2, "15": 0}, "7": {"1": 3, "2": 0, "3": 2, "4": 1, "5": 0, "6": 3, "7": 2, "8": 0, "9": 10, "10": 7, "11": 2, "12": 1, "13": 6, "14": 1, "15": 0}, "8": {"1": 3, "2": 1, "3": 2, "4": 3, "5": 0, "6": 4, "7": 5, "8": 2, "9": 7, "10": 5, "11": 1, "12": 1, "13": 5, "14": 1, "15": 0}, "9": {"1": 3, "2": 2, "3": 6, "4": 9, "5": 0, "6": 14, "7": 5, "8": 0, "9": 17, "10": 4, "11": 2, "12": 1, "13": 7, "14": 2, "15": 0}, "10": {"1": 0, "2": 0, "3": 1, "4": 0, "5": 0, "6": 1, "7": 0, "8": 0, "9": 0, "10": 1, "11": 0, "12": 0, "13": 0, "14": 0, "15": 0}}, "Q5": {"all": {"1": 21, "2": 5, "3": 24, "4": 25, "5": 0, "6": 44, "7": 21, "8": 9, "9": 62, "10": 32, "11": 11, "12": 4, "13": 35, "14": 6, "15": 1}, "1": {"1": 0, "2": 0, "3": 2, "4": 1, "5": 0, "6": 2, "7": 1, "8": 0, "9": 4, "10": 1, "11": 1, "12": 1, "13": 2, "14": 0, "15": 0}, "2": {"1": 0, "2": 0, "3": 1, "4": 1, "5": 0, "6": 2, "7": 1, "8": 0, "9": 1, "10": 2, "11": 1, "12": 0, "13": 2, "14": 0, "15": 0}, "3": {"1": 0, "2": 0, "3": 1, "4": 0, "5": 0, "6": 2, "7": 0, "8": 0, "9": 2, "10": 2, "11": 0, "12": 0, "13": 2, "14": 0, "15": 0}, "4": {"1": 2, "2": 0, "3": 2, "4": 1, "5": 0, "6": 3, "7": 2, "8": 1, "9": 3, "10": 0, "11": 1, "12": 0, "13": 2, "14": 0, "15": 0}, "5": {"1": 4, "2": 0, "3": 2, "4": 1, "5": 0, "6": 1, "7": 2, "8": 0, "9": 2, "10": 2, "11": 1, "12": 0, "13": 1, "14": 0, "15": 1}, "6": {"1": 0, "2": 0, "3": 2, "4": 2, "5": 0, "6": 1, "7": 2, "8": 1, "9": 3, "10": 3, "11": 1, "12": 0, "13": 2, "14": 0, "15": 0}, "7": {"1": 6, "2": 3, "3": 12, "4": 7, "5": 0, "6": 18, "7": 7, "8": 5, "9": 18, "10": 7, "11": 1, "12": 1, "13": 8, "14": 1, "15": 0}, "8": {"1": 8, "2": 1, "3": 7, "4": 4, "5": 0, "6": 12, "7": 8, "8": 3, "9": 13, "10": 11, "11": 3, "12": 1, "13": 9, "14": 1, "15": 0}, "9": {"1": 4, "2": 0, "3": 2, "4": 3, "5": 0, "6": 2, "7": 4, "8": 1, "9": 4, "10": 1, "11": 2, "12": 0, "13": 0, "14": 0, "15": 0}, "10": {"1": 8, "2": 2, "3": 8, "4": 15, "5": 0, "6": 21, "7": 12, "8": 4, "9": 35, "10": 18, "11": 7, "12": 3, "13": 19, "14": 3, "15": 0}, "11": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 1, "7": 1, "8": 0, "9": 0, "10": 0, "11": 0, "12": 0, "13": 0, "14": 0, "15": 0}, "12": {"1": 1, "2": 0, "3": 3, "4": 0, "5": 0, "6": 0, "7": 1, "8": 0, "9": 2, "10": 0, "11": 0, "12": 0, "13": 2, "14": 0, "15": 0}, "13": {"1": 1, "2": 0, "3": 1, "4": 0, "5": 0, "6": 3, "7": 1, "8": 1, "9": 2, "10": 0, "11": 0, "12": 0, "13": 1, "14": 0, "15": 0}, "14": {"1": 1, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0, "7": 0, "8": 0, "9": 1, "10": 1, "11": 0, "12": 0, "13": 0, "14": 0, "15": 0}, "15": {"1": 2, "2": 0, "3": 3, "4": 0, "5": 0, "6": 3, "7": 1, "8": 0, "9": 4, "10": 2, "11": 0, "12": 0, "13": 2, "14": 0, "15": 0}, "16": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 2, "7": 2, "8": 1, "9": 1, "10": 1, "11": 0, "12": 0, "13": 0, "14": 0, "15": 0}, "17": {"1": 2, "2": 0, "3": 2, "4": 0, "5": 0, "6": 1, "7": 2, "8": 1, "9": 2, "10": 1, "11": 0, "12": 0, "13": 0, "14": 0, "15": 0}, "18": {"1": 3, "2": 1, "3": 4, "4": 5, "5": 0, "6": 9, "7": 3, "8": 1, "9": 11, "10": 4, "11": 2, "12": 2, "13": 6, "14": 3, "15": 0}, "19": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0, "7": 0, "8": 0, "9": 0, "10": 0, "11": 0, "12": 0, "13": 0, "14": 0, "15": 0}}, "Q24": {"all": {"1": 21, "2": 5, "3": 24, "4": 25, "5": 0, "6": 44, "7": 21, "8": 9, "9": 62, "10": 32, "11": 11, "12": 4, "13": 35, "14": 6, "15": 1}, "1": {"1": 0, "2": 0, "3": 1, "4": 0, "5": 0, "6": 2, "7": 2, "8": 0, "9": 1, "10": 0, "11": 1, "12": 0, "13": 1, "14": 0, "15": 0}, "2": {"1": 2, "2": 0, "3": 3, "4": 1, "5": 0, "6": 8, "7": 3, "8": 1, "9": 11, "10": 7, "11": 0, "12": 0, "13": 8, "14": 1, "15": 0}, "3": {"1": 7, "2": 3, "3": 9, "4": 12, "5": 0, "6": 18, "7": 8, "8": 4, "9": 25, "10": 9, "11": 7, "12": 1, "13": 12, "14": 4, "15": 0}, "4": {"1": 8, "2": 2, "3": 5, "4": 6, "5": 0, "6": 11, "7": 4, "8": 2, "9": 14, "10": 6, "11": 3, "12": 1, "13": 8, "14": 1, "15": 0}, "5": {"1": 4, "2": 0, "3": 6, "4": 6, "5": 0, "6": 5, "7": 4, "8": 2, "9": 10, "10": 9, "11": 0, "12": 2, "13": 5, "14": 0, "15": 0}, "6": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0, "7": 0, "8": 0, "9": 1, "10": 1, "11": 0, "12": 0, "13": 1, "14": 0, "15": 1}}};
+				const q15Labels = {"1": "Brainstorming, including creating<br>hypotheses or arguments", "2": "Project design and planning", "3": "Literature search and review", "4": "Summarizing, explaining,<br>and simplifying content", "5": "Topic or skill coaching", "6": "Data collection, transcription,<br>translation, and analysis", "7": "Data organization, representation,<br>and visualization", "8": "Coding and Programming", "9": "Writing and rewriting", "10": "Create graphics, pictures,<br>videos or audios", "11": "Critiquing and offering<br>alternate perspectives", "12": "Dissemination (e.g., website building,<br>conference presentation, social media marketing)", "13": "Peer review", "14": "Other (please specify)", "15": "Prefer not to answer"};
+				const questionMetadata = {"Q2": {"title": "Years of Experience", "labels": {"1": "Less than 1 year", "2": "1-3 years", "3": "4-6 years", "4": "7-10 years", "5": "More than 10 years", "6": "Prefer not to answer"}, "is_multi_choice": false}, "Q4": {"title": "Seniority", "labels": {"1": "Undergraduate Student", "2": "Master Student", "3": "PhD Student", "4": "Postdoctoral Researcher", "5": "Research Scientist", "6": "Assistant Professor", "7": "Associate Professor", "8": "Professor", "9": "Other (please specify)", "10": "Prefer not to answer"}, "is_multi_choice": false}, "Q5": {"title": "Discipline", "labels": {"1": "Anthropology", "2": "Art History and Theory", "3": "Classical Studies", "4": "Computational Linguistics", "5": "Computer Science", "6": "Geography and GIS", "7": "History", "8": "Information Science", "9": "Linguistics", "10": "Literary and Cultural Studies", "11": "Mathematics", "12": "Musicology", "13": "Philosophy", "14": "Political Science", "15": "Religious Studies", "16": "Sociology", "17": "Statistics", "18": "Other (please specify)", "19": "Prefer not to answer"}, "is_multi_choice": true}, "Q24": {"title": "GenAI Literacy", "labels": {"1": "Expert", "2": "Advanced", "3": "Proficient", "4": "Competent", "5": "Novice", "6": "Prefer not to answer"}, "is_multi_choice": false}};
+
+				window.updateQ15FilterOptions = function() {
+					const selectedQuestion = document.getElementById('q15-question-filter').value;
+					const valueFilter = document.getElementById('q15-value-filter');
+					const labels = questionMetadata[selectedQuestion].labels;
+
+					valueFilter.innerHTML = '<option value="all">All Respondents</option>';
+
+					for (const [key, value] of Object.entries(labels)) {
+						const option = document.createElement('option');
+						option.value = key;
+						option.textContent = value;
+						valueFilter.appendChild(option);
+					}
+
+					updateQ15Chart();
+				};
+
+				window.updateQ15Chart = function() {
+					const selectedQuestion = document.getElementById('q15-question-filter').value;
+					const selectedValue = document.getElementById('q15-value-filter').value;
+					const distribution = allData[selectedQuestion][selectedValue];
+
+					// Convert to arrays and sort by value descending
+					let entries = Object.keys(distribution).map(key => ({
+						key: key,
+						label: q15Labels[key],
+						value: distribution[key]
+					}));
+					entries.sort((a, b) => b.value - a.value);
+
+					// Plotly reads bottom-to-top for horizontal bars, so reverse
+					entries.reverse();
+
+					const xValues = entries.map(entry => entry.value);
+					const yValues = entries.map(entry => entry.label);
+
+					const trace = {
+						x: xValues,
+						y: yValues,
+						type: 'bar',
+						orientation: 'h',
+						width: 0.6,
+						marker: {
+							color: '#EBE698',
+							line: {
+								color: '#D4D080',
+								width: 1.5
+							}
+						},
+						text: xValues.map(v => v.toString()),
+						textposition: 'outside',
+						hovertemplate: '<b>%{y}</b><br>' +
+										'Count: %{x} respondents<br>' +
+										'<extra></extra>'
+					};
+
+					const layout = {
+						xaxis: {
+							title: { text: 'Number of Respondents', font: { size: 16 } },
+							rangemode: 'tozero',
+							range: [0, Math.max(...xValues) * 1.15],
+							showline: true,
+							linecolor: 'black',
+							linewidth: 1
+						},
+						yaxis: {
+							title: '',
+							automargin: true,
+							ticksuffix: '   ',
+							showline: false
+						},
+						shapes: [{
+							type: 'line',
+							xref: 'paper',
+							yref: 'paper',
+							x0: 0,
+							y0: 0,
+							x1: 0,
+							y1: 1,
+							line: { color: 'black', width: 1 }
+						}],
+						plot_bgcolor: 'rgba(0,0,0,0)',
+						paper_bgcolor: 'rgba(0,0,0,0)',
+						margin: { t: 40, b: 80, l: 300, r: 60 },
+						hovermode: 'closest',
+						hoverlabel: {
+							bgcolor: 'white',
+							font: { family: 'Source Sans Pro, sans-serif', size: 16, color: 'black' },
+							bordercolor: '#D4D080'
+						},
+						font: { family: 'Source Sans Pro, sans-serif', size: 16, color: 'black' }
+					};
+
+					const config = {
+						responsive: true,
+						displayModeBar: false
+					};
+
+					var hasHover = window.matchMedia('(any-hover: hover)').matches;
+					if (!hasHover) {
+						layout.hovermode = false;
+					}
+
+					Plotly.newPlot('q15-chart', [trace], layout, config);
+
+					var q15ChartDiv = document.getElementById('q15-chart');
+					var defaultColor = '#EBE698';
+					var hoverColor = '#D4D080';
+
+					if (hasHover) {
+						q15ChartDiv.on('plotly_hover', function(eventData) {
+							var point = eventData.points[0];
+							var colors = xValues.map(function() { return defaultColor; });
+							colors[point.pointIndex] = hoverColor;
+							Plotly.restyle('q15-chart', { 'marker.color': [colors] }, [0]);
+						});
+						q15ChartDiv.on('plotly_unhover', function() {
+							Plotly.restyle('q15-chart', { 'marker.color': [xValues.map(function() { return defaultColor; })] }, [0]);
+						});
+					} else {
+						var q15InfoPanel = document.querySelector('.q15-touch-info');
+						if (!q15InfoPanel) {
+							q15InfoPanel = document.createElement('div');
+							q15InfoPanel.className = 'q15-touch-info';
+							q15ChartDiv.parentNode.insertBefore(q15InfoPanel, q15ChartDiv.nextSibling);
+						}
+						var q15ActiveBar = -1;
+
+						q15ChartDiv.on('plotly_click', function(eventData) {
+							var point = eventData.points[0];
+							var idx = point.pointIndex;
+							var colors = xValues.map(function() { return defaultColor; });
+
+							if (q15ActiveBar === idx) {
+								q15ActiveBar = -1;
+								q15InfoPanel.style.display = 'none';
+							} else {
+								q15ActiveBar = idx;
+								colors[idx] = hoverColor;
+								q15InfoPanel.innerHTML = '<strong>' + yValues[idx].replace(/<br>/g, ' ') + '</strong><br>Count: ' + xValues[idx] + ' respondents';
+								q15InfoPanel.style.display = 'block';
+							}
+							Plotly.restyle('q15-chart', { 'marker.color': [colors] }, [0]);
+						});
+					}
+
+					scaleQ15Chart();
+				};
+
+				function scaleQ15Chart() {
+					var container = document.querySelector('.q15-chart-container');
+					var scaler = document.querySelector('.q15-chart-scaler');
+					if (!container || !scaler) return;
+					if (container.clientWidth < 1000) {
+						var scale = container.clientWidth / 1000;
+						scaler.style.transform = 'scale(' + scale + ')';
+						container.style.height = (scaler.offsetHeight * scale) + 'px';
+					} else {
+						scaler.style.transform = '';
+						container.style.height = '';
+					}
+				}
+				window.addEventListener('resize', scaleQ15Chart);
+
+				if (document.readyState === 'loading') {
+					document.addEventListener('DOMContentLoaded', updateQ15FilterOptions);
+				} else {
+					updateQ15FilterOptions();
 				}
 			})();
 		</script>

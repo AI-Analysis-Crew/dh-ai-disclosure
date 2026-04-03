@@ -1349,6 +1349,162 @@ h1#introduction {
     text-align: center;
 }
 
+/* ========================================
+   Q15 DISTRIBUTION CHART (Activities)
+   ======================================== */
+
+.q15-filter-container {
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.q15-filter-row {
+    margin-bottom: 1rem;
+}
+
+@media (min-width: 860px) {
+    .q15-filter-container {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    .q15-filter-row {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 0;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 859px) {
+    .q15-filter-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: -1rem;
+    }
+
+    .q15-filter-row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        margin-bottom: 1.4rem;
+    }
+
+    .q15-filter-row label {
+        position: absolute;
+        right: calc(100% + 1rem);
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 599px) {
+    .q15-filter-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: -1rem;
+    }
+
+    .q15-filter-row {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .q15-filter-row label {
+        position: static;
+    }
+}
+
+.q15-filter-row label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #A8D5E2;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.q15-filter-row select {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+    color: #333;
+    cursor: pointer;
+    font-family: 'Source Sans Pro', sans-serif;
+    transition: border-color 0.2s;
+    min-width: 250px;
+}
+
+.q15-filter-row select:hover {
+    border-color: #4CAF50;
+}
+
+.q15-filter-row select:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+
+.q15-filter-row select option {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 0.85rem;
+    color: #333;
+    line-height: 1.8;
+}
+
+.q15-chart-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 2rem auto;
+    text-align: center;
+    overflow: hidden;
+}
+
+.q15-chart-scaler {
+    width: 1000px;
+    overflow: visible;
+    position: relative;
+    transform-origin: top left;
+}
+
+#q15-chart {
+    width: 1000px;
+    height: 700px;
+    margin: 0 auto;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+@media (min-width: 1000px) {
+    .q15-chart-container {
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+.q15-touch-info {
+    display: none;
+    margin: 0.75rem auto;
+    padding: 0.75rem 1rem;
+    max-width: 600px;
+    background: rgba(90, 147, 172, 0.12);
+    border: 1px solid rgba(90, 147, 172, 0.3);
+    border-radius: 8px;
+    font-size: 1rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
 /* ============================================================
    SANKEY DIAGRAM (graphs-analysis)
    ============================================================ */
