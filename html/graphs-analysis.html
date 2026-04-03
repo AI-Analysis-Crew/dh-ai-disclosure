@@ -1186,7 +1186,11 @@
 					// ── Q14 stacked bar chart ──
 					var q14ByQ13 = data.q14_by_q13;
 					var desiredOrder = ['1','2','3','4','5','6','7','8'];
-					var yLabels = desiredOrder.map(function(k) { return q14Labels[k]; }).reverse();
+					var yLabels = desiredOrder.map(function(k) { 
+								// Split the label at the break, add spaces to the top line, 
+								// and then add spaces to the bottom line to create an even right margin
+								return q14Labels[k].split('<br>').join('&nbsp;&nbsp;&nbsp;&nbsp;<br>') + '&nbsp;&nbsp;&nbsp;&nbsp;'; 
+					}).reverse();
 					var q13Keys = Object.keys(q13Labels);
 
 					// Calculate totals for each Q14 option (reversed to match yLabels)
@@ -1248,7 +1252,7 @@
 						},
 						yaxis: {
 							automargin: true,
-							ticksuffix: '      ',
+							// ticksuffix: '      ',
 							tickfont: { size: 16, color: 'black', family: 'Source Sans Pro, sans-serif' },
 							showline: false
 						},
@@ -1264,8 +1268,8 @@
 						}],
 						legend: {
 							orientation: 'h',
-							x: 0,
-							xanchor: 'left',
+							x: 1,
+							xanchor: 'center',
 							y: -0.18,
 							font: { size: 14, color: 'black', family: 'Source Sans Pro, sans-serif' },
 							traceorder: 'normal'
@@ -1274,7 +1278,7 @@
 						plot_bgcolor: 'rgba(0,0,0,0)',
 						paper_bgcolor: 'rgba(0,0,0,0)',
 						font: { family: 'Source Sans Pro, sans-serif', size: 16, color: 'black' },
-						margin: { t: 40, b: 120, l: 160, r: 60 },
+						margin: { t: 40, b: 160, l: 10, r: 60 },
 						hovermode: 'closest'
 					};
 
