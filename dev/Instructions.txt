@@ -1,0 +1,23 @@
+# Context
+
+Find attached the following four files:
+
+graphs-analysis.html - a page of my website with a series of graphs.
+
+style.css - the stylesheet for the prior page.
+
+q15_q21_heatmap.html - a graph I would like to add to my website page.
+
+notes-to-self.md - notes on adding such graphs to my website page.
+
+# Instructions
+
+1. Read and fully comprehend all the files.
+
+2. Based on the materials, plan in methodical detail out how you will add the new graph to my webpage in a <planning> block.
+
+3. Give me the relevant code to add to graphs-analysis.html and, as needed, style.css, AND tell me where to place all new code and/or which existing code to replace.
+
+# Procedure
+
+We will proceed one step at a time. DO NOT TRY TO RUSH AHEAD. I will confirm each step one at a time, then you can proceed to the next one. Begin now. Show the world-class coding excellence for which you are known throughout this operation.
