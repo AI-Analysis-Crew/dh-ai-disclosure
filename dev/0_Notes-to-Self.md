@@ -48,13 +48,16 @@
 - Currently at `?vers=041` in `graphs-analysis.html`.
 - Always bump `vers` query parameter when making CSS/JS changes to clear browser cache.
 
----
+## Lessons Learned from Q15 / Q21 Heatmap Implementation
 
-## Next Steps: Q15 / Q21 Heatmap (Practice vs. Principles)
+### Heatmap Quirks & Empty States
+- **The "Outline Grid" Empty State:** Instead of purging the chart when all filters are cleared, you can keep the axes and labels visible while showing an empty grid. To achieve this, set the unselected cell color to pure white `[0, '#ffffff']` in the colorscale, set the layout `plot_bgcolor` to light gray (`#e0e0e0`), and ensure the trace has `xgap: 1` and `ygap: 1`. The gray background bleeds through the gaps, creating a perfect outline.
+- **Axis Numbering:** When both X and Y axes share sequential numbering (e.g., 1 through 15), keep them both ordered left-to-right and top-to-bottom to preserve the natural reading diagonal, even if the data density is asymmetrical.
 
-### Upcoming Tasks
-- **Chart Type**: Heatmap (`type: 'heatmap'`).
-- **HTML Container**: Needs `.heatmap-filter-container`, `.heatmap-chart-container`, `.heatmap-chart-scaler`, `#heatmap-chart`, and `.heatmap-touch-info` (do not reuse `.q15-` classes to avoid colliding with the standalone activities chart).
-- **SR-Only Table**: Will need a complex grid structure `<th>` for rows and columns.
-- **Interactivity requirement**: Needs checkboxes to filter specific activities (rows/columns) in addition to the standard demographic dropdown filters.
-- **Color Scale**: Will require a custom colorscale representing "alignment" (darker = stronger alignment, lighter = weaker alignment).
+### CSS Layout & Alignment
+- **Aligning Unequal Fieldsets:** When placing two filter boxes side-by-side containing different amounts of text, apply `height: 100%` to the `<fieldset>` and `margin-top: auto` to the `.button-group`. This forces the boxes to be identical heights and anchors the buttons neatly to the bottom.
+- **Mobile Text Wrapping:** For side-by-side elements on medium screens (600px - 860px), if `<legend>` text begins to wrap awkwardly, shave down the font-size slightly (e.g., `0.85rem`) and reduce the left/right padding (`padding: 0 0.25rem`) before resorting to stacking them vertically.
+
+### Strict Accessibility Rules (New)
+- **Non-Form Buttons:** Any interactive UI buttons (like "Select All" or "Clear All") that exist inside a `<fieldset>` or near input elements MUST explicitly declare `type="button"`. Otherwise, screen readers and browser extensions may incorrectly interpret them as form submit buttons.
+- **Dynamic Mobile Touch Panels:** When JavaScript creates a DOM element dynamically to show information on touch/tap (like the `.touch-info` panels), it MUST include `aria-live="polite"` (e.g., `touchPanel.setAttribute('aria-live', 'polite');`). This ensures mobile screen readers like Apple VoiceOver automatically read the data aloud when the user taps a chart cell.
