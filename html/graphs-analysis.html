@@ -1713,7 +1713,6 @@
 						allLabels.map(opt => `<th scope="col">${activityLabelsShort[opt]}</th>`).join('') + '</tr>';
 					srTbody.innerHTML = '';
 
-					let isEmpty = true;
 					const zCount = [], zColor = [], hoverText = [];
 					
 					for (let i = 0; i < allLabels.length; i++) {
@@ -1724,8 +1723,6 @@
 							const count = data.matrix_count[i][j];
 							const percent = data.matrix_percent[i][j];
 							const isSelected = selectedQ15.includes(allLabels[i]) && selectedQ21.includes(allLabels[j]);
-							
-							if (isSelected && count > 0) isEmpty = false;
 							
 							rowCount.push(count);
 							rowColor.push(isSelected ? count : -1); 
@@ -1748,23 +1745,11 @@
 					}
 
 					const chartEl = document.getElementById('heatmap-chart');
-					const cw = chartEl.offsetWidth || 1000;
-					const ch = chartEl.offsetHeight || 800;
-
-					if (isEmpty) {
-						Plotly.purge(chartEl);
-						chartEl.innerHTML = '<svg width="' + cw + '" height="' + ch + '">' +
-							'<rect x="' + (cw/2 - 95) + '" y="' + (ch/2 - 15) + '" width="190" height="30" rx="3" fill="white" stroke="black" stroke-width="1"/>' +
-							'<text x="' + (cw/2) + '" y="' + (ch/2) + '" text-anchor="middle" dominant-baseline="central" ' +
-							'font-family="Source Sans Pro, sans-serif" font-size="16" fill="#1a1a1a">Option not selected</text>' +
-							'</svg>';
-						return;
-					}
 
 					// Custom alignment colorscale mapping to site themes
 					const maxCount = Math.max(...zCount.flat());
 					const colorscale = [
-						[0, '#e5e5e5'],           // Light gray for unselected
+						[0, '#ffffff'],           // Unselected cells are white to create an outline effect
 						[0.001, '#E8F4F8'],       // Pale Blue
 						[0.33, '#A8D5E2'],        // Bright Cyan
 						[0.66, '#5A93AC'],        // Muted Teal
@@ -1814,7 +1799,7 @@
 							autorange: 'reversed', // Makes Option 1 appear at the top
 							tickfont: { size: 14, color: 'black', family: 'Source Sans Pro, sans-serif' }
 						},
-						plot_bgcolor: 'rgba(0,0,0,0)',
+						plot_bgcolor: '#e0e0e0', // Light gray background bleeds through xgap/ygap to create the grid outline
 						paper_bgcolor: 'rgba(0,0,0,0)',
 						margin: { t: 40, b: 120, l: 200, r: 40 },
 						hovermode: 'closest',
