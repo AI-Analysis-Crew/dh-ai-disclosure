@@ -19,6 +19,8 @@
 - **Grid Legends**: Native Plotly legends don't auto-wrap neatly into grids without spacing hacks. To force a permanent, clean grid (like Q14's 3x2), use multiple independent legends (`legend` and `legend2`). Assign traces to them conditionally (`legend: (t < 3) ? 'legend' : 'legend2'`) and use matching `x` but staggered `y` coordinates.
 - **Automargins vs. Padding**: When `automargin: true` is enabled on the y-axis (to accommodate long text labels), setting `margin.l` acts as a *minimum*. To add actual visual padding between the left edge of the white box and the text, `margin.l` must be explicitly *larger* than the width of the longest label (e.g., `l: 240`).
 - **Axis Lines**: Never use hardcoded `shapes` to draw vertical/horizontal axis boundaries. They break when domains change. Instead, use `showline: true`, `linecolor: 'black'`, and `linewidth: 1` directly on the `xaxis` or `yaxis` objects so they snap naturally to the labels.
+- **Preventing Auto-Shrinking Labels**: If a chart has many items (like Q15's 15 bars), Plotly will aggressively auto-shrink multiline y-axis labels to prevent overlap. To prevent this, force the size explicitly (`yaxis: { tickfont: { size: 16 } }`) AND mathematically calculate the CSS `#chart` height to ensure each bar gets enough vertical pixels (e.g., ~62px per slot).
+- **Right-Aligning Multiline Labels**: Plotly struggles to perfectly right-align multiline y-axis labels against the axis line. To force alignment and add padding, split the label at the `<br>` and inject non-breaking spaces: `entry.label.split('<br>').join('\u00A0\u00A0\u00A0\u00A0<br>') + '\u00A0\u00A0\u00A0\u00A0'`.
 
 ### Responsive scaling approach
 - Charts have a fixed width (e.g., 1000px) and use CSS `transform: scale()` on the **scaler** wrapper div when viewport < 1000px.
@@ -35,9 +37,12 @@
 
 ### Q13/Q14 Context Section Specifics
 - **Q13 Small Slices**: Slices below `smallSliceThreshold` (5%) get HTML div labels positioned outside the pie. `addQ13SmallSliceLabels()` uses `getBoundingClientRect()` to compute placement. Labels are appended to the scaler, NOT the chart div, so coordinates align.
-- **Q14 Bar Alignment**: Uses a stacked horizontal bar chart (`barmode: 'stack'`, `orientation: 'h'`). 
+- **Q14 Bar Alignment**: Uses a stacked horizontal bar chart (`barmode: 'stack'`, `orientation: 'h'`).
 - **Q14 Data Linking**: The Q14 chart rebuilds dynamically using `allData["Q2"]["all"]["q14_by_q13"]` without needing its own separate filter UI.
 - Both charts share a touch-aware configuration: hover-capable devices use `plotly_hover` with highlights; touch devices use `plotly_click` with a custom `.touch-info` DOM panel.
+### Accessibility & Dynamic SR-Only Tables
+- **JavaScript Scoping**: When writing logic to dynamically rebuild a `.sr-only` `<tbody>` after a filter change, the update loop **must** sit outside the `if (hasHover) { ... } else { ... }` interactive blocks. If trapped inside the touch-device `else` block, desktop screen reader users will not receive updated data.
+- **Cleaning Labels**: Strip out HTML tags (`<br>`) and non-breaking spaces (`\u00A0`) from the Plotly labels before injecting them into the screen reader table using `.replace(/<br>/g, ' ').replace(/\u00A0/g, '').trim()`.
 
 ### CSS Versioning
 - Currently at `?vers=041` in `graphs-analysis.html`.
@@ -49,7 +54,7 @@
 
 ### Upcoming Tasks
 - **Chart Type**: Heatmap (`type: 'heatmap'`).
-- **HTML Container**: Needs `.q15-filter-container`, `.q15-chart-container`, `.q15-chart-scaler`, `#q15-chart`, and `.q15-touch-info`.
+- **HTML Container**: Needs `.heatmap-filter-container`, `.heatmap-chart-container`, `.heatmap-chart-scaler`, `#heatmap-chart`, and `.heatmap-touch-info` (do not reuse `.q15-` classes to avoid colliding with the standalone activities chart).
 - **SR-Only Table**: Will need a complex grid structure `<th>` for rows and columns.
 - **Interactivity requirement**: Needs checkboxes to filter specific activities (rows/columns) in addition to the standard demographic dropdown filters.
 - **Color Scale**: Will require a custom colorscale representing "alignment" (darker = stronger alignment, lighter = weaker alignment).
