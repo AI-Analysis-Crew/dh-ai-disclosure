@@ -12,7 +12,7 @@ notes-to-self.md - notes on adding such graphs to my website page.
 
 # Instructions
 
-1. Read and fully comprehend all the files.
+1. Read and fully comprehend all the files. Demonstrate your comprehension by giving me a brief summary of each file that shows your understanding of it.
 
 2. Based on the materials, plan in methodical detail out how you will add the new graph to my webpage in a <planning> block.
 
@@ -20,4 +20,8 @@ notes-to-self.md - notes on adding such graphs to my website page.
 
 # Procedure
 
-We will proceed one step at a time. DO NOT TRY TO RUSH AHEAD. I will confirm each step one at a time, then you can proceed to the next one. Begin now. Show the world-class coding excellence for which you are known throughout this operation.
+We will proceed one step at a time regarding the Instructions above. I will confirm each step one at a time, then you can proceed to the next one. Begin now. Show the world-class coding excellence for which you are known throughout this operation. DO NOT DEVIATE FROM GOING ONE STEP AT A TIME. DO NOT TRY TO RUSH AHEAD. 
+
+ # Final Reminder
+
+DO NOT TO DEVIATE FROM MY INSTRUCTIONS OR RUSH AHEAD. ONE STEP AT A TIME !!! and to be clear, that means: wait for me to confirm step 1 before going to step 2 
