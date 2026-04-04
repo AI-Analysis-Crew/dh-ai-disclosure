@@ -1577,6 +1577,161 @@ h1#introduction {
     text-align: center;
 }
 
+/* ========================================
+   Q15 / Q21 HEATMAP CHART
+   ======================================== */
+
+.heatmap-filter-container {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 1rem;
+}
+
+@media (min-width: 860px) {
+    .heatmap-filter-container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 599px) {
+    .heatmap-filter-container {
+        margin-bottom: -1rem;
+    }
+}
+
+.heatmap-filter-group {
+    flex: 1;
+    text-align: left;
+}
+
+.heatmap-filter-group fieldset {
+    border: 1px solid #5A93AC;
+    border-radius: 8px;
+    padding: 1rem;
+    background: rgba(90, 147, 172, 0.05);
+}
+
+.heatmap-filter-group legend {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #A8D5E2;
+    padding: 0 0.5rem;
+}
+
+.heatmap-checkbox-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    max-height: 240px;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+    padding-right: 0.5rem;
+}
+
+.heatmap-checkbox-item {
+    display: flex;
+    align-items: flex-start;
+}
+
+.heatmap-checkbox-item input {
+    margin-top: 0.35rem;
+    margin-right: 0.5rem;
+    cursor: pointer;
+}
+
+.heatmap-checkbox-item label {
+    font-size: 1.1rem;
+    color: #D4E8F0;
+    cursor: pointer;
+    line-height: 1.4;
+}
+
+.heatmap-button-group {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.heatmap-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.heatmap-btn.select-all {
+    background-color: #5A93AC;
+    color: #1a2332;
+}
+
+.heatmap-btn.select-all:hover {
+    background-color: #A8D5E2;
+}
+
+.heatmap-btn.clear-all {
+    background-color: transparent;
+    color: #A8D5E2;
+    border: 1px solid #5A93AC;
+}
+
+.heatmap-btn.clear-all:hover {
+    background-color: rgba(90, 147, 172, 0.1);
+}
+
+.heatmap-chart-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 2rem auto;
+    text-align: center;
+    overflow: hidden;
+}
+
+.heatmap-chart-scaler {
+    width: 1000px;
+    overflow: visible;
+    position: relative;
+    transform-origin: top left;
+}
+
+#heatmap-chart {
+    width: 1000px;
+    height: 800px;
+    margin: 0 auto;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+@media (min-width: 1000px) {
+    .heatmap-chart-container {
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+.heatmap-touch-info {
+    display: none;
+    margin: 0.75rem auto;
+    padding: 0.75rem 1rem;
+    max-width: 600px;
+    background: rgba(90, 147, 172, 0.12);
+    border: 1px solid rgba(90, 147, 172, 0.3);
+    border-radius: 8px;
+    font-size: 1rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
 /* Site Accessibility section */
 [aria-labelledby="page-overview"] ul {
     list-style: none;
