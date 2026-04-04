@@ -1,0 +1,15 @@
+At first glance, a 15x15 heatmap might seem like it should just stand on its own as a static grid. However, adding those interactive checkboxes transforms the graph from a simple display into an active exploratory tool.
+
+Here is exactly what they add to the user experience:
+
+### Taming Information Overload
+A 15x15 grid creates 225 individual data intersections. For a reader trying to parse the chart, that is a massive amount of visual noise. The checkboxes allow users to systematically strip away that noise by graying out rows and columns they do not care about. This makes the data much easier to digest without overwhelming the user's working memory.
+
+### Enabling Targeted Comparisons
+Not every visitor to your site will care about all 15 activities. A researcher focusing purely on the drafting process might only want to look at "Writing and rewriting," "Summarizing," and "Critiquing." The checkboxes let that user isolate those specific activities to see how disclosure expectations correlate with actual practice, completely ignoring data on coding or project design.
+
+### Revealing Hidden Patterns
+Because human eyes are naturally drawn to the darkest, most populated cells, subtle trends in less frequent activities are easily drowned out by massive outliers. By unchecking the highly populated activities, users can remove the visual dominance of those cells, allowing them to spot weaker alignments and nuanced patterns that would otherwise be invisible.
+
+### Supporting Presentation and Storytelling
+If you or your project developers ever use this webpage during a live presentation, the checkboxes become a dynamic storytelling mechanism. You can start with everything cleared, check one box to establish a baseline, and then check a second to highlight a sharp contrast, walking your audience through your findings step-by-step rather than dropping a wall of data on them all at once.
