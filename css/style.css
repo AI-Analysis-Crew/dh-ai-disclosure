@@ -1591,16 +1591,41 @@ h1#introduction {
     margin-bottom: 1rem;
 }
 
-@media (min-width: 860px) {
+@media (min-width: 631px) {
     .heatmap-filter-container {
         flex-direction: row;
         justify-content: space-between;
+        gap: 1rem;
     }
 }
 
-@media (max-width: 599px) {
+@media (min-width: 631px) and (max-width: 859px) {
+    .heatmap-filter-group legend {
+        font-size: 0.85rem; /* Reduced further to ensure it fits on one line */
+        padding: 0 0.25rem; /* Shaved down the padding to buy extra horizontal space */
+        letter-spacing: -0.02em; /* Very slightly tightens the character spacing */
+    }
+}
+
+@media (max-width: 630px) {
     .heatmap-filter-container {
-        margin-bottom: -1rem;
+        gap: 2rem; /* Creates equal spacing between the two stacked fieldsets */
+        margin-bottom: 0; /* Resets the negative margin to balance space above the chart */
+    }
+    
+    .heatmap-filter-group legend {
+        margin: 0 auto;
+    }
+    
+    .heatmap-checkbox-container {
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left;
+    }
+    
+    .heatmap-button-group {
+        justify-content: center;
     }
 }
 
@@ -1614,6 +1639,9 @@ h1#introduction {
     border-radius: 8px;
     padding: 1rem;
     background: rgba(90, 147, 172, 0.05);
+    height: 100%; /* Forces both boxes to be the same height */
+    display: flex;
+    flex-direction: column;
 }
 
 .heatmap-filter-group legend {
@@ -1654,6 +1682,7 @@ h1#introduction {
 .heatmap-button-group {
     display: flex;
     gap: 0.75rem;
+    margin-top: auto; /* Anchors buttons to the bottom */
 }
 
 .heatmap-btn {

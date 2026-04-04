@@ -1773,11 +1773,11 @@ const trace = {
 						hovertemplate: '%{customdata}<extra></extra>',
 						customdata: hoverText,
 						colorbar: {
-							title: { text: 'Count', font: { color: 'black', family: 'Source Sans Pro, sans-serif' } },
+							title: { text: 'Count', font: { size: 16, color: 'black', family: 'Source Sans Pro, sans-serif' } },
 							tickvals: [0, 0.25, 0.5, 0.75, 1],
 							ticktext: ['N/A', Math.round(maxCount * 0.25), Math.round(maxCount * 0.5), Math.round(maxCount * 0.75), maxCount],
-							tickfont: { color: 'black', family: 'Source Sans Pro, sans-serif' },
-							outlinecolor: '#e0e0e0', // Matches the light gray outline of the chart grid
+							tickfont: { size: 14, color: 'black', family: 'Source Sans Pro, sans-serif' }, // Added size: 14 here
+							outlinecolor: '#e0e0e0',
 							outlinewidth: 1
 						},
 						zmin: 0,
@@ -1811,7 +1811,7 @@ const trace = {
 						},
 						plot_bgcolor: '#e0e0e0', 
 						paper_bgcolor: 'rgba(0,0,0,0)',
-						margin: { t: 40, b: 160, l: 240, r: 80 }, // Increased l, r, and b margins for sizing/padding
+						margin: { t: 40, b: 175, l: 220, r: 140 },
 						hovermode: 'closest',
 						hoverlabel: {
 							bgcolor: 'white',
