@@ -368,7 +368,7 @@
 					<div class="heatmap-filter-container">
 						<div class="heatmap-filter-group">
 							<fieldset>
-								<legend>Q15: Important to Disclose</legend>
+								<legend>Q15: Disclosure Expectation</legend>
 								<div class="heatmap-checkbox-container" id="q15-checkboxes"></div>
 								<div class="heatmap-button-group">
 									<button class="heatmap-btn select-all" onclick="window.heatmapSelectAll('q15')">Select All</button>
@@ -379,7 +379,7 @@
 						
 						<div class="heatmap-filter-group">
 							<fieldset>
-								<legend>Q21: Used GenAI For</legend>
+								<legend>Q21: Actual Disclosure Practice</legend>
 								<div class="heatmap-checkbox-container" id="q21-checkboxes"></div>
 								<div class="heatmap-button-group">
 									<button class="heatmap-btn select-all" onclick="window.heatmapSelectAll('q21')">Select All</button>
@@ -396,7 +396,7 @@
 					</div>
 
 					<table class="sr-only" aria-label="Q15 vs Q21 Cross-Selection Data" id="heatmap-sr-table">
-						<caption>Survey responses overlapping Q15 (important to disclose) and Q21 (actual GenAI use)</caption>
+						<caption>Survey responses overlapping Q15 (Disclosure Expectation) and Q21 (Actual Disclosure Practice)</caption>
 						<thead id="heatmap-sr-thead"></thead>
 						<tbody id="heatmap-sr-tbody"></tbody>
 					</table>
@@ -1764,7 +1764,7 @@
 					const yLabels = allLabels.map(opt => `${activityLabelsShort[opt]}&nbsp;&nbsp;&nbsp;&nbsp;`);
 					const xLabels = allLabels.map(opt => `${activityLabelsShort[opt]}`);
 
-					const trace = {
+const trace = {
 						z: zNormalized,
 						x: xLabels,
 						y: yLabels,
@@ -1776,7 +1776,9 @@
 							title: { text: 'Count', font: { color: 'black', family: 'Source Sans Pro, sans-serif' } },
 							tickvals: [0, 0.25, 0.5, 0.75, 1],
 							ticktext: ['N/A', Math.round(maxCount * 0.25), Math.round(maxCount * 0.5), Math.round(maxCount * 0.75), maxCount],
-							tickfont: { color: 'black', family: 'Source Sans Pro, sans-serif' }
+							tickfont: { color: 'black', family: 'Source Sans Pro, sans-serif' },
+							outlinecolor: '#e0e0e0', // Matches the light gray outline of the chart grid
+							outlinewidth: 1
 						},
 						zmin: 0,
 						zmax: 1,
@@ -1787,21 +1789,29 @@
 
 					const layout = {
 						xaxis: {
-							title: { text: 'Q21: Actual Practice', font: { size: 16, color: 'black' } },
+							title: { 
+								text: 'Q21: Actual Disclosure Practice', 
+								font: { size: 16, color: 'black' },
+								standoff: 20 // Pushes title away from tick labels
+							},
 							tickangle: -45,
 							automargin: true,
 							side: 'bottom',
 							tickfont: { size: 14, color: 'black', family: 'Source Sans Pro, sans-serif' }
 						},
 						yaxis: {
-							title: { text: 'Q15: Important to Disclose', font: { size: 16, color: 'black' } },
+							title: { 
+								text: 'Q15: Disclosure Expectation', 
+								font: { size: 16, color: 'black' },
+								standoff: 0 // Pushes title away from tick labels
+							},
 							automargin: true,
-							autorange: 'reversed', // Makes Option 1 appear at the top
+							autorange: 'reversed', 
 							tickfont: { size: 14, color: 'black', family: 'Source Sans Pro, sans-serif' }
 						},
-						plot_bgcolor: '#e0e0e0', // Light gray background bleeds through xgap/ygap to create the grid outline
+						plot_bgcolor: '#e0e0e0', 
 						paper_bgcolor: 'rgba(0,0,0,0)',
-						margin: { t: 40, b: 120, l: 200, r: 40 },
+						margin: { t: 40, b: 160, l: 240, r: 80 }, // Increased l, r, and b margins for sizing/padding
 						hovermode: 'closest',
 						hoverlabel: {
 							bgcolor: 'white',
