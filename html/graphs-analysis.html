@@ -1476,7 +1476,7 @@
 						marker: {
 							color: '#3D6090',
 							line: {
-								color: '#7EC9EE',
+								color: '#263C5A',
 								width: 1.5
 							}
 						},
@@ -1520,7 +1520,7 @@
 						hoverlabel: {
 							bgcolor: 'white',
 							font: { family: 'Source Sans Pro, sans-serif', size: 16, color: 'black' },
-							bordercolor: '#1B6334'
+							bordercolor: '#7EC9EE'
 						},
 						font: { family: 'Source Sans Pro, sans-serif', size: 16, color: 'black' }
 					};
@@ -1538,8 +1538,8 @@
 					Plotly.newPlot('q15-chart', [trace], layout, config);
 
 					var q15ChartDiv = document.getElementById('q15-chart');
-					var defaultColor = '#7EC9EE';
-					var hoverColor = '#3D6090';
+					var defaultColor = '#3D6090';
+					var hoverColor = '#7EC9EE';
 
 					if (hasHover) {
 						q15ChartDiv.on('plotly_hover', function(eventData) {
