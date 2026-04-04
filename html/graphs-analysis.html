@@ -988,6 +988,9 @@
 						return;
 					}
 
+					document.getElementById('q13-chart').innerHTML = '';
+					document.getElementById('q14-chart').innerHTML = '';
+
 					var hasHover = window.matchMedia('(any-hover: hover)').matches;
 
 					// Hide inside labels for small slices — will add external annotations after render
@@ -1016,9 +1019,9 @@
 						hoverinfo: 'none'
 					};
 
-					const pieLayout = {
+const pieLayout = {
 						showlegend: false,
-						margin: { t: 40, b: 40, l: 40, r: 40 },
+						margin: { t: 60, b: 60, l: 40, r: 40 }, 
 						plot_bgcolor: 'rgba(0,0,0,0)',
 						paper_bgcolor: 'rgba(0,0,0,0)',
 						font: { family: 'Source Sans Pro, sans-serif', size: 16 },
@@ -1141,7 +1144,7 @@
 							if (dist === 0) return;
 
 							// Position label further out in the same direction (in viewport pixels)
-							var labelDist = 140 * scale;
+							var labelDist = 110 * scale;
 							var labelScreenX = sliceCx + (dx / dist) * labelDist;
 							var labelScreenY = sliceCy + (dy / dist) * labelDist;
 
@@ -1517,6 +1520,8 @@
 						scaleQ15Chart();
 						return;
 					}
+
+					document.getElementById('q15-chart').innerHTML = '';
 
 					const trace = {
 						x: xValues,
