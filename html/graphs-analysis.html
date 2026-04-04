@@ -371,8 +371,9 @@
 								<legend>Q15: Disclosure Expectation</legend>
 								<div class="heatmap-checkbox-container" id="q15-checkboxes"></div>
 								<div class="heatmap-button-group">
-									<button class="heatmap-btn select-all" onclick="window.heatmapSelectAll('q15')">Select All</button>
-									<button class="heatmap-btn clear-all" onclick="window.heatmapClearAll('q15')">Clear All</button>
+									<button type="button" class="heatmap-btn select-all" onclick="window.heatmapSelectAll('q15')">Select All</button>
+									<button type="button" class="heatmap-btn clear-all" onclick="window.heatmapClearAll('q15')">Clear All</button>
+
 								</div>
 							</fieldset>
 						</div>
@@ -382,8 +383,8 @@
 								<legend>Q21: Actual Disclosure Practice</legend>
 								<div class="heatmap-checkbox-container" id="q21-checkboxes"></div>
 								<div class="heatmap-button-group">
-									<button class="heatmap-btn select-all" onclick="window.heatmapSelectAll('q21')">Select All</button>
-									<button class="heatmap-btn clear-all" onclick="window.heatmapClearAll('q21')">Clear All</button>
+								<button type="button" class="heatmap-btn select-all" onclick="window.heatmapSelectAll('q21')">Select All</button>
+								<button type="button" class="heatmap-btn clear-all" onclick="window.heatmapClearAll('q21')">Clear All</button>
 								</div>
 							</fieldset>
 						</div>
@@ -1846,6 +1847,7 @@
 						if (!touchPanel) {
 							touchPanel = document.createElement('div');
 							touchPanel.className = 'heatmap-touch-info';
+							touchPanel.setAttribute('aria-live', 'polite'); // <-- ADD THIS LINE
 							chartEl.parentNode.insertBefore(touchPanel, chartEl.nextSibling);
 						}
 
