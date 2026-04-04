@@ -401,6 +401,9 @@
 					var layout = JSON.parse(JSON.stringify(sankeyLayout));
 					var data = JSON.parse(JSON.stringify(sankeyData));
 
+					layout.margin = layout.margin || {};
+					layout.margin.b = 50; // Set this closer to 0 for less padding (default is usually ~40+)
+
 					// Node padding (match graphs-analysis)
 					data[0].node.pad = 40;
 
