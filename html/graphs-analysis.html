@@ -1748,12 +1748,21 @@
 
 					// Custom alignment colorscale mapping to site themes
 					const maxCount = Math.max(...zCount.flat());
+					// const colorscale = [
+					// 	[0, '#ffffff'],           // Unselected cells are white to create an outline effect
+					// 	[0.001, '#E8F4F8'],       // Pale Blue
+					// 	[0.33, '#A8D5E2'],        // Bright Cyan
+					// 	[0.66, '#5A93AC'],        // Muted Teal
+					// 	[1, '#1a2332']            // Deep Slate
+					// ];
+					// Multi-hue thermal colorscale using the site's extended palette
 					const colorscale = [
-						[0, '#ffffff'],           // Unselected cells are white to create an outline effect
-						[0.001, '#E8F4F8'],       // Pale Blue
-						[0.33, '#A8D5E2'],        // Bright Cyan
-						[0.66, '#5A93AC'],        // Muted Teal
-						[1, '#1a2332']            // Deep Slate
+						[0, '#ffffff'],           // 0: White (for the empty grid outline)
+						[0.001, '#E8F4F8'],       // >0: Pale Blue (Site base)
+						[0.25, '#4FB4A3'],        // Low: Teal/Green (from Q8)
+						[0.5, '#E2D072'],         // Mid: Yellow/Gold (from Q8)
+						[0.75, '#DB667A'],        // High: Rose/Red (from Q8)
+						[1, '#8B084A']            // Max: Deep Burgundy (from Q8)
 					];
 					
 					const zNormalized = zColor.map(row => 
