@@ -326,7 +326,7 @@
 								<th scope="col">Count</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="q15-sr-tbody">
 							<tr><td>Writing and rewriting</td><td>62</td></tr>
 							<tr><td>Data collection, transcription, translation, and analysis</td><td>44</td></tr>
 							<tr><td>Peer review</td><td>35</td></tr>
@@ -1467,6 +1467,22 @@
 					// Adds 4 non-breaking spaces to the end of EVERY line (splitting at <br>) to match Q14's right-alignment hack
 					const yValues = entries.map(entry => entry.label.split('<br>').join('\u00A0\u00A0\u00A0\u00A0<br>') + '\u00A0\u00A0\u00A0\u00A0');
 
+					const totalResponses = xValues.reduce((a, b) => a + b, 0);
+
+					if (totalResponses === 0) {
+						var chartEl = document.getElementById('q15-chart');
+						Plotly.purge(chartEl);
+						var cw = chartEl.offsetWidth || 1000;
+						var ch = chartEl.offsetHeight || 930; // Matches your updated CSS height
+						chartEl.innerHTML = '<svg width="' + cw + '" height="' + ch + '">' +
+							'<rect x="' + (cw/2 - 95) + '" y="' + (ch/2 - 15) + '" width="190" height="30" rx="3" fill="white" stroke="black" stroke-width="1"/>' +
+							'<text x="' + (cw/2) + '" y="' + (ch/2) + '" text-anchor="middle" dominant-baseline="central" ' +
+							'font-family="Source Sans Pro, sans-serif" font-size="16" fill="#1a1a1a">Option not selected</text>' +
+							'</svg>';
+						scaleQ15Chart();
+						return;
+					}
+
 					const trace = {
 						x: xValues,
 						y: yValues,
@@ -1499,20 +1515,11 @@
 						yaxis: {
 							title: '',
 							automargin: true,
-							showline: false,
-							// Explicitly force the font size so Plotly never shrinks it
+							showline: true, // Changed from false
+							linecolor: 'black', // Added
+							linewidth: 1, // Added
 							tickfont: { size: 16, color: 'black', family: 'Source Sans Pro, sans-serif' }
 						},
-						shapes: [{
-							type: 'line',
-							xref: 'paper',
-							yref: 'paper',
-							x0: 0,
-							y0: 0,
-							x1: 0,
-							y1: 1,
-							line: { color: 'black', width: 1 }
-						}],
 						plot_bgcolor: 'rgba(0,0,0,0)',
 						paper_bgcolor: 'rgba(0,0,0,0)',
 						margin: { t: 40, b: 100, l: 220, r: 60 },
@@ -1577,6 +1584,19 @@
 							}
 							Plotly.restyle('q15-chart', { 'marker.color': [colors] }, [0]);
 						});
+					}
+
+					// Update Q15 sr-only table dynamically
+					var q15Tbody = document.getElementById('q15-sr-tbody');
+					if (q15Tbody) {
+						q15Tbody.innerHTML = '';
+						// Iterate backwards so the table reads top-to-bottom logically 
+						// (since we reversed the arrays earlier for Plotly's bottom-to-top rendering)
+						for (var i = xValues.length - 1; i >= 0; i--) {
+							// Clean the HTML breaks out of the label for the screen reader
+							var cleanLabel = yValues[i].replace(/<br>/g, ' ').replace(/\u00A0/g, '').trim();
+							q15Tbody.innerHTML += '<tr><td>' + cleanLabel + '</td><td>' + xValues[i] + '</td></tr>';
+						}
 					}
 
 					scaleQ15Chart();
