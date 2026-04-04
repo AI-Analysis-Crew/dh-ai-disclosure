@@ -1472,11 +1472,11 @@
 						y: yValues,
 						type: 'bar',
 						orientation: 'h',
-						width: 0.4, // Shrunk from 0.6 to 0.4 to match Q6's spacing
+						width: 0.4, // Matches Q6 width exactly
 						marker: {
-							color: '#2A904D', // True green from Q8 (Funding bodies)
+							color: '#2A904D',
 							line: {
-								color: '#1B6334', // Darker green for the stroke
+								color: '#1B6334',
 								width: 1.5
 							}
 						},
@@ -1499,7 +1499,9 @@
 						yaxis: {
 							title: '',
 							automargin: true,
-							showline: false
+							showline: false,
+							// Explicitly force the font size so Plotly never shrinks it
+							tickfont: { size: 16, color: 'black', family: 'Source Sans Pro, sans-serif' }
 						},
 						shapes: [{
 							type: 'line',
@@ -1513,16 +1515,16 @@
 						}],
 						plot_bgcolor: 'rgba(0,0,0,0)',
 						paper_bgcolor: 'rgba(0,0,0,0)',
-						margin: { t: 40, b: 100, l: 220, r: 60 }, // Bottom margin increased to 100 to match Q6
+						margin: { t: 40, b: 100, l: 220, r: 60 },
 						hovermode: 'closest',
 						hoverlabel: {
 							bgcolor: 'white',
 							font: { family: 'Source Sans Pro, sans-serif', size: 16, color: 'black' },
-							bordercolor: '#1B6334' // Matches the darker green line
+							bordercolor: '#1B6334'
 						},
 						font: { family: 'Source Sans Pro, sans-serif', size: 16, color: 'black' }
 					};
-
+					
 					const config = {
 						responsive: true,
 						displayModeBar: false
