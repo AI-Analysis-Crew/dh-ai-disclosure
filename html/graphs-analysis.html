@@ -579,7 +579,7 @@
 						nodeY.push(pos[1]);
 						nodeSize.push(Math.sqrt(count) * 15 + 10);
 						nodeText.push(q8LabelsShort[opt]);
-						nodeHover.push(q8Labels[opt] + '<br>Selections: ' + count);
+						nodeHover.push('<b>' + q8Labels[opt] + '</b><br>Selections: ' + count);
 						nodeColor.push(colors[parseInt(opt) - 1]);
 					}
 
@@ -618,7 +618,7 @@
 						yaxis: { showgrid: false, zeroline: false, showticklabels: false, range: [-1.5, 1.5] },
 						plot_bgcolor: 'rgba(0,0,0,0)',
 						paper_bgcolor: 'rgba(0,0,0,0)',
-						margin: { t: 20, b: 20, l: 20, r: 20 },
+						margin: { t: 0, b: 0, l: 20, r: 20 },
 						hovermode: 'closest',
 						hoverlabel: { font: { family: 'Source Sans Pro, sans-serif', size: 16 } },
 						annotations: annotations
@@ -1764,7 +1764,7 @@
 					const yLabels = allLabels.map(opt => `${activityLabelsShort[opt]}&nbsp;&nbsp;&nbsp;&nbsp;`);
 					const xLabels = allLabels.map(opt => `${activityLabelsShort[opt]}`);
 
-const trace = {
+					const trace = {
 						z: zNormalized,
 						x: xLabels,
 						y: yLabels,
@@ -1889,6 +1889,10 @@ const trace = {
 					// Deep-clone layout and data to override without mutating shared objects
 					var layout = JSON.parse(JSON.stringify(sankeyLayout));
 					var data = JSON.parse(JSON.stringify(sankeyData));
+
+					// ADD THESE TWO LINES to reduce the bottom padding
+					layout.margin = layout.margin || {};
+					layout.margin.b = 50; // Set this closer to 0 for less padding (default is usually ~40+)
 
 					// Reduce node padding back now that labels wrap properly
 					data[0].node.pad = 40;
