@@ -1468,11 +1468,13 @@
 						var chartEl = document.getElementById('q15-chart');
 						Plotly.purge(chartEl);
 						var cw = chartEl.offsetWidth || 1000;
-						var ch = chartEl.offsetHeight || 930; // Matches your updated CSS height
-						chartEl.innerHTML = '<svg width="' + cw + '" height="' + ch + '">' +
+						var ch = chartEl.offsetHeight || 930;
+						chartEl.setAttribute('aria-label', 'Bar chart: no data available for this filter selection.');
+						chartEl.innerHTML = '<svg width="' + cw + '" height="' + ch + '" role="img" aria-labelledby="q15-empty-title">' +
+							'<title id="q15-empty-title">No data available for this filter selection.</title>' +
 							'<rect x="' + (cw/2 - 95) + '" y="' + (ch/2 - 15) + '" width="190" height="30" rx="3" fill="white" stroke="black" stroke-width="1"/>' +
 							'<text x="' + (cw/2) + '" y="' + (ch/2) + '" text-anchor="middle" dominant-baseline="central" ' +
-							'font-family="Source Sans Pro, sans-serif" font-size="16" fill="#1a1a1a">Option not selected</text>' +
+							'font-family="Source Sans Pro, sans-serif" font-size="16" fill="#1a1a1a" aria-hidden="true">Option not selected</text>' +
 							'</svg>';
 						scaleQ15Chart();
 						return;
