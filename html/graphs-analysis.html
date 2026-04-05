@@ -1548,53 +1548,38 @@
 					var hoverColor = '#7EC9EE';
 
 					if (hasHover) {
-						q13ChartDiv.on('plotly_hover', function(eventData) {
+						q15ChartDiv.on('plotly_hover', function(eventData) {
 							var point = eventData.points[0];
-							var colors = pieColors.slice();
-							for (var i = 0; i < colors.length; i++) {
-								if (i !== point.pointNumber) {
-									colors[i] = colors[i].replace('ff', '88');
-								}
-							}
-							Plotly.restyle('q13-chart', { 'marker.colors': [colors] }, [0]);
-							// Show custom tooltip at mouse position
-							var pct = totalResponses > 0 ? (pieValues[point.pointNumber] / totalResponses * 100).toFixed(1) : 0;
-							q13Tooltip.innerHTML = '<strong>' + pieLabels[point.pointNumber] + '</strong><br>Count: ' + pieValues[point.pointNumber] + '<br>Percent: ' + pct + '%';
-							q13Tooltip.style.display = 'block';
-							q13Tooltip.style.left = (q13MouseX + 15) + 'px';
-							q13Tooltip.style.top = (q13MouseY - 10) + 'px';
+							var colors = xValues.map(function() { return defaultColor; });
+							colors[point.pointIndex] = hoverColor;
+							Plotly.restyle('q15-chart', { 'marker.color': [colors] }, [0]);
 						});
-						q13ChartDiv.on('plotly_unhover', function() {
-							Plotly.restyle('q13-chart', { 'marker.colors': [pieColors] }, [0]);
-							q13Tooltip.style.display = 'none';
+						q15ChartDiv.on('plotly_unhover', function() {
+							Plotly.restyle('q15-chart', { 'marker.color': [xValues.map(function() { return defaultColor; })] }, [0]);
 						});
 					} else {
-						var q13InfoPanel = document.createElement('div');
-						q13InfoPanel.className = 'q13-touch-info';
-						q13ChartDiv.parentNode.insertBefore(q13InfoPanel, q13ChartDiv.nextSibling);
-						var q13ActiveSlice = -1;
+						var q15InfoPanel = document.createElement('div');
+						q15InfoPanel.className = 'q15-touch-info';
+						q15ChartDiv.parentNode.insertBefore(q15InfoPanel, q15ChartDiv.nextSibling);
+						var q15ActiveBar = -1;
 
-						q13ChartDiv.on('plotly_click', function(eventData) {
+						q15ChartDiv.on('plotly_click', function(eventData) {
 							var point = eventData.points[0];
-							var idx = point.pointNumber;
+							var idx = point.pointIndex;
+							var colors = xValues.map(function() { return defaultColor; });
 
-							if (q13ActiveSlice === idx) {
-								q13ActiveSlice = -1;
-								q13InfoPanel.style.display = 'none';
-								Plotly.restyle('q13-chart', { 'marker.colors': [pieColors] }, [0]);
+							if (q15ActiveBar === idx) {
+								q15ActiveBar = -1;
+								q15InfoPanel.style.display = 'none';
 							} else {
-								q13ActiveSlice = idx;
-								var colors = pieColors.slice();
-								for (var i = 0; i < colors.length; i++) {
-									if (i !== idx) {
-										colors[i] = colors[i].replace('ff', '88');
-									}
-								}
-								Plotly.restyle('q13-chart', { 'marker.colors': [colors] }, [0]);
-								var pct = totalResponses > 0 ? (pieValues[idx] / totalResponses * 100).toFixed(1) : 0;
-								q13InfoPanel.innerHTML = '<strong>' + pieLabels[idx] + '</strong><br>Count: ' + pieValues[idx] + '<br>Percent: ' + pct + '%';
-								q13InfoPanel.style.display = 'block';
+								q15ActiveBar = idx;
+								colors[idx] = hoverColor;
+								var cleanLabel = yValues[idx].replace(/<br>/g, ' ').replace(/\u00A0/g, '').trim();
+								var pct = totalResponses > 0 ? (xValues[idx] / totalResponses * 100).toFixed(1) : 0;
+								q15InfoPanel.innerHTML = '<strong>' + cleanLabel + '</strong><br>Count: ' + xValues[idx] + '<br>Percentage: ' + pct + '%';
+								q15InfoPanel.style.display = 'block';
 							}
+							Plotly.restyle('q15-chart', { 'marker.color': [colors] }, [0]);
 						});
 					}
 
