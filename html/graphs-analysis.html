@@ -993,39 +993,34 @@
 
 					var hasHover = window.matchMedia('(any-hover: hover)').matches;
 
-					// Hide inside labels for small slices — will add external annotations after render
-					var smallSliceThreshold = 0.15;
-					var textPositions = pieValues.map(function(v) {
-						return (v / totalResponses) < smallSliceThreshold ? 'none' : 'inside';
-					});
-
 					const pieTrace = {
-						type: 'pie',
-						labels: pieLabels,
-						values: pieValues,
-						domain: { x: [0.22, 1] },
-						marker: {
-							colors: pieColors,
-							line: { color: 'white', width: 2 }
-						},
-						textinfo: 'label+percent',
-						textposition: textPositions,
-						insidetextfont: {
-							family: 'Source Sans Pro, sans-serif',
-							size: 16,
-							color: '#1a1a1a'
-						},
-						insidetextorientation: 'horizontal',
-						hoverinfo: 'none'
+							type: 'pie',
+							labels: pieLabels,
+							values: pieValues,
+							domain: { x: [0.22, 1] },
+							marker: {
+									colors: pieColors,
+									line: { color: 'white', width: 2 }
+							},
+							textinfo: 'percent',
+							textposition: 'inside', // <-- Now it forces them inside
+							insidetextfont: {
+									family: 'Source Sans Pro, sans-serif',
+									size: 16,
+									color: '#1a1a1a'
+							},
+							insidetextorientation: 'horizontal',
+							hoverinfo: 'none'
 					};
 
-const pieLayout = {
-						showlegend: false,
-						margin: { t: 60, b: 60, l: 40, r: 40 }, 
-						plot_bgcolor: 'rgba(0,0,0,0)',
-						paper_bgcolor: 'rgba(0,0,0,0)',
-						font: { family: 'Source Sans Pro, sans-serif', size: 16 },
-						hovermode: 'closest'
+					const pieLayout = {
+							showlegend: false,
+							margin: { t: 60, b: 60, l: 40, r: 40 }, 
+							plot_bgcolor: 'rgba(0,0,0,0)',
+							paper_bgcolor: 'rgba(0,0,0,0)',
+							font: { family: 'Source Sans Pro, sans-serif', size: 16 },
+							hovermode: 'closest',
+							uniformtext: { minsize: 16, mode: 'show' } // <-- This locks the font size
 					};
 
 					const config = {
@@ -1079,114 +1074,10 @@ const pieLayout = {
 						});
 					}
 
-					// Helper: create HTML labels for small slices positioned outside the pie
-					function addQ13SmallSliceLabels() {
-						// Remove old labels
-						var oldLabels = document.querySelectorAll('.q13-outside-label');
-						oldLabels.forEach(function(el) { el.remove(); });
-						var oldLines = document.querySelectorAll('.q13-outside-line');
-						oldLines.forEach(function(el) { el.remove(); });
-
-						var chartEl = document.getElementById('q13-chart');
-						var svgEl = chartEl.querySelector('.main-svg');
-						if (!svgEl) return;
-						var scalerEl = chartEl.parentNode;
-						var scalerRect = scalerEl.getBoundingClientRect();
-						var scale = scalerRect.width / scalerEl.offsetWidth || 1;
-
-						// Get slice paths
-						var slicePaths = svgEl.querySelectorAll('.pielayer path[data-index]');
-						if (slicePaths.length === 0) {
-							// Fallback: get all paths in the slice group
-							var traceGroup = svgEl.querySelector('.pielayer .trace');
-							if (traceGroup) {
-								slicePaths = traceGroup.querySelectorAll('.surface path');
-								if (slicePaths.length === 0) {
-									slicePaths = traceGroup.querySelectorAll('path');
-								}
-							}
-						}
-						if (!slicePaths || slicePaths.length === 0) return;
-
-						// Find pie center by averaging all slice path bounding boxes
-						var allCx = 0, allCy = 0, pathCount = 0;
-						slicePaths.forEach(function(p) {
-							var r = p.getBoundingClientRect();
-							if (r.width > 0) {
-								allCx += r.left + r.width / 2;
-								allCy += r.top + r.height / 2;
-								pathCount++;
-							}
-						});
-						if (pathCount === 0) return;
-						var pieCenterScreenX = allCx / pathCount;
-						var pieCenterScreenY = allCy / pathCount;
-
-						// Plotly sorts by value descending by default
-						var sortedIndices = pieValues.map(function(v, i) { return i; });
-						sortedIndices.sort(function(a, b) { return pieValues[b] - pieValues[a]; });
-
-						slicePaths.forEach(function(path, pathIdx) {
-							if (pathIdx >= sortedIndices.length) return;
-							var dataIdx = sortedIndices[pathIdx];
-							var sliceFraction = pieValues[dataIdx] / totalResponses;
-							if (sliceFraction >= smallSliceThreshold || sliceFraction === 0) return;
-
-							// Get this slice's screen position
-							var pathRect = path.getBoundingClientRect();
-							var sliceCx = pathRect.left + pathRect.width / 2;
-							var sliceCy = pathRect.top + pathRect.height / 2;
-
-							// Direction from pie center to slice center
-							var dx = sliceCx - pieCenterScreenX;
-							var dy = sliceCy - pieCenterScreenY;
-							var dist = Math.sqrt(dx * dx + dy * dy);
-							if (dist === 0) return;
-
-							// Position label further out in the same direction (in viewport pixels)
-							var labelDist = 110 * scale;
-							var labelScreenX = sliceCx + (dx / dist) * labelDist;
-							var labelScreenY = sliceCy + (dy / dist) * labelDist;
-
-							// Convert to position relative to scaler (accounting for CSS transform scale)
-							var labelX = (labelScreenX - scalerRect.left) / scale;
-							var labelY = (labelScreenY - scalerRect.top) / scale;
-							var sliceRelX = (sliceCx - scalerRect.left) / scale;
-							var sliceRelY = (sliceCy - scalerRect.top) / scale;
-
-							var pct = (sliceFraction * 100).toFixed(1);
-
-							// Create SVG line from slice to label
-							var lineEl = document.createElement('div');
-							lineEl.className = 'q13-outside-line';
-							lineEl.style.cssText = 'position:absolute;pointer-events:none;z-index:5;';
-							var lineSvg = '<svg style="position:absolute;top:0;left:0;width:100%;height:100%;overflow:visible;pointer-events:none;">' +
-								'<line x1="' + sliceRelX + '" y1="' + sliceRelY + '" x2="' + labelX + '" y2="' + labelY + '" stroke="black" stroke-width="1.5"/>' +
-								'<circle cx="' + sliceRelX + '" cy="' + sliceRelY + '" r="3" fill="black"/>' +
-								'</svg>';
-							lineEl.innerHTML = lineSvg;
-							chartEl.parentNode.style.position = 'relative';
-							chartEl.parentNode.appendChild(lineEl);
-
-							// Create label div
-							var label = document.createElement('div');
-							label.className = 'q13-outside-label';
-							label.innerHTML = pieLabels[dataIdx] + '<br>' + pct + '%';
-							label.style.cssText = 'position:absolute;z-index:6;background:white;color:#1a1a1a;' +
-								'border:1px solid black;border-radius:3px;padding:4px 8px;font-family:Source Sans Pro,sans-serif;' +
-								'font-size:16px;line-height:1.3;white-space:nowrap;pointer-events:none;' +
-								'left:' + labelX + 'px;top:' + labelY + 'px;transform:translate(-50%,-50%);';
-							chartEl.parentNode.appendChild(label);
-						});
-					}
-
 					Plotly.newPlot('q13-chart', [pieTrace], pieLayout, config).then(function() {
-						requestAnimationFrame(function() {
 							requestAnimationFrame(function() {
-								addQ13LabelBoxes();
-								addQ13SmallSliceLabels();
+									addQ13LabelBoxes(); // Keeps your white boxes!
 							});
-						});
 					});
 
 					var q13ChartDiv = document.getElementById('q13-chart');
@@ -1588,41 +1479,54 @@ const pieLayout = {
 					var defaultColor = '#3D6090';
 					var hoverColor = '#7EC9EE';
 
-					if (hasHover) {
-						q15ChartDiv.on('plotly_hover', function(eventData) {
+if (hasHover) {
+						q13ChartDiv.on('plotly_hover', function(eventData) {
 							var point = eventData.points[0];
-							var colors = xValues.map(function() { return defaultColor; });
-							colors[point.pointIndex] = hoverColor;
-							Plotly.restyle('q15-chart', { 'marker.color': [colors] }, [0]);
+							var colors = pieColors.slice();
+							for (var i = 0; i < colors.length; i++) {
+								if (i !== point.pointNumber) {
+									colors[i] = colors[i].replace('ff', '88');
+								}
+							}
+							Plotly.restyle('q13-chart', { 'marker.colors': [colors] }, [0]);
+							// Show custom tooltip at mouse position
+							var pct = totalResponses > 0 ? (pieValues[point.pointNumber] / totalResponses * 100).toFixed(1) : 0;
+							q13Tooltip.innerHTML = '<strong>' + pieLabels[point.pointNumber] + '</strong><br>Count: ' + pieValues[point.pointNumber] + '<br>Percent: ' + pct + '%';
+							q13Tooltip.style.display = 'block';
+							q13Tooltip.style.left = (q13MouseX + 15) + 'px';
+							q13Tooltip.style.top = (q13MouseY - 10) + 'px';
 						});
-						q15ChartDiv.on('plotly_unhover', function() {
-							Plotly.restyle('q15-chart', { 'marker.color': [xValues.map(function() { return defaultColor; })] }, [0]);
+						q13ChartDiv.on('plotly_unhover', function() {
+							Plotly.restyle('q13-chart', { 'marker.colors': [pieColors] }, [0]);
+							q13Tooltip.style.display = 'none';
 						});
 					} else {
-						var q15InfoPanel = document.querySelector('.q15-touch-info');
-						if (!q15InfoPanel) {
-							q15InfoPanel = document.createElement('div');
-							q15InfoPanel.className = 'q15-touch-info';
-							q15ChartDiv.parentNode.insertBefore(q15InfoPanel, q15ChartDiv.nextSibling);
-						}
-						var q15ActiveBar = -1;
+						var q13InfoPanel = document.createElement('div');
+						q13InfoPanel.className = 'q13-touch-info';
+						q13ChartDiv.parentNode.insertBefore(q13InfoPanel, q13ChartDiv.nextSibling);
+						var q13ActiveSlice = -1;
 
-						q15ChartDiv.on('plotly_click', function(eventData) {
+						q13ChartDiv.on('plotly_click', function(eventData) {
 							var point = eventData.points[0];
-							var idx = point.pointIndex;
-							var colors = xValues.map(function() { return defaultColor; });
+							var idx = point.pointNumber;
 
-							if (q15ActiveBar === idx) {
-								q15ActiveBar = -1;
-								q15InfoPanel.style.display = 'none';
+							if (q13ActiveSlice === idx) {
+								q13ActiveSlice = -1;
+								q13InfoPanel.style.display = 'none';
+								Plotly.restyle('q13-chart', { 'marker.colors': [pieColors] }, [0]);
 							} else {
-								q15ActiveBar = idx;
-								colors[idx] = hoverColor;
-								// Strips out the <br> and the non-breaking spaces for a clean tooltip
-								q15InfoPanel.innerHTML = '<strong>' + yValues[idx].replace(/<br>/g, ' ').replace(/\u00A0/g, '') + '</strong><br>Count: ' + xValues[idx] + ' respondents';
-								q15InfoPanel.style.display = 'block';
+								q13ActiveSlice = idx;
+								var colors = pieColors.slice();
+								for (var i = 0; i < colors.length; i++) {
+									if (i !== idx) {
+										colors[i] = colors[i].replace('ff', '88');
+									}
+								}
+								Plotly.restyle('q13-chart', { 'marker.colors': [colors] }, [0]);
+								var pct = totalResponses > 0 ? (pieValues[idx] / totalResponses * 100).toFixed(1) : 0;
+								q13InfoPanel.innerHTML = '<strong>' + pieLabels[idx] + '</strong><br>Count: ' + pieValues[idx] + '<br>Percent: ' + pct + '%';
+								q13InfoPanel.style.display = 'block';
 							}
-							Plotly.restyle('q15-chart', { 'marker.color': [colors] }, [0]);
 						});
 					}
 
