@@ -380,7 +380,7 @@
 
 					<div class="heatmap-chart-container">
 						<div class="heatmap-chart-scaler">
-							<div id="heatmap-chart" role="img" aria-label="Heatmap comparing AI disclosure expectations (Q15) versus actual practice (Q21). Darker cells indicate stronger alignment."></div>
+							<div id="heatmap-chart" role="img" aria-label="Heatmap comparing AI disclosure expectations (Q15) versus actual practice (Q21)."></div>
 						</div>
 					</div>
 
@@ -1810,6 +1810,15 @@
 
 					var hasHover = window.matchMedia('(any-hover: hover)').matches;
 					if (!hasHover) layout.hovermode = false;
+
+					// Update aria-label to reflect currently selected activities
+					var heatmapQ15Labels = selectedQ15.map(function(k) { return activityLabelsShort[k]; });
+					var heatmapQ21Labels = selectedQ21.map(function(k) { return activityLabelsShort[k]; });
+					var heatmapAriaDesc = 'Heatmap comparing AI disclosure expectations (Q15) versus actual practice (Q21). ' +
+						'Q15 activities shown: ' + (heatmapQ15Labels.length ? heatmapQ15Labels.join(', ') : 'none') + '. ' +
+						'Q21 activities shown: ' + (heatmapQ21Labels.length ? heatmapQ21Labels.join(', ') : 'none') + '. ' +
+						'Darker cells indicate stronger alignment.';
+					document.getElementById('heatmap-chart').setAttribute('aria-label', heatmapAriaDesc);
 
 					Plotly.newPlot('heatmap-chart', [trace], layout, config);
 
