@@ -1027,12 +1027,12 @@ h1#introduction {
 }
 
 .q6-filter-row select:hover {
-    border-color: #4CAF50;
+    border-color: #5A93AC;
 }
 
 .q6-filter-row select:focus {
     outline: none;
-    border-color: #4CAF50;
+    border-color: #5A93AC;
 }
 
 .q6-filter-row select option {
@@ -1196,12 +1196,12 @@ h1#introduction {
 }
 
 .q13-filter-row select:hover {
-    border-color: #4CAF50;
+    border-color: #5A93AC;
 }
 
 .q13-filter-row select:focus {
     outline: none;
-    border-color: #4CAF50;
+    border-color: #5A93AC;
 }
 
 .q13-filter-row select option {
@@ -1444,12 +1444,12 @@ h1#introduction {
 }
 
 .q15-filter-row select:hover {
-    border-color: #4CAF50;
+    border-color: #5A93AC;
 }
 
 .q15-filter-row select:focus {
     outline: none;
-    border-color: #4CAF50;
+    border-color: #5A93AC;
 }
 
 .q15-filter-row select option {

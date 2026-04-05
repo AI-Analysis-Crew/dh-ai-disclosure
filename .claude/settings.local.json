@@ -6,7 +6,13 @@
       "Bash(python3 -c ':*)",
       "Read(//tmp/**)",
       "Bash(python3:*)",
-      "Bash(ls -t /media/rosie/62771373-28ee-4534-8a16-8c392fafd80e/GitHub/dh-ai-disclosure/Screenshot*)"
+      "Bash(ls -t /media/rosie/62771373-28ee-4534-8a16-8c392fafd80e/GitHub/dh-ai-disclosure/Screenshot*)",
+      "Bash(grep -n \"?vers=\" index.html html/*.html)",
+      "Bash(git check-ignore:*)",
+      "Bash(grep:*)",
+      "Bash(ls:*)",
+      "Bash(git ls-tree:*)",
+      "Bash(find /media/rosie/62771373-28ee-4534-8a16-8c392fafd80e/GitHub/dh-ai-disclosure -maxdepth 1 -type f ! -name \".git*\" ! -name \".claude*\" -exec ls -lh {} +)"
     ]
   }
 }
