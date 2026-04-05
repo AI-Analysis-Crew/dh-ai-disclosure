@@ -1161,7 +1161,7 @@
 							q13Tooltip.style.top = (q13MouseY - 10) + 'px';
 						});
 						q13ChartDiv.on('plotly_unhover', function() {
-							Plotly.restyle('q13-chart', { 'marker.colors': [pieColors] }, [0]).then(function() {
+							Plotly.restyle('q13-chart', { 'marker.colors': [pieColors], 'marker.line.color': ['white'], 'marker.line.width': [2] }, [0]).then(function() {
 								requestAnimationFrame(addQ13LabelBoxes);
 							});
 							q13Tooltip.style.display = 'none';
