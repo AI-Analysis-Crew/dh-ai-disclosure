@@ -1838,7 +1838,24 @@
 								touchPanel.style.display = 'none';
 								return;
 							}
-							touchPanel.innerHTML = point.customdata;
+							var q15Label = activityLabelsShort[data.all_options[selectedQ15.indexOf(point.y.trim())]];
+							var q21Label = activityLabelsShort[data.all_options[selectedQ21.indexOf(point.x.trim())]];
+							var rawCount = data.matrix_count[data.all_options.indexOf(
+								data.all_options.find(function(k) { return activityLabelsShort[k] === point.y.trim(); })
+							)][data.all_options.indexOf(
+								data.all_options.find(function(k) { return activityLabelsShort[k] === point.x.trim(); })
+							)];
+							var rawPercent = data.matrix_percent[data.all_options.indexOf(
+								data.all_options.find(function(k) { return activityLabelsShort[k] === point.y.trim(); })
+							)][data.all_options.indexOf(
+								data.all_options.find(function(k) { return activityLabelsShort[k] === point.x.trim(); })
+							)];
+							touchPanel.textContent = '';
+							var pLine = document.createElement('p');
+							pLine.innerHTML = '<strong>Q15:</strong> ' + (q15Label || point.y.trim()) +
+								' | <strong>Q21:</strong> ' + (q21Label || point.x.trim()) +
+								' | Count: ' + rawCount + ' (' + rawPercent.toFixed(1) + '%)';
+							touchPanel.appendChild(pLine);
 							touchPanel.style.display = 'block';
 						});
 					}
