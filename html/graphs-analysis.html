@@ -81,12 +81,12 @@
 
 					<div class="q6-chart-container">
 						<div class="q6-chart-scaler">
-							<div id="q6-chart" role="img" aria-label="Bar chart showing how respondents assess the necessity of disclosing generative AI use. 67 said very necessary, 21 somewhat necessary, 10 neutral, 5 not very necessary, 3 not necessary at all, 1 prefer not to answer."></div>
+							<div id="q6-chart" role="img" aria-label="Bar chart showing how respondents assess the necessity of disclosing generative AI use."></div>
 						</div>
 					</div>
 
-					<table class="sr-only" aria-label="Q6 response data: Do scholars think AI use should be disclosed? All respondents.">
-						<caption>Survey responses on the necessity of disclosing generative AI use (all respondents, n=107)</caption>
+					<table class="sr-only" id="q6-sr-table" aria-label="Q6 response data: Do scholars think AI use should be disclosed? All respondents.">
+						<caption id="q6-sr-caption">Survey responses on the necessity of disclosing generative AI use (all respondents, n=107)</caption>
 						<thead>
 							<tr>
 								<th scope="col">Response</th>
@@ -94,13 +94,7 @@
 								<th scope="col">Percentage</th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr><td>Very necessary</td><td>67</td><td>62.6%</td></tr>
-							<tr><td>Somewhat necessary</td><td>21</td><td>19.6%</td></tr>
-							<tr><td>Neutral</td><td>10</td><td>9.3%</td></tr>
-							<tr><td>Not very necessary</td><td>5</td><td>4.7%</td></tr>
-							<tr><td>Not necessary at all</td><td>3</td><td>2.8%</td></tr>
-							<tr><td>Prefer not to answer</td><td>1</td><td>0.9%</td></tr>
+						<tbody id="q6-sr-tbody">
 						</tbody>
 					</table>
 
@@ -884,6 +878,34 @@
 							}
 							Plotly.restyle('q6-chart', { 'marker.color': [colors] }, [0]);
 						});
+					}
+
+					// Update aria-label to reflect current filter state
+					var q6AriaDesc = 'Bar chart showing how respondents assess the necessity of disclosing generative AI use.';
+					var q6AriaParts = xValues.map(function(label, i) {
+						return yValues[i] + ' said ' + label.toLowerCase();
+					}).reverse();
+					q6AriaDesc += ' ' + q6AriaParts.join(', ') + '.';
+					document.getElementById('q6-chart').setAttribute('aria-label', q6AriaDesc);
+
+					// Update Q6 sr-only table
+					var q6SrTbody = document.getElementById('q6-sr-tbody');
+					if (q6SrTbody) {
+						q6SrTbody.innerHTML = '';
+						var q6AllKeys = Object.keys(distribution);
+						for (var i = 0; i < q6AllKeys.length; i++) {
+							var k = q6AllKeys[i];
+							var cnt = distribution[k];
+							var pct = totalResponses > 0 ? (cnt / totalResponses * 100).toFixed(1) + '%' : '0.0%';
+							q6SrTbody.innerHTML += '<tr><td>' + q6Labels[k] + '</td><td>' + cnt + '</td><td>' + pct + '</td></tr>';
+						}
+					}
+					var q6SrCaption = document.getElementById('q6-sr-caption');
+					if (q6SrCaption) {
+						var q6SelQ = document.getElementById('q6-question-filter').value;
+						var q6SelV = document.getElementById('q6-value-filter').value;
+						var q6FilterDesc = q6SelV === 'all' ? 'all respondents' : questionMetadata[q6SelQ].labels[q6SelV];
+						q6SrCaption.textContent = 'Survey responses on the necessity of disclosing generative AI use (' + q6FilterDesc + ', n=' + totalResponses + ')';
 					}
 
 					scaleQ6Chart();
