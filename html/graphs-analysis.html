@@ -1144,13 +1144,7 @@
 							var b = parseInt(c.slice(5,7),16);
 							return 'rgba(' + r + ',' + g + ',' + b + ',0.35)';
 						});
-						var lineColors = pieColors.map(function(c, i) {
-							return i === point.pointNumber ? '#000000' : 'white';
-						});
-						var lineWidths = pieColors.map(function(c, i) {
-							return i === point.pointNumber ? 3 : 2;
-						});
-							Plotly.restyle('q13-chart', { 'marker.colors': [colors], 'marker.line.color': [lineColors], 'marker.line.width': [lineWidths] }, [0]).then(function() {
+							Plotly.restyle('q13-chart', { 'marker.colors': [colors] }, [0]).then(function() {
 								requestAnimationFrame(addQ13LabelBoxes);
 							});
 							// Show custom tooltip at mouse position
@@ -1191,13 +1185,7 @@
 									var b = parseInt(c.slice(5,7),16);
 									return 'rgba(' + r + ',' + g + ',' + b + ',0.35)';
 								});
-								var lineColors = pieColors.map(function(c, i) {
-									return i === idx ? '#000000' : 'white';
-								});
-								var lineWidths = pieColors.map(function(c, i) {
-									return i === idx ? 3 : 2;
-								});
-								Plotly.restyle('q13-chart', { 'marker.colors': [colors], 'marker.line.color': [lineColors], 'marker.line.width': [lineWidths] }, [0]).then(function() {
+								Plotly.restyle('q13-chart', { 'marker.colors': [colors] }, [0]).then(function() {
 									requestAnimationFrame(addQ13LabelBoxes);
 								});
 								var pct = totalResponses > 0 ? (pieValues[idx] / totalResponses * 100).toFixed(1) : 0;
