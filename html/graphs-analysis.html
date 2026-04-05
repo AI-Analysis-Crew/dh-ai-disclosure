@@ -1596,6 +1596,16 @@
 						});
 					}
 
+					// Update aria-label to reflect current filter state
+					var q15AriaDesc = 'Horizontal bar chart showing which generative AI-assisted research activities respondents believe are most important to disclose.';
+					var q15AriaParts = [];
+					for (var i = xValues.length - 1; i >= 0; i--) {
+						var cleanLabelAria = yValues[i].replace(/<br>/g, ' ').replace(/\u00A0/g, '').trim();
+						q15AriaParts.push(xValues[i] + ' selected ' + cleanLabelAria);
+					}
+					q15AriaDesc += ' ' + q15AriaParts.join(', ') + '.';
+					document.getElementById('q15-chart').setAttribute('aria-label', q15AriaDesc);
+
 					// Update Q15 sr-only table dynamically
 					var q15Tbody = document.getElementById('q15-sr-tbody');
 					if (q15Tbody) {
