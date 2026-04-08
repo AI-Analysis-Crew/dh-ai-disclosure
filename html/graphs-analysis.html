@@ -63,18 +63,14 @@
 
 					<div class="q6-filter-container">
 						<div class="q6-filter-row">
-							<label for="q6-question-filter">Select Question:</label>
-							<select id="q6-question-filter" onchange="updateQ6FilterOptions()">
-								<option value="Q2">Q2: Years of Experience</option>
-								<option value="Q4">Q4: Seniority</option>
-								<option value="Q5">Q5: Discipline</option>
-								<option value="Q24">Q24: GenAI Literacy</option>
+							<label for="q6-question">Filter by demographic:</label>
+							<select id="q6-question" onchange="onQ6QuestionChange()">
+								<option value="" selected>All Respondents</option>
 							</select>
 						</div>
-						<div class="q6-filter-row">
-							<label for="q6-value-filter">Filter by:</label>
-							<select id="q6-value-filter" onchange="updateQ6Chart()">
-								<option value="all">All Respondents</option>
+						<div class="q6-filter-row q6-value-row" style="display:none;">
+							<label for="q6-value">Select value:</label>
+							<select id="q6-value" onchange="updateQ6Chart()">
 							</select>
 						</div>
 					</div>
@@ -103,7 +99,7 @@
 
 					<p>This graph shows how respondents assess the necessity of disclosing generative AI use in scholarship. Each bar represents a response option. Options range from "very necessary" to "not necessary at all". The height of each bar indicates how many respondents selected that option.</p>
 
-					<p>The main filter above allows users to explore how views on disclosure vary by categories like "experience," "seniority," "discipline," or self-defined "genAI literacy." When a subfilter is applied, the chart updates to show responses only from that group. Values reflect the number of respondents who selected a given answer. On desktop view, users can also hover over a given bar to see percentages of respondents who selected a given option.</p>
+					<p>The filters above allow users to explore how views on disclosure vary by categories like "experience," "seniority," "discipline," or self-defined "genAI literacy." When a demographic category is selected, a second filter appears to choose a specific value. The chart then updates to show responses only from that group. Values reflect the number of respondents who selected a given answer. On desktop view, users can also hover over a given bar to see percentages of respondents who selected a given option.</p>
 				</section>
 
 				<section aria-labelledby="graph-analysis-1">
@@ -198,18 +194,14 @@
 
 					<div class="q13-filter-container">
 						<div class="q13-filter-row">
-							<label for="q13-question-filter">Select Question:</label>
-							<select id="q13-question-filter" onchange="updateQ13FilterOptions()">
-								<option value="Q2">Q2: Years of Experience</option>
-								<option value="Q4">Q4: Seniority</option>
-								<option value="Q5">Q5: Discipline</option>
-								<option value="Q24">Q24: GenAI Literacy</option>
+							<label for="q13-question">Filter by demographic:</label>
+							<select id="q13-question" onchange="onQ13QuestionChange()">
+								<option value="" selected>All Respondents</option>
 							</select>
 						</div>
-						<div class="q13-filter-row">
-							<label for="q13-value-filter">Filter by:</label>
-							<select id="q13-value-filter" onchange="updateQ13Charts()">
-								<option value="all">All Respondents</option>
+						<div class="q13-filter-row q13-value-row" style="display:none;">
+							<label for="q13-value">Select value:</label>
+							<select id="q13-value" onchange="updateQ13Charts()">
 							</select>
 						</div>
 					</div>
@@ -267,7 +259,7 @@
 
 					<p>The stacked bar chart (Q14) shows which scholarly products respondents believe to require genAI disclosure. Each bar represents a product type, and its total length reflects how many respondents selected it.</p>
 
-					<p>Users can apply the filters above to explore how patterns vary by categories like "experience," "seniority," "discipline," or self-defined "genAI literacy."</p>
+					<p>Users can apply the filters above to explore how patterns vary by categories like "experience," "seniority," "discipline," or self-defined "genAI literacy." When a demographic category is selected, a second filter appears to choose a specific value.</p>
 				</section>
 
 				<section aria-labelledby="graph-analysis-3">
@@ -284,18 +276,14 @@
 
 					<div class="q15-filter-container">
 						<div class="q15-filter-row">
-							<label for="q15-question-filter">Select Question:</label>
-							<select id="q15-question-filter" onchange="updateQ15FilterOptions()">
-								<option value="Q2">Q2: Years of Experience</option>
-								<option value="Q4">Q4: Seniority</option>
-								<option value="Q5">Q5: Discipline</option>
-								<option value="Q24">Q24: GenAI Literacy</option>
+							<label for="q15-question">Filter by demographic:</label>
+							<select id="q15-question" onchange="onQ15QuestionChange()">
+								<option value="" selected>All Respondents</option>
 							</select>
 						</div>
-						<div class="q15-filter-row">
-							<label for="q15-value-filter">Filter by:</label>
-							<select id="q15-value-filter" onchange="updateQ15Chart()">
-								<option value="all">All Respondents</option>
+						<div class="q15-filter-row q15-value-row" style="display:none;">
+							<label for="q15-value">Select value:</label>
+							<select id="q15-value" onchange="updateQ15Chart()">
 							</select>
 						</div>
 					</div>
@@ -338,7 +326,7 @@
 
 					<p>This graph shows which generative AI-assisted research activities respondents believe are most important to disclose. Each bar represents one activity, and its height reflects how many respondents selected it. Taller bars suggest stronger consensus that an activity warrants disclosure, while shorter bars indicate less consensus.</p>
 
-					<p>Users can use the filters above to explore how disclosure priorities differ by categories like "experience," "seniority," "discipline," or self-defined "genAI literacy." Counts show raw numbers of respondents per item.</p>
+					<p>Users can use the filters above to explore how disclosure priorities differ by categories like "experience," "seniority," "discipline," or self-defined "genAI literacy." When a demographic category is selected, a second filter appears to choose a specific value. Counts show raw numbers of respondents per item.</p>
 				</section>
 
 				<section aria-labelledby="graph-analysis-4">
@@ -744,26 +732,50 @@
 				const q6Labels = {"1": "Very necessary", "2": "Somewhat necessary", "3": "Neutral", "4": "Not very necessary", "5": "Not necessary at all", "6": "Prefer not to answer"};
 				const questionMetadata = {"Q2": {"title": "Years of Experience", "labels": {"1": "Less than 1 year", "2": "1-3 years", "3": "4-6 years", "4": "7-10 years", "5": "More than 10 years", "6": "Prefer not to answer"}, "is_multi_choice": false}, "Q4": {"title": "Seniority", "labels": {"1": "Undergraduate Student", "2": "Master Student", "3": "PhD Student", "4": "Postdoctoral Researcher", "5": "Research Scientist", "6": "Assistant Professor", "7": "Associate Professor", "8": "Professor", "9": "Other (please specify)", "10": "Prefer not to answer"}, "is_multi_choice": false}, "Q5": {"title": "Discipline", "labels": {"1": "Anthropology", "2": "Art History and Theory", "3": "Classical Studies", "4": "Computational Linguistics", "5": "Computer Science", "6": "Geography and GIS", "7": "History", "8": "Information Science", "9": "Linguistics", "10": "Literary and Cultural Studies", "11": "Mathematics", "12": "Musicology", "13": "Philosophy", "14": "Political Science", "15": "Religious Studies", "16": "Sociology", "17": "Statistics", "18": "Other (please specify)", "19": "Prefer not to answer"}, "is_multi_choice": true}, "Q24": {"title": "GenAI Literacy", "labels": {"1": "Expert", "2": "Advanced", "3": "Proficient", "4": "Competent", "5": "Novice", "6": "Prefer not to answer"}, "is_multi_choice": false}};
 
-				window.updateQ6FilterOptions = function() {
-					const selectedQuestion = document.getElementById('q6-question-filter').value;
-					const valueFilter = document.getElementById('q6-value-filter');
-					const labels = questionMetadata[selectedQuestion].labels;
-
-					valueFilter.innerHTML = '<option value="all">All Respondents</option>';
-
-					for (const [key, value] of Object.entries(labels)) {
-						const option = document.createElement('option');
-						option.value = key;
-						option.textContent = value;
-						valueFilter.appendChild(option);
+				window.initQ6Filter = function() {
+					var select = document.getElementById('q6-question');
+					var questions = ['Q2', 'Q4', 'Q5', 'Q24'];
+					for (var i = 0; i < questions.length; i++) {
+						var q = questions[i];
+						var option = document.createElement('option');
+						option.value = q;
+						option.textContent = questionMetadata[q].title;
+						select.appendChild(option);
 					}
+					updateQ6Chart();
+				};
 
+				window.onQ6QuestionChange = function() {
+					var questionVal = document.getElementById('q6-question').value;
+					var valueRow = document.querySelector('.q6-value-row');
+					var valueSelect = document.getElementById('q6-value');
+					if (!questionVal) {
+						valueRow.style.display = 'none';
+						updateQ6Chart();
+						return;
+					}
+					valueSelect.innerHTML = '';
+					var meta = questionMetadata[questionVal];
+					for (var key in meta.labels) {
+						var option = document.createElement('option');
+						option.value = key;
+						option.textContent = meta.labels[key];
+						valueSelect.appendChild(option);
+					}
+					valueRow.style.display = '';
 					updateQ6Chart();
 				};
 
 				window.updateQ6Chart = function() {
-					const selectedQuestion = document.getElementById('q6-question-filter').value;
-					const selectedValue = document.getElementById('q6-value-filter').value;
+					var questionVal = document.getElementById('q6-question').value;
+					var selectedQuestion, selectedValue;
+					if (!questionVal) {
+						selectedQuestion = 'Q2';
+						selectedValue = 'all';
+					} else {
+						selectedQuestion = questionVal;
+						selectedValue = document.getElementById('q6-value').value;
+					}
 					const distribution = allData[selectedQuestion][selectedValue];
 
 					const xValues = Object.keys(distribution).map(key => q6Labels[key]).reverse();
@@ -902,9 +914,13 @@
 					}
 					var q6SrCaption = document.getElementById('q6-sr-caption');
 					if (q6SrCaption) {
-						var q6SelQ = document.getElementById('q6-question-filter').value;
-						var q6SelV = document.getElementById('q6-value-filter').value;
-						var q6FilterDesc = q6SelV === 'all' ? 'all respondents' : questionMetadata[q6SelQ].labels[q6SelV];
+						var q6QVal = document.getElementById('q6-question').value;
+						var q6FilterDesc;
+						if (!q6QVal) {
+							q6FilterDesc = 'all respondents';
+						} else {
+							q6FilterDesc = questionMetadata[q6QVal].labels[document.getElementById('q6-value').value];
+						}
 						q6SrCaption.textContent = 'Survey responses on the necessity of disclosing generative AI use (' + q6FilterDesc + ', n=' + totalResponses + ')';
 					}
 
@@ -926,9 +942,9 @@
 				window.addEventListener('resize', scaleQ6Chart);
 
 				if (document.readyState === 'loading') {
-					document.addEventListener('DOMContentLoaded', updateQ6FilterOptions);
+					document.addEventListener('DOMContentLoaded', initQ6Filter);
 				} else {
-					updateQ6FilterOptions();
+					initQ6Filter();
 				}
 			})();
 		</script>
@@ -942,26 +958,50 @@
 				const q13Colors = {"1": "#3D6090", "2": "#7EC9EE", "3": "#4FB4A3", "4": "#2A904D", "5": "#AFA11C", "6": "#757575"};
 				const questionMetadata = {"Q2": {"title": "Years of Experience", "labels": {"1": "Less than 1 year", "2": "1-3 years", "3": "4-6 years", "4": "7-10 years", "5": "More than 10 years", "6": "Prefer not to answer"}, "is_multi_choice": false}, "Q4": {"title": "Seniority", "labels": {"1": "Undergraduate Student", "2": "Master Student", "3": "PhD Student", "4": "Postdoctoral Researcher", "5": "Research Scientist", "6": "Assistant Professor", "7": "Associate Professor", "8": "Professor", "9": "Other (please specify)", "10": "Prefer not to answer"}, "is_multi_choice": false}, "Q5": {"title": "Discipline", "labels": {"1": "Anthropology", "2": "Art History and Theory", "3": "Classical Studies", "4": "Computational Linguistics", "5": "Computer Science", "6": "Geography and GIS", "7": "History", "8": "Information Science", "9": "Linguistics", "10": "Literary and Cultural Studies", "11": "Mathematics", "12": "Musicology", "13": "Philosophy", "14": "Political Science", "15": "Religious Studies", "16": "Sociology", "17": "Statistics", "18": "Other (please specify)", "19": "Prefer not to answer"}, "is_multi_choice": true}, "Q24": {"title": "GenAI Literacy", "labels": {"1": "Expert", "2": "Advanced", "3": "Proficient", "4": "Competent", "5": "Novice", "6": "Prefer not to answer"}, "is_multi_choice": false}};
 
-				window.updateQ13FilterOptions = function() {
-					const selectedQuestion = document.getElementById('q13-question-filter').value;
-					const valueFilter = document.getElementById('q13-value-filter');
-					const labels = questionMetadata[selectedQuestion].labels;
-
-					valueFilter.innerHTML = '<option value="all">All Respondents</option>';
-
-					for (const [key, value] of Object.entries(labels)) {
-						const option = document.createElement('option');
-						option.value = key;
-						option.textContent = value;
-						valueFilter.appendChild(option);
+				window.initQ13Filter = function() {
+					var select = document.getElementById('q13-question');
+					var questions = ['Q2', 'Q4', 'Q5', 'Q24'];
+					for (var i = 0; i < questions.length; i++) {
+						var q = questions[i];
+						var option = document.createElement('option');
+						option.value = q;
+						option.textContent = questionMetadata[q].title;
+						select.appendChild(option);
 					}
+					updateQ13Charts();
+				};
 
+				window.onQ13QuestionChange = function() {
+					var questionVal = document.getElementById('q13-question').value;
+					var valueRow = document.querySelector('.q13-value-row');
+					var valueSelect = document.getElementById('q13-value');
+					if (!questionVal) {
+						valueRow.style.display = 'none';
+						updateQ13Charts();
+						return;
+					}
+					valueSelect.innerHTML = '';
+					var meta = questionMetadata[questionVal];
+					for (var key in meta.labels) {
+						var option = document.createElement('option');
+						option.value = key;
+						option.textContent = meta.labels[key];
+						valueSelect.appendChild(option);
+					}
+					valueRow.style.display = '';
 					updateQ13Charts();
 				};
 
 				window.updateQ13Charts = function() {
-					const selectedQuestion = document.getElementById('q13-question-filter').value;
-					const selectedValue = document.getElementById('q13-value-filter').value;
+					var questionVal = document.getElementById('q13-question').value;
+					var selectedQuestion, selectedValue;
+					if (!questionVal) {
+						selectedQuestion = 'Q2';
+						selectedValue = 'all';
+					} else {
+						selectedQuestion = questionVal;
+						selectedValue = document.getElementById('q13-value').value;
+					}
 					const data = allData[selectedQuestion][selectedValue];
 
 					// Q13 pie chart — filter out zero-value slices
@@ -1342,9 +1382,13 @@
 					}
 					var q13SrCaption = document.getElementById('q13-sr-caption');
 					if (q13SrCaption) {
-						var selectedQ = document.getElementById('q13-question-filter').value;
-						var selectedV = document.getElementById('q13-value-filter').value;
-						var filterDesc = selectedV === 'all' ? 'all respondents' : questionMetadata[selectedQ].labels[selectedV];
+						var q13QVal = document.getElementById('q13-question').value;
+						var filterDesc;
+						if (!q13QVal) {
+							filterDesc = 'all respondents';
+						} else {
+							filterDesc = questionMetadata[q13QVal].labels[document.getElementById('q13-value').value];
+						}
 						q13SrCaption.textContent = 'Survey responses on whether scholarly product type matters for GenAI disclosure (' + filterDesc + ', n=' + totalResponses + ')';
 					}
 
@@ -1400,9 +1444,9 @@
 				window.addEventListener('resize', function() { scaleQ13Chart(); scaleQ14Chart(); });
 
 				if (document.readyState === 'loading') {
-					document.addEventListener('DOMContentLoaded', updateQ13FilterOptions);
+					document.addEventListener('DOMContentLoaded', initQ13Filter);
 				} else {
-					updateQ13FilterOptions();
+					initQ13Filter();
 				}
 			})();
 		</script>
@@ -1415,26 +1459,50 @@
 				const q15Labels = {"1": "Brainstorming, including creating<br>hypotheses or arguments", "2": "Project design and planning", "3": "Literature search and review", "4": "Summarizing, explaining,<br>and simplifying content", "5": "Topic or skill coaching", "6": "Data collection, transcription,<br>translation, and analysis", "7": "Data organization, representation,<br>and visualization", "8": "Coding and Programming", "9": "Writing and rewriting", "10": "Create graphics, pictures,<br>videos or audios", "11": "Critiquing and offering<br>alternate perspectives", "12": "Dissemination", "13": "Peer review", "14": "Other (please specify)", "15": "Prefer not to answer"};
 				const questionMetadata = {"Q2": {"title": "Years of Experience", "labels": {"1": "Less than 1 year", "2": "1-3 years", "3": "4-6 years", "4": "7-10 years", "5": "More than 10 years", "6": "Prefer not to answer"}, "is_multi_choice": false}, "Q4": {"title": "Seniority", "labels": {"1": "Undergraduate Student", "2": "Master Student", "3": "PhD Student", "4": "Postdoctoral Researcher", "5": "Research Scientist", "6": "Assistant Professor", "7": "Associate Professor", "8": "Professor", "9": "Other (please specify)", "10": "Prefer not to answer"}, "is_multi_choice": false}, "Q5": {"title": "Discipline", "labels": {"1": "Anthropology", "2": "Art History and Theory", "3": "Classical Studies", "4": "Computational Linguistics", "5": "Computer Science", "6": "Geography and GIS", "7": "History", "8": "Information Science", "9": "Linguistics", "10": "Literary and Cultural Studies", "11": "Mathematics", "12": "Musicology", "13": "Philosophy", "14": "Political Science", "15": "Religious Studies", "16": "Sociology", "17": "Statistics", "18": "Other (please specify)", "19": "Prefer not to answer"}, "is_multi_choice": true}, "Q24": {"title": "GenAI Literacy", "labels": {"1": "Expert", "2": "Advanced", "3": "Proficient", "4": "Competent", "5": "Novice", "6": "Prefer not to answer"}, "is_multi_choice": false}};
 
-				window.updateQ15FilterOptions = function() {
-					const selectedQuestion = document.getElementById('q15-question-filter').value;
-					const valueFilter = document.getElementById('q15-value-filter');
-					const labels = questionMetadata[selectedQuestion].labels;
-
-					valueFilter.innerHTML = '<option value="all">All Respondents</option>';
-
-					for (const [key, value] of Object.entries(labels)) {
-						const option = document.createElement('option');
-						option.value = key;
-						option.textContent = value;
-						valueFilter.appendChild(option);
+				window.initQ15Filter = function() {
+					var select = document.getElementById('q15-question');
+					var questions = ['Q2', 'Q4', 'Q5', 'Q24'];
+					for (var i = 0; i < questions.length; i++) {
+						var q = questions[i];
+						var option = document.createElement('option');
+						option.value = q;
+						option.textContent = questionMetadata[q].title;
+						select.appendChild(option);
 					}
+					updateQ15Chart();
+				};
 
+				window.onQ15QuestionChange = function() {
+					var questionVal = document.getElementById('q15-question').value;
+					var valueRow = document.querySelector('.q15-value-row');
+					var valueSelect = document.getElementById('q15-value');
+					if (!questionVal) {
+						valueRow.style.display = 'none';
+						updateQ15Chart();
+						return;
+					}
+					valueSelect.innerHTML = '';
+					var meta = questionMetadata[questionVal];
+					for (var key in meta.labels) {
+						var option = document.createElement('option');
+						option.value = key;
+						option.textContent = meta.labels[key];
+						valueSelect.appendChild(option);
+					}
+					valueRow.style.display = '';
 					updateQ15Chart();
 				};
 
 				window.updateQ15Chart = function() {
-					const selectedQuestion = document.getElementById('q15-question-filter').value;
-					const selectedValue = document.getElementById('q15-value-filter').value;
+					var questionVal = document.getElementById('q15-question').value;
+					var selectedQuestion, selectedValue;
+					if (!questionVal) {
+						selectedQuestion = 'Q2';
+						selectedValue = 'all';
+					} else {
+						selectedQuestion = questionVal;
+						selectedValue = document.getElementById('q15-value').value;
+					}
 					const distribution = allData[selectedQuestion][selectedValue];
 
 					let entries = Object.keys(distribution).map(key => ({
@@ -1613,9 +1681,9 @@
 				window.addEventListener('resize', scaleQ15Chart);
 
 				if (document.readyState === 'loading') {
-					document.addEventListener('DOMContentLoaded', updateQ15FilterOptions);
+					document.addEventListener('DOMContentLoaded', initQ15Filter);
 				} else {
-					updateQ15FilterOptions();
+					initQ15Filter();
 				}
 			})();
 		</script>
