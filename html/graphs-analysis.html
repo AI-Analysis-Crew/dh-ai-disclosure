@@ -18,13 +18,13 @@
 		<meta name="twitter:title" content="Graphs/Analysis - Disclosing Generative AI Use in Digital Humanities Research"/>
 		<meta name="twitter:description" content="Graphs and analysis based on a generative AI use in digital humanities research disclosure and transparency survey."/>
 		<!-- Preload critical resources -->
-		<link rel="preload" href="../css/style.css?vers=045" as="style"/>
+		<link rel="preload" href="../css/style.css?vers=046" as="style"/>
 		<link rel="preconnect" href="https://fonts.googleapis.com"/>
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
 		<link rel="preconnect" href="https://cdnjs.cloudflare.com"/>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=Source+Sans+Pro:wght@400;600;700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,;:!?()'&quot;-"/>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		<link rel="stylesheet" type="text/css" href="../css/style.css?vers=045"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css?vers=046"/>
 		<script src="https://cdn.plot.ly/plotly-2.27.0.min.js" integrity="sha512-2yjH2FQFIKp1XQ8nSWes+7/zWAPc9qfDolxFGJV1BUO7/+YIAPh1jICUN6TaA+VVlfabERCqo1Hji0yYTFtDew==" crossorigin="anonymous" charset="utf-8"></script>
 	</head>
 
@@ -591,11 +591,12 @@
 					var layout = {
 						title: '',
 						font: { family: 'Source Sans Pro, sans-serif', size: 16 },
-						xaxis: { showgrid: false, zeroline: false, showticklabels: false, range: [-1.5, 1.5] },
-						yaxis: { showgrid: false, zeroline: false, showticklabels: false, range: [-1.5, 1.5] },
+						xaxis: { showgrid: false, zeroline: false, showticklabels: false, range: [-1.5, 1.5], fixedrange: true },
+						yaxis: { showgrid: false, zeroline: false, showticklabels: false, range: [-1.5, 1.5], fixedrange: true },
 						plot_bgcolor: 'rgba(0,0,0,0)',
 						paper_bgcolor: 'rgba(0,0,0,0)',
 						margin: { t: 0, b: 0, l: 20, r: 20 },
+						dragmode: false,
 						hovermode: 'closest',
 						hoverlabel: { font: { family: 'Source Sans Pro, sans-serif', size: 16 } },
 						annotations: annotations
@@ -811,14 +812,17 @@
 							range: [0, Math.max(...yValues) * 1.15],
 							showline: true,
 							linecolor: 'black',
-							linewidth: 1
+							linewidth: 1,
+							fixedrange: true
 						},
 						yaxis: {
 							title: '',
 							automargin: true,
 							ticksuffix: '   ',
-							showline: false
+							showline: false,
+							fixedrange: true
 						},
+						dragmode: false,
 						shapes: [{
 							type: 'line',
 							xref: 'paper',
@@ -1293,6 +1297,7 @@
 
 					var q14Layout = {
 						barmode: 'stack',
+						dragmode: false,
 						xaxis: {
 							title: { text: 'Number of Respondents', font: { color: 'black', family: 'Source Sans Pro, sans-serif', size: 16 } },
 							rangemode: 'tozero',
@@ -1300,14 +1305,16 @@
 							tickfont: { size: 16, color: 'black', family: 'Source Sans Pro, sans-serif' },
 							showline: true,
 							linecolor: 'black',
-							linewidth: 1
+							linewidth: 1,
+							fixedrange: true
 						},
 						yaxis: {
 							automargin: true,
 							tickfont: { size: 16, color: 'black', family: 'Source Sans Pro, sans-serif' },
 							showline: true,
 							linecolor: 'black',
-							linewidth: 1
+							linewidth: 1,
+							fixedrange: true
 						},
 						legend: {
 							orientation: 'h',
@@ -1559,13 +1566,15 @@
 					};
 
 					const layout = {
+						dragmode: false,
 						xaxis: {
 							title: { text: 'Number of Respondents', font: { size: 16 } },
 							rangemode: 'tozero',
 							range: [0, Math.max(...xValues) * 1.15],
 							showline: true,
 							linecolor: 'black',
-							linewidth: 1
+							linewidth: 1,
+							fixedrange: true
 						},
 						yaxis: {
 							title: '',
@@ -1573,7 +1582,8 @@
 							showline: true, // Changed from false
 							linecolor: 'black', // Added
 							linewidth: 1, // Added
-							tickfont: { size: 16, color: 'black', family: 'Source Sans Pro, sans-serif' }
+							tickfont: { size: 16, color: 'black', family: 'Source Sans Pro, sans-serif' },
+							fixedrange: true
 						},
 						plot_bgcolor: 'rgba(0,0,0,0)',
 						paper_bgcolor: 'rgba(0,0,0,0)',
@@ -1826,26 +1836,29 @@
 					};
 
 					const layout = {
+						dragmode: false,
 						xaxis: {
-							title: { 
-								text: 'Q21: Actual Disclosure Practice', 
+							title: {
+								text: 'Q21: Actual Disclosure Practice',
 								font: { size: 16, color: 'black' },
 								standoff: 20 // Pushes title away from tick labels
 							},
 							tickangle: -45,
 							automargin: true,
 							side: 'bottom',
-							tickfont: { size: 14, color: 'black', family: 'Source Sans Pro, sans-serif' }
+							tickfont: { size: 14, color: 'black', family: 'Source Sans Pro, sans-serif' },
+							fixedrange: true
 						},
 						yaxis: {
-							title: { 
-								text: 'Q15: Disclosure Expectation', 
+							title: {
+								text: 'Q15: Disclosure Expectation',
 								font: { size: 16, color: 'black' },
 								standoff: 0 // Pushes title away from tick labels
 							},
 							automargin: true,
-							autorange: 'reversed', 
-							tickfont: { size: 14, color: 'black', family: 'Source Sans Pro, sans-serif' }
+							autorange: 'reversed',
+							tickfont: { size: 14, color: 'black', family: 'Source Sans Pro, sans-serif' },
+							fixedrange: true
 						},
 						plot_bgcolor: '#e0e0e0', 
 						paper_bgcolor: 'rgba(0,0,0,0)',
@@ -1961,6 +1974,9 @@
 
 					// Reduce node padding back now that labels wrap properly
 					data[0].node.pad = 40;
+
+					// Prevent touch-dragging nodes out of place (no way to reset without the mode bar)
+					data[0].arrangement = 'fixed';
 
 					// Node colors from Q8 palette, distributed for maximum contrast between neighbors
 					data[0].node.color = [
