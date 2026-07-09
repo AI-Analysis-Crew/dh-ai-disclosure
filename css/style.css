@@ -734,12 +734,9 @@ footer ul li a:hover {
     border: 0;
 }
 
-/* Tables ignore width:1px in auto layout and nowrap captions force them
-   thousands of px wide, creating horizontal page overflow on mobile */
-table.sr-only {
-    table-layout: fixed;
-    white-space: normal;
-}
+/* NOTE: .sr-only does not work directly on <table> elements — tables ignore
+   width/height:1px and blow out the page (horizontal or vertical overflow on
+   mobile). Wrap hidden tables in <div class="sr-only"> instead. */
 
 /* custom focus styles for accessibility */
 *:focus {
