@@ -1980,7 +1980,7 @@
 			})();
 		</script>
 
-		<script src="../js/sankey_data.js?vers=001"></script>
+		<script src="/js/sankey_data.js?vers=001"></script>
 		<script>
 			// Sankey Diagram (graphs-analysis)
 			(function() {
@@ -2130,19 +2130,12 @@
 			// Includes HTML snippets; vanilla JavaScript implementation
 			document.addEventListener('DOMContentLoaded', function() {
 				var includes = document.querySelectorAll('[data-include]');
-				var basePath = '../';
 				includes.forEach(function(element) {
-					var file = basePath + 'common/' + element.getAttribute('data-include') + '.html?vers=004';
+					var file = '/common/' + element.getAttribute('data-include') + '.html?vers=005';
 					fetch(file)
 						.then(response => response.text())
 						.then(function(data) {
 							element.innerHTML = data;
-							element.querySelectorAll('a[href]').forEach(function(a) {
-								var href = a.getAttribute('href');
-								if (href && !href.startsWith('http') && !href.startsWith('#') && !href.startsWith('mailto:')) {
-									a.setAttribute('href', basePath + href);
-								}
-							});
 								if (element.getAttribute('data-include') === 'nav') {
 									var btn = element.querySelector('.hamburger');
 									var menu = element.querySelector('.nav-menu');

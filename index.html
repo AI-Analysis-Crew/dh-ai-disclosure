@@ -234,17 +234,17 @@
         <figure>
           <a href="/jpg/2025-ASIS+T-Poster.jpg" aria-label="View full-size conference poster">
             <img
-              src="./jpg/responsive/2025-ASIS+T-Poster-1366w.jpg"
+              src="/jpg/responsive/2025-ASIS+T-Poster-1366w.jpg"
               srcset="
-                ./jpg/responsive/2025-ASIS+T-Poster-320w.jpg 320w,
-                ./jpg/responsive/2025-ASIS+T-Poster-480w.jpg 480w,
-                ./jpg/responsive/2025-ASIS+T-Poster-640w.jpg 640w,
-                ./jpg/responsive/2025-ASIS+T-Poster-768w.jpg 768w,
-                ./jpg/responsive/2025-ASIS+T-Poster-960w.jpg 960w,
-                ./jpg/responsive/2025-ASIS+T-Poster-1024w.jpg 1024w,
-                ./jpg/responsive/2025-ASIS+T-Poster-1366w.jpg 1366w,
-                ./jpg/responsive/2025-ASIS+T-Poster-2048w.jpg 2048w,
-                ./jpg/responsive/2025-ASIS+T-Poster-2732w.jpg 2732w
+                /jpg/responsive/2025-ASIS+T-Poster-320w.jpg 320w,
+                /jpg/responsive/2025-ASIS+T-Poster-480w.jpg 480w,
+                /jpg/responsive/2025-ASIS+T-Poster-640w.jpg 640w,
+                /jpg/responsive/2025-ASIS+T-Poster-768w.jpg 768w,
+                /jpg/responsive/2025-ASIS+T-Poster-960w.jpg 960w,
+                /jpg/responsive/2025-ASIS+T-Poster-1024w.jpg 1024w,
+                /jpg/responsive/2025-ASIS+T-Poster-1366w.jpg 1366w,
+                /jpg/responsive/2025-ASIS+T-Poster-2048w.jpg 2048w,
+                /jpg/responsive/2025-ASIS+T-Poster-2732w.jpg 2732w
               "
               sizes="
                 (max-width: 400px) calc(100vw - 2rem),
@@ -268,17 +268,17 @@
         <figure>
           <a href="/jpg/2025-ASIS+T-1st-Place-Prize.jpg" aria-label="View full-size award certificate">
             <img
-              src="./jpg/responsive/2025-ASIS+T-1st-Place-Prize-1366w.jpg"
+              src="/jpg/responsive/2025-ASIS+T-1st-Place-Prize-1366w.jpg"
               srcset="
-                ./jpg/responsive/2025-ASIS+T-1st-Place-Prize-320w.jpg 320w,
-                ./jpg/responsive/2025-ASIS+T-1st-Place-Prize-480w.jpg 480w,
-                ./jpg/responsive/2025-ASIS+T-1st-Place-Prize-640w.jpg 640w,
-                ./jpg/responsive/2025-ASIS+T-1st-Place-Prize-768w.jpg 768w,
-                ./jpg/responsive/2025-ASIS+T-1st-Place-Prize-960w.jpg 960w,
-                ./jpg/responsive/2025-ASIS+T-1st-Place-Prize-1024w.jpg 1024w,
-                ./jpg/responsive/2025-ASIS+T-1st-Place-Prize-1366w.jpg 1366w,
-                ./jpg/responsive/2025-ASIS+T-1st-Place-Prize-2048w.jpg 2048w,
-                ./jpg/responsive/2025-ASIS+T-1st-Place-Prize-2732w.jpg 2732w
+                /jpg/responsive/2025-ASIS+T-1st-Place-Prize-320w.jpg 320w,
+                /jpg/responsive/2025-ASIS+T-1st-Place-Prize-480w.jpg 480w,
+                /jpg/responsive/2025-ASIS+T-1st-Place-Prize-640w.jpg 640w,
+                /jpg/responsive/2025-ASIS+T-1st-Place-Prize-768w.jpg 768w,
+                /jpg/responsive/2025-ASIS+T-1st-Place-Prize-960w.jpg 960w,
+                /jpg/responsive/2025-ASIS+T-1st-Place-Prize-1024w.jpg 1024w,
+                /jpg/responsive/2025-ASIS+T-1st-Place-Prize-1366w.jpg 1366w,
+                /jpg/responsive/2025-ASIS+T-1st-Place-Prize-2048w.jpg 2048w,
+                /jpg/responsive/2025-ASIS+T-1st-Place-Prize-2732w.jpg 2732w
               "
               sizes="
                 (max-width: 400px) calc(100vw - 2rem),
@@ -316,19 +316,12 @@
 			// Includes HTML snippets; vanilla JavaScript implementation
 			document.addEventListener('DOMContentLoaded', function() {
 				var includes = document.querySelectorAll('[data-include]');
-				var basePath = './';
 				includes.forEach(function(element) {
-					var file = basePath + 'common/' + element.getAttribute('data-include') + '.html?vers=004';
+					var file = '/common/' + element.getAttribute('data-include') + '.html?vers=005';
 					fetch(file)
 						.then(response => response.text())
 						.then(function(data) {
 							element.innerHTML = data;
-							element.querySelectorAll('a[href]').forEach(function(a) {
-								var href = a.getAttribute('href');
-								if (href && !href.startsWith('http') && !href.startsWith('#') && !href.startsWith('mailto:')) {
-									a.setAttribute('href', basePath + href);
-								}
-							});
 								// Initialize hamburger menu after nav loads
 								if (element.getAttribute('data-include') === 'nav') {
 									var btn = element.querySelector('.hamburger');
@@ -386,7 +379,7 @@
 		</script>
 
 		<!-- Sankey diagram data and rendering -->
-		<script src="./js/sankey_data.js?vers=001"></script>
+		<script src="/js/sankey_data.js?vers=001"></script>
 		<script>
 			// Homepage Sankey diagram — enhanced version
 			(function() {
