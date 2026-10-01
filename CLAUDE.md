@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Static website for a Digital Humanities research project on generative AI disclosure. Hosted on GitHub Pages at `https://dh-ai-disclosure.github.io/`. No build system, bundler, or package manager — just plain HTML, CSS, and vanilla JavaScript.
+Static website for a Digital Humanities research project on generative AI disclosure. Hosted on GitHub Pages as a project page at `https://ai-analysis-crew.github.io/dh-ai-disclosure/` (repo `AI-Analysis-Crew/dh-ai-disclosure`), i.e. under the `/dh-ai-disclosure/` subpath, not the domain root. No build system, bundler, or package manager — just plain HTML, CSS, and vanilla JavaScript.
 
 ## Git Workflow
 
@@ -14,7 +14,7 @@ Three branches promoted in order: `dev` → `stage` → `main`. All work happens
 
 **Pages:** `index.html` (root), `html/survey.html`, `html/graphs-analysis.html`, `html/accessibility.html`
 
-**Shared components:** `common/nav.html` and `common/footer.html` are loaded at runtime via `fetch()` into `<div data-include="nav">` / `<div data-include="footer">` elements. Each page has its own inline `<script>` that handles this inclusion, fetching `/common/<name>.html`. No path rewriting is done.
+**Shared components:** `common/nav.html` and `common/footer.html` are loaded at runtime via `fetch()` into `<div data-include="nav">` / `<div data-include="footer">` elements. Each page has its own inline `<script>` that handles this inclusion and rewrites relative paths. The `basePath` variable differs per page (`'./'` for root, `'../'` for pages in `html/`).
 
 **Styles:** Single stylesheet `css/style.css`. Uses a dark-mode color palette (Deep Slate background, cyan/blue text) designed for AAA accessibility (7:1+ contrast ratios). When updating CSS, increment the `?vers=` cache-busting parameter in all HTML files that reference it (currently `index.html`, `html/survey.html`, `html/graphs-analysis.html`, `html/accessibility.html`).
 
@@ -24,8 +24,8 @@ Three branches promoted in order: `dev` → `stage` → `main`. All work happens
 
 ## Key Conventions
 
-- All site paths in HTML must be root-absolute (e.g. `/css/style.css`, `/html/survey.html`). The site is served from the domain root, both on GitHub Pages and in VS Code Go Live, so open the repo folder itself as the VS Code workspace root. It will not work from a subpath or `file://`
-- Nav link hrefs in `common/nav.html` are root-absolute and used as written (no rewriting)
+- All paths in HTML must be relative (not root-absolute like `/css/...`), because the live site is served from the `/dh-ai-disclosure/` subpath. Root-absolute paths resolve to the domain root and 404 there (tried in commit 33dc780, which broke the live site). Relative paths also work in VS Code Go Live.
+- Nav link hrefs in `common/nav.html` are written relative to root (no leading slash); the inclusion script rewrites them based on each page's `basePath`
 - `common/nav.html` and `common/footer.html` versioning: bump `?vers=` in the fetch URL when these change, in all four pages (`index.html`, `html/survey.html`, `html/graphs-analysis.html`, `html/accessibility.html`)
 - External libraries loaded via CDN with SRI hashes (Font Awesome, Google Fonts, Plotly.js)
 - Fonts: Noto Serif (headings), Source Sans Pro (body)

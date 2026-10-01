@@ -18,13 +18,13 @@
 		<meta name="twitter:title" content="Graphs/Analysis - Disclosing Generative AI Use in Digital Humanities Research"/>
 		<meta name="twitter:description" content="Graphs and analysis based on a generative AI use in digital humanities research disclosure and transparency survey."/>
 		<!-- Preload critical resources -->
-		<link rel="preload" href="/css/style.css?vers=047" as="style"/>
+		<link rel="preload" href="../css/style.css?vers=047" as="style"/>
 		<link rel="preconnect" href="https://fonts.googleapis.com"/>
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
 		<link rel="preconnect" href="https://cdnjs.cloudflare.com"/>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=Source+Sans+Pro:wght@400;600;700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,;:!?()'&quot;-"/>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		<link rel="stylesheet" type="text/css" href="/css/style.css?vers=047"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css?vers=047"/>
 		<script src="https://cdn.plot.ly/plotly-2.27.0.min.js" integrity="sha512-2yjH2FQFIKp1XQ8nSWes+7/zWAPc9qfDolxFGJV1BUO7/+YIAPh1jICUN6TaA+VVlfabERCqo1Hji0yYTFtDew==" crossorigin="anonymous" charset="utf-8"></script>
 	</head>
 
@@ -507,7 +507,7 @@
 			<section aria-labelledby="responses">
 				<h3 id="responses"><em>Bonus:</em> De-identified Survey Responses</h3>
 
-				<p>Download the original de-identified <a href="/csv/de-identified-survey-responses.csv">survey responses</a> and a question-by-question <a href="/pdf/visualization-survey-responses.pdf">visualization</a> of these responses.</p>
+				<p>Download the original de-identified <a href="../csv/de-identified-survey-responses.csv">survey responses</a> and a question-by-question <a href="../pdf/visualization-survey-responses.pdf">visualization</a> of these responses.</p>
 
 			</section>
 		</main>
@@ -1980,7 +1980,7 @@
 			})();
 		</script>
 
-		<script src="/js/sankey_data.js?vers=001"></script>
+		<script src="../js/sankey_data.js?vers=001"></script>
 		<script>
 			// Sankey Diagram (graphs-analysis)
 			(function() {
@@ -2130,12 +2130,19 @@
 			// Includes HTML snippets; vanilla JavaScript implementation
 			document.addEventListener('DOMContentLoaded', function() {
 				var includes = document.querySelectorAll('[data-include]');
+				var basePath = '../';
 				includes.forEach(function(element) {
-					var file = '/common/' + element.getAttribute('data-include') + '.html?vers=005';
+					var file = basePath + 'common/' + element.getAttribute('data-include') + '.html?vers=006';
 					fetch(file)
 						.then(response => response.text())
 						.then(function(data) {
 							element.innerHTML = data;
+							element.querySelectorAll('a[href]').forEach(function(a) {
+								var href = a.getAttribute('href');
+								if (href && !href.startsWith('http') && !href.startsWith('#') && !href.startsWith('mailto:')) {
+									a.setAttribute('href', basePath + href);
+								}
+							});
 								if (element.getAttribute('data-include') === 'nav') {
 									var btn = element.querySelector('.hamburger');
 									var menu = element.querySelector('.nav-menu');
