@@ -752,6 +752,34 @@ footer ul li a:hover {
    width/height:1px and blow out the page (horizontal or vertical overflow on
    mobile). Wrap hidden tables in <div class="sr-only"> instead. */
 
+/* "Show data table on screen" toggle for the visually hidden chart tables */
+.data-table-btn {
+    display: block;
+    margin: 1rem auto 0;
+    padding: .5rem 1rem;
+    font: inherit;
+    font-size: 1.1rem;
+    color: #E8F4F8;
+    background: rgba(90, 147, 172, 0.15);
+    border: 1px solid #5A93AC;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.data-table-btn:hover {
+    background: rgba(90, 147, 172, 0.3);
+}
+
+/* Revealed table: scroll sideways inside the wrapper instead of widening the page */
+.data-table-visible {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.data-table-visible table {
+    table-layout: auto;
+}
+
 /* custom focus styles for accessibility */
 *:focus {
     outline: 2px solid white;
