@@ -334,6 +334,20 @@ td {
     background: rgba(90, 147, 172, 0.05);
 }
 
+/* Narrow phones: keep table inside the viewport */
+@media (max-width: 400px) {
+    table {
+        table-layout: fixed;
+        font-size: 1rem;
+    }
+
+    th, td {
+        padding: .4rem .5rem;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+}
+
 /* Contents box styling */
 .contents-box {
     border: 2px solid #5A93AC;
