@@ -778,6 +778,22 @@ footer ul li a:hover {
 
 .data-table-visible table {
     table-layout: auto;
+    margin-top: 1.25rem;
+}
+
+.data-table-visible caption {
+    margin-bottom: .5rem;
+    font-style: italic;
+}
+
+/* Narrow screens: let cells wrap and tighten padding so wide tables fit without sideways scrolling */
+@media (max-width: 767px) {
+    .data-table-visible th,
+    .data-table-visible td {
+        padding: .4rem .5rem;
+        overflow-wrap: anywhere;
+        hyphens: auto;
+    }
 }
 
 /* custom focus styles for accessibility */

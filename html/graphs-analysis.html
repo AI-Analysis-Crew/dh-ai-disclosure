@@ -18,13 +18,13 @@
 		<meta name="twitter:title" content="Graphs/Analysis - Disclosing Generative AI Use in Digital Humanities Research"/>
 		<meta name="twitter:description" content="Graphs and analysis based on a generative AI use in digital humanities research disclosure and transparency survey."/>
 		<!-- Preload critical resources -->
-		<link rel="preload" href="../css/style.css?vers=049" as="style"/>
+		<link rel="preload" href="../css/style.css?vers=050" as="style"/>
 		<link rel="preconnect" href="https://fonts.googleapis.com"/>
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
 		<link rel="preconnect" href="https://cdnjs.cloudflare.com"/>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=Source+Sans+Pro:wght@400;600;700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,;:!?()'&quot;-"/>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		<link rel="stylesheet" type="text/css" href="../css/style.css?vers=049"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css?vers=050"/>
 		<script src="https://cdn.plot.ly/plotly-2.27.0.min.js" integrity="sha512-2yjH2FQFIKp1XQ8nSWes+7/zWAPc9qfDolxFGJV1BUO7/+YIAPh1jICUN6TaA+VVlfabERCqo1Hji0yYTFtDew==" crossorigin="anonymous" charset="utf-8"></script>
 	</head>
 
@@ -138,7 +138,7 @@
 					</div>
 					</div>
 
-					<button type="button" class="data-table-btn" aria-expanded="false" aria-controls="dt-q8-responses"><span class="data-table-label">Show</span> data table on screen<span class="sr-only"> (Q8 network graph, selection counts)</span></button>
+					<button type="button" class="data-table-btn" aria-expanded="false" aria-controls="dt-q8-responses dt-q8-pairs"><span class="data-table-label">Show</span> data tables on screen<span class="sr-only"> (Q8 network graph)</span></button>
 					<div class="sr-only" id="dt-q8-responses">
 					<table aria-label="Q8 response data: Who should be responsible for ensuring AI disclosure?">
 						<caption>Entities selected as responsible for AI disclosure and their co-selection frequencies (n=107)</caption>
@@ -164,7 +164,6 @@
 					</table>
 					</div>
 
-					<button type="button" class="data-table-btn" aria-expanded="false" aria-controls="dt-q8-pairs"><span class="data-table-label">Show</span> data table on screen<span class="sr-only"> (Q8 network graph, co-selections)</span></button>
 					<div class="sr-only" id="dt-q8-pairs">
 					<table aria-label="Q8 co-selection data: How often entities were selected together">
 						<caption>Top co-selections between entities (strongest connections in the network)</caption>
@@ -445,61 +444,85 @@
 						</div>
 					</div>
 
-					<button type="button" class="data-table-btn" aria-expanded="false" aria-controls="dt-sankey"><span class="data-table-label">Show</span> data table on screen<span class="sr-only"> (Sankey diagram)</span></button>
+					<button type="button" class="data-table-btn" aria-expanded="false" aria-controls="dt-sankey"><span class="data-table-label">Show</span> data tables on screen<span class="sr-only"> (Sankey diagram)</span></button>
 					<div class="sr-only" id="dt-sankey">
-					<table aria-label="Sankey diagram data: Flow of responses across Q6, Q16, Q10, and Q11">
-						<caption>Survey response flows: necessity of disclosure (Q6) to degree (Q16) to frequency (Q10) to volition (Q11), n=107</caption>
+					<table aria-label="Sankey diagram data, step 1: necessity of disclosure (Q6) to degree of disclosure (Q16)">
+						<caption>Necessity of disclosure (Q6) to degree of disclosure (Q16), n=107</caption>
 						<thead>
 							<tr>
-								<th scope="col">Source Node</th>
-								<th scope="col">Target Node</th>
+								<th scope="col">Necessity of disclosure (Q6)</th>
+								<th scope="col">Degree of disclosure (Q16)</th>
 								<th scope="col">Count</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr><td>Q6 - Very necessary (67)</td><td>Q16 - Minimal disclosure (8)</td><td>1</td></tr>
-							<tr><td>Q6 - Very necessary (67)</td><td>Q16 - Brief disclosure (59)</td><td>33</td></tr>
-							<tr><td>Q6 - Very necessary (67)</td><td>Q16 - Detailed disclosure (37)</td><td>33</td></tr>
-							<tr><td>Q6 - Somewhat necessary (21)</td><td>Q16 - Minimal disclosure (8)</td><td>2</td></tr>
-							<tr><td>Q6 - Somewhat necessary (21)</td><td>Q16 - Brief disclosure (59)</td><td>18</td></tr>
-							<tr><td>Q6 - Somewhat necessary (21)</td><td>Q16 - Detailed disclosure (37)</td><td>1</td></tr>
-							<tr><td>Q6 - Neutral (10)</td><td>Q16 - Minimal disclosure (8)</td><td>4</td></tr>
-							<tr><td>Q6 - Neutral (10)</td><td>Q16 - Brief disclosure (59)</td><td>4</td></tr>
-							<tr><td>Q6 - Neutral (10)</td><td>Q16 - Detailed disclosure (37)</td><td>1</td></tr>
-							<tr><td>Q6 - Neutral (10)</td><td>Q16 - Prefer not to answer (3)</td><td>1</td></tr>
-							<tr><td>Q6 - Not very necessary (5)</td><td>Q16 - Minimal disclosure (8)</td><td>1</td></tr>
-							<tr><td>Q6 - Not very necessary (5)</td><td>Q16 - Brief disclosure (59)</td><td>3</td></tr>
-							<tr><td>Q6 - Not very necessary (5)</td><td>Q16 - Prefer not to answer (3)</td><td>1</td></tr>
-							<tr><td>Q6 - Not necessary at all (3)</td><td>Q16 - Brief disclosure (59)</td><td>1</td></tr>
-							<tr><td>Q6 - Not necessary at all (3)</td><td>Q16 - Detailed disclosure (37)</td><td>2</td></tr>
-							<tr><td>Q6 - Prefer not to answer (1)</td><td>Q16 - Prefer not to answer (3)</td><td>1</td></tr>
-							<tr><td>Q16 - Minimal disclosure (8)</td><td>Q10 - Never (73)</td><td>5</td></tr>
-							<tr><td>Q16 - Minimal disclosure (8)</td><td>Q10 - 1-2 times (22)</td><td>1</td></tr>
-							<tr><td>Q16 - Minimal disclosure (8)</td><td>Q10 - More than 10 times (2)</td><td>1</td></tr>
-							<tr><td>Q16 - Minimal disclosure (8)</td><td>Q10 - Prefer not to answer (2)</td><td>1</td></tr>
-							<tr><td>Q16 - Brief disclosure (59)</td><td>Q10 - Never (73)</td><td>36</td></tr>
-							<tr><td>Q16 - Brief disclosure (59)</td><td>Q10 - 1-2 times (22)</td><td>17</td></tr>
-							<tr><td>Q16 - Brief disclosure (59)</td><td>Q10 - 3-5 times (6)</td><td>3</td></tr>
-							<tr><td>Q16 - Brief disclosure (59)</td><td>Q10 - 6-10 times (2)</td><td>1</td></tr>
-							<tr><td>Q16 - Brief disclosure (59)</td><td>Q10 - More than 10 times (2)</td><td>1</td></tr>
-							<tr><td>Q16 - Brief disclosure (59)</td><td>Q10 - Prefer not to answer (2)</td><td>1</td></tr>
-							<tr><td>Q16 - Detailed disclosure (37)</td><td>Q10 - Never (73)</td><td>31</td></tr>
-							<tr><td>Q16 - Detailed disclosure (37)</td><td>Q10 - 1-2 times (22)</td><td>4</td></tr>
-							<tr><td>Q16 - Detailed disclosure (37)</td><td>Q10 - 3-5 times (6)</td><td>1</td></tr>
-							<tr><td>Q16 - Detailed disclosure (37)</td><td>Q10 - 6-10 times (2)</td><td>1</td></tr>
-							<tr><td>Q16 - Prefer not to answer (3)</td><td>Q10 - Never (73)</td><td>1</td></tr>
-							<tr><td>Q16 - Prefer not to answer (3)</td><td>Q10 - 3-5 times (6)</td><td>2</td></tr>
-							<tr><td>Q10 - Never (73)</td><td>Q11 - Never disclosed (73)</td><td>73</td></tr>
-							<tr><td>Q10 - 1-2 times (22)</td><td>Q11 - It was required (9)</td><td>7</td></tr>
-							<tr><td>Q10 - 1-2 times (22)</td><td>Q11 - Both required and voluntary (2)</td><td>1</td></tr>
-							<tr><td>Q10 - 1-2 times (22)</td><td>Q11 - I disclosed it voluntarily (21)</td><td>14</td></tr>
-							<tr><td>Q10 - 3-5 times (6)</td><td>Q11 - It was required (9)</td><td>2</td></tr>
-							<tr><td>Q10 - 3-5 times (6)</td><td>Q11 - I disclosed it voluntarily (21)</td><td>4</td></tr>
-							<tr><td>Q10 - 6-10 times (2)</td><td>Q11 - I disclosed it voluntarily (21)</td><td>2</td></tr>
-							<tr><td>Q10 - More than 10 times (2)</td><td>Q11 - Both required and voluntary (2)</td><td>1</td></tr>
-							<tr><td>Q10 - More than 10 times (2)</td><td>Q11 - Other (1)</td><td>1</td></tr>
-							<tr><td>Q10 - Prefer not to answer (2)</td><td>Q11 - I disclosed it voluntarily (21)</td><td>1</td></tr>
-							<tr><td>Q10 - Prefer not to answer (2)</td><td>Q11 - Prefer not to answer (1)</td><td>1</td></tr>
+							<tr><td>Very necessary</td><td>Minimal disclosure</td><td>1</td></tr>
+							<tr><td>Very necessary</td><td>Brief disclosure</td><td>33</td></tr>
+							<tr><td>Very necessary</td><td>Detailed disclosure</td><td>33</td></tr>
+							<tr><td>Somewhat necessary</td><td>Minimal disclosure</td><td>2</td></tr>
+							<tr><td>Somewhat necessary</td><td>Brief disclosure</td><td>18</td></tr>
+							<tr><td>Somewhat necessary</td><td>Detailed disclosure</td><td>1</td></tr>
+							<tr><td>Neutral</td><td>Minimal disclosure</td><td>4</td></tr>
+							<tr><td>Neutral</td><td>Brief disclosure</td><td>4</td></tr>
+							<tr><td>Neutral</td><td>Detailed disclosure</td><td>1</td></tr>
+							<tr><td>Neutral</td><td>Prefer not to answer</td><td>1</td></tr>
+							<tr><td>Not very necessary</td><td>Minimal disclosure</td><td>1</td></tr>
+							<tr><td>Not very necessary</td><td>Brief disclosure</td><td>3</td></tr>
+							<tr><td>Not very necessary</td><td>Prefer not to answer</td><td>1</td></tr>
+							<tr><td>Not necessary at all</td><td>Brief disclosure</td><td>1</td></tr>
+							<tr><td>Not necessary at all</td><td>Detailed disclosure</td><td>2</td></tr>
+							<tr><td>Prefer not to answer</td><td>Prefer not to answer</td><td>1</td></tr>
+						</tbody>
+					</table>
+					<table aria-label="Sankey diagram data, step 2: degree of disclosure (Q16) to frequency of disclosure (Q10)">
+						<caption>Degree of disclosure (Q16) to frequency of disclosure (Q10), n=107</caption>
+						<thead>
+							<tr>
+								<th scope="col">Degree of disclosure (Q16)</th>
+								<th scope="col">Frequency of disclosure (Q10)</th>
+								<th scope="col">Count</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr><td>Minimal disclosure</td><td>Never</td><td>5</td></tr>
+							<tr><td>Minimal disclosure</td><td>1-2 times</td><td>1</td></tr>
+							<tr><td>Minimal disclosure</td><td>More than 10 times</td><td>1</td></tr>
+							<tr><td>Minimal disclosure</td><td>Prefer not to answer</td><td>1</td></tr>
+							<tr><td>Brief disclosure</td><td>Never</td><td>36</td></tr>
+							<tr><td>Brief disclosure</td><td>1-2 times</td><td>17</td></tr>
+							<tr><td>Brief disclosure</td><td>3-5 times</td><td>3</td></tr>
+							<tr><td>Brief disclosure</td><td>6-10 times</td><td>1</td></tr>
+							<tr><td>Brief disclosure</td><td>More than 10 times</td><td>1</td></tr>
+							<tr><td>Brief disclosure</td><td>Prefer not to answer</td><td>1</td></tr>
+							<tr><td>Detailed disclosure</td><td>Never</td><td>31</td></tr>
+							<tr><td>Detailed disclosure</td><td>1-2 times</td><td>4</td></tr>
+							<tr><td>Detailed disclosure</td><td>3-5 times</td><td>1</td></tr>
+							<tr><td>Detailed disclosure</td><td>6-10 times</td><td>1</td></tr>
+							<tr><td>Prefer not to answer</td><td>Never</td><td>1</td></tr>
+							<tr><td>Prefer not to answer</td><td>3-5 times</td><td>2</td></tr>
+						</tbody>
+					</table>
+					<table aria-label="Sankey diagram data, step 3: frequency of disclosure (Q10) to whether disclosure was required or voluntary (Q11)">
+						<caption>Frequency of disclosure (Q10) to whether disclosure was required or voluntary (Q11), n=107</caption>
+						<thead>
+							<tr>
+								<th scope="col">Frequency of disclosure (Q10)</th>
+								<th scope="col">Required or voluntary (Q11)</th>
+								<th scope="col">Count</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr><td>Never</td><td>Never disclosed</td><td>73</td></tr>
+							<tr><td>1-2 times</td><td>It was required</td><td>7</td></tr>
+							<tr><td>1-2 times</td><td>Both required and voluntary</td><td>1</td></tr>
+							<tr><td>1-2 times</td><td>I disclosed it voluntarily</td><td>14</td></tr>
+							<tr><td>3-5 times</td><td>It was required</td><td>2</td></tr>
+							<tr><td>3-5 times</td><td>I disclosed it voluntarily</td><td>4</td></tr>
+							<tr><td>6-10 times</td><td>I disclosed it voluntarily</td><td>2</td></tr>
+							<tr><td>More than 10 times</td><td>Both required and voluntary</td><td>1</td></tr>
+							<tr><td>More than 10 times</td><td>Other</td><td>1</td></tr>
+							<tr><td>Prefer not to answer</td><td>I disclosed it voluntarily</td><td>1</td></tr>
+							<tr><td>Prefer not to answer</td><td>Prefer not to answer</td><td>1</td></tr>
 						</tbody>
 					</table>
 					</div>
@@ -2210,11 +2233,13 @@
 			// Show/hide the visually hidden data tables; the tables stay in the reading order for screen readers either way
 			document.querySelectorAll('.data-table-btn').forEach(function(btn) {
 				btn.addEventListener('click', function() {
-					var target = document.getElementById(btn.getAttribute('aria-controls'));
-					if (!target) return;
 					var show = btn.getAttribute('aria-expanded') !== 'true';
-					target.classList.toggle('sr-only', !show);
-					target.classList.toggle('data-table-visible', show);
+					btn.getAttribute('aria-controls').split(' ').forEach(function(id) {
+						var target = document.getElementById(id);
+						if (!target) return;
+						target.classList.toggle('sr-only', !show);
+						target.classList.toggle('data-table-visible', show);
+					});
 					btn.setAttribute('aria-expanded', show ? 'true' : 'false');
 					btn.querySelector('.data-table-label').textContent = show ? 'Hide' : 'Show';
 				});
