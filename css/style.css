@@ -158,6 +158,11 @@ figure a:focus {
     outline-offset: 2px;
 }
 
+/* Links inside a figure caption stay in the text flow (the block rule above is for clickable images) */
+figcaption a {
+    display: inline;
+}
+
 /* Figure caption styling */
 .caption {
     font-size: 1.1rem;
