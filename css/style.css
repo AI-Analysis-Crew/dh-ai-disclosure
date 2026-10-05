@@ -777,7 +777,7 @@ footer ul li a:hover {
 
 .data-table-caption {
     max-width: 850px;
-    margin: 1.25rem auto .5rem;
+    margin: 1.5rem auto 1rem;
     font-size: 1.1rem;
     font-style: italic;
     text-align: center;
@@ -785,12 +785,25 @@ footer ul li a:hover {
 
 .data-table-visible table {
     table-layout: auto;
-    margin-top: 0;
 }
 
-/* The gap below the first Q8 table comes from the next table's caption */
-#dt-q8-responses table {
+/* Spacing sits on the scroll container, not the table, so it merges with the next element's margin
+   (graph 2rem, h4 3rem, next caption 1.5rem) and the bottom scroll bar stays next to the table */
+.data-table-scroll table {
+    margin: 0 auto;
+}
+
+.data-table-scroll {
+    margin-bottom: 2rem;
+}
+
+/* Q8: 1.25rem between its two tables */
+#dt-q8-responses .data-table-scroll {
     margin-bottom: 0;
+}
+
+#dt-q8-pairs .data-table-caption {
+    margin-top: 1.25rem;
 }
 
 /* Scrolling: the table scrolls inside .data-table-scroll, and .data-table-scroll-top mirrors its scroll bar above the table */
@@ -798,7 +811,7 @@ footer ul li a:hover {
 .data-table-scroll-top {
     max-width: 100%;
     scrollbar-width: auto;
-    scrollbar-color: #A8D5E2 #2A3B52;
+    scrollbar-color: #FFFFFF #2A3B52;
 }
 
 .data-table-scroll {
@@ -809,7 +822,6 @@ footer ul li a:hover {
     display: none;
     overflow-x: scroll;
     overflow-y: hidden;
-    margin-bottom: .25rem;
 }
 
 .data-table-scroll-top > div {
@@ -829,18 +841,25 @@ footer ul li a:hover {
 
 .data-table-scroll::-webkit-scrollbar-thumb,
 .data-table-scroll-top::-webkit-scrollbar-thumb {
-    background: #A8D5E2;
+    background: #FFFFFF;
     border: 3px solid #2A3B52;
     border-radius: 8px;
 }
 
-/* Narrow screens: let cells wrap and tighten padding so wide tables fit without sideways scrolling */
+/* Narrow screens: let cells wrap (with logical, hyphenated breaks) and tighten padding so wide tables fit without sideways scrolling */
 @media (max-width: 767px) {
+    .data-table-caption {
+        line-height: normal;
+    }
+
     .data-table-visible th,
     .data-table-visible td {
         padding: .4rem .5rem;
-        overflow-wrap: anywhere;
+        /* Break long words at syllables and add a hyphen; break-word only catches strings with no break point, such as "Q15" */
+        -webkit-hyphens: auto;
         hyphens: auto;
+        hyphenate-limit-chars: 7 3 3;
+        overflow-wrap: break-word;
     }
 }
 
