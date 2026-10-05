@@ -18,13 +18,13 @@
 		<meta name="twitter:title" content="Graphs/Analysis - Disclosing Generative AI Use in Digital Humanities Research"/>
 		<meta name="twitter:description" content="Graphs and analysis based on a generative AI use in digital humanities research disclosure and transparency survey."/>
 		<!-- Preload critical resources -->
-		<link rel="preload" href="../css/style.css?vers=052" as="style"/>
+		<link rel="preload" href="../css/style.css?vers=055" as="style"/>
 		<link rel="preconnect" href="https://fonts.googleapis.com"/>
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
 		<link rel="preconnect" href="https://cdnjs.cloudflare.com"/>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=Source+Sans+Pro:wght@400;600;700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,;:!?()'&quot;-"/>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		<link rel="stylesheet" type="text/css" href="../css/style.css?vers=052"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css?vers=055"/>
 		<script src="https://cdn.plot.ly/plotly-2.27.0.min.js" integrity="sha512-2yjH2FQFIKp1XQ8nSWes+7/zWAPc9qfDolxFGJV1BUO7/+YIAPh1jICUN6TaA+VVlfabERCqo1Hji0yYTFtDew==" crossorigin="anonymous" charset="utf-8"></script>
 	</head>
 
@@ -2231,14 +2231,56 @@
 
 		<script>
 			// Show/hide the visually hidden data tables; the tables stay in the reading order for screen readers either way.
-			// Each table gets a scroll container plus a mirrored scroll bar above it, so wide tables are easy to scroll and never look cut off.
+			// Each table scrolls inside a container, with a bar drawn above and below it so the bars are always visible.
 			(function() {
 				var allRigs = [];
 
-				function refresh(rig) {
-					var overflowing = rig.scroll.scrollWidth > rig.scroll.clientWidth + 1;
-					rig.top.style.display = overflowing ? 'block' : 'none';
-					rig.spacer.style.width = rig.scroll.scrollWidth + 'px';
+				function makeBar(scroll) {
+					var track = document.createElement('div');
+					track.className = 'data-table-bar';
+					track.setAttribute('aria-hidden', 'true');
+					var thumb = document.createElement('div');
+					thumb.className = 'data-table-bar-thumb';
+					track.appendChild(thumb);
+
+					function update() {
+						var overflow = scroll.scrollWidth - scroll.clientWidth;
+						if (overflow <= 1 || !track.parentNode) { track.style.display = 'none'; return; }
+						track.style.display = 'block';
+						var thumbWidth = Math.max(40, track.clientWidth * scroll.clientWidth / scroll.scrollWidth);
+						thumb.style.width = thumbWidth + 'px';
+						thumb.style.left = ((track.clientWidth - thumbWidth) * scroll.scrollLeft / overflow) + 'px';
+					}
+
+					// Drag the thumb
+					thumb.addEventListener('pointerdown', function(e) {
+						e.preventDefault();
+						var startX = e.clientX;
+						var startScroll = scroll.scrollLeft;
+						var overflow = scroll.scrollWidth - scroll.clientWidth;
+						var room = track.clientWidth - thumb.offsetWidth;
+						thumb.setPointerCapture(e.pointerId);
+						function move(ev) { scroll.scrollLeft = startScroll + (ev.clientX - startX) * overflow / room; }
+						function stop() {
+							thumb.removeEventListener('pointermove', move);
+							thumb.removeEventListener('pointerup', stop);
+							thumb.removeEventListener('pointercancel', stop);
+						}
+						thumb.addEventListener('pointermove', move);
+						thumb.addEventListener('pointerup', stop);
+						thumb.addEventListener('pointercancel', stop);
+					});
+
+					// Click the track to jump there
+					track.addEventListener('pointerdown', function(e) {
+						if (e.target !== track) return;
+						var overflow = scroll.scrollWidth - scroll.clientWidth;
+						var room = track.clientWidth - thumb.offsetWidth;
+						var x = e.clientX - track.getBoundingClientRect().left - thumb.offsetWidth / 2;
+						scroll.scrollLeft = Math.min(Math.max(x / room, 0), 1) * overflow;
+					});
+
+					return { track: track, update: update };
 				}
 
 				document.querySelectorAll('.data-table-btn').forEach(function(btn) {
@@ -2251,27 +2293,30 @@
 						wrappers.push(wrapper);
 
 						wrapper.querySelectorAll('table').forEach(function(table) {
+							var block = document.createElement('div');
+							block.className = 'data-table-block';
 							var scroll = document.createElement('div');
 							scroll.className = 'data-table-scroll';
-							var top = document.createElement('div');
-							top.className = 'data-table-scroll-top';
-							top.setAttribute('aria-hidden', 'true');
-							top.tabIndex = -1;
-							var spacer = document.createElement('div');
-							top.appendChild(spacer);
 
-							table.parentNode.insertBefore(scroll, table);
+							table.parentNode.insertBefore(block, table);
 							scroll.appendChild(table);
-							scroll.parentNode.insertBefore(top, scroll);
+							var topBar = makeBar(scroll);
+							var bottomBar = makeBar(scroll);
+							block.appendChild(topBar.track);
+							block.appendChild(scroll);
+							block.appendChild(bottomBar.track);
 
-							top.addEventListener('scroll', function() { scroll.scrollLeft = top.scrollLeft; });
-							scroll.addEventListener('scroll', function() { top.scrollLeft = scroll.scrollLeft; });
+							var rig = {
+								scroll: scroll,
+								label: table.getAttribute('aria-label') || 'Data table',
+								update: function() { topBar.update(); bottomBar.update(); }
+							};
+							scroll.addEventListener('scroll', rig.update);
 
-							var rig = { scroll: scroll, top: top, spacer: spacer, label: table.getAttribute('aria-label') || 'Data table' };
 							rigs.push(rig);
 							allRigs.push(rig);
 							if (window.ResizeObserver) {
-								new ResizeObserver(function() { refresh(rig); }).observe(table);
+								new ResizeObserver(rig.update).observe(table);
 							}
 						});
 					});
@@ -2288,7 +2333,7 @@
 								rig.scroll.setAttribute('tabindex', '0');
 								rig.scroll.setAttribute('role', 'region');
 								rig.scroll.setAttribute('aria-label', rig.label);
-								refresh(rig);
+								rig.update();
 							} else {
 								rig.scroll.removeAttribute('tabindex');
 								rig.scroll.removeAttribute('role');
@@ -2300,7 +2345,7 @@
 					});
 				});
 
-				window.addEventListener('resize', function() { allRigs.forEach(refresh); });
+				window.addEventListener('resize', function() { allRigs.forEach(function(rig) { rig.update(); }); });
 			})();
 		</script>
 	</body>

@@ -787,63 +787,44 @@ footer ul li a:hover {
     table-layout: auto;
 }
 
-/* Spacing sits on the scroll container, not the table, so it merges with the next element's margin
-   (graph 2rem, h4 3rem, next caption 1.5rem) and the bottom scroll bar stays next to the table */
 .data-table-scroll table {
     margin: 0 auto;
 }
 
-.data-table-scroll {
-    margin-bottom: 2rem;
-}
-
-/* Q8: 1.25rem between its two tables */
-#dt-q8-responses .data-table-scroll {
-    margin-bottom: 0;
-}
-
-#dt-q8-pairs .data-table-caption {
-    margin-top: 1.25rem;
-}
-
-/* Scrolling: the table scrolls inside .data-table-scroll, and .data-table-scroll-top mirrors its scroll bar above the table */
-.data-table-scroll,
-.data-table-scroll-top {
+/* The table scrolls inside .data-table-scroll (native bar hidden). Two bars drawn by the page, above and
+   below the table, mirror it, so they stay visible. The block's margin merges with the next element's
+   margin (graph 2rem, h4 3rem, next caption 1.5rem). */
+.data-table-block {
     max-width: 100%;
-    scrollbar-width: auto;
-    scrollbar-color: #FFFFFF #2A3B52;
+    margin-bottom: 2rem;
 }
 
 .data-table-scroll {
     overflow-x: auto;
+    scrollbar-width: none;
 }
 
-.data-table-scroll-top {
+.data-table-scroll::-webkit-scrollbar {
     display: none;
-    overflow-x: scroll;
-    overflow-y: hidden;
 }
 
-.data-table-scroll-top > div {
-    height: 1px;
-}
-
-.data-table-scroll::-webkit-scrollbar,
-.data-table-scroll-top::-webkit-scrollbar {
-    height: 16px;
-}
-
-.data-table-scroll::-webkit-scrollbar-track,
-.data-table-scroll-top::-webkit-scrollbar-track {
+.data-table-bar {
+    display: none;
+    position: relative;
+    height: 9px;
     background: #2A3B52;
-    border-radius: 8px;
+    border-radius: 4.5px;
 }
 
-.data-table-scroll::-webkit-scrollbar-thumb,
-.data-table-scroll-top::-webkit-scrollbar-thumb {
+.data-table-bar-thumb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
     background: #FFFFFF;
-    border: 3px solid #2A3B52;
-    border-radius: 8px;
+    border-radius: 4.5px;
+    cursor: grab;
+    touch-action: none;
 }
 
 /* Narrow screens: let cells wrap (with logical, hyphenated breaks) and tighten padding so wide tables fit without sideways scrolling */
