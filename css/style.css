@@ -842,6 +842,12 @@ footer ul li a:hover {
         hyphenate-limit-chars: 7 3 3;
         overflow-wrap: break-word;
     }
+
+    /* Tables with many columns (Q14, heatmap): keep each column readable and scroll sideways instead of squeezing */
+    .data-table-wide th,
+    .data-table-wide td {
+        min-width: 7rem;
+    }
 }
 
 /* custom focus styles for accessibility */
