@@ -311,7 +311,7 @@ section[aria-labelledby="survey-box"] h2 {
 
 /* Table styling */
 table {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     width: 100%;
     border-collapse: collapse;
     margin: 2rem auto;
@@ -770,20 +770,68 @@ footer ul li a:hover {
     background: rgba(90, 147, 172, 0.3);
 }
 
-/* Revealed table: scroll sideways inside the wrapper instead of widening the page */
+/* Revealed table: caption stays outside the table, so it never scrolls away */
 .data-table-visible {
     max-width: 100%;
-    overflow-x: auto;
+}
+
+.data-table-caption {
+    max-width: 850px;
+    margin: 1.25rem auto .5rem;
+    font-size: 1.1rem;
+    font-style: italic;
+    text-align: center;
 }
 
 .data-table-visible table {
     table-layout: auto;
-    margin-top: 1.25rem;
+    margin-top: 0;
 }
 
-.data-table-visible caption {
-    margin-bottom: .5rem;
-    font-style: italic;
+/* The gap below the first Q8 table comes from the next table's caption */
+#dt-q8-responses table {
+    margin-bottom: 0;
+}
+
+/* Scrolling: the table scrolls inside .data-table-scroll, and .data-table-scroll-top mirrors its scroll bar above the table */
+.data-table-scroll,
+.data-table-scroll-top {
+    max-width: 100%;
+    scrollbar-width: auto;
+    scrollbar-color: #A8D5E2 #2A3B52;
+}
+
+.data-table-scroll {
+    overflow-x: auto;
+}
+
+.data-table-scroll-top {
+    display: none;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    margin-bottom: .25rem;
+}
+
+.data-table-scroll-top > div {
+    height: 1px;
+}
+
+.data-table-scroll::-webkit-scrollbar,
+.data-table-scroll-top::-webkit-scrollbar {
+    height: 16px;
+}
+
+.data-table-scroll::-webkit-scrollbar-track,
+.data-table-scroll-top::-webkit-scrollbar-track {
+    background: #2A3B52;
+    border-radius: 8px;
+}
+
+.data-table-scroll::-webkit-scrollbar-thumb,
+.data-table-scroll-top::-webkit-scrollbar-thumb {
+    background: #A8D5E2;
+    border: 3px solid #2A3B52;
+    border-radius: 8px;
 }
 
 /* Narrow screens: let cells wrap and tighten padding so wide tables fit without sideways scrolling */
