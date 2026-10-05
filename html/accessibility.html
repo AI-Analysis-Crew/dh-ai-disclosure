@@ -64,6 +64,7 @@
 					<li><a href="#performance">Performance &amp; Resource Loading</a></li>
 					<li><a href="#typography">Typography</a></li>
 					<li><a href="#navigation">Navigation</a></li>
+					<li><a href="#limitations">Limitations</a></li>
 				</ol>
 			</section>
 
@@ -82,15 +83,15 @@
 				<h3 id="aria-attributes">ARIA Attributes</h3>
 				<ul role="list">
 					<li><code>aria-label</code> on all external links, email links, chart containers, and interactive buttons</li>
-					<li><code>aria-expanded</code> on hamburger menu button, toggled dynamically via JS</li>
+					<li><code>aria-expanded</code> on the hamburger menu button and on the "Show data table on screen" buttons (with <code>aria-controls</code> pointing to the corresponding tables), toggled dynamically via JS</li>
 					<li><code>role="img"</code> with descriptive <code>aria-label</code> on Plotly chart containers</li>
 					<li><code>aria-labelledby</code> connecting <code>&lt;main&gt;</code> and <code>&lt;section&gt;</code> elements to their headings</li>
 				</ul>
 				<h3 id="screen-reader">Screen Reader Support</h3>
 				<ul role="list">
 					<li><code>.sr-only</code> utility class (1px clip, off-screen positioning)</li>
-					<li>Screen-reader-only data tables for every interactive chart</li>
-					<li>Table <code>&lt;caption&gt;</code> elements describing chart data</li>
+					<li>A data table for every interactive graph on the <a href="graphs-analysis.html">Graphs/Analysis page</a> (the <a href="../index.html">homepage</a> Sankey graph only has a text description; the graph with its data table appears on the <a href="graphs-analysis.html">Graphs/Analysis page</a>): screen readers can read it in place while a "Show data table on screen" button displays it onscreen</li>
+					<li>A caption above each data table, outside the table, so it stays visible when the table scrolls sideways. Each table is named with <code>aria-label</code></li>
 				</ul>
 				<h3 id="skip-link">Skip Link</h3>
 				<ul role="list">
@@ -102,6 +103,8 @@
 					<li>Custom focus styles on hamburger button, close button, select dropdowns, figure links</li>
 					<li>Skip link visible on focus with z-index 1000</li>
 					<li><code>scroll-padding-top: 6.5rem</code> to account for fixed nav on anchor jumps</li>
+					<li>A displayed data table can be focused and scrolled sideways with the arrow keys (<code>tabindex="0"</code>, <code>role="region"</code> and an <code>aria-label</code> naming the table)</li>
+					<li>Always-visible scroll bars above and below wide data tables (white scroll bar on a dark track), drawn by the page because some browsers hide their own scroll bars until the pointer hovers over them</li>
 				</ul>
 				<h3 id="color-contrast">Color &amp; Contrast</h3>
 				<ul role="list">
@@ -115,6 +118,8 @@
 					<li>Responsive font sizes in <code>rem</code> units scaling across breakpoints</li>
 					<li>Body line-height 1.8 for readability</li>
 					<li>Responsive padding adjustments per viewport</li>
+					<li>Data tables use 1.1rem text (1rem on the narrowest screens), and on narrow screens their cells break long words at syllables with a dash (<code>hyphens: auto</code>)</li>
+					<li>Wide data tables (the <a href="graphs-analysis.html#context">Q14</a> and <a href="graphs-analysis.html#practice">heatmap</a> tables) keep a minimum column width and scroll sideways instead of narrowing their columns</li>
 				</ul>
 				<h3 id="responsive-images">Responsive Images</h3>
 				<ul role="list">
@@ -125,7 +130,7 @@
 				<h3 id="touch-device">Touch Device Accessibility</h3>
 				<ul role="list">
 					<li><code>window.matchMedia('(any-hover: hover)')</code> detection for hover capability</li>
-					<li>Tap-to-toggle info panels replacing tooltips on touch-only devices</li>
+					<li>Tap-to-toggle info panels replacing tooltips on touch-only devices, on all seven graphs</li>
 					<li><code>hovermode: false</code> on Plotly charts for touch devices</li>
 					<li>Adequate touch target sizing on mobile nav items</li>
 				</ul>
@@ -168,6 +173,11 @@
 					<li>Mobile hamburger menu with <code>aria-label</code>, overlay dismiss, and close button</li>
 					<li>Table of contents ("Contents" box) for in-page section navigation</li>
 					<li>Plotly mode bar hidden (<code>displayModeBar: false</code>) to reduce UI clutter</li>
+				</ul>
+				<h3 id="limitations">Limitations</h3>
+				<ul role="list">
+					<li>The hover tooltips on the graphs are not keyboard-accessible. However, the data tables provided with each graph contain the same information and can be viewed with the "Show data table on screen" button or read with a screen reader.</li>
+					<li>The data table of co-selection items beneath the network graph for <a href="graphs-analysis.html#responsible">"Who Should Be Responsible for Ensuring AI Disclosure?"</a> lists only 10 of the 45 pairs displayed by the graph. Hovering over a connection in the graph gives the count for any pair.</li>
 				</ul>
 			</section>
 		</main>
