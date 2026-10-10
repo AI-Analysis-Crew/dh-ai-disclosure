@@ -693,6 +693,49 @@ li > ol > li:last-child {
     padding-bottom: 0;
 }
 
+/* bibliography description list: each reference has a hanging indent, its description is indented beneath it */
+.bibliography-list {
+    margin: 0;
+}
+
+.bibliography-list dt,
+.bibliography-list dd {
+    color: #D4E8F0;
+    line-height: 1.8;
+}
+
+.bibliography-list dt {
+    margin-top: 1.75rem;
+    padding-left: 2rem;
+    text-indent: -2rem;
+}
+
+.bibliography-list dt:first-child {
+    margin-top: 0;
+}
+
+.bibliography-list dd {
+    margin: .5rem 0 0 2rem;
+}
+
+/* bullet and a space as the first characters of each annotation; the second content declaration gives it empty alt text so screen readers skip it */
+.bibliography-list dd::before {
+    content: "• ";
+    content: "• " / "";
+}
+
+/* Extra small devices (phones, up to 400px) */
+@media (max-width: 400px) {
+    .bibliography-list dt {
+        padding-left: 1.5rem;
+        text-indent: -1.5rem;
+    }
+
+    .bibliography-list dd {
+        margin-left: 1.5rem;
+    }
+}
+
 /* center utility class */
 .center {
     text-align: center;
