@@ -722,13 +722,18 @@ li > ol > li:last-child {
 .bibliography-list dd,
 .organizations-list dd {
     margin: .5rem 0 0 2rem;
+    padding-left: 1rem;
+    text-indent: -1rem;
 }
 
-/* bullet and a space as the first characters of each annotation; the second content declaration gives it empty alt text so screen readers skip it */
+/* bullet at the start of each annotation, in a 1rem box so wrapped lines align with the first line of text; the second content declaration gives it empty alt text so screen readers skip it */
 .bibliography-list dd::before,
 .organizations-list dd::before {
-    content: "• ";
-    content: "• " / "";
+    content: "•";
+    content: "•" / "";
+    display: inline-block;
+    width: 1rem;
+    text-indent: 0;
 }
 
 /* Extra small devices (phones, up to 400px) */
