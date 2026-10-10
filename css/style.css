@@ -736,6 +736,30 @@ li > ol > li:last-child {
     }
 }
 
+/* works cited list: no bullets, each entry has a hanging indent */
+.works-cited-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.works-cited-list li {
+    margin-top: 1rem;
+    padding: 0 0 0 2rem;
+    text-indent: -2rem;
+}
+
+.works-cited-list li:first-child {
+    margin-top: 0;
+}
+
+/* Extra small devices (phones, up to 400px) */
+@media (max-width: 400px) {
+    .works-cited-list li {
+        padding-left: 1.5rem;
+        text-indent: -1.5rem;
+    }
+}
+
 /* center utility class */
 .center {
     text-align: center;
