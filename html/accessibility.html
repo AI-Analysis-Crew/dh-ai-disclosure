@@ -10,7 +10,7 @@
 		<meta property="og:type" content="website"/>
 		<meta property="og:title" content="Accessibility - Disclosing Generative AI Use in Digital Humanities Research"/>
 		<meta property="og:description" content="Accessibility features of the Disclosing Generative AI Use in Digital Humanities Research project site."/>
-		<meta property="og:url" content="https://dh-ai-disclosure.github.io/html/accessibility.html"/>
+		<meta property="og:url" content="https://ai-analysis-crew.github.io/dh-ai-disclosure/html/accessibility.html"/>
 		<meta property="og:site_name" content="DH AI Disclosure"/>
 		<meta property="og:locale" content="en_US"/>
 		<!-- Twitter Card meta tags -->
@@ -18,13 +18,13 @@
 		<meta name="twitter:title" content="Accessibility - Disclosing Generative AI Use in Digital Humanities Research"/>
 		<meta name="twitter:description" content="Accessibility features of the Disclosing Generative AI Use in Digital Humanities Research project site."/>
 		<!-- Preload critical resources -->
-		<link rel="preload" href="../css/style.css?vers=061" as="style"/>
+		<link rel="preload" href="../css/style.css?vers=062" as="style"/>
 		<link rel="preconnect" href="https://fonts.googleapis.com"/>
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
 		<link rel="preconnect" href="https://cdnjs.cloudflare.com"/>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=Source+Sans+Pro:wght@400;600;700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,;:!?()'&quot;-"/>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		<link rel="stylesheet" type="text/css" href="../css/style.css?vers=061"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css?vers=062"/>
 	</head>
 
 	<body>
@@ -95,7 +95,7 @@
 					<li>A caption above each data table, outside the table, so it stays visible when the table scrolls sideways. Each table is named with <code>aria-label</code></li>
 					<li>The Bibliography page list is announced with its number of entries, and each description is read directly after the reference it belongs to</li>
 					<li>Reference titles in a language other than English are marked with a <code>lang</code> attribute (for example <code>lang="de"</code> on a German journal name) so screen readers pronounce them correctly</li>
-					<li>Each link on the Bibliography page opens in a new tab and says so in its accessible name (for example, "(opens in new tab)")</li>
+					<li>Each link in the <a href="bibliography.html">Bibliography</a> and in the <a href="../index.html#works-cited">Works Cited</a> list on the homepage opens in a new tab and says so in its accessible name (for example, "(opens in new tab)")</li>
 				</ul>
 				<h3 id="skip-link">Skip Link</h3>
 				<ul role="list">
@@ -193,7 +193,7 @@
 				var includes = document.querySelectorAll('[data-include]');
 				var basePath = '../';
 				includes.forEach(function(element) {
-					var file = basePath + 'common/' + element.getAttribute('data-include') + '.html?vers=009';
+					var file = basePath + 'common/' + element.getAttribute('data-include') + '.html?vers=010';
 					fetch(file)
 						.then(response => response.text())
 						.then(function(data) {
