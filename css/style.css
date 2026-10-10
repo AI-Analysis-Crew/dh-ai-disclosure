@@ -525,8 +525,8 @@ nav ul li a,
     display: none;
 }
 
-/* Mobile nav (below 768px) */
-@media (max-width: 767px) {
+/* Mobile nav (below 992px) */
+@media (max-width: 991px) {
     [data-include="nav"] {
         padding: 0.75rem 1rem;
     }
