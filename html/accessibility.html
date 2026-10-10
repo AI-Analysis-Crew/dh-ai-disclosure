@@ -79,6 +79,7 @@
 					<li><code>&lt;section aria-labelledby="..."&gt;</code> linking sections to their headings</li>
 					<li><code>&lt;ul role="list"&gt;</code> for explicit list semantics</li>
 					<li>Semantic table markup with <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;th scope="col"&gt;</code></li>
+					<li>A description list (<code>&lt;dl&gt;</code>, with <code>&lt;dt&gt;</code> and <code>&lt;dd&gt;</code>) on the <a href="bibliography.html">Bibliography page</a>, so each reference is programmatically paired with its description</li>
 				</ul>
 				<h3 id="aria-attributes">ARIA Attributes</h3>
 				<ul role="list">
@@ -92,6 +93,9 @@
 					<li><code>.sr-only</code> utility class (1px clip, off-screen positioning)</li>
 					<li>A data table for every interactive graph on the <a href="graphs-analysis.html">Graphs/Analysis page</a> (the <a href="../index.html">homepage</a> Sankey graph only has a text description; the graph with its data table appears on the <a href="graphs-analysis.html">Graphs/Analysis page</a>): screen readers can read it in place while a "Show data table on screen" button displays it onscreen</li>
 					<li>A caption above each data table, outside the table, so it stays visible when the table scrolls sideways. Each table is named with <code>aria-label</code></li>
+					<li>The Bibliography page list is announced with its number of entries, and each description is read directly after the reference it belongs to</li>
+					<li>Reference titles in a language other than English are marked with a <code>lang</code> attribute (for example <code>lang="de"</code> on a German journal name) so screen readers pronounce them correctly</li>
+					<li>Each link on the Bibliography page opens in a new tab and says so in its accessible name (for example, "(opens in new tab)")</li>
 				</ul>
 				<h3 id="skip-link">Skip Link</h3>
 				<ul role="list">
