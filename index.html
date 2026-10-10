@@ -11,7 +11,7 @@
 		<meta property="og:type" content="website"/>
 		<meta property="og:title" content="Disclosing Generative AI Use in Digital Humanities Research"/>
 		<meta property="og:description" content="Survey study investigating how digital humanists perceive and approach generative AI disclosure in research. Empirical guidance for scholars, institutional leaders, funders, and stakeholders."/>
-		<meta property="og:url" content="https://dh-ai-disclosure.github.io/"/>
+		<meta property="og:url" content="https://ai-analysis-crew.github.io/dh-ai-disclosure/"/>
 		<meta property="og:site_name" content="DH AI Disclosure"/>
 		<meta property="og:locale" content="en_US"/>
 		<!-- Twitter Card meta tags -->
@@ -23,13 +23,13 @@
 		<!--<link rel="/apple-touch-icon" sizes="180x180" href=""/>-->
 		<!--<link rel="/manifest" href="/site.webmanifest"/>-->
 		<!-- Preload critical resources -->
-		<link rel="preload" href="./css/style.css?vers=061" as="style"/>
+		<link rel="preload" href="./css/style.css?vers=062" as="style"/>
 		<link rel="preconnect" href="https://fonts.googleapis.com"/>
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 		<link rel="preconnect" href="https://cdnjs.cloudflare.com"/>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=Source+Sans+Pro:wght@400;600;700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,;:!?()'&quot;-"/>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		<link rel="stylesheet" type="text/css" href="./css/style.css?vers=061"/>
+		<link rel="stylesheet" type="text/css" href="./css/style.css?vers=062"/>
 		<!-- Plotly.js CDN for Sankey diagram -->
 		<script src="https://cdn.plot.ly/plotly-2.27.0.min.js" integrity="sha512-2yjH2FQFIKp1XQ8nSWes+7/zWAPc9qfDolxFGJV1BUO7/+YIAPh1jICUN6TaA+VVlfabERCqo1Hji0yYTFtDew==" crossorigin="anonymous" charset="utf-8"></script>
 	</head>
@@ -42,7 +42,7 @@
 			"@type": "ScholarlyArticle",
 			"name": "Disclosing Generative AI Use in Digital Humanities Research",
 			"description": "This survey study investigates how digital humanists perceive and approach generative AI (GenAI) disclosure in research. The results indicate that while digital humanities scholars acknowledge the importance of disclosing GenAI use, the actual rate of disclosure in research practice remains low.",
-			"url": "https://dh-ai-disclosure.github.io/",
+			"url": "https://ai-analysis-crew.github.io/dh-ai-disclosure/",
 			"inLanguage": "en",
 			"about": {
 				"@type": "Thing",
@@ -109,6 +109,7 @@
 					<li><a href="#results">Results</a></li>
 					<li><a href="#conference">Conference Presentation</a></li>
 					<li><a href="#site-code">Site Code</a></li>
+					<li><a href="#works-cited">Works Cited</a></li>
 				</ol>
 			</section>
 			<section aria-labelledby="development">
@@ -125,8 +126,8 @@
 			</section>
 			<section aria-labelledby="background">
 				<h2 id="background">Background</h2>
-				<p>Generative AI (GenAI) now permeates almost every aspect of daily life and has become integral to academic work. Although its use offers clear benefits to researchers, it also raises challenging questions about academic integrity and research ethics (Van Noorden et al., 2023; Hosseini et al., 2023; Abdelhafiz et al., 2024; Dedema &amp; Ma, 2024; Ng et al., 2025). Disclosure has therefore emerged as a potential policy solution.</p>
-        <p>Resnik et al. (2025) propose a three-tier framework distinguishing mandatory, optional, and unnecessary disclosure. This framework demonstrates the increasingly nuanced guidance now issued by publishers. Publishers agree that GenAI tools cannot be listed as authors, yet their disclosure policies vary:</p>
+				<p>Generative AI (GenAI) now permeates almost every aspect of daily life and has become integral to academic work. Although its use offers clear benefits to researchers, it also raises challenging questions about academic integrity and research ethics (Van Noorden &amp; Perkel, 2023; Hosseini et al., 2023; Abdelhafiz et al., 2024; Dedema &amp; Ma, 2024; Ng et al., 2025). Disclosure has therefore emerged as a potential policy solution.</p>
+        <p>Resnik &amp; Hosseini (2026) propose a three-tier framework distinguishing mandatory, optional, and unnecessary disclosure. This framework demonstrates the increasingly nuanced guidance now issued by publishers. Publishers agree that GenAI tools cannot be listed as authors, yet their disclosure policies vary:</p>
         <table>
           <colgroup>
             <col style="width: 38%" />
@@ -141,11 +142,11 @@
           <tbody>
             <tr class="odd">
               <td><strong>Disclosure Distinctions</strong></td>
-              <td>Most publishers distinguish between routine language polishing (grammar, spelling) and substantive content generation: the former typically escapes disclosure, whereas the latter demands it (STM, 2023)</td>
+              <td>Most publishers distinguish between routine language polishing (grammar, spelling) and substantive content generation: the former typically escapes disclosure, whereas the latter demands it (International Association of Scientific, Technical &amp; Medical Publishers [STM], 2025)</td>
             </tr>
             <tr class="even">
               <td><strong>Strict Implementation</strong></td>
-              <td>Journals such as <em>Science</em> (2023) and Wiley (2023) titles require detailed statements describing the software, provider, and prompts used, with authors affirming full responsibility</td>
+              <td>Journals such as <em>Science</em> (American Association for the Advancement of Science [AAAS], 2023) and Wiley (2023) titles require detailed statements describing the software, provider, and prompts used, with authors affirming full responsibility</td>
             </tr>
             <tr class="odd">
               <td><strong>Moderate Implementation</strong></td>
@@ -157,7 +158,7 @@
             </tr>
           </tbody>
         </table>
-        <p>However, policies that mandate AI disclosure can produce unintended consequences. Empirical research has identified an “AI disclosure penalty” in both professional and creative domains. The magnitude varies by context: professional settings show moderate penalties (Reis et al., 2024; Proksch et al., 2024); creative contexts show smaller but still significant penalties (Horton Jr. et al., 2023). Studies consistently suggest AI disclosure reduces perceived credibility across multiple contexts (Longoni et al., 2021; Henestrosa and Kimmerle, 2024).</p>
+        <p>However, policies that mandate AI disclosure can produce unintended consequences. Empirical research has identified an “AI disclosure penalty” in both professional and creative domains. The magnitude varies by context: professional settings show moderate penalties (Reis et al., 2024; Proksch et al., 2024); creative contexts show smaller but still significant penalties (Horton et al., 2023). Studies consistently suggest AI disclosure reduces perceived credibility across multiple contexts (Longoni et al., 2021; Lermann Henestrosa &amp; Kimmerle, 2024).</p>
         <p>Given these context-dependent penalties, understanding how different audiences interpret AI disclosure is important. A recent <em>Nature</em> survey reveals deep divisions among scholars over whether GenAI use should be declared at all and, if so, how much detail such declarations should include (Kwon, 2025).</p>
 			</section>
       <section aria-labelledby="research-questions">
@@ -182,7 +183,7 @@
           <h3 id="qualtrics-survey">Qualtrics Survey</h3>
           <ul>
             <li>Distributed 20 February to 6 May 2025 via social media (Bluesky, Slack, LinkedIn) and digital humanities mailing lists</li>
-            <li>Digital humanists self-identify due to lack of clear definition for “digital humanist” (Ma, 2022; Ramsay, 2011)</li>
+            <li>Digital humanists self-identify due to lack of clear definition for “digital humanist” (Ma, 2022; Ramsay, 2013)</li>
             <li>30 questions organized into 3 sections:
               <ul>
                 <li>Demographics</li>
@@ -305,6 +306,31 @@
 				<p>The code for this site is adapted from the <a aria-label="One More Voice project site" href="https://onemorevoice.org/" target="_blank" rel="noopener noreferrer">One More Voice</a> project site. The code for that site is released under a <a aria-label="Creative Commons Attribution-NonCommercial 4.0 International license" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener noreferrer">Creative Commons Attribution-NonCommercial 4.0 International</a> (CC BY-NC 4.0) license and may be reused for educational and other non-commercial purposes as long as proper attribution is given.</p> 
 				<p>The code for the present site was further developed using a combination of human effort plus use of Claude Sonnet 4.5, Sonnet 4.6, and Opus 4.6 from the <a aria-label="Claude website" href="https://claude.ai/" target="_blank" rel="noopener noreferrer">Claude</a> website and from Claude Code v.2.0.1, v.2.0.37., v.2.1.89, and v2.1.285 as well as Gemini 3.1 Pro from the <a aria-label="Gemini website" href="https://gemini.google.com/app"  target="_blank" rel="noopener noreferrer">Gemini</a> website.</p>
 			</section>
+			<section aria-labelledby="works-cited">
+				<h2 id="works-cited">Works Cited</h2>
+				<ul role="list" class="works-cited-list">
+					<li>Abdelhafiz, A. S., Ali, A., Maaly, A. M., Ziady, H. H., Sultan, E. A., &amp; Mahgoub, M. A. (2024). <a aria-label="Knowledge, perceptions and attitude of researchers towards using ChatGPT in research (opens in new tab)" href="https://doi.org/10.1007/s10916-024-02044-4" target="_blank" rel="noopener noreferrer">Knowledge, perceptions and attitude of researchers towards using ChatGPT in research</a>. <em>Journal of Medical Systems</em>, <em>48</em>(1), Article 26.</li>
+					<li>American Association for the Advancement of Science. (2023, November 16). <a aria-label="Change to policy on the use of generative AI and large language models (opens in new tab)" href="https://www.science.org/content/blog-post/change-policy-use-generative-ai-and-large-language-models" target="_blank" rel="noopener noreferrer">Change to policy on the use of generative AI and large language models</a>. <em>Science</em>.</li>
+					<li>Dedema, M., &amp; Ma, R. (2024). <a aria-label="The collective use and perceptions of generative AI tools in digital humanities research: Survey-based results (opens in new tab)" href="https://doi.org/10.48550/arXiv.2404.12458" target="_blank" rel="noopener noreferrer">The collective use and perceptions of generative AI tools in digital humanities research: Survey-based results</a> [Preprint]. arXiv.</li>
+					<li>Horton, C. B., Jr., White, M. W., &amp; Iyengar, S. S. (2023). <a aria-label="Bias against AI art can enhance perceptions of human creativity (opens in new tab)" href="https://doi.org/10.1038/s41598-023-45202-3" target="_blank" rel="noopener noreferrer">Bias against AI art can enhance perceptions of human creativity</a>. <em>Scientific Reports</em>, <em>13</em>, Article 19001.</li>
+					<li>Hosseini, M., Resnik, D. B., &amp; Holmes, K. (2023). <a aria-label="The ethics of disclosing the use of artificial intelligence tools in writing scholarly manuscripts (opens in new tab)" href="https://doi.org/10.1177/17470161231180449" target="_blank" rel="noopener noreferrer">The ethics of disclosing the use of artificial intelligence tools in writing scholarly manuscripts</a>. <em>Research Ethics</em>, <em>19</em>(4), 449–465.</li>
+					<li>International Association of Scientific, Technical &amp; Medical Publishers. (2025). <a aria-label="Draft report: Classifying AI use in manuscript preparation (opens in new tab)" href="https://stm-assoc.org/new-stm-draft-report-classifying-ai-use-in-manuscript-preparation/" target="_blank" rel="noopener noreferrer"><em>Draft report: Classifying AI use in manuscript preparation</em></a>. STM Association.</li>
+					<li>IOP Publishing. (n.d.). <a aria-label="Artificial intelligence (opens in new tab)" href="https://ioppublishing.org/artificial-intelligence/" target="_blank" rel="noopener noreferrer"><em>Artificial intelligence</em></a>.</li>
+					<li>Kwon, D. (2025). <a aria-label="Is it OK for AI to write science papers? Nature survey shows researchers are split (opens in new tab)" href="https://www.nature.com/articles/d41586-025-01463-8" target="_blank" rel="noopener noreferrer">Is it OK for AI to write science papers? Nature survey shows researchers are split</a>. <em>Nature</em>, <em>641</em>(8063), 574–578.</li>
+					<li>Lermann Henestrosa, A. L., &amp; Kimmerle, J. (2024). <a aria-label="The effects of assumed AI vs. human authorship on the perception of a GPT-generated text (opens in new tab)" href="https://doi.org/10.3390/journalmedia5030069" target="_blank" rel="noopener noreferrer">The effects of assumed AI vs. human authorship on the perception of a GPT-generated text</a>. <em>Journalism and Media</em>, <em>5</em>(3), 1085–1097.</li>
+					<li>Longoni, C., Fradkin, A., Cian, L., &amp; Pennycook, G. (2021). <a aria-label="News from artificial intelligence is believed less (opens in new tab)" href="https://doi.org/10.2139/ssrn.3787064" target="_blank" rel="noopener noreferrer"><em>News from artificial intelligence is believed less</em></a> (SSRN Working Paper No. 3787064). Social Science Research Network.</li>
+					<li>Luhmann, J., &amp; Burghardt, M. (2022). <a aria-label="Digital humanities—A discipline in its own right? An analysis of the role and position of digital humanities in the academic landscape (opens in new tab)" href="https://doi.org/10.1002/asi.24533" target="_blank" rel="noopener noreferrer">Digital humanities—A discipline in its own right? An analysis of the role and position of digital humanities in the academic landscape</a>. <em>Journal of the Association for Information Science and Technology</em>, <em>73</em>(2), 148–171.</li>
+					<li>Ma, R. (2022). <a aria-label="Revisiting connotations of digital humanists: Exploratory interviews (opens in new tab)" href="https://doi.org/10.1002/pra2.714" target="_blank" rel="noopener noreferrer">Revisiting connotations of digital humanists: Exploratory interviews</a>. <em>Proceedings of the Association for Information Science and Technology</em>, <em>59</em>(1), 750–752.</li>
+					<li>Ng, J. Y., Maduranayagam, S. G., Suthakar, N., Li, A., Lokker, C., Iorio, A., Haynes, R. B., &amp; Moher, D. (2025). <a aria-label="Attitudes and perceptions of medical researchers towards the use of artificial intelligence chatbots in the scientific process: An international cross-sectional survey (opens in new tab)" href="https://doi.org/10.1016/S2589-7500(24)00202-4" target="_blank" rel="noopener noreferrer">Attitudes and perceptions of medical researchers towards the use of artificial intelligence chatbots in the scientific process: An international cross-sectional survey</a>. <em>The Lancet Digital Health</em>, <em>7</em>(1), e94–e102.</li>
+					<li>Proksch, S., Schühle, J., Streeb, E., Weymann, F., Luther, T., &amp; Kimmerle, J. (2024). <a aria-label="The impact of text topic and assumed human vs. AI authorship on competence and quality assessment (opens in new tab)" href="https://doi.org/10.3389/frai.2024.1412710" target="_blank" rel="noopener noreferrer">The impact of text topic and assumed human vs. AI authorship on competence and quality assessment</a>. <em>Frontiers in Artificial Intelligence</em>, <em>7</em>, Article 1412710.</li>
+					<li>Ramsay, S. (2013). Who’s in and who’s out. In M. Terras, J. Nyhan, &amp; E. Vanhoutte (Eds.), <em>Defining digital humanities: A reader</em>. Ashgate.</li>
+					<li>Reis, M., Reis, F., &amp; Kunde, W. (2024). <a aria-label="Influence of believed AI involvement on the perception of digital medical advice (opens in new tab)" href="https://doi.org/10.1038/s41591-024-03180-7" target="_blank" rel="noopener noreferrer">Influence of believed AI involvement on the perception of digital medical advice</a>. <em>Nature Medicine</em>, <em>30</em>(11), 3098–3100.</li>
+					<li>Resnik, D. B., &amp; Hosseini, M. (2026). <a aria-label="Disclosing artificial intelligence use in scientific research and publication: When should disclosure be mandatory, optional, or unnecessary? (opens in new tab)" href="https://doi.org/10.1080/08989621.2025.2481949" target="_blank" rel="noopener noreferrer">Disclosing artificial intelligence use in scientific research and publication: When should disclosure be mandatory, optional, or unnecessary?</a> <em>Accountability in Research</em>, <em>33</em>(2), Article 2481949.</li>
+					<li>Springer Nature. (2023). <a aria-label="Editorial policies: “Artificial intelligence” (opens in new tab)" href="https://www.springernature.com/gp/policies/editorial-policies" target="_blank" rel="noopener noreferrer"><em>Editorial policies: “Artificial intelligence”</em></a>.</li>
+					<li>Van Noorden, R., &amp; Perkel, J. M. (2023). <a aria-label="AI and science: What 1,600 researchers think (opens in new tab)" href="https://www.nature.com/articles/d41586-023-02980-0" target="_blank" rel="noopener noreferrer">AI and science: What 1,600 researchers think</a>. <em>Nature</em>, <em>621</em>(7980), 672–675.</li>
+					<li>Wiley. (2023). <a aria-label="Generative artificial intelligence guidelines for authors (opens in new tab)" href="https://onlinelibrary.wiley.com/pb-assets/assets/15405885/Generative%20AI%20Policy_September%202023-1695231878293.pdf" target="_blank" rel="noopener noreferrer"><em>Generative artificial intelligence guidelines for authors</em></a> [Policy document].</li>
+				</ul>
+			</section>
 		</main>
 
 		<div data-include="footer"></div>
@@ -318,7 +344,7 @@
 				var includes = document.querySelectorAll('[data-include]');
 				var basePath = './';
 				includes.forEach(function(element) {
-					var file = basePath + 'common/' + element.getAttribute('data-include') + '.html?vers=009';
+					var file = basePath + 'common/' + element.getAttribute('data-include') + '.html?vers=010';
 					fetch(file)
 						.then(response => response.text())
 						.then(function(data) {
