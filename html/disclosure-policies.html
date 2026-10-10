@@ -18,13 +18,13 @@
 		<meta name="twitter:title" content="Disclosure Policies - Disclosing Generative AI Use in Digital Humanities Research"/>
 		<meta name="twitter:description" content="Disclosure policies related to the Disclosing Generative AI Use in Digital Humanities Research project."/>
 		<!-- Preload critical resources -->
-		<link rel="preload" href="../css/style.css?vers=062" as="style"/>
+		<link rel="preload" href="../css/style.css?vers=063" as="style"/>
 		<link rel="preconnect" href="https://fonts.googleapis.com"/>
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
 		<link rel="preconnect" href="https://cdnjs.cloudflare.com"/>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=Source+Sans+Pro:wght@400;600;700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,;:!?()'&quot;-"/>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		<link rel="stylesheet" type="text/css" href="../css/style.css?vers=062"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css?vers=063"/>
 	</head>
 
 	<body>
@@ -48,19 +48,31 @@
 			<section aria-labelledby="menu" class="contents-box">
 				<h3 id="menu">Menu</h3>
 				<ol>
-					<li><a href="#journals">Journals</a></li>
 					<li><a href="#organizations">Organizations</a></li>
+					<li><a href="#journals">Journals</a></li>
 					<li><a href="#miscellaneous">Miscellaneous</a></li>
 				</ol>
 			</section>
 
-			<section aria-labelledby="journals">
-				<h3 id="journals">Journals</h3>
-				<p class="center">Coming soon!</p>
-			</section>
-
 			<section aria-labelledby="organizations">
 				<h3 id="organizations">Organizations</h3>
+				<dl class="organizations-list">
+					<dt><strong><a aria-label="Association for Computers and the Humanities (opens in new tab)" href="https://ach.org/" target="_blank" rel="noopener noreferrer">Association for Computers and the Humanities</a> (ACH)</strong></dt>
+					<dd><em>Call for Papers:</em> “<a aria-label="ACH 2026 CFP (opens in new tab)" href="https://ach2026.ach.org/en/cfp/" target="_blank" rel="noopener noreferrer">ACH 2026 CFP</a>” (see “Use of Generative AI in Proposals and Reviews”)</dd>
+					<dt><strong><a aria-label="Associazione per l’Informatica Umanistica e la Cultura Digitale (opens in new tab)" href="https://www.aiucd.it/" target="_blank" rel="noopener noreferrer"><span lang="it">Associazione per l’Informatica Umanistica e la Cultura Digitale</span></a> (AIUCD)</strong></dt>
+					<dd><em>Call for Papers:</em> “<a aria-label="Call for Papers: Digital and Public Engagement: Practices and Perspectives in Digital Humanities (opens in new tab)" href="https://www.aiucd2026.unica.it/language/en/conference/call-for-papers/" target="_blank" rel="noopener noreferrer">Call for Papers: Digital and Public Engagement: Practices and Perspectives in Digital Humanities</a>” (see “Format and Submission Mode”)</dd>
+					<dt><strong><a aria-label="European Association for Digital Humanities (opens in new tab)" href="https://eadh.org/" target="_blank" rel="noopener noreferrer">European Association for Digital Humanities</a> (EADH)</strong></dt>
+					<dd><em>Call for Papers:</em> “<a aria-label="European Association for Digital Humanities 2026 Call for Papers (opens in new tab)" href="https://eadh2026.confer.uj.edu.pl/cfp" target="_blank" rel="noopener noreferrer">European Association for Digital Humanities 2026 Call for Papers</a>” (see “AI Statement”)</dd>
+					<dd><em>Grants:</em> “<a aria-label="Call for EADH Small Grants (2025-2026) (opens in new tab)" href="https://eadh.org/news/2025/09/23/call-eadh-small-grants-2025-2026" target="_blank" rel="noopener noreferrer">Call for EADH Small Grants (2025-2026)</a>” (see “How to apply?”)</dd>
+					<dt><strong><a aria-label="Japanese Association for Digital Humanities (opens in new tab)" href="https://www.jadh.org/" target="_blank" rel="noopener noreferrer">Japanese Association for Digital Humanities</a> (JADH)</strong></dt>
+					<dd><em>Call for Papers:</em> “<a aria-label="JADH2026: ‘Whose World, Whose Data? Sustainability in Digital Umwelts’ (opens in new tab)" href="https://www.jadh.org/jadh2026cfp" target="_blank" rel="noopener noreferrer">JADH2026: ‘Whose World, Whose Data? Sustainability in Digital Umwelts’</a>” (see “Use of generative AI language tools”)</dd>
+					<dt><strong><a aria-label="Modern Language Association (opens in new tab)" href="https://www.mla.org/" target="_blank" rel="noopener noreferrer">Modern Language Association</a> (MLA)</strong></dt>
+					<dd><em>Guidance:</em> “<a aria-label="Beyond Citation: Describing AI Use in Your Work (opens in new tab)" href="https://style.mla.org/describing-ai-use/" target="_blank" rel="noopener noreferrer">Beyond Citation: Describing AI Use in Your Work</a>”</dd>
+				</dl>
+			</section>
+
+			<section aria-labelledby="journals">
+				<h3 id="journals">Journals</h3>
 				<p class="center">Coming soon!</p>
 			</section>
 
@@ -78,7 +90,7 @@
 				var includes = document.querySelectorAll('[data-include]');
 				var basePath = '../';
 				includes.forEach(function(element) {
-					var file = basePath + 'common/' + element.getAttribute('data-include') + '.html?vers=010';
+					var file = basePath + 'common/' + element.getAttribute('data-include') + '.html?vers=011';
 					fetch(file)
 						.then(response => response.text())
 						.then(function(data) {
