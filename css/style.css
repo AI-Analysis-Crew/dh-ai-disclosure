@@ -534,6 +534,11 @@ nav ul li a,
     display: none;
 }
 
+/* Lock page scrolling while the mobile menu is open (class toggled by js/includes.js on both html and body, since some mobile browsers ignore overflow on body alone) */
+.nav-open {
+    overflow: hidden;
+}
+
 /* Mobile nav (below 992px) */
 @media (max-width: 991px) {
     [data-include="nav"] {
