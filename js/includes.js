@@ -51,6 +51,10 @@
                                 var open = mobileMenu.classList.toggle('open');
                                 overlay.classList.toggle('open', open);
                                 btn.setAttribute('aria-expanded', open);
+                                // Lock page scrolling while the menu is open;
+                                // the class is styled in css/style.css
+                                document.documentElement.classList.toggle('nav-open', open);
+                                document.body.classList.toggle('nav-open', open);
                             }
                             btn.addEventListener('click', toggleMenu);
                             overlay.addEventListener('click', toggleMenu);
