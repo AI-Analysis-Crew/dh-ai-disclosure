@@ -18,10 +18,10 @@
 		<meta name="twitter:card" content="summary_large_image"/>
 		<meta name="twitter:title" content="Disclosing Generative AI Use in Digital Humanities Research"/>
 		<meta name="twitter:description" content="Survey study investigating how digital humanists perceive and approach generative AI disclosure in research."/>
-		<!--<link rel="icon" type="/image/png" sizes="16x16" href=""/>-->
-		<!--<link rel="icon" type="/image/png" sizes="32x32" href=""/>-->
-		<!--<link rel="/apple-touch-icon" sizes="180x180" href=""/>-->
-		<!--<link rel="/manifest" href="/site.webmanifest"/>-->
+		<!--<link rel="icon" type="image/png" sizes="16x16" href=""/>-->
+		<!--<link rel="icon" type="image/png" sizes="32x32" href=""/>-->
+		<!--<link rel="apple-touch-icon" sizes="180x180" href=""/>-->
+		<!--<link rel="manifest" href="site.webmanifest"/>-->
 		<!-- Preload critical resources -->
 		<link rel="preload" href="./css/style.css?vers=064" as="style"/>
 		<link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -31,7 +31,7 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 		<link rel="stylesheet" type="text/css" href="./css/style.css?vers=064"/>
 		<!-- Plotly.js CDN for Sankey diagram -->
-		<script src="https://cdn.plot.ly/plotly-2.27.0.min.js" integrity="sha512-2yjH2FQFIKp1XQ8nSWes+7/zWAPc9qfDolxFGJV1BUO7/+YIAPh1jICUN6TaA+VVlfabERCqo1Hji0yYTFtDew==" crossorigin="anonymous" charset="utf-8"></script>
+		<script src="https://cdn.plot.ly/plotly-2.27.0.min.js" integrity="sha512-2yjH2FQFIKp1XQ8nSWes+7/zWAPc9qfDolxFGJV1BUO7/+YIAPh1jICUN6TaA+VVlfabERCqo1Hji0yYTFtDew==" crossorigin="anonymous" charset="utf-8" defer></script>
 	</head>
 
 	<body>
@@ -75,6 +75,7 @@
 		<a href="#main" class="skip-link">Skip to main content</a>
 		<div data-include="nav"></div>
 
+		<main id="main">
 		<h1 id="introduction">Disclosing Generative AI Use in Digital Humanities Research</h1>
 
 		<figure id="header">
@@ -86,7 +87,6 @@
 			<figcaption class="caption"><strong>Figure 1.</strong> This Sankey diagram documents one of the key findings of our project, that digital humanists in theory support the disclosure of generative AI use, but in practice tend not to disclose such use or do so only in limited ways. The same graph, with its data table, also appears on the <a href="./html/graphs-analysis.html#principles">Graphs/Analysis</a> page.</figcaption>
 		</figure>
 
-		<main id="main">
 			<section aria-labelledby="project-developers">
 				<h2 id="project-developers">Project Developers</h2>
 				<ul role="list">
@@ -121,13 +121,13 @@
 			</section> -->
 			<section aria-labelledby="abstract">
 				<h2 id="abstract">Abstract</h2>
-				<p>This project investigates how digital humanists perceive and approach generative AI (GenAI) disclosure in research. It is based on a <a href="./html/survey.html">survey</a> that we conducted in 2024-2025. The results indicate that while digital humanities scholars acknowledge the importance of disclosing GenAI use, the actual rate of disclosure in research practice remains low. Respondents differ in their views on which activities most require disclosure and on the most appropriate methods for doing so. Most also believe that safeguards for AI disclosure should be established through institutional policies rather than left to individual decisions. The study’s findings will offer empirical guidance to scholars, institutional leaders, funders, and other stakeholders responsible for shaping effective disclosure policies.</p>
+				<p>This project investigates how digital humanists perceive and approach generative AI (GenAI) disclosure in research. It is based on a <a href="./html/survey.html">survey</a> that we conducted in 2025. The results indicate that while digital humanities scholars acknowledge the importance of disclosing GenAI use, the actual rate of disclosure in research practice remains low. Respondents differ in their views on which activities most require disclosure and on the most appropriate methods for doing so. Most also believe that safeguards for AI disclosure should be established through institutional policies rather than left to individual decisions. The study’s findings will offer empirical guidance to scholars, institutional leaders, funders, and other stakeholders responsible for shaping effective disclosure policies.</p>
 			</section>
 			<section aria-labelledby="background">
 				<h2 id="background">Background</h2>
 				<p>Generative AI (GenAI) now permeates almost every aspect of daily life and has become integral to academic work. Although its use offers clear benefits to researchers, it also raises challenging questions about academic integrity and research ethics (Van Noorden &amp; Perkel, 2023; Hosseini et al., 2023; Abdelhafiz et al., 2024; Dedema &amp; Ma, 2024; Ng et al., 2025). Disclosure has therefore emerged as a potential policy solution.</p>
-        <p>Resnik &amp; Hosseini (2026) propose a three-tier framework distinguishing mandatory, optional, and unnecessary disclosure. This framework demonstrates the increasingly nuanced guidance now issued by publishers. Publishers agree that GenAI tools cannot be listed as authors, yet their disclosure policies vary:</p>
-        <table>
+        <p>Resnik &amp; Hosseini (2026) propose a three-tier framework distinguishing mandatory, optional, and unnecessary disclosure. This framework demonstrates the increasingly nuanced guidance now issued by publishers. Publishers agree that GenAI tools cannot be listed as authors, yet their disclosure policies vary.</p>
+        <table style="margin-bottom: 1rem;">
           <colgroup>
             <col style="width: 38%" />
             <col style="width: 61%" />
@@ -157,6 +157,7 @@
             </tr>
           </tbody>
         </table>
+        <p class="data-table-caption" style="font-style: normal; margin-top: 0.5rem;"><strong>Table 1.</strong> Variations in publisher GenAI disclosure policies.</p>
         <p>However, policies that mandate AI disclosure can produce unintended consequences. Empirical research has identified an “AI disclosure penalty” in both professional and creative domains. The magnitude varies by context: professional settings show moderate penalties (Reis et al., 2024; Proksch et al., 2024); creative contexts show smaller but still significant penalties (Horton et al., 2023). Studies consistently suggest AI disclosure reduces perceived credibility across multiple contexts (Longoni et al., 2021; Lermann Henestrosa &amp; Kimmerle, 2024).</p>
         <p>Given these context-dependent penalties, understanding how different audiences interpret AI disclosure is important. A recent <em>Nature</em> survey reveals deep divisions among scholars over whether GenAI use should be declared at all and, if so, how much detail such declarations should include (Kwon, 2025).</p>
 			</section>
