@@ -18,6 +18,7 @@
 		<meta name="twitter:card" content="summary_large_image"/>
 		<meta name="twitter:title" content="Disclosing Generative AI Use in Digital Humanities Research"/>
 		<meta name="twitter:description" content="Survey study investigating how digital humanists perceive and approach generative AI disclosure in research."/>
+		<link rel="canonical" href="https://ai-analysis-crew.github.io/dh-ai-disclosure/"/>
 		<!--<link rel="icon" type="image/png" sizes="16x16" href=""/>-->
 		<!--<link rel="icon" type="image/png" sizes="32x32" href=""/>-->
 		<!--<link rel="apple-touch-icon" sizes="180x180" href=""/>-->
@@ -338,7 +339,7 @@
 				var includes = document.querySelectorAll('[data-include]');
 				var basePath = './';
 				includes.forEach(function(element) {
-					var file = basePath + 'common/' + element.getAttribute('data-include') + '.html?vers=012';
+					var file = basePath + 'common/' + element.getAttribute('data-include') + '.html?vers=013';
 					fetch(file)
 						.then(response => response.text())
 						.then(function(data) {
@@ -347,6 +348,12 @@
 								var href = a.getAttribute('href');
 								if (href && !href.startsWith('http') && !href.startsWith('#') && !href.startsWith('mailto:')) {
 									a.setAttribute('href', basePath + href);
+								}
+							});
+							element.querySelectorAll('img[src]').forEach(function(img) {
+								var src = img.getAttribute('src');
+								if (src && !src.startsWith('http') && !src.startsWith('/') && !src.startsWith('data:')) {
+									img.setAttribute('src', basePath + src);
 								}
 							});
 								// Initialize hamburger menu after nav loads

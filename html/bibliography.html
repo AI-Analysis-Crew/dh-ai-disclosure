@@ -17,6 +17,7 @@
 		<meta name="twitter:card" content="summary_large_image"/>
 		<meta name="twitter:title" content="Bibliography - Disclosing Generative AI Use in Digital Humanities Research"/>
 		<meta name="twitter:description" content="Bibliography for the Disclosing Generative AI Use in Digital Humanities Research project."/>
+		<link rel="canonical" href="https://ai-analysis-crew.github.io/dh-ai-disclosure/html/bibliography.html"/>
 		<!-- Preload critical resources -->
 		<link rel="preload" href="../css/style.css?vers=064" as="style"/>
 		<link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -31,9 +32,8 @@
 		<a href="#main" class="skip-link">Skip to main content</a>
 		<div data-include="nav"></div>
 
-		<h1 id="title">Disclosing Generative AI Use in Digital Humanities Research</h1>
-
 		<main aria-labelledby="title" id="main">
+		<h1 id="title">Disclosing Generative AI Use in Digital Humanities Research</h1>
 			<h2 id="bibliography">Bibliography</h2>
 
 			<section aria-labelledby="project-developers">
@@ -145,7 +145,7 @@
 				var includes = document.querySelectorAll('[data-include]');
 				var basePath = '../';
 				includes.forEach(function(element) {
-					var file = basePath + 'common/' + element.getAttribute('data-include') + '.html?vers=012';
+					var file = basePath + 'common/' + element.getAttribute('data-include') + '.html?vers=013';
 					fetch(file)
 						.then(response => response.text())
 						.then(function(data) {
@@ -154,6 +154,12 @@
 								var href = a.getAttribute('href');
 								if (href && !href.startsWith('http') && !href.startsWith('#') && !href.startsWith('mailto:')) {
 									a.setAttribute('href', basePath + href);
+								}
+							});
+							element.querySelectorAll('img[src]').forEach(function(img) {
+								var src = img.getAttribute('src');
+								if (src && !src.startsWith('http') && !src.startsWith('/') && !src.startsWith('data:')) {
+									img.setAttribute('src', basePath + src);
 								}
 							});
 								if (element.getAttribute('data-include') === 'nav') {
