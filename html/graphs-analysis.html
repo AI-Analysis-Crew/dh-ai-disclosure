@@ -19,13 +19,13 @@
 		<meta name="twitter:description" content="Graphs and analysis based on a generative AI use in digital humanities research disclosure and transparency survey."/>
 		<link rel="canonical" href="https://ai-analysis-crew.github.io/dh-ai-disclosure/html/graphs-analysis.html"/>
 		<!-- Preload critical resources -->
-		<link rel="preload" href="../css/style.css?vers=064" as="style"/>
+		<link rel="preload" href="../css/style.css?vers=066" as="style"/>
 		<link rel="preconnect" href="https://fonts.googleapis.com"/>
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
 		<link rel="preconnect" href="https://cdnjs.cloudflare.com"/>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=Source+Sans+Pro:wght@400;600;700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,;:!?()'&quot;-"/>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		<link rel="stylesheet" type="text/css" href="../css/style.css?vers=064"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css?vers=066"/>
 		<script src="https://cdn.plot.ly/plotly-2.27.0.min.js" integrity="sha512-2yjH2FQFIKp1XQ8nSWes+7/zWAPc9qfDolxFGJV1BUO7/+YIAPh1jICUN6TaA+VVlfabERCqo1Hji0yYTFtDew==" crossorigin="anonymous" charset="utf-8" defer></script>
 	</head>
 
@@ -61,7 +61,7 @@
 				</ol>
 			</section>
 
-			<section aria-labelledby="Overview">
+			<section aria-labelledby="overview">
 				<h3 id="overview">Overview</h3>
 
 				<p>This project investigates how digital humanists perceive and approach generative AI (GenAI) disclosure in research. It is based on a <a href="./survey.html">survey</a> that we conducted in 2025. The interactive graphs that follow offer a series of visual representations based on our data.</p>
@@ -131,7 +131,7 @@
 				</section>
 			</section>
 
-      <hr />
+			<hr />
 
 			<section aria-labelledby="responsible">
 				<h3 id="responsible">Who Should Be Responsible for Ensuring AI Disclosure?</h3>
@@ -249,7 +249,7 @@
 				</section>
       </section>
 			
-      <hr />
+			<hr />
 
 			<section aria-labelledby="context">
 				<h3 id="context">Does Context Matter for AI Disclosure?</h3>
@@ -299,7 +299,7 @@
 
 					<button type="button" class="data-table-btn" aria-expanded="false" aria-controls="dt-q14"><span class="data-table-label">Show</span> data table on screen<span class="sr-only"> (Q14 chart)</span></button>
 					<div class="sr-only" id="dt-q14">
-					<p class="data-table-caption" id="q14-sr-caption">Survey responses on which scholarly products require GenAI disclosure, by response to Q13 (all respondents, n=TBD)</p>
+					<p class="data-table-caption" id="q14-sr-caption">Survey responses on which scholarly products require GenAI disclosure, by response to Q13 (all respondents, n=107)</p>
 					<table class="data-table-wide" aria-label="Q14 response data: Which scholarly products require GenAI disclosure, cross-tabulated by Q13 responses.">
 						<thead>
 							<tr>
@@ -337,7 +337,7 @@
 				</section>
 			</section>
 
-      <hr />
+			<hr />
 
 			<section aria-labelledby="activities">
 				<h3 id="activities">Which AI-Assisted Activities Do Scholars Believe Should Be Disclosed?</h3>
@@ -364,7 +364,7 @@
 
 					<button type="button" class="data-table-btn" aria-expanded="false" aria-controls="dt-q15"><span class="data-table-label">Show</span> data table on screen<span class="sr-only"> (Q15 chart)</span></button>
 					<div class="sr-only" id="dt-q15">
-					<p class="data-table-caption" id="q15-sr-caption">Survey responses on which activities should be disclosed (all respondents, n=TBD)</p>
+					<p class="data-table-caption" id="q15-sr-caption">Survey responses on which activities should be disclosed (all respondents, n=107)</p>
 					<table aria-label="Q15 response data: Which AI-assisted activities should be disclosed?">
 						<thead>
 							<tr>
@@ -407,7 +407,7 @@
 				</section>
 			</section>
 
-      <hr />
+			<hr />
 
 			<section aria-labelledby="practice">
 				<h3 id="practice">Where Do AI Disclosure Expectations Align with Practice?</h3>
@@ -445,7 +445,7 @@
 
 					<button type="button" class="data-table-btn" aria-expanded="false" aria-controls="dt-heatmap"><span class="data-table-label">Show</span> data table on screen<span class="sr-only"> (heatmap)</span></button>
 					<div class="sr-only" id="dt-heatmap">
-					<p class="data-table-caption">Survey responses on expected disclosure (Q15) and actual disclosure practice (Q21), by activity (all respondents, n=TBD)</p>
+					<p class="data-table-caption">Survey responses on expected disclosure (Q15) and actual disclosure practice (Q21), by activity (all respondents, n=107)</p>
 					<table class="data-table-wide" aria-label="Q15 vs Q21 Cross-Selection Data" id="heatmap-sr-table">
 						<thead id="heatmap-sr-thead"></thead>
 						<tbody id="heatmap-sr-tbody"></tbody>
@@ -477,7 +477,7 @@
 				</section>
 			</section>
 
-      <hr />
+			<hr />
 
 			<section aria-labelledby="principles">
 				<h3 id="principles">Do AI Disclosure Principles Overall Align with Disclosure Practices?</h3>
@@ -1510,7 +1510,7 @@
 					// Update Q14 caption (follows the Q13 filter)
 					var q14SrCaption = document.getElementById('q14-sr-caption');
 					if (q14SrCaption) {
-						q14SrCaption.textContent = 'Survey responses on which scholarly products require GenAI disclosure, by response to Q13 (' + filterDesc + ', n=TBD)';
+						q14SrCaption.textContent = 'Survey responses on which scholarly products require GenAI disclosure, by response to Q13 (' + filterDesc + ', n=107)';
 					}
 
 					// Update Q14 sr-only table
@@ -1782,7 +1782,7 @@
 						} else {
 							q15FilterDesc = questionMetadata[questionVal].labels[document.getElementById('q15-value').value];
 						}
-						q15SrCaption.textContent = 'Survey responses on which activities should be disclosed (' + q15FilterDesc + ', n=TBD)';
+						q15SrCaption.textContent = 'Survey responses on which activities should be disclosed (' + q15FilterDesc + ', n=107)';
 					}
 
 					// Update Q15 sr-only table dynamically

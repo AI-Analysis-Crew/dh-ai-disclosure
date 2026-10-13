@@ -19,13 +19,13 @@
 		<meta name="twitter:description" content="Accessibility features of the Disclosing Generative AI Use in Digital Humanities Research project site."/>
 		<link rel="canonical" href="https://ai-analysis-crew.github.io/dh-ai-disclosure/html/accessibility.html"/>
 		<!-- Preload critical resources -->
-		<link rel="preload" href="../css/style.css?vers=064" as="style"/>
+		<link rel="preload" href="../css/style.css?vers=066" as="style"/>
 		<link rel="preconnect" href="https://fonts.googleapis.com"/>
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
 		<link rel="preconnect" href="https://cdnjs.cloudflare.com"/>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=Source+Sans+Pro:wght@400;600;700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,;:!?()'&quot;-"/>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		<link rel="stylesheet" type="text/css" href="../css/style.css?vers=064"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css?vers=066"/>
 	</head>
 
 	<body>
@@ -71,6 +71,9 @@
 			<section aria-labelledby="page-overview">
 				<h3 id="page-overview">Page Overview</h3>
 				<p>The project developers have designed this site to incorporate a variety of accessibility features. The sections that follow describe each of these features. We welcome additional suggestions for making the site more accessible.</p>
+			</section>
+
+			<section aria-labelledby="semantic-html">
 				<h3 id="semantic-html">Semantic HTML &amp; Structure</h3>
 				<ul role="list">
 					<li><code>lang="en"</code> attribute on all pages</li>
@@ -81,6 +84,9 @@
 					<li>Semantic table markup with <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;th scope="col"&gt;</code></li>
 					<li>A description list (<code>&lt;dl&gt;</code>, with <code>&lt;dt&gt;</code> and <code>&lt;dd&gt;</code>) on the <a href="bibliography.html">Bibliography page</a> and the <a href="disclosure-policies.html">Disclosure Policies page</a>, so each reference or organization is programmatically paired with its description</li>
 				</ul>
+			</section>
+
+			<section aria-labelledby="aria-attributes">
 				<h3 id="aria-attributes">ARIA Attributes</h3>
 				<ul role="list">
 					<li><code>aria-label</code> on all external links, email links, chart containers, and interactive buttons</li>
@@ -88,6 +94,9 @@
 					<li><code>role="img"</code> with descriptive <code>aria-label</code> on Plotly chart containers</li>
 					<li><code>aria-labelledby</code> connecting <code>&lt;main&gt;</code> and <code>&lt;section&gt;</code> elements to their headings</li>
 				</ul>
+			</section>
+
+			<section aria-labelledby="screen-reader">
 				<h3 id="screen-reader">Screen Reader Support</h3>
 				<ul role="list">
 					<li><code>.sr-only</code> utility class (1px clip, off-screen positioning)</li>
@@ -97,10 +106,16 @@
 					<li>Reference titles and organization names in a language other than English are marked with a <code>lang</code> attribute (for example <code>lang="de"</code> on a German journal name and <code>lang="it"</code> on an Italian organization name) so assistive technology and translation tools can identify the language</li>
 					<li>Each link in the <a href="bibliography.html">Bibliography</a> and in the <a href="../index.html#works-cited">Works Cited</a> list on the homepage, and in the Organizations list on the <a href="disclosure-policies.html">Disclosure Policies</a> page, opens in a new tab and says so in its accessible name (for example, "(opens in new tab)")</li>
 				</ul>
+			</section>
+
+			<section aria-labelledby="skip-link">
 				<h3 id="skip-link">Skip Link</h3>
 				<ul role="list">
 					<li>"Skip to main content" link, hidden off-screen until focused</li>
 				</ul>
+			</section>
+
+			<section aria-labelledby="keyboard-focus">
 				<h3 id="keyboard-focus">Keyboard &amp; Focus</h3>
 				<ul role="list">
 					<li>Global <code>*:focus</code> outline (2px solid white, 2px offset)</li>
@@ -110,27 +125,39 @@
 					<li>A displayed data table can be focused and scrolled sideways with the arrow keys (<code>tabindex="0"</code>, <code>role="region"</code> and an <code>aria-label</code> naming the table)</li>
 					<li>Always-visible scroll bars above and below wide data tables (white scroll bar on a dark track), drawn by the page because some browsers hide their own scroll bars until the pointer hovers over them</li>
 				</ul>
+			</section>
+
+			<section aria-labelledby="color-contrast">
 				<h3 id="color-contrast">Color &amp; Contrast</h3>
 				<ul role="list">
 					<li>WCAG AAA contrast ratios (7:1+) across all text/background combinations</li>
 					<li>Custom <code>::selection</code> colors for readable text highlighting</li>
 				</ul>
+			</section>
+
+			<section aria-labelledby="responsive-design">
 				<h3 id="responsive-design">Responsive Design</h3>
 				<ul role="list">
 					<li>Viewport meta tag with <code>width=device-width, initial-scale=1.0</code></li>
-					<li>Nine CSS media query breakpoints (400px–1200px)</li>
+					<li>Seventeen CSS media query breakpoints (400px–1200px)</li>
 					<li>Responsive font sizes in <code>rem</code> units scaling across breakpoints</li>
 					<li>Body line-height 1.8 for readability</li>
 					<li>Responsive padding adjustments per viewport</li>
 					<li>Data tables use 1.1rem text (1rem on the narrowest screens), and on narrow screens their cells break long words at syllables with a dash (<code>hyphens: auto</code>)</li>
 					<li>Wide data tables (the <a href="graphs-analysis.html#context">Q14</a> and <a href="graphs-analysis.html#practice">heatmap</a> tables) keep a minimum column width and scroll sideways instead of narrowing their columns</li>
 				</ul>
+			</section>
+
+			<section aria-labelledby="responsive-images">
 				<h3 id="responsive-images">Responsive Images</h3>
 				<ul role="list">
 					<li><code>srcset</code> with nine width variants (320w–2732w) and <code>sizes</code> attribute</li>
 					<li><code>loading="lazy"</code> and <code>decoding="async"</code> on below-fold images</li>
 					<li>Descriptive <code>alt</code> text on all images</li>
 				</ul>
+			</section>
+
+			<section aria-labelledby="touch-device">
 				<h3 id="touch-device">Touch Device Accessibility</h3>
 				<ul role="list">
 					<li><code>window.matchMedia('(any-hover: hover)')</code> detection for hover capability</li>
@@ -138,16 +165,25 @@
 					<li><code>hovermode: false</code> on Plotly charts for touch devices</li>
 					<li>Adequate touch target sizing on mobile nav items</li>
 				</ul>
+			</section>
+
+			<section aria-labelledby="form-accessibility">
 				<h3 id="form-accessibility">Form Accessibility</h3>
 				<ul role="list">
 					<li><code>&lt;label for="..."&gt;</code> associated with filter <code>&lt;select&gt;</code> controls</li>
 					<li>Focus border color change on select inputs</li>
 				</ul>
+			</section>
+
+			<section aria-labelledby="external-link">
 				<h3 id="external-link">External Link Security</h3>
 				<ul role="list">
 					<li><code>rel="noopener noreferrer"</code> on all <code>target="_blank"</code> links</li>
 					<li><code>referrerpolicy="no-referrer"</code> on external resources</li>
 				</ul>
+			</section>
+
+			<section aria-labelledby="structured-data">
 				<h3 id="structured-data">Structured Data / Schema.org</h3>
 				<ul role="list">
 					<li>JSON-LD <code>ScholarlyArticle</code> schema with accessibility properties:
@@ -159,6 +195,9 @@
 						</ul>
 					</li>
 				</ul>
+			</section>
+
+			<section aria-labelledby="performance">
 				<h3 id="performance">Performance &amp; Resource Loading</h3>
 				<ul role="list">
 					<li><code>&lt;link rel="preload"&gt;</code> for stylesheet, <code>&lt;link rel="preconnect"&gt;</code> for font/CDN origins</li>
@@ -166,18 +205,27 @@
 					<li><code>crossorigin="anonymous"</code> on third-party resources</li>
 					<li><code>display=swap</code> on Google Fonts for flash-of-unstyled-text prevention</li>
 				</ul>
+			</section>
+
+			<section aria-labelledby="typography">
 				<h3 id="typography">Typography</h3>
 				<ul role="list">
 					<li>Noto Serif for headings, Source Sans Pro for body (both with system fallbacks)</li>
 					<li><code>box-sizing: border-box</code> globally applied</li>
 					<li><code>-webkit-text-size-adjust: 100%</code> preventing mobile text inflation</li>
 				</ul>
+			</section>
+
+			<section aria-labelledby="navigation">
 				<h3 id="navigation">Navigation</h3>
 				<ul role="list">
 					<li>Mobile hamburger menu with <code>aria-label</code>, overlay dismiss, and close button</li>
 					<li>Table of contents ("Contents" box) for in-page section navigation</li>
 					<li>Plotly mode bar hidden (<code>displayModeBar: false</code>) to reduce UI clutter</li>
 				</ul>
+			</section>
+
+			<section aria-labelledby="limitations">
 				<h3 id="limitations">Limitations</h3>
 				<ul role="list">
 					<li>The hover tooltips on the graphs are not keyboard-accessible. However, the data tables provided with each graph contain the same information and can be viewed with the "Show data table on screen" button or read with a screen reader.</li>

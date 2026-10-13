@@ -408,6 +408,15 @@ td {
     font-style: normal;
     text-transform: uppercase;
     margin-bottom: 0;
+    /* On the homepage the Menu heading is an h2 (peer of the other section headings); these two properties and the ::after rule below keep it rendering exactly like the h3 it replaced. On pages where it remains an h3 they are no-ops (the .contents-box h3 rules already set the same values). */
+    font-size: 1.4rem;
+    margin-top: 0;
+}
+
+#menu::after {
+    width: 50px;
+    height: 12px;
+    background: url("data:image/svg+xml,%3Csvg width='50' height='12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 0 6 Q 12.5 0, 25 6 Q 37.5 12, 50 6' stroke='%235A93AC' stroke-width='2' fill='none'/%3E%3C/svg%3E") no-repeat;
 }
 
 #menu + ol {
@@ -734,6 +743,21 @@ li > ol > li:last-child {
     display: inline-block;
     width: 1rem;
     text-indent: 0;
+}
+
+/* bibliography category tag: keeps the bullet from the rule above, in italics like the note at the top of the list */
+.bibliography-category {
+    font-style: italic;
+}
+
+/* organizations list: a CSS counter numbers each entry, so items can be inserted without renumbering by hand */
+.organizations-list {
+    counter-reset: org-item;
+}
+
+.organizations-list dt::before {
+    counter-increment: org-item;
+    content: counter(org-item) ". ";
 }
 
 /* Extra small devices (phones, up to 400px) */
