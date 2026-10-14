@@ -9,7 +9,7 @@
 
     // Cache-buster for common/nav.html and common/footer.html: bump this when
     // either include changes (no per-page edits needed).
-    var includesVers = '013';
+    var includesVers = '014';
 
     function initIncludes() {
         var includes = document.querySelectorAll('[data-include]');
