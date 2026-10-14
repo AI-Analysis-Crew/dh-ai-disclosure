@@ -1,0 +1,22 @@
+{
+    "name": "Disclosing Generative AI Use in Digital Humanities Research",
+    "short_name": "DH AI Disclosure",
+    "description": "Survey study investigating how digital humanists perceive and approach generative AI disclosure in research. Provides empirical guidance to individuals, groups, and institutions for shaping effective AI disclosure policies.",
+    "start_url": "./",
+    "scope": "./",
+    "display": "browser",
+    "background_color": "#1a2332",
+    "theme_color": "#1a2332",
+    "icons": [
+        {
+            "src": "png/favicon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "png/favicon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
