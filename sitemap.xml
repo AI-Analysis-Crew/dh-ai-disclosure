@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+       <loc>https://ai-analysis-crew.github.io/dh-ai-disclosure/</loc>
+       <lastmod>2026-10-14T23:43:52+00:00</lastmod>
+       <priority>1.0000</priority>
+  </url>
+  <url>
+       <loc>https://ai-analysis-crew.github.io/dh-ai-disclosure/html/graphs-analysis.html</loc>
+       <lastmod>2026-10-14T23:43:52+00:00</lastmod>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://ai-analysis-crew.github.io/dh-ai-disclosure/html/survey.html</loc>
+       <lastmod>2026-10-14T23:43:52+00:00</lastmod>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://ai-analysis-crew.github.io/dh-ai-disclosure/index.html</loc>
+       <lastmod>2026-10-14T23:43:52+00:00</lastmod>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://ai-analysis-crew.github.io/dh-ai-disclosure/csv/de-identified-survey-responses.csv</loc>
+       <lastmod>2026-10-14T23:43:52+00:00</lastmod>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://ai-analysis-crew.github.io/dh-ai-disclosure/pdf/visualization-survey-responses.pdf</loc>
+       <lastmod>2026-10-14T23:43:52+00:00</lastmod>
+       <priority>0.6400</priority>
+  </url>
+  <url>
+       <loc>https://ai-analysis-crew.github.io/dh-ai-disclosure/html/disclosure-policies.html</loc>
+       <lastmod>2026-10-14T23:43:52+00:00</lastmod>
+       <priority>0.4096</priority>
+  </url>
+  <url>
+       <loc>https://ai-analysis-crew.github.io/dh-ai-disclosure/html/bibliography.html</loc>
+       <lastmod>2026-10-14T23:43:52+00:00</lastmod>
+       <priority>0.4096</priority>
+  </url>
+  <url>
+       <loc>https://ai-analysis-crew.github.io/dh-ai-disclosure/html/site-code.html</loc>
+       <lastmod>2026-10-14T23:43:52+00:00</lastmod>
+       <priority>0.4096</priority>
+  </url>
+  <url>
+       <loc>https://ai-analysis-crew.github.io/dh-ai-disclosure/html/accessibility.html</loc>
+       <lastmod>2026-10-14T23:43:52+00:00</lastmod>
+       <priority>0.4096</priority>
+  </url>
+</urlset>
