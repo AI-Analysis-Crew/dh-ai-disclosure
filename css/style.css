@@ -310,6 +310,11 @@ section[aria-labelledby="survey-box"] h2 {
     margin-top: 0;
 }
 
+section[aria-labelledby="survey"] h3,
+section[aria-labelledby="survey-box"] h3 {
+    margin-top: 1rem;
+}
+
 /* ========================================
    COMPONENTS
    ======================================== */
