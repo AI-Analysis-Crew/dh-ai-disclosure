@@ -514,6 +514,13 @@ nav ul li a,
     padding: 0.25rem 0.5rem;
     line-height: 1;
     z-index: 200;
+    position: relative;
+    top: 2px; /* optical alignment with the boxed nav logo */
+}
+
+.hamburger:hover {
+    outline: 2px solid #5A93AC;
+    outline-offset: -2px;
 }
 
 .hamburger:focus {
