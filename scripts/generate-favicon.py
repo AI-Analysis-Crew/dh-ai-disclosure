@@ -74,6 +74,8 @@ def main():
     master = draw_master()
     master.save(png / 'favicon-master.png')
     for name, size in (
+        ('favicon-512.png', 512),
+        ('favicon-192.png', 192),
         ('apple-touch-icon.png', 180),
         ('favicon-32.png', 32),
         ('favicon-16.png', 16),
