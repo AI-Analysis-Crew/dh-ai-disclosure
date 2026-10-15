@@ -511,21 +511,26 @@ nav ul li a,
 /* Hamburger button - hidden on desktop */
 .hamburger {
     display: none;
-    background: none;
-    border: none;
+    background: #2a3444;
+    border: 1px solid #5A93AC;
+    border-radius: 5px;
     color: #E8F4F8;
     font-size: 1.5rem;
     cursor: pointer;
-    padding: 0.25rem 0.5rem;
+    padding: 0 0.5rem;
     line-height: 1;
     z-index: 200;
+    box-sizing: border-box;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
     position: relative;
     top: 2px; /* optical alignment with the boxed nav logo */
 }
 
 .hamburger:hover {
-    outline: 2px solid #5A93AC;
-    outline-offset: -2px;
+    color: #A8D5E2;
+    border-color: #A8D5E2;
 }
 
 .hamburger:focus {
@@ -558,7 +563,7 @@ nav ul li a,
     }
 
     .hamburger {
-        display: block;
+        display: flex;
     }
 
     nav .nav-menu {
