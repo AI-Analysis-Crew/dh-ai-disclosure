@@ -2,14 +2,4 @@ git fetch --all && git checkout dev && git pull && git push && git checkout stag
 
 OR
 
-set -euo pipefail
-git checkout dev
-git pull --ff-only
-git push
-git checkout stage
-git merge dev --no-edit
-git push
-git checkout main
-git merge stage --no-edit
-git push
-git checkout dev
+set -euo pipefail && git checkout dev && git pull --ff-only && git push && git checkout stage && git merge dev --no-edit && git push && git checkout main && git merge stage --no-edit && git push && git checkout dev
