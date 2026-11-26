@@ -25,13 +25,13 @@
 		<link rel="icon" type="image/png" sizes="32x32" href="../png/favicon-32.png"/>
 		<link rel="apple-touch-icon" sizes="180x180" href="../png/apple-touch-icon.png"/>
 		<!-- Preload critical resources -->
-		<link rel="preload" href="../css/style.css?vers=071" as="style"/>
+		<link rel="preload" href="../css/style.css?vers=072" as="style"/>
 		<link rel="preconnect" href="https://fonts.googleapis.com"/>
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
 		<link rel="preconnect" href="https://cdnjs.cloudflare.com"/>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=Source+Sans+Pro:wght@400;600;700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,;:!?()'&quot;-"/>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		<link rel="stylesheet" type="text/css" href="../css/style.css?vers=071"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css?vers=072"/>
 	</head>
 
 	<body>
@@ -87,7 +87,7 @@
 					<li>Proper heading hierarchy (h1–h4) with unique IDs</li>
 					<li><code>&lt;section aria-labelledby="..."&gt;</code> linking sections to their headings</li>
 					<li><code>&lt;ul role="list"&gt;</code> for explicit list semantics</li>
-					<li>Semantic table markup with <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;th scope="col"&gt;</code></li>
+					<li>Semantic table markup with <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;th scope="col"&gt;</code> (and <code>scope="row"</code> for the row headers of the heatmap table)</li>
 					<li>A description list (<code>&lt;dl&gt;</code>, with <code>&lt;dt&gt;</code> and <code>&lt;dd&gt;</code>) on the <a href="bibliography.html">Bibliography page</a> and the <a href="disclosure-policies.html">Disclosure Policies page</a>, so each reference or organization is programmatically paired with its description</li>
 				</ul>
 			</section>
@@ -106,7 +106,7 @@
 				<h3 id="screen-reader">Screen Reader Support</h3>
 				<ul role="list">
 					<li><code>.sr-only</code> utility class (1px clip, off-screen positioning)</li>
-					<li>A data table for every interactive graph on the <a href="graphs-analysis.html">Graphs/Analysis page</a> (the <a href="../index.html">homepage</a> Sankey graph only has a text description; the graph with its data table appears on the <a href="graphs-analysis.html">Graphs/Analysis page</a>): screen readers can read it in place while a "Show data table on screen" button displays it onscreen</li>
+					<li>A data table for every interactive graph on the <a href="graphs-analysis.html">Graphs/Analysis page</a>: screen readers can read it in place while a "Show data table on screen" button displays it onscreen. The Sankey graph on the <a href="../index.html">homepage</a> has only a text description (<code>aria-label</code>). The same graph with its data tables appears on the Graphs/Analysis page.</li>
 					<li>A caption above each data table, outside the table, so it stays visible when the table scrolls sideways. Each table is named with <code>aria-label</code></li>
 					<li>The lists on the Bibliography and Disclosure Policies pages are announced with their number of entries, and each description is read directly after the reference or organization it belongs to</li>
 					<li>Reference titles and organization names in a language other than English are marked with a <code>lang</code> attribute (for example <code>lang="de"</code> on a German journal name and <code>lang="it"</code> on an Italian organization name) so assistive technology and translation tools can identify the language</li>
@@ -136,7 +136,7 @@
 			<section aria-labelledby="color-contrast">
 				<h3 id="color-contrast">Color &amp; Contrast</h3>
 				<ul role="list">
-					<li>WCAG AAA contrast ratios (7:1+) across all text/background combinations</li>
+					<li>WCAG AAA contrast ratios (7:1+) for body text, headings, links, and interface text on the dark background</li>
 					<li>Custom <code>::selection</code> colors for readable text highlighting</li>
 				</ul>
 			</section>
@@ -145,9 +145,9 @@
 				<h3 id="responsive-design">Responsive Design</h3>
 				<ul role="list">
 					<li>Viewport meta tag with <code>width=device-width, initial-scale=1.0</code></li>
-					<li>Seventeen CSS media query breakpoints (400px–1200px)</li>
+					<li>Responsive layout adjustments at breakpoints between 400px and 1200px</li>
 					<li>Responsive font sizes in <code>rem</code> units scaling across breakpoints</li>
-					<li>Body line-height 1.8 for readability</li>
+					<li>Line height of 1.8 for readability</li>
 					<li>Responsive padding adjustments per viewport</li>
 					<li>Data tables use 1.1rem text (1rem on the narrowest screens), and on narrow screens their cells break long words at syllables with a dash (<code>hyphens: auto</code>)</li>
 					<li>Wide data tables (the <a href="graphs-analysis.html#context">Q14</a> and <a href="graphs-analysis.html#practice">heatmap</a> tables) keep a minimum column width and scroll sideways instead of narrowing their columns</li>
@@ -167,7 +167,7 @@
 				<h3 id="touch-device">Touch Device Accessibility</h3>
 				<ul role="list">
 					<li><code>window.matchMedia('(any-hover: hover)')</code> detection for hover capability</li>
-					<li>Tap-to-toggle info panels replacing tooltips on touch-only devices, on all seven graphs</li>
+					<li>Tap-to-toggle info panels replacing tooltips on touch-only devices, on all seven graphs on the Graphs/Analysis page and on the homepage Sankey graph</li>
 					<li><code>hovermode: false</code> on Plotly charts for touch devices</li>
 					<li>Adequate touch target sizing on mobile nav items</li>
 				</ul>
@@ -177,7 +177,7 @@
 				<h3 id="form-accessibility">Form Accessibility</h3>
 				<ul role="list">
 					<li><code>&lt;label for="..."&gt;</code> associated with filter <code>&lt;select&gt;</code> controls</li>
-					<li>Focus border color change on select inputs</li>
+					<li>Focus on select inputs is shown by a border color change (the white outline is replaced)</li>
 				</ul>
 			</section>
 
@@ -185,14 +185,14 @@
 				<h3 id="external-link">External Link Security</h3>
 				<ul role="list">
 					<li><code>rel="noopener noreferrer"</code> on all <code>target="_blank"</code> links</li>
-					<li><code>referrerpolicy="no-referrer"</code> on external resources</li>
+					<li><code>referrerpolicy="no-referrer"</code> on the Font Awesome stylesheet</li>
 				</ul>
 			</section>
 
 			<section aria-labelledby="structured-data">
 				<h3 id="structured-data">Structured Data / Schema.org</h3>
 				<ul role="list">
-					<li>JSON-LD <code>ScholarlyArticle</code> schema with accessibility properties:
+					<li>JSON-LD <code>ScholarlyArticle</code> schema on the homepage, with accessibility properties:
 						<ul role="list">
 							<li><code>accessMode: ["textual", "visual"]</code></li>
 							<li><code>accessModeSufficient: ["textual"]</code></li>
@@ -207,8 +207,8 @@
 				<h3 id="performance">Performance &amp; Resource Loading</h3>
 				<ul role="list">
 					<li><code>&lt;link rel="preload"&gt;</code> for stylesheet, <code>&lt;link rel="preconnect"&gt;</code> for font/CDN origins</li>
-					<li>SRI hashes (<code>integrity</code> attribute) on external CSS/JS</li>
-					<li><code>crossorigin="anonymous"</code> on third-party resources</li>
+					<li>SRI hashes (<code>integrity</code> attribute) on the Font Awesome stylesheet and the Plotly.js script</li>
+					<li><code>crossorigin="anonymous"</code> on the Font Awesome stylesheet and the Plotly.js script</li>
 					<li><code>display=swap</code> on Google Fonts for flash-of-unstyled-text prevention</li>
 				</ul>
 			</section>
@@ -226,7 +226,7 @@
 				<h3 id="navigation">Navigation</h3>
 				<ul role="list">
 					<li>Mobile hamburger menu with <code>aria-label</code>, overlay dismiss, and close button</li>
-					<li>Table of contents ("Contents" box) for in-page section navigation</li>
+					<li>"Menu" box at the top of the Home, Graphs/Analysis, Disclosure Policies, and Accessibility pages for in-page section navigation</li>
 					<li>Plotly mode bar hidden (<code>displayModeBar: false</code>) to reduce UI clutter</li>
 				</ul>
 			</section>
