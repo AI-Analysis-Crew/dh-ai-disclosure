@@ -27,13 +27,13 @@
 		<link rel="apple-touch-icon" sizes="180x180" href="./png/apple-touch-icon.png"/>
 		<link rel="manifest" href="./site.webmanifest"/>
 		<!-- Preload critical resources -->
-		<link rel="preload" href="./css/style.css?vers=071" as="style"/>
+		<link rel="preload" href="./css/style.css?vers=072" as="style"/>
 		<link rel="preconnect" href="https://fonts.googleapis.com"/>
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 		<link rel="preconnect" href="https://cdnjs.cloudflare.com"/>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=Source+Sans+Pro:wght@400;600;700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,;:!?()'&quot;-"/>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		<link rel="stylesheet" type="text/css" href="./css/style.css?vers=071"/>
+		<link rel="stylesheet" type="text/css" href="./css/style.css?vers=072"/>
 		<!-- Plotly.js CDN for Sankey diagram -->
 		<script src="https://cdn.plot.ly/plotly-2.27.0.min.js" integrity="sha512-2yjH2FQFIKp1XQ8nSWes+7/zWAPc9qfDolxFGJV1BUO7/+YIAPh1jICUN6TaA+VVlfabERCqo1Hji0yYTFtDew==" crossorigin="anonymous" charset="utf-8" defer></script>
 	</head>
@@ -93,7 +93,7 @@
 					<div id="sankey-chart" role="img" aria-label="Interactive Sankey diagram showing survey responses about generative AI disclosure in digital humanities: Question 6 asks about necessity of disclosure, Question 16 asks about degree of disclosure, Question 10 asks about frequency of disclosure, and Question 11 asks whether disclosure was required or voluntary. Most respondents believe disclosure is necessary but have never actually disclosed their AI use." style="width: 100%; height: 600px; margin: 0 auto;"></div>
 				</div>
 			</div>
-			<figcaption class="caption"><strong>Figure 1.</strong> This Sankey diagram documents one of the key findings of our project, that digital humanists in theory support the disclosure of generative AI use, but in practice tend not to disclose such use or do so only in limited ways. The same graph, with its data table, also appears on the <a href="./html/graphs-analysis.html#principles">Graphs/Analysis</a> page.</figcaption>
+			<figcaption class="caption"><strong>Figure 1.</strong> This Sankey diagram documents one of the key findings of our project, that digital humanists in theory support the disclosure of generative AI use, but in practice tend not to disclose such use or do so only in limited ways: 78% of respondents regard disclosure as necessary, yet 58% have never disclosed their generative AI use, and brief disclosure is the most common degree chosen. The same graph, with its data table, also appears on the <a href="./html/graphs-analysis.html#principles">Graphs/Analysis</a> page. The diagram includes the 78 respondents who reported using generative AI in their research (Q20). It excludes 26 respondents who reported never using it, 2 who preferred not to answer, and 1 who left the question blank, because disclosure questions do not apply to non-users.</figcaption>
 		</figure>
 
 			<section aria-labelledby="project-developers">
@@ -130,11 +130,11 @@
 			</section> -->
 			<section aria-labelledby="abstract">
 				<h2 id="abstract">Abstract</h2>
-				<p>This project investigates how digital humanists perceive and approach generative AI (GenAI) disclosure in research. It is based on a <a href="./html/survey.html">survey</a> that we conducted in 2025. The results indicate that while digital humanities scholars acknowledge the importance of disclosing GenAI use, the actual rate of disclosure in research practice remains low. Respondents differ in their views on which activities most require disclosure and on the most appropriate methods for doing so. Most also believe that safeguards for AI disclosure should be established through institutional policies rather than left to individual decisions. The study’s findings will offer empirical guidance to scholars, institutional leaders, funders, and other stakeholders responsible for shaping effective disclosure policies.</p>
+				<p>This project investigates how digital humanists perceive and approach generative AI (GenAI) disclosure in research. It is based on a <a href="./html/survey.html">survey</a> that we conducted in 2025. The results indicate that while digital humanities scholars acknowledge the importance of disclosing GenAI use, the actual rate of disclosure in research practice remains low. Respondents differ in their views on which activities most require disclosure and on the most appropriate methods for doing so. Most also believe that academic institutions (85%) and journal publishers (86%) should be responsible for ensuring disclosure. The study’s findings will offer empirical guidance to scholars, institutional leaders, funders, and other stakeholders responsible for shaping effective disclosure policies.</p>
 			</section>
 			<section aria-labelledby="background">
 				<h2 id="background">Background</h2>
-				<p>Generative AI (GenAI) now permeates almost every aspect of daily life and has become integral to academic work. Although its use offers clear benefits to researchers, it also raises challenging questions about academic integrity and research ethics (Van Noorden &amp; Perkel, 2023; Hosseini et al., 2023; Abdelhafiz et al., 2024; Dedema &amp; Ma, 2024; Ng et al., 2025). Disclosure has therefore emerged as a potential policy solution.</p>
+				<p>Generative AI (GenAI) now permeates almost every aspect of daily life and has become integral to academic work. Although its use offers clear benefits to researchers, it also raises challenging questions about academic integrity and research ethics (Van Noorden &amp; Perkel, 2023; Hosseini et al., 2023; Abdelhafiz et al., 2024; Ng et al., 2025; Ma et al., 2026). Disclosure has therefore emerged as a potential policy solution.</p>
         <p>Resnik &amp; Hosseini (2026) propose a three-tier framework distinguishing mandatory, optional, and unnecessary disclosure. This framework demonstrates the increasingly nuanced guidance now issued by publishers. Publishers agree that GenAI tools cannot be listed as authors, yet their disclosure policies vary.</p>
         <table style="margin-bottom: 1rem;">
           <colgroup>
@@ -149,25 +149,25 @@
           </thead>
           <tbody>
             <tr class="odd">
-              <td><strong>Disclosure Distinctions</strong></td>
-              <td>Most publishers distinguish between routine language polishing (grammar, spelling) and substantive content generation: the former typically escapes disclosure, whereas the latter demands it (International Association of Scientific, Technical &amp; Medical Publishers [STM], 2025)</td>
+              <td><strong>STM</strong></td>
+              <td>Distinguishes language refinement, for which its 2023 guidelines recommended no disclosure, from generating text or other content, and leaves publishers to decide which AI uses authors must declare (International Association of Scientific, Technical &amp; Medical Publishers [STM], 2025)</td>
             </tr>
             <tr class="even">
-              <td><strong>Strict Implementation</strong></td>
-              <td>Journals such as <em>Science</em> (American Association for the Advancement of Science [AAAS], 2023) and Wiley (2023) titles require detailed statements describing the software, provider, and prompts used, with authors affirming full responsibility</td>
+              <td><strong>Springer Nature</strong></td>
+              <td>Asks authors to describe AI use in the Methods section and to add an AI Use Declaration; even AI-assisted copy editing should be declared (Springer Nature, n.d.)</td>
             </tr>
             <tr class="odd">
-              <td><strong>Moderate Implementation</strong></td>
-              <td><em>Springer Nature</em> (2023) insists that generative use be “properly documented” while exempting minor editing</td>
+              <td><strong>Wiley</strong></td>
+              <td>Requires AI use that develops any part of a manuscript to be “described, transparently and in detail” in the Methods or Acknowledgements, with authors fully responsible for accuracy; tools used only for spelling, grammar, and general editing are excluded. Some Wiley journals add requirements, such as the <em>Journal of Product Innovation Management</em>’s appendix of prompts and outputs (<em>Journal of Product Innovation Management</em> [JPIM], 2023)</td>
             </tr>
             <tr class="even">
-              <td><strong>Lenient Implementation</strong></td>
-              <td>IOP Publishing (n.d.) merely encourages transparency and reminds authors they remain accountable for all content</td>
+              <td><strong>IOP Publishing</strong></td>
+              <td>Requires a separate AI disclosure statement in the Acknowledgements when AI materially contributes to the work, naming the tool and version; routine spelling, grammar, and language editing is exempt (IOP Publishing, n.d.)</td>
             </tr>
           </tbody>
         </table>
         <p class="data-table-caption" style="font-style: normal; margin-top: 0.5rem;"><strong>Table 1.</strong> Variations in publisher GenAI disclosure policies.</p>
-        <p>However, policies that mandate AI disclosure can produce unintended consequences. Empirical research has identified an “AI disclosure penalty” in both professional and creative domains. The magnitude varies by context: professional settings show moderate penalties (Reis et al., 2024; Proksch et al., 2024); creative contexts show smaller but still significant penalties (Horton et al., 2023). Studies consistently suggest AI disclosure reduces perceived credibility across multiple contexts (Longoni et al., 2021; Lermann Henestrosa &amp; Kimmerle, 2024).</p>
+        <p>However, policies that mandate AI disclosure can produce unintended consequences. Empirical research has identified an “AI disclosure penalty” in both professional and creative domains. Professional settings show penalties (Reis et al., 2024; Proksch et al., 2024), and creative contexts show significant penalties too (Horton et al., 2023). Studies consistently suggest AI disclosure reduces perceived credibility across multiple contexts (Longoni et al., 2022; Lermann Henestrosa &amp; Kimmerle, 2024).</p>
         <p>Given these context-dependent penalties, understanding how different audiences interpret AI disclosure is important. A recent <em>Nature</em> survey reveals deep divisions among scholars over whether GenAI use should be declared at all and, if so, how much detail such declarations should include (Kwon, 2025).</p>
 			</section>
       <section aria-labelledby="research-questions">
@@ -209,7 +209,7 @@
             <li>Respondents:
               <ul>
                 <li>span a wide range of digital humanities subfields: e.g., literary and cultural studies, history, information science</li>
-                <li>represent a geographically diverse community (Canada, Europe, Germany, India, Israel, Italy, Mexico, Netherlands, South Korea, and Spain))</li>
+                <li>represent a geographically diverse community (Canada, Europe, Germany, India, Israel, Italy, Mexico, Netherlands, South Korea, Spain, and the United Kingdom)</li>
                 <li>hold positions ranging from undergraduate to full professor; independent scholars also included</li>
               </ul>
             </li>
@@ -224,17 +224,13 @@
 				<h2 id="results">Results</h2>
 				<p>The survey study reveals a shared recognition of the importance of disclosing GenAI use, but divergent views on how such disclosure should be integrated into research practices.</p>
         <p>Respondents differ in their views on which activities most require disclosure and on the most appropriate methods for doing so.</p>
-        <p>Most also believe that safeguards for AI disclosure should be established through institutional policies rather than left to individual decisions.</p>
+        <p>Most also believe that academic institutions (85%) and journal publishers (86%) should be responsible for ensuring disclosure.</p>
         <section aria-labelledby="results-brief" class="contents-box">
 				  <h3 id="results-brief">Results: Overview</h3>
           <ol type="1">
-            <li>There is a GenAI disclosure perceptions mismatch among digital humanists:
-              <ol type="a">
-                <li>72% of researchers who never disclosed GenAI use perceive it “very necessary” to disclose GenAI use.</li>
-                <li>Only 43% of researchers who disclosed GenAI use voluntarily perceive it "very necessary" to disclose GenAI use.</li>
-              </ol>
-            </li>
-            <li>Researchers consider it more important to disclose GenAI use in developmental and dissemination research stages.</li>
+            <li>There is a GenAI disclosure perceptions mismatch among digital humanists who use GenAI: 60% of researchers who never disclosed GenAI use perceive it “very necessary” to disclose GenAI use, while only 45% of researchers who disclosed it voluntarily do so.</li>
+            <li>Among the 32 respondents who reported how often they disclosed GenAI use, most did so voluntarily (20) rather than because it was required (9).</li>
+            <li>Respondents most often selected writing and rewriting (62 of 107) and data collection, transcription, translation, and analysis (44 of 107) as the generative AI-assisted activities most important to disclose.</li>
           </ol>
         </section>
 			</section>
@@ -313,25 +309,24 @@
 				<h2 id="works-cited">Works Cited</h2>
 				<ul role="list" class="works-cited-list">
 					<li>Abdelhafiz, A. S., Ali, A., Maaly, A. M., Ziady, H. H., Sultan, E. A., &amp; Mahgoub, M. A. (2024). <a aria-label="Knowledge, perceptions and attitude of researchers towards using ChatGPT in research (opens in new tab)" href="https://doi.org/10.1007/s10916-024-02044-4" target="_blank" rel="noopener noreferrer">Knowledge, perceptions and attitude of researchers towards using ChatGPT in research</a>. <em>Journal of Medical Systems</em>, <em>48</em>(1), Article 26.</li>
-					<li>American Association for the Advancement of Science. (2023, November 16). <a aria-label="Change to policy on the use of generative AI and large language models (opens in new tab)" href="https://www.science.org/content/blog-post/change-policy-use-generative-ai-and-large-language-models" target="_blank" rel="noopener noreferrer">Change to policy on the use of generative AI and large language models</a>. <em>Science</em>.</li>
-					<li>Dedema, M., &amp; Ma, R. (2024). <a aria-label="The collective use and perceptions of generative AI tools in digital humanities research: Survey-based results (opens in new tab)" href="https://doi.org/10.48550/arXiv.2404.12458" target="_blank" rel="noopener noreferrer">The collective use and perceptions of generative AI tools in digital humanities research: Survey-based results</a> [Preprint]. arXiv.</li>
 					<li>Horton, C. B., Jr., White, M. W., &amp; Iyengar, S. S. (2023). <a aria-label="Bias against AI art can enhance perceptions of human creativity (opens in new tab)" href="https://doi.org/10.1038/s41598-023-45202-3" target="_blank" rel="noopener noreferrer">Bias against AI art can enhance perceptions of human creativity</a>. <em>Scientific Reports</em>, <em>13</em>, Article 19001.</li>
 					<li>Hosseini, M., Resnik, D. B., &amp; Holmes, K. (2023). <a aria-label="The ethics of disclosing the use of artificial intelligence tools in writing scholarly manuscripts (opens in new tab)" href="https://doi.org/10.1177/17470161231180449" target="_blank" rel="noopener noreferrer">The ethics of disclosing the use of artificial intelligence tools in writing scholarly manuscripts</a>. <em>Research Ethics</em>, <em>19</em>(4), 449–465.</li>
-					<li>International Association of Scientific, Technical &amp; Medical Publishers. (2025). <a aria-label="Draft report: Classifying AI use in manuscript preparation (opens in new tab)" href="https://stm-assoc.org/new-stm-draft-report-classifying-ai-use-in-manuscript-preparation/" target="_blank" rel="noopener noreferrer"><em>Draft report: Classifying AI use in manuscript preparation</em></a>. STM Association.</li>
-					<li>IOP Publishing. (n.d.). <a aria-label="Artificial intelligence (opens in new tab)" href="https://ioppublishing.org/artificial-intelligence/" target="_blank" rel="noopener noreferrer"><em>Artificial intelligence</em></a>.</li>
+					<li>International Association of Scientific, Technical &amp; Medical Publishers. (2025). <a aria-label="Recommendations for a classification of AI use in academic manuscript preparation (opens in new tab)" href="https://stm-assoc.org/document/recommendations-for-a-classification-of-ai-use-in-academic-manuscript-preparation/" target="_blank" rel="noopener noreferrer"><em>Recommendations for a classification of AI use in academic manuscript preparation</em></a>. STM Association.</li>
+					<li>IOP Publishing. (n.d.). <a aria-label="Generative AI tools (opens in new tab)" href="https://publishingsupport.iopscience.iop.org/questions/generative-ai-tools/" target="_blank" rel="noopener noreferrer"><em>Generative AI tools</em></a>. IOPscience Publishing Support.</li>
+					<li><em>Journal of Product Innovation Management</em>. (2023, September 13). <a aria-label="Generative artificial intelligence guidelines for authors (opens in new tab)" href="https://onlinelibrary.wiley.com/pb-assets/assets/15405885/Generative%20AI%20Policy_September%202023-1695231878293.pdf" target="_blank" rel="noopener noreferrer"><em>Generative artificial intelligence guidelines for authors</em></a> [Policy document]. Wiley.</li>
 					<li>Kwon, D. (2025). <a aria-label="Is it OK for AI to write science papers? Nature survey shows researchers are split (opens in new tab)" href="https://www.nature.com/articles/d41586-025-01463-8" target="_blank" rel="noopener noreferrer">Is it OK for AI to write science papers? Nature survey shows researchers are split</a>. <em>Nature</em>, <em>641</em>(8063), 574–578.</li>
 					<li>Lermann Henestrosa, A. L., &amp; Kimmerle, J. (2024). <a aria-label="The effects of assumed AI vs. human authorship on the perception of a GPT-generated text (opens in new tab)" href="https://doi.org/10.3390/journalmedia5030069" target="_blank" rel="noopener noreferrer">The effects of assumed AI vs. human authorship on the perception of a GPT-generated text</a>. <em>Journalism and Media</em>, <em>5</em>(3), 1085–1097.</li>
-					<li>Longoni, C., Fradkin, A., Cian, L., &amp; Pennycook, G. (2021). <a aria-label="News from artificial intelligence is believed less (opens in new tab)" href="https://doi.org/10.2139/ssrn.3787064" target="_blank" rel="noopener noreferrer"><em>News from artificial intelligence is believed less</em></a> (SSRN Working Paper No. 3787064). Social Science Research Network.</li>
+					<li>Longoni, C., Fradkin, A., Cian, L., &amp; Pennycook, G. (2022). <a aria-label="News from generative artificial intelligence is believed less (opens in new tab)" href="https://doi.org/10.1145/3531146.3533077" target="_blank" rel="noopener noreferrer">News from generative artificial intelligence is believed less</a>. In <em>Proceedings of the 2022 ACM Conference on Fairness, Accountability, and Transparency</em> (pp. 97–106). Association for Computing Machinery.</li>
 					<li>Luhmann, J., &amp; Burghardt, M. (2022). <a aria-label="Digital humanities—A discipline in its own right? An analysis of the role and position of digital humanities in the academic landscape (opens in new tab)" href="https://doi.org/10.1002/asi.24533" target="_blank" rel="noopener noreferrer">Digital humanities—A discipline in its own right? An analysis of the role and position of digital humanities in the academic landscape</a>. <em>Journal of the Association for Information Science and Technology</em>, <em>73</em>(2), 148–171.</li>
 					<li>Ma, R. (2022). <a aria-label="Revisiting connotations of digital humanists: Exploratory interviews (opens in new tab)" href="https://doi.org/10.1002/pra2.714" target="_blank" rel="noopener noreferrer">Revisiting connotations of digital humanists: Exploratory interviews</a>. <em>Proceedings of the Association for Information Science and Technology</em>, <em>59</em>(1), 750–752.</li>
+					<li>Ma, R., Dedema, M., &amp; Cox, A. (2026). <a aria-label="A dancing bear, a colleague, or a sharpened toolbox? The cautious adoption of generative artificial intelligence technologies in digital humanities research (opens in new tab)" href="https://doi.org/10.1002/asi.70066" target="_blank" rel="noopener noreferrer">A dancing bear, a colleague, or a sharpened toolbox? The cautious adoption of generative artificial intelligence technologies in digital humanities research</a>. <em>Journal of the Association for Information Science and Technology</em>, <em>77</em>(6), 812–830.</li>
 					<li>Ng, J. Y., Maduranayagam, S. G., Suthakar, N., Li, A., Lokker, C., Iorio, A., Haynes, R. B., &amp; Moher, D. (2025). <a aria-label="Attitudes and perceptions of medical researchers towards the use of artificial intelligence chatbots in the scientific process: An international cross-sectional survey (opens in new tab)" href="https://doi.org/10.1016/S2589-7500(24)00202-4" target="_blank" rel="noopener noreferrer">Attitudes and perceptions of medical researchers towards the use of artificial intelligence chatbots in the scientific process: An international cross-sectional survey</a>. <em>The Lancet Digital Health</em>, <em>7</em>(1), e94–e102.</li>
 					<li>Proksch, S., Schühle, J., Streeb, E., Weymann, F., Luther, T., &amp; Kimmerle, J. (2024). <a aria-label="The impact of text topic and assumed human vs. AI authorship on competence and quality assessment (opens in new tab)" href="https://doi.org/10.3389/frai.2024.1412710" target="_blank" rel="noopener noreferrer">The impact of text topic and assumed human vs. AI authorship on competence and quality assessment</a>. <em>Frontiers in Artificial Intelligence</em>, <em>7</em>, Article 1412710.</li>
 					<li>Ramsay, S. (2013). Who’s in and who’s out. In M. Terras, J. Nyhan, &amp; E. Vanhoutte (Eds.), <em>Defining digital humanities: A reader</em>  (pp. 239–241). Ashgate.</li>
 					<li>Reis, M., Reis, F., &amp; Kunde, W. (2024). <a aria-label="Influence of believed AI involvement on the perception of digital medical advice (opens in new tab)" href="https://doi.org/10.1038/s41591-024-03180-7" target="_blank" rel="noopener noreferrer">Influence of believed AI involvement on the perception of digital medical advice</a>. <em>Nature Medicine</em>, <em>30</em>(11), 3098–3100.</li>
 					<li>Resnik, D. B., &amp; Hosseini, M. (2026). <a aria-label="Disclosing artificial intelligence use in scientific research and publication: When should disclosure be mandatory, optional, or unnecessary? (opens in new tab)" href="https://doi.org/10.1080/08989621.2025.2481949" target="_blank" rel="noopener noreferrer">Disclosing artificial intelligence use in scientific research and publication: When should disclosure be mandatory, optional, or unnecessary?</a> <em>Accountability in Research</em>, <em>33</em>(2), Article 2481949.</li>
-					<li>Springer Nature. (2023). <a aria-label="Editorial policies: “Artificial intelligence” (opens in new tab)" href="https://www.springernature.com/gp/policies/editorial-policies" target="_blank" rel="noopener noreferrer"><em>Editorial policies: “Artificial intelligence”</em></a>.</li>
+					<li>Springer Nature. (n.d.). <a aria-label="AI guidance for researchers, editors and reviewers (opens in new tab)" href="https://group.springernature.com/gp/group/ai/ai-guidance-for-our-researchers-and-communities" target="_blank" rel="noopener noreferrer"><em>AI guidance for researchers, editors and reviewers</em></a>.</li>
 					<li>Van Noorden, R., &amp; Perkel, J. M. (2023). <a aria-label="AI and science: What 1,600 researchers think (opens in new tab)" href="https://www.nature.com/articles/d41586-023-02980-0" target="_blank" rel="noopener noreferrer">AI and science: What 1,600 researchers think</a>. <em>Nature</em>, <em>621</em>(7980), 672–675.</li>
-					<li>Wiley. (2023). <a aria-label="Generative artificial intelligence guidelines for authors (opens in new tab)" href="https://onlinelibrary.wiley.com/pb-assets/assets/15405885/Generative%20AI%20Policy_September%202023-1695231878293.pdf" target="_blank" rel="noopener noreferrer"><em>Generative artificial intelligence guidelines for authors</em></a> [Policy document].</li>
 				</ul>
 			</section>
 		</main>
@@ -344,7 +339,7 @@
 		<script src="./js/includes.js?vers=003" data-base="./"></script>
 
 		<!-- Sankey diagram data and rendering -->
-		<script src="./js/sankey_data.js?vers=001"></script>
+		<script src="./js/sankey_data.js?vers=002"></script>
 		<script>
 			// Homepage Sankey diagram — enhanced version
 			(function() {
@@ -367,7 +362,7 @@
 
 					// Node colors from Q8 palette, distributed for maximum contrast between neighbors
 					data[0].node.color = [
-						'#7EC9EE', '#DB667A', '#2A904D', '#C552B1', '#AFA11C', '#757575',  // Q6
+						'#7EC9EE', '#DB667A', '#2A904D', '#C552B1', '#AFA11C',  // Q6
 						'#8B084A', '#3D6090', '#E2D072', '#9e9e9e',                          // Q16
 						'#4FB4A3', '#DB667A', '#3D6090', '#AFA11C', '#C552B1', '#757575',    // Q10
 						'#E2D072', '#4FB4A3', '#7EC9EE', '#8B084A', '#9e9e9e', '#2A904D'     // Q11
